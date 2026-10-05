@@ -207,7 +207,7 @@ guild.main/roster/rankings, progression.rank, catalog.recipe, catalog.monster �
 หัวตัวอย่างจำนวนจำกัดและป้าย preview ไม่เรียงหัวนับร้อยเป็นกำแพง
 
 ### ร้าน D — ร้านยาและอาหาร
-โต๊ะปรุงยา 3 × 2 ข้างเคาน์เตอร์, ขวดตกแต่งด้วย stained glass เล็ก, สมุนไพรและหม้อไม่เกิน 3 จุด เปิด alchemy.shop/recipe เมื่อระบบพร้อม
+โต๊ะปรุงยา 3 × 2 ข้างเคาน์เตอร์, ขวดตกแต่งด้วย stained glass เล็ก, สมุนไพรและหม้อไม่เกิน 3 จุด ผูก `alchemy.main` ของ [Core v0.9](../../fantasycore/ALCHEMY-th.md) เมื่อ checklist T ผ่าน; เมนูสูตร `/alchemy` ไม่ใช้ action alchemy.shop/recipe
 ป้ายร้านเป็นขวดยาทรงเหลี่ยมกว้าง 3 สูง 5 สร้างจากบล็อก
 
 ### แผง 6 จุด
@@ -240,6 +240,10 @@ craft.detail แสดง output stats, วัสดุที่มี/ที่
 repair.preview แสดงความทนทานปัจจุบัน/หลังซ่อม ค่าใช้จ่าย และคำยืนยัน
 upgrade.preview แสดงผล/โอกาส/สิ่งที่เสียถ้าใช้ระบบตีบวก ไม่ซ่อนกติกาในข้อความตกแต่ง
 NPC ซ่อมอยู่ตรงหน้ามองเห็นจากทางวาร์ป ไม่ต้องเข้าห้องเตาหรือขึ้นชั้นบน
+
+Core v0.5 มี `craft.main`/`/craft` และ `repair.main`/`/repair` สำหรับ Core/vanilla แล้ว
+ดู [ใบงาน NPC คราฟต์และสูตร](../../fantasycore/CRAFT-th.md) และ [ใบงาน NPC ซ่อมและ policy](../../fantasycore/REPAIR-th.md)
+Upgrade และ provider MMOItems/Nexo/ItemsAdder ยังไม่เปิดใน JAR รุ่นนี้; คราฟต์แสดงวัตถุดิบมี/ขาดและราคา แต่ stat ยังเป็น vanilla
 
 อุปกรณ์โชว์เป็น item ตัวอย่างที่ไม่รับซื้อคืน/ไม่หยิบได้ ผ่าน permission และ Core item policy
 

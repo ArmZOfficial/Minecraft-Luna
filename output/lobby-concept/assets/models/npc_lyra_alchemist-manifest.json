@@ -1,0 +1,264 @@
+{
+  "id": "npc_lyra_alchemist",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "stir",
+    "offer_potion",
+    "brew_success"
+  ],
+  "cubes": 206,
+  "bones": 21,
+  "height_target": 2.1,
+  "runtime_tested": false,
+  "reference": "assets/references/npc-lyra-alchemist-turnaround.png",
+  "texture": [
+    512,
+    512
+  ],
+  "native_timeline_frames_checked": 265,
+  "revision": 1,
+  "built_at": "2026-10-06",
+  "units_per_block": 16,
+  "direction": "north (-Z)",
+  "handedness": "right +X / left -X",
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "right_coattail",
+      "parent": "waist",
+      "origin": [
+        2.4,
+        12,
+        2.1
+      ]
+    },
+    {
+      "name": "left_coattail",
+      "parent": "waist",
+      "origin": [
+        -2.4,
+        12,
+        2.1
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        24,
+        0
+      ]
+    },
+    {
+      "name": "goggles",
+      "parent": "hi_head",
+      "origin": [
+        0,
+        30.7,
+        -3.8
+      ]
+    },
+    {
+      "name": "braid",
+      "parent": "hi_head",
+      "origin": [
+        -3.5,
+        26,
+        -2.9
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        6.2,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        6.2,
+        17.7,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        6.2,
+        13.3,
+        -0.3
+      ]
+    },
+    {
+      "name": "stirring_rod",
+      "parent": "right_hand",
+      "origin": [
+        6.2,
+        12.7,
+        -1.8
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -6.2,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -6.2,
+        17.7,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -6.2,
+        13.3,
+        -0.3
+      ]
+    },
+    {
+      "name": "flask",
+      "parent": "left_hand",
+      "origin": [
+        -6.2,
+        12.6,
+        -2.3
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "brew_station",
+      "parent": "motion_root",
+      "origin": [
+        6.2,
+        0,
+        -1.8
+      ]
+    },
+    {
+      "name": "brew_liquid",
+      "parent": "brew_station",
+      "origin": [
+        6.2,
+        7.4,
+        -1.8
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        28.4,
+        0
+      ]
+    }
+  ],
+  "build_method": "AI reference -> Blockbench 5.2.1 / MCP 1.10.0 native geometry, imported new per-face pixel atlas and native animation",
+  "builder": "tools/build_alchemist.py",
+  "pose_capture": "tools/preview_alchemist.py",
+  "timeline": {
+    "fps": 20,
+    "sampling": "every tick including both endpoints",
+    "keyframes": 75
+  },
+  "held_props": {
+    "flask": "left_hand",
+    "stirring_rod": "right_hand",
+    "max_flask_neck_gap_units": 0,
+    "max_rod_grip_gap_units": 0
+  },
+  "station": {
+    "parent": "motion_root",
+    "animated": false,
+    "tip_outside_liquid_frames": 0
+  },
+  "bounds_blocks": {
+    "max_height": 2.0903,
+    "max_width": 1.1149,
+    "max_depth": 0.9705
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_lyra_alchemist.bbmodel": "1d01af4a0a486a9e1080f7dda72499b750c6094fed9ea39b024168955dc14ff8",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist.png": "7fbc5c4742f8b2fd1715fd520712438f175a9ccac6c3fd06f0e92c8881c1ecb8",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-pose-checks.json": "fe61064fd2d45631f18db8f9f26116acaa38b5f38edf5fa3bd75e98679d6500c",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-back.png": "7fdb3fb8e8441e5d3d9b5062e75597ae96f872cb2ffeee2fd295f14a20896aa9",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-brew-success.png": "b118874687e4a28b8a7a8cb6ed268ad8fb19f0849e44d5d35a43dd1e3a3a92eb",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-front.png": "40b68e3277c9d6b0e6c55a9324de600dec0bd0dfe6d347c2bd78ca5231421021",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-greet.png": "e0471c9f7eb572377d8f7f7470343468fe29e19c477d22acbddd98944ca15d12",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-idle.png": "7eb552b0c7c4b17a6bfdfcfaf13788ec3cf87cbffd2538fce6654d19adedc07c",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-offer-potion.png": "6db86d67a2db777a335d515c9ffaf9f7e440f68fc72f5dd12e71d36e43c83692",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-preview.png": "b6fe4e4ac88765f45e3f9489f43dd11010694896a0c7ac29d58348cd97e2fd5a",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-right.png": "ee7a3bcf4630e733f056e2d3e92e1d2d98c4a7a81616f69b26f5cb5e718c0c09",
+    "output/lobby-concept/assets/models/npc_lyra_alchemist-stir.png": "f3f1bce5c479e4e294c12837b7caa1caa546d6519a64bcbc2ceb0a214794c0cc",
+    "output/lobby-concept/assets/references/npc-lyra-alchemist-turnaround.png": "7605f413b8099272ce55f020f52410d988722eee6dbb791df2e8f6a76193a417",
+    "server/content/npc-models/lyra-model-contract.json": "cc3068dc2d3b6e27ec1322038f2b51cb1415e87ef00eeee0a29efb003c033ed2"
+  },
+  "known_limits": [
+    "Native frame bounds are axis-aligned review evidence, not an oriented collision proof or a Minecraft test",
+    "No ModelEngine/Citizens renderer integration or compiled legacy/modern resource pack yet",
+    "Core v0.9 implements alchemy.main using the shared CRAFT journal; Minecraft QA and an animation event bridge are still pending; market.main remains planned",
+    "206 cubes and 21 bones are a high-detail single shopkeeper; crowd and client performance still require staging"
+  ]
+}

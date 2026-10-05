@@ -17,3 +17,20 @@ output/*report*.json
 **/*mcp_config*.json
 **/*.backup*
 .codex/
+
+# FantasyCore / staging server
+fantasycore/build/
+fantasycore/.gradle/
+!fantasycore/gradle/wrapper/gradle-wrapper.jar
+server/runtime/
+.tools/
+.cache/
+
+# User-supplied source packs and plugin binaries stay in the local asset library
+/All for module/
+/*.tmp
+# Selected supplied assets are regenerated locally; do not redistribute paid pack files.
+website/public/assets/library/
+website/out/
+website/.next/
+server/content/library/local/

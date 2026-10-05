@@ -1,0 +1,166 @@
+name: FantasyCore
+version: '${version}'
+main: com.armzofficial.fantasycore.FantasyCorePlugin
+api-version: '26.2'
+description: 'Luma core: economy, bank, ledger, death rules, menus, stations, homes, RTP'
+authors: [ArmZOfficial]
+website: https://github.com/ArmZOfficial/Minecraft-Luna
+softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, PlaceholderAPI, Citizens]
+loadbefore: [ItemsCore]
+
+commands:
+  alchemy:
+    description: ดูสูตรและยืนยันปรุงยาที่ร้านไลรา
+    usage: /alchemy
+    aliases: [elixir]
+    permission: fantasy.alchemy.use
+  party:
+    description: จัดปาร์ตี้ Moonfall 2–4 คน
+    usage: /party [invite <player>|accept|list|leave|kick <player>|disband]
+    permission: fantasy.party
+  dungeon:
+    description: ดันเจี้ยน Moonfall เดี่ยวหรือปาร์ตี้
+    usage: /dungeon [join|leave]
+    aliases: [dun]
+    permission: fantasy.dungeon
+  craft:
+    description: ดูสูตรและยืนยันคราฟต์อุปกรณ์รูนที่โรงตีเหล็ก
+    usage: /craft
+    permission: fantasy.craft.use
+  menu:
+    description: เปิดเมนูหลัก
+    aliases: [luma]
+    permission: fantasy.menu
+  bank:
+    description: ธนาคาร ฝาก/ถอน/ประวัติ
+    usage: /bank [deposit|withdraw <amount|all>|history]
+    permission: fantasy.bank.use
+  balance:
+    description: ดูยอดเงิน
+    aliases: [bal, money]
+    permission: fantasy.balance
+  sethome:
+    description: ตั้งจุดกลับบ้าน
+    usage: /sethome [name] [confirm]
+    permission: fantasy.home.use
+  home:
+    description: กลับบ้าน
+    usage: /home [name]
+    permission: fantasy.home.use
+  delhome:
+    description: ลบจุดกลับบ้าน
+    usage: /delhome <name>
+    permission: fantasy.home.use
+  homes:
+    description: รายการบ้าน
+    permission: fantasy.home.use
+  rtp:
+    description: สุ่มวาร์ปในโลกที่อนุญาต
+    usage: /rtp [housing|resource]
+    permission: fantasy.rtp.use
+  spawn:
+    description: กลับลานกลางเมือง
+    permission: fantasy.spawn
+  land:
+    description: ดูแปลงตรงที่ยืน
+    permission: fantasy.land.use
+  rewards:
+    description: รับของรายวัน (รอบ 7 ครั้ง เวลาไทย)
+    usage: /rewards [claim]
+    aliases: [daily]
+    permission: fantasy.rewards
+  mail:
+    description: กล่องจดหมาย — ของที่ส่งเข้า inventory ไม่ได้
+    usage: /mail [all]
+    permission: fantasy.mail
+  exchange:
+    description: เลือกสูตรและยืนยันแลกวัตถุดิบเป็นของรางวัล
+    usage: /exchange
+    permission: fantasy.exchange
+  repair:
+    description: ดูราคาและยืนยันซ่อมของในมือหลักที่โรงตีเหล็ก
+    usage: /repair
+    permission: fantasy.repair.use
+  fantasycore:
+    description: ข้อมูลปลั๊กอิน / ทางเข้าบริการสำหรับ NPC ของ Citizens
+    usage: /fantasycore action <id>
+    aliases: [fc]
+  fa:
+    description: เปิด AdminPanel หรือใช้เครื่องมือแอดมิน FantasyCore
+    usage: /fa [panel|player|help|doctor|bank|eco|confirm|npc|item|mail|exchange|craft|repair|audit|dungeon]
+    permission: fantasyadmin.view
+
+permissions:
+  fantasy.player:
+    description: สิทธิ์พื้นฐานของผู้เล่น
+    default: true
+    children:
+      fantasy.menu: true
+      fantasy.balance: true
+      fantasy.bank.use: true
+      fantasy.home.use: true
+      fantasy.rtp.use: true
+      fantasy.spawn: true
+      fantasy.land.use: true
+      fantasy.rewards: true
+      fantasy.mail: true
+      fantasy.exchange: true
+      fantasy.repair.use: true
+      fantasy.craft.use: true
+      fantasy.alchemy.use: true
+      fantasy.dungeon: true
+      fantasy.party: true
+  fantasy.party:
+    description: จัดปาร์ตี้ดันเจี้ยน
+    default: true
+  fantasyadmin.dungeon.manage:
+    description: สร้าง/ตรวจโลกดันฝึกและยกเลิกรอบ (build/abort ต้องยืนยันและมีเหตุผล)
+    default: op
+  fantasy.craft.remote:
+    description: คราฟต์จากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
+    default: false
+  fantasy.alchemy.use:
+    description: เปิดร้านยาที่จุดบริการ alchemy.main
+    default: true
+  fantasy.alchemy.remote:
+    description: ปรุงยาจากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
+    default: false
+  fantasyadmin.craft.resolve:
+    description: ตัดสินคราฟต์ที่ค้าง (ต้องมีเหตุผลและยืนยัน)
+    default: op
+  fantasy.repair.remote:
+    description: ซ่อมของจากทุกที่ (ต้องจ่ายค่าซ่อมเหมือนเดิม)
+    default: false
+  fantasy.bank.remote:
+    description: ใช้ธนาคารได้จากทุกที่ (ปลดล็อกตามแรงค์)
+    default: false
+  fantasy.home.limit.3:
+    description: ตั้งบ้านได้ 3 หลัง
+    default: false
+  fantasy.home.limit.5:
+    description: ตั้งบ้านได้ 5 หลัง
+    default: false
+  fantasy.rtp.bypass-cooldown:
+    description: สุ่มวาร์ปโดยไม่ติด cooldown (staff/ทดสอบ)
+    default: op
+  fantasyadmin.view:
+    description: เปิด /fa ดูสถานะและข้อมูล
+    default: op
+  fantasyadmin.economy.adjust:
+    description: ปรับยอดเงินผู้เล่น (ต้องใส่เหตุผล + ยืนยัน)
+    default: op
+  fantasyadmin.npc.edit:
+    description: วาง/ลบ NPC และ anchor ของจุดบริการ
+    default: op
+  fantasyadmin.content.edit:
+    description: ออกไอเทมจากแม่แบบ
+    default: op
+  fantasyadmin.audit:
+    description: อ่าน audit log
+    default: op
+  fantasyadmin.exchange.resolve:
+    description: ตัดสินการแลกที่ค้าง (ต้องใส่เหตุผล + ยืนยัน)
+    default: op
+  fantasyadmin.repair.resolve:
+    description: ตัดสินรายการซ่อมค้าง (ต้องมีเหตุผลและยืนยัน)
+    default: op

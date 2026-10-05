@@ -1,0 +1,52 @@
+{
+  "id": "item_runeblade_v2",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 25,
+  "runtime_tested": false,
+  "reference": "assets/references/item-runeblade.png",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": "item_runeblade",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_items_v2.py",
+  "texture_method": "shared swatch atlas",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/runeblade_v2",
+  "gui_extent_units": [
+    -7.86,
+    7.31,
+    -7.86,
+    7.31
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/item_runeblade_v2.json": "2774c9a267e7ed066f91f80886d4a991be747b1e4c3f6f4208cc8437a68133c9",
+    "output/lobby-concept/assets/models/item_runeblade_v2.bbmodel": "73a7debdd68ed80dfe628b6d7035d09cc1f95e2013a699872cb039444a3254b0",
+    "output/lobby-concept/assets/models/item_runeblade_v2.png": "f62840a46deeab11511601073480bc4bee66d3ada4d4eafa81b0b690a4425da8",
+    "output/lobby-concept/assets/models/item_runeblade_v2-display.png": "51a4cc4a6ba7a9b1b62d4ea3773fc76acfba871e48ce96b2a7b971e3c5b09b3b",
+    "output/lobby-concept/assets/models/item_runeblade_v2-preview.png": "e1da3e6d55170fd1fe3cea2791f591e20defd251eafb585296f0c7da4f03090e",
+    "output/lobby-concept/assets/models/item_runeblade_v2-front.png": "a6eefc16866b9b357d35412485442549c80b69909e632265ed033c8f28fe4330",
+    "output/lobby-concept/assets/models/item_runeblade_v2-right.png": "0573de72d416093dd848ae025df1a8d87071fb9d9cadead151e54b02d8656f96",
+    "output/lobby-concept/assets/models/item_runeblade_v2-top.png": "d33066d03a6753473294f62bb5ee92b45251ec7fd580ff6c8d290350103ea500"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

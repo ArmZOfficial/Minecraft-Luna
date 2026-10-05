@@ -1,0 +1,9 @@
+# Repair v0.4 — ราคาเป็นค่าทดลอง ปรับบาลานซ์ก่อน public
+# แก้แล้ว restart; ไม่รองรับ /reload
+enabled: true
+pricing:
+  base-gold: 50
+  full-damage-gold: 450
+# price = base + ceil(full-damage × damage/max-damage); เต็มความทนทานไม่คิดราคา
+# เลือกเฉพาะมือหลัก 1 ชิ้น, vanilla/Core ที่ adapter ตรวจได้
+# ไม่รับ MMOItems/Nexo/ItemsAdder/custom provider จนมี adapter ของ provider นั้นจริง

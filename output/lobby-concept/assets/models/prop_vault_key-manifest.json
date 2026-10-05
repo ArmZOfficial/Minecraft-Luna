@@ -1,0 +1,50 @@
+{
+  "id": "prop_vault_key",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 16,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    64,
+    64
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_vault_key",
+  "gui_extent_units": [
+    -2.16,
+    2.16,
+    -6.72,
+    6.72
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_vault_key.json": "5a505d69159c7b74516a3b3d8e6b2bc92d3ef412c768e7a1a8497c4ea8ad6c49",
+    "output/lobby-concept/assets/models/prop_vault_key.bbmodel": "2bf814ad6c1a6f60a9b3e77e7b91b0ff3de9790c01076f51358104cea929a15b",
+    "output/lobby-concept/assets/models/prop_vault_key.png": "b80346d98cdcd0448408717830ef64cbb673e3cb9b01494da6b99258f1a9cfff",
+    "output/lobby-concept/assets/models/prop_vault_key-display.png": "7946c97af1f20310591a56207b0f02ca01ad06b1df18fb9a489cb381f5de1b64",
+    "output/lobby-concept/assets/models/prop_vault_key-preview.png": "4d0261dde586141b8a9e718c3efc66e6ddc6cc1a3be8efb3370cc58aceb8252d",
+    "output/lobby-concept/assets/models/prop_vault_key-front.png": "bef3c0672cfcd55feede5ebabab23eed6962249b964c63f351bdce427e926557"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

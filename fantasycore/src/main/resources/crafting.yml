@@ -1,0 +1,50 @@
+# Core v0.6: วัตถุดิบ vanilla ธรรมดา + gold.wallet → Core template v2 พร้อม native enchant เข้า /mail
+# ถ้าอัปเกรดเซิร์ฟเดิม ให้ archive แม่แบบเดิมใน items.yml ก่อนเปลี่ยน recipe/output version (ไม่เขียนทับไฟล์เดิม)
+# แก้สูตร/ราคาให้เพิ่ม recipe version; output.version ต้องตรง template version
+enabled: true
+recipes:
+  starter_runeblade:
+    enabled: true
+    version: 2
+    name: ดาบรูนผู้เริ่มต้น
+    icon: IRON_SWORD
+    daily-limit: 3
+    gold-cost: 200
+    inputs:
+      IRON_INGOT: 12
+      LAPIS_LAZULI: 4
+      STICK: 2
+    output:
+      provider: core
+      template: starter_runeblade
+      version: 2
+  moonstone_pickaxe:
+    enabled: true
+    version: 2
+    name: อีเต้อจันทร์นักสำรวจ
+    icon: IRON_PICKAXE
+    daily-limit: 2
+    gold-cost: 300
+    inputs:
+      IRON_INGOT: 16
+      LAPIS_LAZULI: 8
+      STICK: 4
+    output:
+      provider: core
+      template: moonstone_pickaxe
+      version: 2
+  sentinel_chestplate:
+    enabled: true
+    version: 2
+    name: เกราะผู้พิทักษ์ลูม่า
+    icon: IRON_CHESTPLATE
+    daily-limit: 2
+    gold-cost: 400
+    inputs:
+      IRON_INGOT: 24
+      LAPIS_LAZULI: 12
+      LEATHER: 8
+    output:
+      provider: core
+      template: sentinel_chestplate
+      version: 2

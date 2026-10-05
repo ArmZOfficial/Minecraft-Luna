@@ -1,0 +1,315 @@
+[
+  {
+    "file": "archive.zip",
+    "sha256": "57d3246d16d8245f27383849e402e1ad7d5577cf1561e1375d6b2990c81d6591",
+    "entries": 30,
+    "bytes": 54573199,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0
+  },
+  {
+    "file": "azureset.zip",
+    "sha256": "d128b2845baa4ba3d75a7690b5bc0c73d88eb578925d3fda138a8d0e8ba0433f",
+    "entries": 89,
+    "bytes": 231920,
+    "yaml": 4,
+    "models": 32,
+    "textures": 37
+  },
+  {
+    "file": "beatsset.zip",
+    "sha256": "8782d6040591dd03fcdf7046e12ef3573378f2ca81922a37a7e418482a0a3e9c",
+    "entries": 139,
+    "bytes": 180097,
+    "yaml": 4,
+    "models": 32,
+    "textures": 62
+  },
+  {
+    "file": "Beserkset.zip",
+    "sha256": "42ceb229332a0528e4a98c0cfcc26792be2fa74a97ff1ffd3d0936d89dac5a4a",
+    "entries": 51,
+    "bytes": 92739,
+    "yaml": 2,
+    "models": 22,
+    "textures": 13
+  },
+  {
+    "file": "CommandAPI-12.1.0-Paper.jar",
+    "sha256": "ab48e55fd06264dd239cf015b501936cb50eb6c38d967fbffca6c91a48064049",
+    "entries": 352,
+    "bytes": 658788,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0,
+    "plugin_metadata": {
+      "name": "CommandAPI",
+      "version": "12.1.0",
+      "api-version": "'1.20.6'"
+    }
+  },
+  {
+    "file": "Demon_commander pack.zip",
+    "sha256": "abfcfd3141e3ff077c5bc2c47029c9831458ee02f77cbf66d094fc90bdfc4dd9",
+    "entries": 78,
+    "bytes": 213994,
+    "yaml": 3,
+    "models": 27,
+    "textures": 32
+  },
+  {
+    "file": "Demonic_Killeffect_legacy.zip",
+    "sha256": "6c2c6a21519af199b17f1da2871515b441b3b80446590f15989ca38d07a68dc6",
+    "entries": 16,
+    "bytes": 78144,
+    "yaml": 2,
+    "models": 1,
+    "textures": 2
+  },
+  {
+    "file": "draculaset.zip",
+    "sha256": "4cfda4d7dab5232901caa152053c8eb37b5e76c7753ea8c614a464cd06da5f9f",
+    "entries": 63,
+    "bytes": 153723,
+    "yaml": 4,
+    "models": 27,
+    "textures": 18
+  },
+  {
+    "file": "Essential Icons Vol.1.zip",
+    "sha256": "989c6767cdeff89c3791f178e0fd9475df5afc43bd8cb8016844326e8501d4ca",
+    "entries": 21802,
+    "bytes": 14323992,
+    "yaml": 60,
+    "models": 1,
+    "textures": 21634
+  },
+  {
+    "file": "EssentialIconsVol1.zip",
+    "sha256": "a763970acbc82e25fa01d41aa03ef191aaf4201272251cff5b10bf1cc882937f",
+    "entries": 123,
+    "bytes": 67082,
+    "yaml": 3,
+    "models": 0,
+    "textures": 90
+  },
+  {
+    "file": "EssentialIconsVol2.zip",
+    "sha256": "feeb23055b437eb9ff58a46adfeb578bcdeb28468f20ff8f4b17f904d827675a",
+    "entries": 126,
+    "bytes": 66117,
+    "yaml": 3,
+    "models": 0,
+    "textures": 93
+  },
+  {
+    "file": "fiendskullset.zip",
+    "sha256": "2b8b3aaca308f5247f6c69decb31310de6580ee6d6d49a769dac6e0b8c29368b",
+    "entries": 81,
+    "bytes": 266663,
+    "yaml": 4,
+    "models": 34,
+    "textures": 33
+  },
+  {
+    "file": "Ifritset.zip",
+    "sha256": "c187e2c29a5c52289754f42abae72fc1e12e92e5b946a93b00e204cc05b11f59",
+    "entries": 56,
+    "bytes": 158301,
+    "yaml": 3,
+    "models": 28,
+    "textures": 12
+  },
+  {
+    "file": "infernoset.zip",
+    "sha256": "2db56bb5ff2bf2910079320203373628a89971afa094a945b61e0ab45a23df04",
+    "entries": 85,
+    "bytes": 298785,
+    "yaml": 4,
+    "models": 34,
+    "textures": 35
+  },
+  {
+    "file": "ItemsAdder_4.0.18.jar",
+    "sha256": "b68230bc9f08ea19e181ec12f3572a1e6bb8ae0bb39425ffa493e0db03500f45",
+    "entries": 2197,
+    "bytes": 4704312,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0,
+    "plugin_metadata": {
+      "name": "ItemsAdder",
+      "version": "4.0.18",
+      "api-version": "1.14"
+    }
+  },
+  {
+    "file": "littledragonset.zip",
+    "sha256": "e3fc64791e6086bcb27cc468cee50e5560e36b8031deca5aba529fc82330aba4",
+    "entries": 108,
+    "bytes": 223355,
+    "yaml": 4,
+    "models": 37,
+    "textures": 45
+  },
+  {
+    "file": "lunardragon_set.zip",
+    "sha256": "8e9dc1553e3bcffb50ff940b0bbc20d8cfd916d570fd54085f8f345cda9e8970",
+    "entries": 93,
+    "bytes": 141999,
+    "yaml": 4,
+    "models": 42,
+    "textures": 33
+  },
+  {
+    "file": "Madhatterset.zip",
+    "sha256": "4c281822378e2726cbd47afbd8a00c3616afd8a83615b9bcc8fdd02118641324",
+    "entries": 56,
+    "bytes": 112780,
+    "yaml": 2,
+    "models": 27,
+    "textures": 11
+  },
+  {
+    "file": "Medieval-Kitchen-Furniture_Pack.zip",
+    "sha256": "4b5f71797ebe9639f89e4df059cbbb55de5994a037293c6a58343ad20e07f9a5",
+    "entries": 182,
+    "bytes": 276489,
+    "yaml": 3,
+    "models": 72,
+    "textures": 72
+  },
+  {
+    "file": "Medieval-Tavern-Furniture_Pack.zip",
+    "sha256": "8bffaed876d07beab6cda1dbf96ab549615fa079ce7eb704a91bf780e6c89cc0",
+    "entries": 136,
+    "bytes": 205345,
+    "yaml": 3,
+    "models": 56,
+    "textures": 44
+  },
+  {
+    "file": "MystiCrates _ keys animated V.2.0.0.zip",
+    "sha256": "942de4158ea10112d7912e52982c6b1381aeca889f726429e4cc6aa45d2f43b4",
+    "entries": 98,
+    "bytes": 147084,
+    "yaml": 24,
+    "models": 15,
+    "textures": 16
+  },
+  {
+    "file": "MythicMobs-5.6.1.jar",
+    "sha256": "ba580f5c21a986857e61e896f2292b9c253afa55e1fa452e362bd25945cb6435",
+    "entries": 10322,
+    "bytes": 15469051,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0,
+    "plugin_metadata": {
+      "name": "MythicMobs",
+      "version": "5.6.1-${CI_COMMIT_SHORT_SHA}",
+      "api-version": "1.13"
+    }
+  },
+  {
+    "file": "Nogs Plushies [Dinosaurs].zip",
+    "sha256": "ba44683fd5ba626201f96cd759b4d29fd88227f9a46fef79478f612ea6646c43",
+    "entries": 141,
+    "bytes": 410420,
+    "yaml": 26,
+    "models": 36,
+    "textures": 36
+  },
+  {
+    "file": "Nogs Plushies [Superheroes].zip",
+    "sha256": "ddaf9c499af2b88c4d50cc4e03d2bbf782de3e1c0ef9b39b5fe950eae35f19b7",
+    "entries": 85,
+    "bytes": 315296,
+    "yaml": 22,
+    "models": 30,
+    "textures": 30
+  },
+  {
+    "file": "nora-limited_set.zip",
+    "sha256": "fb5818c0ae0dcf36085e77f720522cc505c5228b4d83f419e72b447651265773",
+    "entries": 99,
+    "bytes": 129811,
+    "yaml": 3,
+    "models": 29,
+    "textures": 43
+  },
+  {
+    "file": "OnePunchMan_set.zip",
+    "sha256": "8cfc87da828fa343a3a224040c0e777a0e51bc0e3264c7df3823f0cc5fefb756",
+    "entries": 108,
+    "bytes": 115288,
+    "yaml": 2,
+    "models": 25,
+    "textures": 49
+  },
+  {
+    "file": "oraxen-1.211.0.jar",
+    "sha256": "3a7ed96b472bb6c7cc6be01e27dc72c1fcf00760a0466d5d5b448e11b2f8c6a7",
+    "entries": 3224,
+    "bytes": 4692873,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0,
+    "plugin_metadata": {
+      "name": "Oraxen",
+      "version": "1.211.0",
+      "api-version": "\"1.18\""
+    }
+  },
+  {
+    "file": "radiance_collection.zip",
+    "sha256": "12c9dea0431ff788ca79e92a7a22c6b8d9fdc99a70350e943dd7cbb765b4eafc",
+    "entries": 50,
+    "bytes": 168784,
+    "yaml": 3,
+    "models": 22,
+    "textures": 14
+  },
+  {
+    "file": "sanpatric_set.zip",
+    "sha256": "9cc21a55eedef1d90052b5f60843eecb0bf0c2500c554adbc507fa8a58c66d5c",
+    "entries": 85,
+    "bytes": 208896,
+    "yaml": 3,
+    "models": 36,
+    "textures": 32
+  },
+  {
+    "file": "Skelton_overload set.zip",
+    "sha256": "28ab89e21931c1a163e91ac82f32a2368a36c2395b05b61bd1bc1e27b31f9570",
+    "entries": 53,
+    "bytes": 178398,
+    "yaml": 2,
+    "models": 25,
+    "textures": 11
+  },
+  {
+    "file": "starlight_set.zip",
+    "sha256": "0d4b07788da4a224fb271960d5ee2940eda14ca8948c64572e124786b15b6867",
+    "entries": 58,
+    "bytes": 167055,
+    "yaml": 4,
+    "models": 24,
+    "textures": 16
+  },
+  {
+    "file": "Vulcan-2.9.7.26.jar",
+    "sha256": "ae0dc9018a12063170195cea0c15aa61192976534479c4879964035318d52c45",
+    "entries": 920,
+    "bytes": 3365513,
+    "yaml": 0,
+    "models": 0,
+    "textures": 0,
+    "plugin_metadata": {
+      "name": "Vulcan",
+      "version": "2.9.7.26",
+      "api-version": "1.13"
+    }
+  }
+]

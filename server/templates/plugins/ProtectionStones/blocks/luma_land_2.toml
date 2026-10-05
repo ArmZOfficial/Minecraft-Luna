@@ -1,0 +1,116 @@
+# Luma — Protect ระดับ II: ศิลาคุ้มครองเรือนพัก
+# ขนาดจริง 21 × 21 บล็อก (ความกว้าง = 2 × radius + 1) สูงเต็มโลก — PROTECTIONSTONES-TIERS-th.md §1
+# ไฟล์นี้อิงแม่แบบ block1.toml ของ ProtectionStones 2.10.6; key ที่ไม่ได้ใส่จะใช้ค่าจากแม่แบบของปลั๊กอิน
+# ราคา/การปลดล็อก/serial/เพดาน 2 แปลง เป็นงานของ FantasyCore ClaimAdapter (phase ถัดไป) — PS ไม่ได้ enforce ให้
+
+type = "LAPIS_ORE"
+alias = "luma_land_2"
+description = "ศิลาคุ้มครองเรือนพัก — 21 × 21 บล็อก"
+
+# ได้หินจาก /ps give ของทีมงานเท่านั้น แร่ที่ขุดได้ไม่เป็นหินกันบ้าน
+restrict_obtaining = true
+
+# ใช้ได้เฉพาะโลกบ้าน (OP/protectionstones.admin ข้ามได้)
+world_list_type = "whitelist"
+worlds = ["luma_housing"]
+prevent_block_place_in_restricted_world = true
+allow_placing_in_wild = true
+placing_bypasses_wg_passthrough = true
+
+[region]
+    # PS วัดจากตัวหินถึงขอบ region อื่น: radius + 5 ≈ ช่องว่างขอบถึงขอบ 5 บล็อกตามแกน
+    # (เอกสารกำหนดให้ Core ตรวจ bounding box จริงอีกชั้น — ยังไม่มีใน v0.1)
+    distance_between_claims = 15
+    x_radius = 10
+    y_radius = -1
+    z_radius = 10
+    chunk_radius = -1
+    home_x_offset = 0.0
+    home_y_offset = 1.0
+    home_z_offset = 0.0
+    flags = [
+        "pvp deny",
+        "tnt deny",
+        "creeper-explosion deny",
+        "other-explosion deny",
+        "wither-damage deny",
+        "ghast-fireball deny",
+        "fire-spread deny",
+        "greeting-action &aเข้าเขตบ้านของ &f%player%",
+        "farewell-action &7ออกจากเขตบ้านของ &f%player%",
+    ]
+    # เจ้าของปรับได้เฉพาะข้อความและการเกิดม็อบ — เปิด PvP ในแปลงเองไม่ได้
+    allowed_flags = [
+        "greeting-action",
+        "farewell-action",
+        "mob-spawning",
+    ]
+    hidden_flags_from_info = [
+        "ps-name",
+        "ps-merged-regions",
+        "ps-merged-regions-types",
+        "ps-block-material",
+        "ps-price",
+        "ps-landlord",
+        "ps-tenant",
+        "ps-rent-period",
+        "ps-rent-last-paid",
+        "ps-for-sale",
+        "ps-rent-settings",
+        "ps-tax-payments-due",
+        "ps-tax-last-payment-added",
+        "ps-tax-autopayer"
+    ]
+    priority = 0
+    allow_overlap_unowned_regions = false
+    allow_other_regions_to_overlap = "none"
+    allow_merging = false
+    allowed_merging_into_types = []
+
+[block_data]
+    display_name = "&6&lศิลาคุ้มครองเรือนพัก &7(II)"
+    lore = [
+        "&7ป้องกัน &f21 × 21 &7บล็อก สูงเต็มโลก",
+        "&7เหมาะกับ: &fบ้านพร้อมสวนและคอกสัตว์",
+        "&8วางในโลกบ้านเท่านั้น · ผูกเจ้าของ",
+    ]
+    enchanted_effect = false
+    # ราคาอยู่ที่ FantasyCore (ทองผ่าน Core เท่านั้น) — ห้ามตั้งราคาใน PS ซ้อน
+    price = 0.0
+    allow_craft_with_custom_recipe = false
+    custom_model_data = -1
+
+[economy]
+    tax_amount = 0.0
+    tax_period = -1
+    tax_payment_time = 86400
+    start_with_tax_autopay = true
+    tenant_rent_role = "member"
+    landlord_still_owner = false
+
+[behaviour]
+    auto_hide = false
+    auto_merge = false
+    no_drop = false
+    prevent_piston_push = true
+    prevent_explode = true
+    destroy_region_when_explode = false
+    prevent_silk_touch = false
+    cost_to_place = 0.0
+    allow_smelt_item = false
+    allow_use_in_crafting = false
+
+[player]
+    allow_shift_right_break = false
+    prevent_teleport_in = false
+    no_moving_when_tp_waiting = true
+    tp_waiting_seconds = 3
+    # ผู้เล่นซื้อหินผ่าน /ps get ไม่ได้ (ต้องผ่าน Core) และ /ps home ปิด เพราะ FantasyCore เป็นเจ้าของ /home
+    prevent_ps_get = true
+    prevent_ps_home = true
+    permission = ''
+
+[event]
+    enable = false
+    on_region_create = []
+    on_region_destroy = []

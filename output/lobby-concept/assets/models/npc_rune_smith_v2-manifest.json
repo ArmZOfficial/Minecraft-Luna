@@ -1,0 +1,229 @@
+{
+  "id": "npc_rune_smith_v2",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "hammer",
+    "craft_success"
+  ],
+  "cubes": 171,
+  "bones": 16,
+  "height_target": 2.2,
+  "runtime_tested": false,
+  "reference": "assets/references/npc-rune-smith.png",
+  "texture": [
+    512,
+    512
+  ],
+  "native_timeline_frames_checked": 19,
+  "supersedes": "npc_rune_smith",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "builder": "tools/build_rune_smith.py",
+  "pose_capture": "tools/preview_rune_smith.py",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        13,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        13,
+        0
+      ]
+    },
+    {
+      "name": "apron_flap",
+      "parent": "waist",
+      "origin": [
+        0,
+        13.2,
+        -3.1
+      ]
+    },
+    {
+      "name": "tongs",
+      "parent": "waist",
+      "origin": [
+        -5.3,
+        12.4,
+        -1.25
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        26,
+        0
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        6.8,
+        25,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        6.8,
+        19.5,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        6.8,
+        15.5,
+        -0.3
+      ]
+    },
+    {
+      "name": "hammer",
+      "parent": "right_hand",
+      "origin": [
+        6.8,
+        14.3,
+        -0.3
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -6.8,
+        25,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -6.8,
+        19.5,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -6.8,
+        15.5,
+        -0.3
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2.3,
+        13,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2.3,
+        13,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        30,
+        0
+      ]
+    }
+  ],
+  "held_props": {
+    "hammer": "right_hand",
+    "tongs": "waist",
+    "max_gap_px": 0
+  },
+  "handedness": "character right is +X (model faces north/-Z); pauldron on left shoulder as in the reference",
+  "animation_events": {
+    "hammer_impact_ticks": [
+      11,
+      25
+    ]
+  },
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.8,
+      0,
+      -4.8
+    ],
+    "to": [
+      4.8,
+      35.6,
+      4.8
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "keyframes": 103
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 2.6162,
+    "max_width": 1.6806
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_rune_smith_v2.bbmodel": "ca00a8e0781ad8717d6a0adc09ab021e1456df2b4b7a56a9c4ab7960f33a8877",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2.png": "5ca5c6c93a86e720df3574aff80313352a0e446e936f4e08a41c42c50ed130bb",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-pose-checks.json": "fbbba405a18280f4cc3eac06983f1149e4f8ffb9410a745a7413a4a8c09dced5",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-back.png": "af4f935a0ab3d36228bafaa05c9abeacfbdd4731abb8728e85e89d080a6602c8",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-craft-success.png": "7f302b979684a1528ff4bda095a576bf554f40b247c005c708e18f58b962a338",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-front.png": "b2bf496c24251dc078db1444009c3673857fd590b51158360c607e44ec44bf1c",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-greet.png": "dc8ec89509d16e0f0661fd4c310ac05b218b52e4dba07a079f021f1b97e09e53",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-hammer-impact.png": "d41188588c20eefad61f0c506a3a98cc819675e1b9899adf1083618a6909d97a",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-hammer-windup.png": "6340b2647487c79d90348ca497a2352ede9c62b91e8ba3f8024628850868980e",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-idle.png": "9e64ebefebb499107f6499e8a3c636faea71e678c4f0b599c6e7c13b60c287fa",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-preview.png": "f2c298adf6fb4577017ebea329ab8b37f25240411b234331c8245dc9c253375d",
+    "output/lobby-concept/assets/models/npc_rune_smith_v2-right.png": "4f614d8e653f672a3339d4456452852f154f6392d3623f0d19ee73c7a109eeb1"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens runtime or client evidence yet",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "v1 (npc_rune_smith) is kept unchanged for comparison"
+  ]
+}

@@ -1,0 +1,77 @@
+# Luma staging — คำสั่ง LuckPerms ชุดเริ่มต้น
+# วิธีใช้: คัดลอกทีละบรรทัด (หรือทั้งก้อน) ไปวางใน console ของเซิร์ฟ — บรรทัดที่ขึ้นต้นด้วย # ไม่ต้องวาง
+# ชื่อกลุ่มและ node ตาม ADMIN-PANEL-SPEC-th.md / PROTECTIONSTONES-TIERS-th.md — ปรับได้หลังทดสอบ
+
+# ---------- ผู้เล่นทั่วไป (default)
+# fantasy.player เปิดเป็น default ใน plugin.yml แล้ว (menu, bank ที่สถานี, home, rtp, spawn, land)
+lp group default permission set fantasy.dungeon true
+lp group default permission set fantasy.party true
+lp group default permission set protectionstones.create true
+lp group default permission set protectionstones.destroy true
+lp group default permission set protectionstones.unclaim true
+lp group default permission set protectionstones.view true
+lp group default permission set protectionstones.info true
+lp group default permission set protectionstones.count true
+lp group default permission set protectionstones.list true
+lp group default permission set protectionstones.members true
+lp group default permission set protectionstones.flags true
+lp group default permission set protectionstones.toggle true
+lp group default permission set protectionstones.limit.1 true
+# ปิดเส้นทาง native ที่ข้ามกติกา Core: ซื้อหินเอง, /ps home, เพิ่มเจ้าของร่วม, merge, เช่า/ขาย
+lp group default permission set protectionstones.get false
+lp group default permission set protectionstones.home false
+lp group default permission set protectionstones.tp false
+lp group default permission set protectionstones.owners false
+lp group default permission set protectionstones.merge false
+lp group default permission set protectionstones.rent false
+lp group default permission set protectionstones.buysell false
+
+# ---------- สิทธิ์ที่ได้จากความคืบหน้า (เควส/แรงค์) — ใช้ทดสอบ: lp user <ชื่อ> parent add <กลุ่ม>
+lp creategroup housing_second_plot
+lp group housing_second_plot permission set protectionstones.limit.2 true
+lp creategroup housing_workshop
+lp group housing_workshop permission set fantasy.home.limit.3 true
+lp creategroup housing_community
+lp group housing_community permission set fantasy.home.limit.5 true
+lp creategroup rank_bank_remote
+lp group rank_bank_remote permission set fantasy.bank.remote true
+
+# ---------- ทีมงาน (ไม่ใช้ OP เป็นหลัก)
+lp creategroup staff_observer
+lp group staff_observer permission set fantasyadmin.view true
+
+lp creategroup staff_moderator
+lp group staff_moderator parent add staff_observer
+
+lp creategroup staff_builder
+lp group staff_builder parent add staff_observer
+lp group staff_builder permission set fantasyadmin.npc.edit true
+lp group staff_builder permission set worldedit.* true
+lp group staff_builder permission set worldguard.region.* true
+
+lp creategroup staff_content
+lp group staff_content parent add staff_observer
+lp group staff_content permission set fantasyadmin.content.edit true
+lp group staff_content permission set fantasyadmin.dungeon.manage true
+
+lp creategroup staff_economy
+lp group staff_economy parent add staff_observer
+lp group staff_economy permission set fantasyadmin.economy.adjust true
+lp group staff_economy permission set fantasyadmin.audit true
+lp group staff_economy permission set fantasyadmin.exchange.resolve true
+lp group staff_economy permission set fantasyadmin.repair.resolve true
+lp group staff_economy permission set fantasyadmin.craft.resolve true
+
+# ถ้าติดตั้ง EssentialsX เพิ่มภายหลัง ห้าม utility repair ข้ามราคา Core
+lp group default permission set essentials.repair false
+lp group default permission set essentials.repair.all false
+
+lp creategroup staff_owner
+lp group staff_owner parent add staff_builder
+lp group staff_owner parent add staff_content
+lp group staff_owner parent add staff_economy
+lp group staff_owner permission set protectionstones.admin true
+lp group staff_owner permission set protectionstones.give true
+lp group staff_owner permission set fantasy.rtp.bypass-cooldown true
+
+# ตัวอย่าง: lp user ArmZ parent add staff_owner

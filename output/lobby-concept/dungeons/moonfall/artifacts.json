@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-05",
+  "tool": "image_gen",
+  "prompts": "PROMPTS-th.md",
+  "status": "concept-not-schematic",
+  "images": [
+    {
+      "file": "01-overview.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2556890,
+      "sha256": "4ad4b1bf05475af92f4ca71a96bd5a1009f069ab338dfb86c87525eeb109bf42"
+    },
+    {
+      "file": "02-entrance.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2609527,
+      "sha256": "c6c145c365d3fca114bcabd8a0fb508c789710f3149ae7a4a5f8e7fdb62dfb6e"
+    },
+    {
+      "file": "03-rune-hall.png",
+      "width": 1672,
+      "height": 940,
+      "bytes": 2608224,
+      "sha256": "b77762aaba0fae033db9e315544960077fbbd764dc1d0de83445acb83c0c1cac"
+    },
+    {
+      "file": "04-boss-arena.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2858261,
+      "sha256": "ebb65f815bf423e1ad81c07be7da4e94f8016a664aa34e13497e96f350d48e2a"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+# Core v0.6: ใช้เฉพาะ vanilla hostile ที่เกิด NATURAL ในโลกนี้
+# ระดับตรึงตอนเกิด; ไม่ใช้ซ้อน MythicMobs/dungeon CUSTOM spawn, ไม่เพิ่มจำนวนเกิด/loot/XP
+enabled: true
+worlds: [luma_resource]
+health-cap: 200
+raw-damage-cap: 12
+# แสดง BossBar เฉพาะตัวที่เล็งและมองเห็น ภายใน 8 บล็อก; อัปเดตทุก 10 ticks
+target-health-bar: true
+tiers:
+  surface:
+    name: ผิวดิน
+    min-y: 64
+    health-scale: 1.0
+    damage-scale: 1.0
+    color: GREEN
+  cavern:
+    name: ถ้ำรูน
+    min-y: 32
+    health-scale: 1.5
+    damage-scale: 1.2
+    color: YELLOW
+  deep:
+    name: ถ้ำลึก
+    min-y: 16
+    health-scale: 2.2
+    damage-scale: 1.5
+    color: RED
+  abyss:
+    name: ห้วงจันทรา
+    min-y: 0
+    health-scale: 3.2
+    damage-scale: 1.8
+    color: PURPLE

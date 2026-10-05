@@ -1,0 +1,827 @@
+# ข้อความภาษาไทยของ FantasyCore (รูปแบบ MiniMessage: https://docs.advntr.dev/minimessage/format.html)
+# แก้ไฟล์นี้ในโฟลเดอร์ plugins/FantasyCore/ แล้วรีสตาร์ตเซิร์ฟ — key ที่ลบทิ้งจะใช้ค่าจากในปลั๊กอินแทน
+# สี: ทอง #DDA54A (เน้น), ฟ้าคริสตัล #47C8D3 (ตัวเลข), งาช้าง #EDF4E9 (ข้อความ) ตาม BRAND-GUIDE
+
+prefix: '<#DDA54A><bold>ลูม่า</bold></#DDA54A> <dark_gray>»</dark_gray> <#EDF4E9>'
+
+party:
+  not-leader: '<yellow>ให้หัวหน้าปาร์ตี้เป็นคนจัดทีมและเริ่มรอบ'
+  locked: '<yellow>ทีมกำลังลงดัน เปลี่ยนสมาชิกไม่ได้ · /dungeon leave จะยกเลิกทั้งรอบ'
+  updated: '<green>จัดทีมเรียบร้อย'
+  already-joined: '<yellow>ผู้เล่นอยู่ในทีมแล้ว หรือมีคำเชิญที่ยังไม่หมดอายุ'
+  full: '<yellow>ปาร์ตี้เต็มแล้ว สูงสุด 4 คน'
+  no-invite: '<yellow>ไม่มีคำเชิญที่ใช้ได้ หรือหมดเวลา 60 วินาทีแล้ว'
+  no-party: '<gray>ยังไม่มีปาร์ตี้ · /party invite ชื่อผู้เล่น'
+  invalid-target: '<yellow>ไม่พบผู้เล่นที่เชิญหรือจัดทีมได้'
+  invited: '<#B996EF><player> เชิญเข้าปาร์ตี้ <gray>พิมพ์ /party accept ภายใน 60 วินาที'
+  usage: '<gray>/party invite ชื่อ · accept · list · leave · kick ชื่อหรือUUID · disband'
+  menu:
+    title: '<#B996EF>ปาร์ตี้ · Moonfall'
+    info-name: '<#DDA54A>ทีมผจญภัย'
+    info-lore: |-
+      <gray>สมาชิก <count>/4 · หัวหน้า <leader>
+      <gray>สถานะ: <status>
+      <gray>เชิญเพื่อนด้วย /party invite ชื่อ
+      <gray>หัวหน้ากดเข้าดันเพื่อเริ่มพร้อมกัน
+    member-name: '<#47C8D3><player>'
+    accept-name: '<green>รับคำเชิญ'
+    accept-lore: '<gray>เข้าทีมของ <player> ก่อนคำเชิญหมดเวลา'
+    leave-name: '<yellow>ออกจากทีม'
+    leave-lore: |-
+      <gray>ออกได้เมื่อไม่มีรอบที่กำลังเล่น
+      <gray>หัวหน้าออกจะยุบทั้งปาร์ตี้
+    dungeon-name: '<#47C8D3>เปิดเมนูดันเจี้ยน'
+
+dungeon:
+  party-disabled: '<yellow>ดันปาร์ตี้ยังปิดอยู่ ทีมงานต้องทดสอบก่อน'
+  member-not-ready: '<yellow><player> ยังไม่พร้อม ต้องออนไลน์ อยู่ Survival บนพื้นปลอดภัย ไม่มีรอบหรือวาร์ปค้าง'
+  gather: '<#B996EF>รอสมาชิกครบห้อง <room> เพื่อเริ่มต่อสู้'
+  party-waiting: '<yellow>มีสมาชิกหลุดเกม พักมอนสเตอร์และการต่อสู้ รอกลับภายใน 60 วินาที'
+  party-resumed: '<green>สมาชิกกลับครบแล้ว ต่อสู้ต่อได้'
+  reconnected: '<green>กลับเข้ารอบเดิมแล้ว สมาชิกและรางวัลคงเดิม'
+  reconnect-expired: '<yellow>สมาชิกกลับไม่ทันเวลา ยกเลิกรอบและนำทุกคนกลับ'
+  paused: '<yellow>พักรอบ · รอสมาชิกอีก <seconds> วินาที'
+  unavailable: '<yellow>ดันฝึกยังไม่เปิดหรือแมพยังไม่พร้อม — ทีมงานกำลังตรวจเส้นทาง'
+  occupied: '<yellow>มีผู้เล่นกำลังฝึกหรือมีรายการกลับค้างอยู่ — ลองอีกครั้งเมื่อพร้อม'
+  join-denied: '<yellow>เข้าได้ในโหมด Survival เมื่อยืนบนพื้น ไม่อยู่บนพาหนะและไม่มีการต่อสู้/วาร์ปค้าง'
+  unsafe-exit: '<yellow>จุดที่ยืนยังไม่ปลอดภัยสำหรับกลับออกจากดัน — ยืนบนพื้นก่อนเข้า'
+  storage-error: '<red>ดันหยุดเพราะระบบบันทึกขัดข้อง รางวัลที่บันทึกสำเร็จแล้วยังคงอยู่ใน /mail — แจ้งทีมงาน'
+  started: '<#B996EF>ยินดีต้อนรับสู่ซากวิหารจันทรา! <gray>เดินลงบันไดสู่ห้องรูน · ออกด้วย /dungeon leave'
+  visiting: '<yellow>กำลังตรวจแมพฝึก ยังไม่มีมอนสเตอร์/รางวัล · ออกด้วย /dungeon leave'
+  left: '<yellow>สมาชิกออก ยกเลิกทั้งรอบและเริ่มกลับจุดเดิม รางวัลเฉพาะรอบที่ผ่านครบเท่านั้น'
+  not-playing: '<gray>คุณยังไม่ได้อยู่ในดันฝึก'
+  timeout: '<yellow>หมดเวลาฝึกรอบนี้ กำลังนำคุณกลับ'
+  stopped: '<yellow>รอบฝึกหยุดลง กำลังนำคุณกลับ — ใช้ /dungeon leave ซ้ำได้ถ้าจุดกลับยังไม่พร้อม'
+  walk-hall: '<#B996EF>ซากวิหารจันทรา · เดินสู่ห้องอักษรรูน'
+  walk-next: '<#B996EF>ผ่านห้องแล้ว · เดินสู่ <room>'
+  encounter: '<#DDA54A>✦ <room> <gray>· <#47C8D3><hp>/<max> HP'
+  room-start: '<#B996EF>เริ่มต่อสู้: <room> <gray>· เคลียร์มอนสเตอร์ให้ครบเพื่อเปิดทาง'
+  room-cleared: '<green>ผ่านห้องแล้ว! <gray>ประตูห้องถัดไปเปิด'
+  slam-warning: '<#B996EF>✦ บอสกำลังทุบพื้น! <yellow>ออกจากวงสีม่วงก่อนกระแทก'
+  rewarded: '<green>ผ่านซากวิหารจันทรา! <#DDA54A>เศษจันทรา ×2 <gray>รอใน /mail · กำลังนำคุณกลับ'
+  completed-daily: '<green>ผ่านดันฝึกอีกครั้ง! <gray>รางวัลวันนี้รับแล้ว วันใหม่ 00:00 เวลาไทย · กำลังนำคุณกลับ'
+  use-leave: '<yellow>ระหว่างอยู่ในแมพฝึก ใช้ /dungeon leave เพื่อกลับออกอย่างปลอดภัย'
+  exit-failed: '<red>จุดกลับไม่พร้อมหรือการวาร์ปถูกยกเลิก — ยังคงจำจุดกลับไว้ ใช้ /dungeon leave อีกครั้งหรือแจ้งทีมงาน'
+  reward-name: '<#B996EF>✦ เศษจันทรา'
+  reward-lore: |-
+    <gray>รางวัลจากการฝึกในซากวิหารจันทรา
+    <gray>วัตถุดิบเควส · ยังไม่มีสูตรใช้ในรุ่นนี้
+  admin-report: '<#47C8D3>Moonfall <gray>· <detail>'
+  admin-preview: '<yellow>เตรียม <action> เป้าหมาย <target> <gray>· <reason> · <gold>/fa confirm <token>'
+  admin-usage: '<yellow>/fa dungeon status | visit [training|party1|party2] | build <เหตุผล> | buildparty <1|2> <เหตุผล> | abort <เหตุผล> (ทุกรอบ)'
+  menu:
+    title: '<#B996EF>ซากวิหารจันทรา · เดี่ยว / ปาร์ตี้'
+    info-name: '<#DDA54A>Moonfall · นักเดินทาง I'
+    info-lore: |-
+      <gray>ห้องรูน → ศิลาจันทร์ → ผู้พิทักษ์
+      <gray>เดี่ยวหรือทีม 2–4 คน · จำกัด <duration> นาที
+      <gray>สถานะ: <status>
+    join-name: '<#47C8D3>เข้าสู่ดันฝึก'
+    join-lore: |-
+      <gray>ใช้ของที่พกมา ไม่มีค่าเข้า
+      <gray>ตายแล้วเก็บของ/XP และไม่เสียทอง
+      <gray>ความทนทานและของใช้ยังลดตามปกติ
+      <gray>ผ่านครบรับเศษจันทรา ×2 ใน /mail
+      <gray>รับรางวัลได้วันละครั้งเวลาไทย
+      <gray>หลุดเกมพัก 60 วินาที · ตายหรือออกยกเลิกทั้งทีม
+      <yellow>หัวหน้าคลิกเพื่อเข้าทั้งทีม
+    leave-name: '<yellow>กลับออกจากดัน'
+    leave-lore: |-
+      <gray>ยกเลิกทั้งรอบและนำสมาชิกกลับจุดก่อนเข้า
+      <gray>หากจุดเดิมไม่ปลอดภัยจะกลับจุดเกิด
+
+common:
+  no-permission: '<red>คุณยังไม่มีสิทธิ์ใช้งานนี้'
+  players-only: '<red>คำสั่งนี้ใช้ได้เฉพาะผู้เล่นในเกม'
+  storage-error: '<red>ระบบบันทึกข้อมูลขัดข้อง ยังไม่มีการเปลี่ยนแปลงใด ๆ — ลองใหม่หรือแจ้งทีมงาน'
+  busy: '<yellow>รายการก่อนหน้ายังทำไม่เสร็จ รอสักครู่แล้วลองใหม่'
+  invalid-amount: '<red>จำนวน "<input>" ไม่ถูกต้อง — ใช้ตัวเลขจำนวนเต็มมากกว่า 0 หรือพิมพ์ all'
+
+core:
+  version: 'FantasyCore <#47C8D3><version></#47C8D3> — พิมพ์ <#DDA54A>/menu</#DDA54A> เพื่อเปิดเมนูหลัก'
+
+service:
+  not-connected: '<yellow>บริการ <#DDA54A><action></#DDA54A> ยังไม่เชื่อมระบบในรุ่นนี้ — ทีมงานกำลังพัฒนา'
+  unknown: '<red>ไม่รู้จักบริการ <action>'
+  go-to-station: '<yellow>บริการนี้ใช้ได้ที่จุดบริการในเมือง (<action>) หรือเมื่อแรงค์ปลดล็อกการใช้ทางไกล'
+
+menu:
+  close: '<red>ปิดเมนู'
+  back: '<gray>« กลับ'
+  busy: '<yellow>กำลังทำรายการ…'
+  status:
+    ready: '<green>● พร้อมใช้'
+    not-connected: '<gray>○ ยังไม่เชื่อม (เร็ว ๆ นี้)'
+  main:
+    title: '<#194D39>เมนูหลัก · ลูม่า'
+    profile:
+      name: '<#DDA54A><player>'
+      lore: |-
+        <gray>ทองที่พก: <#DDA54A><wallet></#DDA54A>
+        <gray>เงินฝาก: <#DDA54A><bank></#DDA54A>
+        <gray>เงินแดง: <red><redcoin></red>
+    explore:
+      name: '<#47C8D3>สำรวจโลก / สุ่มวาร์ป'
+      lore: |-
+        <gray>สุ่มจุดปลอดภัยในโลกบ้านหรือโลกทรัพยากร
+    rewards:
+      name: '<#DDA54A>รางวัลของฉัน'
+      lore: |-
+        <gray>รับของรายวัน รอบสะสม 7 ครั้ง (/rewards)
+        <gray>วันใหม่ 00:00 เวลาไทย
+    land:
+      name: '<#DDA54A>ที่ดินและบ้าน'
+      lore: |-
+        <gray>จุดกลับบ้านของคุณ (/sethome, /home)
+        <gray>ดูแปลงตรงที่ยืน: /land
+    skins:
+      name: '<#DDA54A>ห้องแต่งไอเทม'
+      lore: |-
+        <gray>เปลี่ยนภาพอุปกรณ์โดยคงความสามารถ
+    exchange:
+      name: '<#DDA54A>กระดานแลกของ'
+      lore: |-
+        <gray>ส่งวัตถุดิบ รับของที่เห็นล่วงหน้า
+    paint:
+      name: '<#DDA54A>สตูดิโอภาพพิกเซล'
+      lore: |-
+        <gray>วาดรูปไปติดบ้าน
+    upgrade:
+      name: '<#DDA54A>อัปเกรดอุปกรณ์'
+      lore: |-
+        <gray>ดูสูตร ราคา และผลลัพธ์ก่อนยืนยัน
+    bank:
+      name: '<#DDA54A>ธนาคาร'
+      lore: |-
+        <gray>ฝาก/ถอนทอง เงินฝากไม่หายเมื่อเสียชีวิต
+        <gray>ใช้ได้ที่ธนาคารโซน 05 หรือเมื่อแรงค์ปลดล็อก
+    craft:
+      name: '<#47C8D3>ช่างคราฟต์อุปกรณ์รูน'
+      lore: |-
+        <gray>เลือกสูตร ดูวัตถุดิบและค่าทองก่อนยืนยัน
+        <gray>คราฟต์ครั้งละ 1 ชิ้น รับของใน /mail
+        <gray>ใช้ที่โรงตีเหล็กโซน 07 (/craft)
+    alchemy:
+      name: '<#AC79FF>ไลรา · ปรุงยา'
+      lore: |-
+        <gray>เลือกสูตร ดูผลยา วัตถุดิบ และค่าทองก่อนยืนยัน
+        <gray>ปรุงครั้งละ 1 ขวด รับยาใน /mail
+        <gray>ใช้ที่ร้านยาโซน 06 (/alchemy)
+    repair:
+      name: '<#DDA54A>ช่างซ่อมอุปกรณ์'
+      lore: |-
+        <gray>ถือของในมือหลัก ดูราคาและยืนยันก่อนซ่อม
+        <gray>ใช้ได้ที่โรงตีเหล็กโซน 07 (/repair)
+    mail:
+      name: '<#DDA54A>กล่องจดหมาย'
+      lore: |-
+        <gray>ของรางวัล/ของที่ส่งเข้ากระเป๋าไม่ได้
+        <gray>รอรับที่นี่ ไม่ตกพื้น (/mail)
+    spawn:
+      name: '<#47C8D3>กลับจุดเกิด'
+      lore: |-
+        <gray>วาร์ปกลับลานกลางเมือง (/spawn)
+    dungeon:
+      name: '<#B996EF>ซากวิหารจันทรา'
+      lore: |-
+        <gray>ดันเจี้ยนฝึกเดี่ยว ผ่าน 3 ห้องต่อสู้
+        <gray>ตรวจสถานะก่อนเข้า (/dungeon)
+
+bank:
+  menu:
+    title: '<#194D39>ธนาคารลูม่า'
+    balance:
+      name: '<#DDA54A>ยอดเงินของคุณ'
+      lore: |-
+        <gray>ทองที่พก: <#DDA54A><wallet></#DDA54A>
+        <gray>เงินฝาก: <#DDA54A><bank></#DDA54A>
+        <gray>เงินแดง: <red><redcoin></red>
+    deposit:
+      name: '<green>ฝาก <amount> ทอง'
+      lore: |-
+        <gray>ย้ายจากทองที่พกเข้าเงินฝาก
+    withdraw:
+      name: '<gold>ถอน <amount> ทอง'
+      lore: |-
+        <gray>ย้ายจากเงินฝากมาเป็นทองที่พก
+    deposit-all:
+      name: '<green>ฝากทั้งหมด'
+      lore: |-
+        <gray>ฝากทองที่พกทั้งหมด ณ ตอนยืนยัน
+    withdraw-all:
+      name: '<gold>ถอนทั้งหมด'
+      lore: |-
+        <gray>ถอนเงินฝากทั้งหมด ณ ตอนยืนยัน
+    history:
+      name: '<#47C8D3>ประวัติ 10 รายการล่าสุด'
+      lore: |-
+        <gray>แสดงในแชท พร้อมรหัสอ้างอิง
+    rules:
+      name: '<#DDA54A>กติกาเมื่อเสียชีวิต'
+      lore: |-
+        <gray>โลกนี้: เสียทองที่พก <red><percent>%</red> ปัดลง
+        <gray>เงินฝากและเงินแดง <green>ไม่หาย</green>
+  deposited: '<green>ฝาก <#DDA54A><amount></#DDA54A> ทองแล้ว</green> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A>'
+  withdrew: '<green>ถอน <#DDA54A><amount></#DDA54A> ทองแล้ว</green> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A>'
+  nothing-to-deposit: '<yellow>ไม่มีทองที่พกให้ฝาก'
+  nothing-to-withdraw: '<yellow>ไม่มีเงินฝากให้ถอน'
+  not-enough-wallet: '<red>ทองที่พกไม่พอ</red> (มี <#DDA54A><wallet></#DDA54A>)'
+  not-enough-bank: '<red>เงินฝากไม่พอ</red> (มี <#DDA54A><bank></#DDA54A>)'
+  limit: '<red>เกินเพดานต่อรายการ (<max> ทอง)'
+  failed: '<red>ทำรายการไม่สำเร็จ (<status>) — ยังไม่มีการเปลี่ยนแปลงยอด'
+  usage: '<gray>ใช้: <#DDA54A>/bank</#DDA54A> · <#DDA54A>/bank deposit <จำนวน|all></#DDA54A> · <#DDA54A>/bank withdraw <จำนวน|all></#DDA54A> · <#DDA54A>/bank history</#DDA54A>'
+  history:
+    empty: '<gray>ยังไม่มีประวัติเงินของ <player>'
+    header: '<#DDA54A>ประวัติเงินล่าสุดของ <player></#DDA54A> <gray>(เวลาไทย)'
+    line: '<dark_gray><time></dark_gray> <gray><bucket></gray> <#47C8D3><delta></#47C8D3> <dark_gray>→</dark_gray> <white><after></white> <gray><reason></gray> <dark_gray>#<op></dark_gray>'
+
+economy:
+  balance: 'ทองที่พก <#DDA54A><wallet></#DDA54A> · เงินฝาก <#DDA54A><bank></#DDA54A> · เงินแดง <red><redcoin></red>'
+  adjusted-by-staff: '<gray>ทีมงานปรับยอด <bucket> ของคุณ <#47C8D3><delta></#47C8D3> (ดูรายละเอียดใน /bank history)'
+
+death:
+  gold-lost: '<red>คุณเสียชีวิตและเสียทองที่พก <#DDA54A><amount></#DDA54A> (<percent>%)</red> — เหลือพก <#DDA54A><wallet></#DDA54A> · เงินฝาก <#DDA54A><bank></#DDA54A> ยังอยู่ครบ'
+
+travel:
+  combat: '<red>ยังอยู่ในการต่อสู้ — วาร์ปได้อีก <seconds> วินาที'
+  already-pending: '<yellow>คุณมีการวาร์ปที่กำลังนับถอยหลังอยู่แล้ว'
+  warmup-start: 'กำลังวาร์ปไป <destination> ใน <#47C8D3><seconds></#47C8D3> วินาที <gray>(อย่าขยับหรือโดนโจมตี)'
+  countdown: '<#47C8D3>วาร์ปใน <seconds>…'
+  failed: '<red>วาร์ปไม่สำเร็จ (ถูกยกเลิกโดยระบบอื่น) — ไม่มีการบันทึกเวลารอ'
+  cancel-moved: '<yellow>ยกเลิกการวาร์ปเพราะคุณขยับ'
+  cancel-damaged: '<yellow>ยกเลิกการวาร์ปเพราะคุณโดนโจมตี'
+
+spawn:
+  label: '<#DDA54A>ลานกลางเมือง'
+  arrived: '<green>ถึงลานกลางเมืองแล้ว'
+
+rtp:
+  unknown-profile: '<red>ไม่รู้จักโลกนี้ — เลือกได้: <profiles>'
+  world-not-loaded: '<red><world> ยังไม่เปิดใช้งาน (โลกไม่ได้โหลด) — แจ้งทีมงาน'
+  retry-wait: '<yellow>รออีก <seconds> วินาทีก่อนสุ่มใหม่'
+  already-searching: '<yellow>กำลังหาจุดให้อยู่ รอสักครู่'
+  cooldown: '<yellow>สุ่มวาร์ปได้อีกครั้งใน <#47C8D3><seconds></#47C8D3> วินาที'
+  searching: '<gray>กำลังหาจุดปลอดภัยใน <world>…'
+  not-found: '<yellow>ยังหาจุดปลอดภัยใน <world> ไม่เจอ — ไม่เสียเวลารอ ลองใหม่อีกครั้งได้'
+  label: '<#47C8D3><world></#47C8D3>'
+  arrived: '<green>ถึง <world> แล้ว</green> <gray>(<x>, <y>, <z>) — ตั้งบ้านได้เมื่อมีหินกันบ้าน'
+  target-changed: '<yellow>จุดลงจอดเปลี่ยนไประหว่างนับถอยหลัง (ไม่ปลอดภัยหรือมีคนเคลม) — ไม่เสียเวลารอ ลองใหม่ได้'
+  menu:
+    title: '<#194D39>สำรวจโลก · สุ่มวาร์ป'
+    info:
+      name: '<#DDA54A>กติกาสุ่มวาร์ป'
+      lore: |-
+        <gray>รอระหว่างครั้ง: <#47C8D3><cooldown></#47C8D3> วินาที
+        <gray>นับถอยหลัง: <#47C8D3><warmup></#47C8D3> วินาที (อย่าขยับ)
+        <gray>หลังต่อสู้ต้องรอ: <#47C8D3><combat></#47C8D3> วินาที
+        <gray>ไม่สุ่มลงที่ดินของใครและพื้นอันตราย
+    profile:
+      name: '<#47C8D3><world>'
+      lore: |-
+        <gray>ระยะจากศูนย์กลาง <min>–<max> บล็อก
+    status:
+      ready: '<green>● พร้อม — คลิกเพื่อสุ่ม'
+      cooldown: '<yellow>● รออีก <seconds> วินาที'
+      missing: '<red>● โลกยังไม่เปิด'
+
+home:
+  invalid-name: '<red>ชื่อบ้านใช้ได้ 1–<max> ตัวอักษร: ไทย, a-z, 0-9, _ หรือ -'
+  unsafe-here: '<red>จุดที่ยืนไม่ปลอดภัยสำหรับตั้งบ้าน (ของเหลว/บล็อกอันตราย/ไม่มีพื้น)'
+  created: '<green>ตั้งบ้าน <#DDA54A><name></#DDA54A> แล้ว</green> <gray>(<coords>) — ใช้ไป <count>/<limit>'
+  moved: '<green>ย้ายบ้าน <#DDA54A><name></#DDA54A> แล้ว</green> <gray>(<old> → <coords>)'
+  confirm-move: '<yellow>มีบ้านชื่อ <name> แล้วที่ <old></yellow> — พิมพ์ <#DDA54A>/sethome <name> confirm</#DDA54A> เพื่อย้ายมาที่ <coords>'
+  limit: '<red>ตั้งบ้านครบ <limit> หลังแล้ว</red> — ลบหลังเดิมด้วย <#DDA54A>/delhome <ชื่อ></#DDA54A> หรือปลดล็อกเพิ่มจากเควสบ้าน'
+  world-not-allowed: '<red>ตั้งบ้านได้เฉพาะในโลก: <worlds>'
+  claims-unavailable: '<red>ระบบที่ดินยังไม่เชื่อม จึงตั้งบ้านไม่ได้ชั่วคราว — แจ้งทีมงาน'
+  not-in-claim: '<red>ต้องอยู่ในแปลงที่คุณเป็นเจ้าของหรือเพื่อนที่เชื่อถือ — วางหินกันบ้านก่อน'
+  not-member: '<red>แปลงนี้ไม่ใช่ของคุณและคุณไม่ได้เป็นเพื่อนที่เชื่อถือ'
+  label: '<#DDA54A>บ้าน <name>'
+  arrived: '<green>ถึงบ้าน <name> แล้ว'
+  world-missing: '<red>โลกของบ้าน <name> ไม่ได้โหลดอยู่ — ลองใหม่ภายหลังหรือแจ้งทีมงาน'
+  no-longer-valid: '<red>ไปบ้าน <name> ไม่ได้: สิทธิ์ในแปลงหายหรือพื้นที่ไม่อนุญาตแล้ว — ตั้งบ้านใหม่ในแปลงของคุณ'
+  unsafe-target: '<red>จุดบ้าน <name> ไม่ปลอดภัยแล้ว (ถูกปิด/พื้นหาย) — ไปที่บ้านแล้วตั้งใหม่ด้วย /sethome <name> confirm'
+  none: '<yellow>คุณยังไม่มีบ้าน — ยืนในแปลงของคุณแล้วพิมพ์ <#DDA54A>/sethome</#DDA54A>'
+  not-found: '<red>ไม่พบบ้านชื่อ <name></red> <gray>(มี: <names>)'
+  deleted: '<green>ลบจุดบ้าน <name> แล้ว</green> <gray>(ตัวบ้านและที่ดินไม่ถูกลบ)'
+  usage-delete: '<gray>ใช้: <#DDA54A>/delhome <ชื่อ>'
+  menu:
+    title: '<#194D39>บ้านของฉัน'
+    info:
+      name: '<#DDA54A>จุดกลับบ้าน <count>/<limit>'
+      lore: |-
+        <gray>ตั้งบ้าน: ยืนในแปลงของคุณแล้วพิมพ์ /sethome <ชื่อ>
+        <gray>ลบ: /delhome <ชื่อ>
+        <gray>โลกที่ตั้งได้: <worlds>
+    entry:
+      name: '<#DDA54A><name>'
+      lore: |-
+        <gray><world> · <coords>
+        <green>คลิกเพื่อวาร์ป
+    empty:
+      name: '<gray>ยังไม่มีบ้าน'
+      lore: |-
+        <gray>วางหินกันบ้านในโลกบ้าน แล้ว /sethome
+
+reward:
+  disabled: '<yellow>ระบบรางวัลรายวันยังไม่เปิด'
+  already: '<yellow>วันนี้รับไปแล้ว</yellow> — รอบใหม่ในอีก <#47C8D3><time></#47C8D3> (00:00 เวลาไทย)'
+  claimed: '<green>รับรางวัลครั้งที่ <index>/<cycle> แล้ว:</green> <#DDA54A><reward></#DDA54A> <gray>(ทองที่พก <wallet>)'
+  items-in-mail: '<yellow>ของ <count> ชิ้นใส่กระเป๋าไม่ได้ — รอใน <#DDA54A>/mail</#DDA54A> ไม่หาย'
+  join-notice: 'วันนี้ยังไม่ได้รับของรายวัน — พิมพ์ <#DDA54A>/rewards</#DDA54A>'
+  menu:
+    title: '<#194D39>รางวัลของฉัน'
+    info:
+      name: '<#DDA54A>รับของรายวัน'
+      lore: |-
+        <gray>รับแล้วทั้งหมด: <#47C8D3><total></#47C8D3> ครั้ง
+        <gray>รอบละ <cycle> ครั้ง สะสม ไม่ต้องต่อเนื่อง
+        <gray>รอบใหม่ในอีก <#47C8D3><time></#47C8D3> (00:00 เวลาไทย)
+    day:
+      name: '<#DDA54A>ครั้งที่ <index>'
+      loading: |-
+        <gray><reward>
+      done: |-
+        <gray><reward>
+        <green>✔ รับแล้วในรอบนี้
+      today: |-
+        <white><reward>
+        <yellow>★ รับได้วันนี้
+      later: |-
+        <gray><reward>
+        <dark_gray>ครั้งถัดไป
+    claim:
+      name: '<green><bold>รับรางวัลวันนี้'
+      lore: |-
+        <gray>เงินเข้าทันที ของเข้ากระเป๋า
+        <gray>(ถ้าเต็มจะรอใน /mail)
+    claimed:
+      name: '<gray>วันนี้รับแล้ว'
+      lore: |-
+        <gray>รอบใหม่ในอีก <time>
+
+mail:
+  saving-disabled: '<red>เซิร์ฟปิดการบันทึกผู้เล่นหรืออ่านสถานะไม่ได้ — ยังรับของไม่ได้ โปรดแจ้งทีมงานตรวจ /fa doctor'
+  join-notice: 'คุณมีของรอในกล่องจดหมาย <#47C8D3><count></#47C8D3> ชิ้น — พิมพ์ <#DDA54A>/mail</#DDA54A>'
+  claimed-one: '<green>รับ <item> แล้ว'
+  claimed-all: '<green>รับของจากกล่องแล้ว <count> ชิ้น'
+  claimed-partial: '<yellow>รับได้ <count> ชิ้น แล้วกระเป๋าเต็ม</yellow> — เหลือ <left> ชิ้นในกล่อง ไม่หาย'
+  full: '<yellow>กระเป๋าเต็ม — เคลียร์ช่องแล้วลองใหม่ ของยังอยู่ในกล่อง'
+  corrupt: '<red>อ่านของในจดหมาย #<id> ไม่ได้ — แจ้งทีมงาน (ของยังไม่ถูกใช้)'
+  menu:
+    title: '<#194D39>กล่องจดหมาย'
+    info:
+      name: '<#DDA54A>ของรอรับ <count> ชิ้น'
+      lore: |-
+        <gray>คลิกที่ของเพื่อรับทีละชิ้น
+        <gray>ของไม่หายถ้ากระเป๋าเต็ม — รอจนกว่าจะรับ
+    entry:
+      lore: |-
+        <dark_gray>จาก <source> · <time>
+        <gray>กระเป๋า: <fits> — <green>คลิกเพื่อรับ
+    empty:
+      name: '<gray>กล่องว่าง'
+      lore: |-
+        <gray>ของรางวัลที่ใส่กระเป๋าไม่ได้จะมารอที่นี่
+    claim-all:
+      name: '<green>รับทั้งหมด'
+      lore: |-
+        <gray>รับตามลำดับจนกว่ากระเป๋าจะเต็ม
+    open:
+      name: '<#DDA54A>กล่องจดหมาย'
+      lore: |-
+        <gray>เปิด /mail
+    corrupt:
+      name: '<red>จดหมาย #<id> อ่านไม่ได้'
+
+exchange:
+  disabled: '<yellow>เควสแลกของยังไม่เปิด — ดูสถานะ /fa doctor'
+  busy: '<yellow>มีรายการแลกกำลังทำงานหรือรอทีมงานตรวจ กรุณารอก่อน'
+  missing: '<red>วัตถุดิบธรรมดาไม่ครบ:</red> <gray><inputs> (ไม่ใช้ของที่มีชื่อ/ข้อมูลพิเศษ)'
+  quota: '<yellow>จำนวนรอบเกินโควตาวันนี้ — ลดจำนวนหรือรอ 00:00 เวลาไทย'
+  changed: '<yellow>ยกเลิกก่อนตัดของ — หน้าต่าง กระเป๋า หรือสถานะเปลี่ยน กรุณาเลือกใหม่'
+  success: '<green>แลก <name> ×<batch> สำเร็จ — รับรางวัลใน /mail</green> <dark_gray>op <op>'
+  review: '<yellow>รายการแลกถูกพักไว้ให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่แจกหรือคืนของอัตโนมัติ)'
+  menu:
+    title: '<#DDA54A>สมาคมนักแลกของ'
+    previous: '<white>หน้าก่อน'
+    next: '<white>หน้าถัดไป'
+    less: '<red>ลด 1 รอบ'
+    more: '<green>เพิ่ม 1 รอบ (สูงสุด 16)'
+    list:
+      name: '<#DDA54A>เลือกสูตรแลกของ'
+      lore: |-
+        <gray>หน้า <page>/<pages> · โควตารีเซ็ต 00:00 เวลาไทย
+        <gray>รับเฉพาะวัตถุดิบ vanilla ธรรมดาในกระเป๋า
+        <gray>ของมีชื่อ/enchants/PDC จะไม่ถูกใช้
+    recipe:
+      name: '<#47C8D3><name>'
+      lore: |-
+        <gray>ใช้: <white><inputs>
+        <gray>ได้รับ: <#DDA54A><outputs>
+        <gray>ใช้โควตาวันนี้ <used>/<limit> รอบ
+        <green>คลิกดูรายละเอียดก่อนยืนยัน
+    preview: |-
+      <gray>แลก <white><batch></white> รอบ
+      <gray>ตัด: <white><inputs>
+      <gray>รางวัล: <#DDA54A><outputs>
+      <gray>ใช้โควตาวันนี้ <used>/<limit> รอบ
+      <gray>รางวัลรอรับใน /mail · ตรวจจำนวนก่อนยืนยัน
+    confirm:
+      name: '<green>ยืนยันแลกตามรายละเอียด'
+      lore: |-
+        <gray>ตัดวัตถุดิบตามรายการด้านบน
+        <gray>เกราะ/มือรอง/ของที่มีข้อมูลพิเศษไม่ถูกใช้
+        <gray>หากปิดหน้าต่างก่อนเริ่มตัดจะยกเลิก
+        <yellow>รางวัลเข้า /mail ไม่มีของตกพื้น
+
+craft:
+  disabled: '<yellow>คราฟต์ยังไม่เปิด — ดูสถานะ /fa doctor'
+  busy: '<yellow>มีรายการคราฟต์/แลกกำลังทำงานหรือรอทีมงานตรวจ กรุณารอก่อน'
+  missing: '<red>วัตถุดิบธรรมดาไม่ครบ:</red> <gray><inputs> (ไม่ใช้ของที่มีชื่อ/ข้อมูลพิเศษ)'
+  funds: '<red>ทองในกระเป๋าไม่พอ หรือราคาเกินเพดานธุรกรรม — ยังไม่ตัดวัตถุดิบ'
+  quota: '<yellow>ครบโควตาคราฟต์วันนี้แล้ว — เริ่มรอบใหม่ 00:00 เวลาไทย'
+  changed: '<yellow>ยกเลิกก่อนตัดของเพราะหน้าต่าง กระเป๋า สิทธิ์ หรือระยะจากช่างเปลี่ยน — คืนค่าจองแล้วถ้ามี'
+  success: '<green>คราฟต์ <name> สำเร็จ — รับอุปกรณ์ serial ใหม่ใน /mail</green> <dark_gray>op <op>'
+  review: '<yellow>รายการคราฟต์พักให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่ส่งของหรือคืนเงินอัตโนมัติ)'
+  menu:
+    title: '<#47C8D3>โรงตีเหล็กรูน · คราฟต์'
+    enchant: '<gray>Enchant: <#47C8D3><enchant>'
+    previous: '<white>หน้าก่อน'
+    next: '<white>หน้าถัดไป'
+    less: '<gray>คราฟต์ครั้งละ 1 ชิ้น'
+    more: '<gray>คราฟต์ครั้งละ 1 ชิ้น'
+    list:
+      name: '<#47C8D3>เลือกอุปกรณ์รูน'
+      lore: |-
+        <gray>หน้า <page>/<pages> · โควตารีเซ็ต 00:00 เวลาไทย
+        <gray>ใช้วัตถุดิบ vanilla ธรรมดาและทองในกระเป๋า
+        <gray>อุปกรณ์แต่ละชิ้นมี serial เฉพาะ
+    recipe:
+      name: '<#47C8D3><name>'
+      lore: |-
+        <gray>ใช้: <white><inputs>
+        <gray>ค่าคราฟต์: <#DDA54A><price> ทองจากกระเป๋า
+        <gray>ได้รับ: <white><outputs>
+        <gray>ใช้โควตาวันนี้ <used>/<limit> ชิ้น
+        <green>คลิกดูรายละเอียดก่อนยืนยัน
+    preview: |-
+      <gray>คราฟต์อุปกรณ์ <white>1 ชิ้น</white>
+      <gray>ตัด: <white><inputs>
+      <gray>มี/ต้องใช้: <white><available>
+      <gray>ค่าคราฟต์: <#DDA54A><price> ทองจากกระเป๋า
+      <gray>ได้รับ: <white><outputs>
+      <gray>ใช้โควตาวันนี้ <used>/<limit> ชิ้น
+      <gray>serial ออกใหม่ · รอรับใน /mail
+    confirm:
+      name: '<green>ยืนยันคราฟต์ตามรายละเอียด'
+      lore: |-
+        <gray>จองค่าทองและตรวจวัตถุดิบก่อนตัด
+        <gray>เกราะ/มือรอง/ของมีข้อมูลพิเศษไม่ถูกใช้
+        <gray>ต้องอยู่ใกล้ช่างจนเริ่มตัดวัตถุดิบ
+        <yellow>ผลคราฟต์เข้า /mail ไม่มีของตกพื้น
+
+alchemy:
+  brew-blocked: '<yellow>ยาของไลราไม่ใช้ในแท่นปรุง vanilla — เอฟเฟกต์ผูกกับสูตรและเวอร์ชันเดิม'
+  disabled: '<yellow>ร้านยายังไม่พร้อม — ทีมงานตรวจ /fa doctor และ alchemy.yml'
+  busy: '<yellow>มีรายการผลิต/แลกกำลังทำงานหรือรอทีมงานตรวจ กรุณารอก่อน'
+  missing: '<red>วัตถุดิบธรรมดาไม่ครบ:</red> <gray><inputs> (ไม่ใช้ของที่มีชื่อหรือข้อมูลพิเศษ)'
+  funds: '<red>ทองในกระเป๋าไม่พอ หรือราคาเกินเพดานธุรกรรม — ยังไม่ตัดวัตถุดิบ'
+  quota: '<yellow>ครบโควตาสูตรนี้วันนี้แล้ว — เริ่มรอบใหม่ 00:00 เวลาไทย'
+  changed: '<yellow>ยกเลิกก่อนตัดของเพราะหน้าต่าง กระเป๋า สิทธิ์ หรือระยะจากร้านยาเปลี่ยน — คืนค่าจองแล้วถ้ามี'
+  success: '<green>ปรุง <name> สำเร็จ — รับยา 1 ขวดใน /mail</green> <dark_gray>op <op>'
+  review: '<yellow>รายการปรุงยาพักให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่ส่งยาหรือคืนเงินอัตโนมัติ)'
+  menu:
+    title: '<#AC79FF>ร้านยาไลรา · ปรุงยา'
+    effect: '<gray>ผลยา: <#AC79FF><effect>'
+    previous: '<white>หน้าก่อน'
+    next: '<white>หน้าถัดไป'
+    less: '<gray>ปรุงครั้งละ 1 ขวด'
+    more: '<gray>ปรุงครั้งละ 1 ขวด'
+    list:
+      name: '<#AC79FF>เลือกสูตรของไลรา'
+      lore: |-
+        <gray>หน้า <page>/<pages> · โควตารีเซ็ต 00:00 เวลาไทย
+        <gray>วัตถุดิบธรรมดาและทองในกระเป๋า
+        <gray>กดดูผลยาและรายละเอียดก่อนยืนยัน
+    recipe:
+      name: '<#AC79FF><name>'
+      lore: |-
+        <gray>ใช้: <white><inputs>
+        <gray>ค่าปรุง: <#DDA54A><price> ทองจากกระเป๋า
+        <gray>ได้รับ: <white><outputs>
+        <gray>ใช้โควตาวันนี้ <used>/<limit> ขวด
+        <green>คลิกดูรายละเอียดก่อนยืนยัน
+    preview: |-
+      <gray>ปรุงยา <white>1 ขวด</white>
+      <gray>ตัด: <white><inputs>
+      <gray>มี/ต้องใช้: <white><available>
+      <gray>ค่าปรุง: <#DDA54A><price> ทองจากกระเป๋า
+      <gray>ได้รับ: <white><outputs>
+      <gray>ใช้โควตาวันนี้ <used>/<limit> ขวด
+      <gray>รอรับใน /mail · ไม่ตกพื้น
+    confirm:
+      name: '<green>ยืนยันปรุงยาตามรายละเอียด'
+      lore: |-
+        <gray>จองค่าทองและตรวจวัตถุดิบก่อนตัด
+        <gray>ไม่ใช้เกราะ มือรอง หรือของมีข้อมูลพิเศษ
+        <gray>ต้องอยู่ใกล้ร้านยาจนเริ่มตัดวัตถุดิบ
+        <yellow>ผลปรุงเข้า /mail แม้กระเป๋าเต็ม
+
+repair:
+  disabled: '<yellow>ระบบซ่อมยังไม่พร้อม หรือปิดการบันทึกผู้เล่น — แจ้งทีมงานตรวจ /fa doctor'
+  full: '<green>อุปกรณ์เต็มความทนทานแล้ว — ไม่ต้องซ่อมเพิ่มเติม'
+  item-invalid: '<yellow>ซ่อมของชิ้นนี้ไม่ได้: <reason>'
+  identity-invalid: '<yellow>ทะเบียน Core ไม่ตรงเจ้าของ/แม่แบบ/สถานะ หรือของยังอยู่ในจดหมายรอรับ — ต้องตรวจไอเทมก่อน'
+  changed: '<yellow>ยกเลิกก่อนซ่อม เพราะของ/หน้าต่าง/สิทธิ์/ระยะ/preview เปลี่ยนหรือหมดอายุ — เงินที่จองไว้คืนแล้ว'
+  busy: '<yellow>มีรายการซ่อมกำลังทำงานหรือค้างตรวจ กรุณารอทีมงาน'
+  funds: '<red>ทองที่พกไม่พอ — ไม่ได้จองเงินหรือซ่อม'
+  limit: '<red>ค่าซ่อมเกินวงเงินที่ระบบยอมรับ — แจ้งทีมงานตรวจ config'
+  success: '<green>ซ่อมชิ้นเดิมเต็มความทนทานแล้ว ค่าบริการ <price> ทอง</green> <dark_gray>op <op>'
+  review: '<yellow>รายการซ่อมถูกพักตรวจ: <op> — ไม่คืนเงินหรือแก้ของซ้ำอัตโนมัติ โปรดแจ้งทีมงาน'
+  native-blocked: '<yellow>ช่องทาง native นี้ไม่รองรับอุปกรณ์ Core หรือข้ามค่าซ่อม — ใช้ /repair ที่ช่างก่อน'
+  menu:
+    title: '<#DDA54A>โรงตีเหล็ก · ซ่อมอุปกรณ์'
+    no-item: '<gray>ยังไม่มีรายการที่ซ่อมได้ — เปลี่ยนของในมือแล้วเปิด /repair ใหม่'
+    refresh: '<#47C8D3>ตรวจของและราคาใหม่'
+    arrow: '<#DDA54A>ซ่อมชิ้นเดิม'
+    info:
+      name: '<#DDA54A>ช่างซ่อมแห่งลูม่า'
+      lore: |-
+        <gray>ซ่อมเฉพาะอุปกรณ์ 1 ชิ้นในมือหลัก
+        <gray>ไม่ต้องลากของใส่เมนู · ของจาก provider อื่นรอ adapter
+        <gray>preview มีอายุ 60 วินาที ตรวจของ/ราคาแล้วค่อยยืนยัน
+    before:
+      name: '<yellow>ก่อนซ่อม'
+      lore: |-
+        <gray>อุปกรณ์: <white><material>
+        <gray>ความทนทานเหลือ <white><current>/<max>
+        <gray>provider: <provider>
+    after:
+      name: '<green>หลังซ่อม'
+      lore: |-
+        <gray>ความทนทาน <green><max>/<max>
+        <gray>ค่าซ่อม <#DDA54A><price> ทองที่พก
+        <gray>ทองที่พกขณะแสดง: <wallet> (อ่านยอดใหม่ตอนยืนยัน)
+        <gray>เปลี่ยนเฉพาะ DAMAGE คงชื่อ/enchant/ข้อมูลอื่นของชิ้นเดิม
+    confirm:
+      name: '<green>ยืนยันราคาและซ่อม'
+      lore: |-
+        <gray>จองเงินตามราคาด้านบนก่อนซ่อม
+        <gray>เปลี่ยนมือ/ออกจากสถานี/ปิดก่อนเริ่มซ่อม → คืนเงิน
+        <yellow>ถ้าค้างหลังเริ่มซ่อม ทีมงานตรวจด้วย operation ID
+
+land:
+  provider-missing: '<red>ระบบที่ดิน (WorldGuard) ยังไม่เชื่อม'
+  none-here: '<gray>ตรงนี้ใน <world> ยังไม่มีแปลงของผู้เล่น'
+  here: 'แปลง <#DDA54A><region></#DDA54A> ขนาด <#47C8D3><x> × <z></#47C8D3> บล็อก (Y <miny>..<maxy>) — คุณเป็น <role>'
+  role:
+    owner: '<green>เจ้าของ'
+    member: '<#47C8D3>เพื่อนที่เชื่อถือ'
+    visitor: '<gray>ผู้เยี่ยมชม'
+  next-phase: '<dark_gray>ซื้อหิน/อัปเกรด/สมาชิกผ่านเมนู /land จะเปิดใน phase ถัดไป — ตอนนี้ทีมงานทดสอบด้วยคำสั่ง /ps บน staging'
+
+admin:
+  panel:
+    title: '<#DDA54A>ลูม่า · ทีมงาน'
+    heading: '<#DDA54A><page>'
+    heading-lore: |-
+      <gray>FantasyCore <version> · เลือกงานจากเมนู
+      <gray>งานปรับเงินต้องมีเหตุผลและยืนยัน
+    back:
+      name: '<white>ย้อนกลับ'
+      lore: '<gray>กลับหน้าก่อน · ยกเลิก preview ที่ยังไม่ยืนยัน'
+    close:
+      name: '<red>ปิดเมนู'
+      lore: '<gray>การปิดก่อนยืนยันยังไม่ปรับเงิน'
+    players:
+      name: '<#47C8D3>ผู้เล่น'
+      lore: |-
+        <gray>เลือกคนออนไลน์ หรือค้นหาชื่อ/UUID
+        <gray>ดูยอดและประวัติของบัญชีที่เคยเข้าเซิร์ฟ
+    economy:
+      name: '<#DDA54A>เงินและธนาคาร'
+      lore: |-
+        <gray>เลือกผู้เล่น → จำนวน/เหตุผล → preview
+        <gray>ดูยอดได้; ปรับต้องมีสิทธิ์แยก
+    items:
+      name: '<#47C8D3>แม่แบบไอเทม'
+      lore: '<gray>ดู ID/version/material/enchant/ผลยา · ไม่แจกของจากภาพ'
+    stations:
+      name: '<#47C8D3>จุดบริการ NPC'
+      lore: |-
+        <gray>ดู action/พิกัด/ทิศ yaw/ตัวตนสถานี
+        <gray>หน้านี้อ่านข้อมูล · ไม่ย้าย NPC
+    review-name: '<gold>รายการค้าง · <group>'
+    review-lore: |-
+      <gray>รอตรวจ REVIEW: <count>
+      <gray>คลิกเปิดรายงานข้อความเดิม
+      <gray>craft รวม gear และยา · ตรวจหลักฐานก่อน resolve
+    dungeon:
+      name: '<#B996EF>Moonfall'
+      lore: '<gray>เปิดรายงานสถานะห้องและรอบ · ไม่สร้างแมพจากปุ่มนี้'
+    alchemy-name: '<#B996EF>ร้านยาไลรา'
+    alchemy-lore: |-
+      <gray>สถานะ <state> · <count> สูตร
+      <gray>รายการปรุงยาอยู่ใน CRAFT journal
+      <gray>ต้องผ่าน checklist เกมก่อนเปิดผู้เล่น
+    doctor:
+      name: '<gold>ตรวจระบบ'
+      lore: '<gray>เปิดรายงาน doctor พร้อมปัญหาและสิ่งที่ต้องตรวจ'
+    refresh:
+      name: '<#47C8D3>อ่านข้อมูลใหม่'
+      lore: '<gray>โหลดสถานะจากฐานข้อมูลอีกครั้ง'
+    audit:
+      name: '<gold>ประวัติงานทีมงาน'
+      lore: '<gray>เปิดรายงาน audit · ต้องมีสิทธิ์ fantasyadmin.audit'
+    player-name: '<white><player>'
+    player-lore: |-
+      <dark_gray><uuid>
+      <gray>คลิกดูเงินและงานของผู้เล่นนี้
+    balance-lore: |-
+      <dark_gray>UUID <uuid>
+      <gray>ทองที่พก <#DDA54A><gold>
+      <gray>ทองฝาก <#DDA54A><bank>
+      <gray>เงินแดง <red><redcoin></red>
+      <dark_gray>ข้อมูล ณ ตอนโหลด · กดอ่านใหม่ได้
+    search:
+      name: '<#47C8D3>ค้นหาชื่อหรือ UUID'
+      lore: '<gray>ค้นหาคนที่เคยเข้าเซิร์ฟได้แม้ออฟไลน์'
+    adjust:
+      name: '<#DDA54A>ปรับเงิน'
+      lore: |-
+        <gray>เลือกช่องเงิน เพิ่ม/ลด จำนวนและเหตุผล
+        <gray>ยังไม่บันทึกจนยืนยันหน้า preview
+    history:
+      name: '<white>ยอดและประวัติธนาคาร'
+      lore: '<gray>เปิดรายงานข้อความ ledger ของ UUID นี้'
+    bucket-name: '<#DDA54A><bucket>'
+    bucket-lore: '<gray><selected> · ไม่ย้ายยอดช่องอื่น'
+    direction-name: '<white><direction>เงิน'
+    direction-lore: '<gray>คลิกสลับเพิ่ม/ลด · หน้า preview จะแสดงเครื่องหมายชัดเจน'
+    amount-name: '<#DDA54A>จำนวน · <amount>'
+    amount-lore: '<gray>กรอกผ่านฟอร์มแชต · จำนวนเต็ม 1–<limit>'
+    reason-name: '<white>เหตุผลการปรับเงิน'
+    reason-lore: |-
+      <gray><reason>
+      <gray>คลิกกรอกใหม่ · 3–200 ตัวอักษร · เก็บใน audit
+    preview:
+      name: '<green>ดูยอดก่อน–หลัง'
+      lore: '<gray>ตรวจยอดจริงอีกครั้ง · ยังไม่หักหรือเพิ่มเงิน'
+    incomplete: '<yellow>กรอกจำนวนและเหตุผลให้ครบก่อนดู preview'
+    confirm-name: '<gold>ตรวจรายการปรับเงิน'
+    confirm-lore: |-
+      <white>ผู้เล่น <player>
+      <dark_gray>UUID <uuid>
+      <gray>ช่อง <#DDA54A><bucket>
+      <gray>ปรับ <#47C8D3><delta>
+      <gray>ยอดเดิม <white><before> <gray>→ ยอดใหม่ <green><after>
+      <gray>เหตุผล <white><reason>
+      <yellow>ยืนยันได้ครั้งเดียว ภายใน 60 วินาที
+      <gray>หากยอดหรือสิทธิ์เปลี่ยน จะไม่บันทึก
+    apply:
+      name: '<green>ยืนยันรายการด้านบน'
+      lore: |-
+        <gray>บันทึก ledger และ audit ด้วย operation ID
+        <gray>ผลสำเร็จ/ปฏิเสธจะแสดงหลังฐานข้อมูลตอบ
+    template-name: '<white><id>'
+    template-lore: |-
+      <gray>version <version> · <material>
+      <gray><effect>
+      <dark_gray>ข้อมูลแม่แบบ · ภาพนี้ไม่แจกไอเทม
+    station-name: '<#47C8D3><action>'
+    station-lore: |-
+      <gray><kind> · <state>
+      <gray><world> · X<x> Y<y> Z<z>
+      <gray>yaw <yaw> · 0ใต้ / 90ตะวันตก / 180เหนือ / −90ตะวันออก
+      <dark_gray>ID <id>
+      <dark_gray>ข้อมูลทะเบียน · ยังต้องตรวจตำแหน่งในเกม
+    page: '<white>หน้า <page>/<pages>'
+    empty: '<gray>ยังไม่มีรายการในหมวดนี้'
+    previous:
+      name: '<white>หน้าก่อน'
+      lore: '<gray>ดูรายการชุดก่อน'
+    next:
+      name: '<white>หน้าถัดไป'
+      lore: '<gray>ดูรายการชุดถัดไป'
+    input:
+      player: '<#47C8D3>พิมพ์ชื่อผู้เล่นหรือ UUID ที่ต้องการค้นหา'
+      amount: '<#DDA54A>พิมพ์จำนวนเงินเต็มบวก เช่น 1,000 (ไม่ใส่เครื่องหมายลบ)'
+      reason: '<white>พิมพ์เหตุผล 3–200 ตัวอักษรสำหรับ audit'
+      hint: '<gray>ฟอร์มนี้ไม่ส่งคำตอบออกแชตปกติ · ยกเลิก: cancel / ยกเลิก / /cancel · หมดเวลา 60 วินาที'
+      timeout: '<yellow>ฟอร์มหมดเวลา — เปิด /fa ใหม่เพื่อเริ่มอีกครั้ง'
+      cancelled: '<gray>ยกเลิกฟอร์มแล้ว · ไม่มีการปรับเงิน'
+      invalid: '<yellow>คำตอบต้องยาว 1–200 ตัวอักษร ไม่มีบรรทัดใหม่/control characters — เปิด /fa ใหม่'
+
+  help: |-
+    <#DDA54A>FantasyAdmin — /fa เปิดเมนู · /fa help แสดงคำสั่ง</#DDA54A>
+    <gray>/fa doctor <dark_gray>— ตรวจสถานะระบบและ adapter
+    <gray>/fa bank <ผู้เล่น> <dark_gray>— ดูยอดและประวัติ
+    <gray>/fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผล> <dark_gray>— preview แล้ว /fa confirm
+    <gray>/fa npc spawn <action> [ชื่อ] · bind <action> (Citizens) · unbind · remove · anchor · unanchor · list
+    <gray>/fa mail review · release|void <id> <เหตุผล> · give <ผู้เล่น> <เหตุผล> (ของในมือ)
+    <gray>/fa exchange review · complete|cancel <op> <เหตุผล> → /fa confirm
+    <gray>/fa repair review · complete|cancel <op> <เหตุผล> → /fa confirm
+    <gray>/fa craft review · complete|cancel <op> <เหตุผล> → /fa confirm
+    <gray>/fa item list · give <ผู้เล่น> <template> · inspect
+    <gray>/fa dungeon status · visit [training|party1|party2] · build · buildparty 1|2 · abort (ทุกรอบ) → /fa confirm
+    <gray>/fa audit [ผู้เล่น]
+  doctor:
+    header: '<#DDA54A>ตรวจระบบ FantasyCore <version>'
+    line: '<status> <white><name></white> <dark_gray>—</dark_gray> <gray><detail>'
+  status:
+    ready: '<green>[พร้อม]'
+    broken: '<red>[ต้องแก้ไข]'
+    fix: '<gold>[ต้องแก้ไข]'
+    missing: '<yellow>[ไม่ได้เชื่อม]'
+    'off': '<gray>[ปิด]'
+  usage:
+    craft: '<gray>ใช้: /fa craft review · /fa craft complete|cancel <op> <เหตุผล> → /fa confirm'
+    bank: '<gray>ใช้: /fa bank <ผู้เล่น>'
+    eco: '<gray>ใช้: /fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผลอย่างน้อย 3 ตัวอักษร>'
+    confirm: '<gray>ใช้: /fa confirm <รหัส>'
+    npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc bind <action> (มอง NPC ของ Citizens) · /fa npc unbind · /fa npc remove (มอง NPC) · /fa npc anchor <action> · /fa npc unanchor · /fa npc list'
+    mail: '<gray>ใช้: /fa mail review · /fa mail release|void <id> <เหตุผล> · /fa mail give <ผู้เล่น> <เหตุผล>'
+    exchange: '<gray>ใช้: /fa exchange review · /fa exchange complete|cancel <op> <เหตุผล> → /fa confirm'
+    repair: '<gray>ใช้: /fa repair review · /fa repair complete|cancel <op> <เหตุผล> → /fa confirm'
+    item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
+  bank:
+    summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
+  reason-required: '<red>เหตุผลต้องยาว 3–200 ตัวอักษร ไม่มี control characters (เก็บใน audit)'
+  eco:
+    limit: '<yellow>จำนวนต้องเป็นจำนวนเต็มบวก ไม่เกินเพดานธุรกรรม และยอดใหม่ต้องไม่ล้น'
+    would-be-negative: '<red>ยอดจะติดลบ (ตอนนี้มี <before>) — ปรับจำนวนแล้ว preview ใหม่'
+    preview: '<yellow>ตัวอย่าง:</yellow> <white><player></white> <gray><bucket></gray> <#47C8D3><delta></#47C8D3> (<before> → <after>) เหตุผล "<reason>" — ยืนยันด้วย <#DDA54A>/fa confirm <token></#DDA54A> ภายใน 60 วินาที'
+    applied: '<green>ปรับยอดแล้ว</green> <player> <bucket> = <#DDA54A><after></#DDA54A> <dark_gray>op <op>'
+    changed: '<yellow>ยอดเปลี่ยนระหว่าง preview — ไม่ได้ปรับ กรุณา preview ใหม่'
+    duplicate: '<yellow>operation <op> ถูกใช้ไปแล้ว — ไม่ทำซ้ำ'
+    failed: '<red>ปรับยอดไม่สำเร็จ (<status>)'
+  confirm:
+    applying: '<gray>กำลังบันทึก…'
+    expired: '<red>รหัสหมดอายุ — preview ใหม่'
+    wrong-actor: '<red>รหัสนี้ไม่ใช่ของคุณ'
+    unknown: '<red>ไม่พบรหัสนี้ (หรือใช้ไปแล้ว)'
+  npc:
+    list-header: '<#DDA54A>จุดบริการทั้งหมด <count> จุด'
+    list-line: '<gray><kind></gray> <white><action></white> <dark_gray><world></dark_gray> <gray><coords></gray> <dark_gray>#<id>'
+    unknown-action: '<red>ไม่รู้จัก action <action></red> <gray>— ที่รู้จัก: <known>'
+    spawned: '<green>วาง NPC <action> แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>)'
+    anchored: '<green>ผูก anchor <action> ที่ตำแหน่งนี้แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>) — ใช้กับคำสั่ง /fc action <action> ใกล้จุดนี้ (NPC ของ Citizens ใช้ /fa npc bind ง่ายกว่า)'
+    spawn-blocked: '<red>วาง NPC ไม่สำเร็จ: <detail>'
+    no-citizens: '<red>ไม่พบ Citizens (หรือรุ่นไม่รองรับ) — ใช้ /fa npc spawn แทนได้'
+    not-citizens: '<red>มองไปที่ NPC ของ Citizens ในระยะ 6 บล็อกก่อน'
+    bound: '<green>ผูก NPC <npc> (Citizens #<npcid>) กับ <action> แล้ว</green> <gray>(<connected>) — คลิกขวาที่ NPC เพื่อใช้บริการ ไม่ต้องตั้ง /npc command'
+    unbound: '<green>ยกเลิกการผูก NPC <npc> แล้ว'
+    not-bound: '<yellow>NPC <npc> ยังไม่ได้ผูกกับบริการ'
+    no-target: '<red>มองไปที่ NPC ของ Core ในระยะ 6 บล็อกก่อน'
+    removed: '<green>ลบ NPC แล้ว'
+    unanchored: '<green>ลบ anchor ที่ใกล้ที่สุดแล้ว'
+    no-anchor: '<yellow>ไม่มี anchor ในระยะ 3 บล็อก'
+  item:
+    list-header: '<#DDA54A>แม่แบบไอเทม <count> รายการ'
+    list-line: '<white><id></white> <gray>v<version> · <material> · <enchants>'
+    not-core: '<yellow>ไอเทมในมือไม่ใช่ของ Core (ไม่มี template ใน PDC) — ชื่อ/lore ไม่นับเป็นหลักฐาน'
+    identity: 'template <#DDA54A><template></#DDA54A> v<version> · serial <#47C8D3><serial></#47C8D3> · สถานะ <state>'
+    unknown: '<red>ไม่พบ template <id> — ดู /fa item list'
+    given: '<green>ส่ง <id> ให้ <player> แล้ว</green> <dark_gray>#<serial>'
+    mailed: '<yellow>กระเป๋าของ <player> เต็ม — <id> เข้ากล่องจดหมายแทน</yellow> <dark_gray>#<serial>'
+    delivery-failed: '<red>บันทึก serial แล้วแต่ส่งของไม่สำเร็จ</red> <dark_gray>#<serial></dark_gray> <gray>— สถานะ DELIVERY_FAILED ตรวจด้วย /fa audit'
+  mail:
+    review-header: '<#DDA54A>จดหมายรอตัดสิน <count> รายการ</#DDA54A> <gray>(ค้างกลางการส่งตอนเซิร์ฟดับ — ตรวจ inventory ผู้เล่นก่อน)'
+    review-line: '<white>#<id></white> <gray><player></gray> <#47C8D3><item></#47C8D3> <dark_gray><source> · <time>'
+    released: '<green>คืนจดหมาย #<id> ให้ผู้เล่นรับใหม่แล้ว'
+    voided: '<green>ปิดจดหมาย #<id> แล้ว (ถือว่าผู้เล่นได้ของไปแล้ว)'
+    not-review: '<red>จดหมาย #<id> ไม่ได้อยู่ในสถานะรอตัดสิน'
+    empty-hand: '<red>ถือของที่จะส่งไว้ในมือหลักก่อน'
+    serialized: '<red>ของในมือมี serial — ส่งผ่าน /fa item give เพื่อไม่ให้ serial ซ้ำ'
+    sent: '<green>ส่งสำเนาของในมือเข้ากล่องของ <player> แล้ว'
+  exchange:
+    header: '<#DDA54A>การแลกรอตรวจ <count> รายการแรก (สูงสุด 20)</#DDA54A> <gray>ตรวจ inventory/playerdata และ snapshot ก่อนตัดสิน'
+    line: '<white>op <op></white> <gray><player> · <recipe> v<version> ×<batch> · วัน <period> · ตัด <inputs>'
+    preview: '<yellow>op <op> → <effect></yellow> <gray>เหตุผล: <reason> — ยืนยันด้วย /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ส่งรางวัลที่บันทึกไว้เข้า /mail (ใช้เมื่อยืนยันว่าตัดของแล้ว)'
+    cancel-effect: '<yellow>ปิดรายการและคืนโควตา โดยไม่คืนวัตถุดิบ (ใช้เมื่อไม่ถูกตัด/ชดเชยแล้ว)'
+    resolved: '<green>ตัดสินรายการ <op> แล้ว ดู audit และ /mail'
+    not-review: '<yellow>รายการ <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
+  craft:
+    header: '<#DDA54A>คราฟต์ที่รอทีมงานตรวจ (<count> รายการล่าสุด)'
+    line: |-
+      <gray><op> · <player> · <recipe> v<version> · <inputs> · ค่าจอง <price> ทอง · <period>
+      <dark_gray>ผลที่บันทึกไว้: <outputs>
+    not-review: '<yellow>ไม่พบคราฟต์ <op> ที่อยู่ใน REVIEW — ไม่เปลี่ยนรายการ'
+    preview: '<yellow>รายการ <op> → <effect> · เหตุผล: <reason> · ยืนยัน /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ส่งผลคราฟต์เดิมเข้า /mail และออกทะเบียน serial; เก็บค่าจอง (ยืนยันว่าตัดวัตถุดิบแล้ว)'
+    cancel-effect: '<yellow>คืนค่าจองทองและปล่อยโควตา; ไม่คืนวัตถุดิบ (ต้องตรวจและชดเชยวัตถุดิบเองถ้าจำเป็น)'
+    resolved: '<green>ตัดสินคราฟต์ <op> แล้ว — บันทึก audit และไม่ทำซ้ำ'
+  repair:
+    header: '<#DDA54A>รายการซ่อมรอตรวจ <count> รายการแรก (สูงสุด 20)</#DDA54A> <gray>ตรวจ snapshot/playerdata ว่าซ่อมจริงแล้วหรือยัง ก่อนตัดสิน'
+    line: '<white>op <op></white> <gray><player> · <material> damage <damage>/<max> · จอง <price> ทอง · serial <serial>'
+    preview: '<yellow><effect></yellow> <gray>เหตุผล: <reason> — /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ปิดเป็นซ่อมสำเร็จ คงค่าบริการเดิม ไม่แก้หรือแจกของอีก (ยืนยันว่าซ่อมแล้ว)'
+    cancel-effect: '<yellow>ปิดและคืนค่าจอง ไม่เปลี่ยน item (ยืนยันว่าไม่ซ่อม/ย้อนผลซ่อมแล้ว)'
+    resolved: '<green>ตัดสินรายการซ่อม <op> แล้ว ตรวจยอดเงินและ audit'
+    not-review: '<yellow>รายการซ่อม <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
+  player-offline: '<red><player> ไม่ได้ออนไลน์'
+  player-unknown: '<red>ไม่พบผู้เล่น <player> ในทะเบียน (ต้องเคยเข้าเซิร์ฟนี้)'
+  audit:
+    header: '<#DDA54A>Audit — <target></#DDA54A> <gray>(<count> รายการล่าสุด)'
+    line: '<dark_gray><time></dark_gray> <white><actor></white> <gray><action></gray> <#47C8D3><detail></#47C8D3> <dark_gray>เหตุผล: <reason>'

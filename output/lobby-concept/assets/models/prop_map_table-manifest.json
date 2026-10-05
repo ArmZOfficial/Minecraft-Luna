@@ -1,0 +1,50 @@
+{
+  "id": "prop_map_table",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 15,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_map_table",
+  "gui_extent_units": [
+    -7.05,
+    7.05,
+    -7.4,
+    7.4
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_map_table.json": "07d53be1e165c5da0732b88a18459fd37fd107149b82cbd529e7a944c9a556f6",
+    "output/lobby-concept/assets/models/prop_map_table.bbmodel": "fee7fb961a4bbb33705c267685559d15a3c1e64854c309f27f0b7d43b20f65c8",
+    "output/lobby-concept/assets/models/prop_map_table.png": "bb314386c94967ce4c0db7db9cccbf6145f67c0c5a57ab65c8fa7d659591687a",
+    "output/lobby-concept/assets/models/prop_map_table-display.png": "a6fac82e3620cf3ae04026572322a8215884d5ab5fe0b9735679216b2c2f95dc",
+    "output/lobby-concept/assets/models/prop_map_table-preview.png": "a8341d4cf01c353c23f4e0e455f1ba7601c7a78a8cf74ef9dbc963a9a58663d1",
+    "output/lobby-concept/assets/models/prop_map_table-front.png": "7525ce5413220e3ac3869e8a275bfe55b75a37641997b41ce69240fa5381572d"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "id": "npc_market_merchant",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "show_wares",
+    "weigh_goods",
+    "sale_success"
+  ],
+  "cubes": 179,
+  "bones": 20,
+  "height_target": 2.2,
+  "runtime_tested": false,
+  "reference": null,
+  "texture": [
+    512,
+    512
+  ],
+  "native_timeline_frames_checked": 26,
+  "revision": 1,
+  "built_at": "2026-10-06",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "builder": "tools/build_market_merchant.py",
+  "pose_capture": "tools/preview_market_merchant.py",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        24,
+        0
+      ]
+    },
+    {
+      "name": "hat",
+      "parent": "hi_head",
+      "origin": [
+        0,
+        31,
+        0
+      ]
+    },
+    {
+      "name": "backpack",
+      "parent": "body",
+      "origin": [
+        0,
+        18,
+        2.8
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        6.2,
+        23.5,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        6.2,
+        18,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        6.2,
+        13,
+        -0.3
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -6.2,
+        23.5,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -6.2,
+        18,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -6.2,
+        13,
+        -0.3
+      ]
+    },
+    {
+      "name": "scale",
+      "parent": "left_hand",
+      "origin": [
+        -6.2,
+        10.2,
+        0
+      ]
+    },
+    {
+      "name": "scale_turn",
+      "parent": "scale",
+      "origin": [
+        -6.2,
+        10.2,
+        0
+      ]
+    },
+    {
+      "name": "scale_beam",
+      "parent": "scale_turn",
+      "origin": [
+        -6.2,
+        8.4,
+        0
+      ]
+    },
+    {
+      "name": "scale_pan_front",
+      "parent": "scale_beam",
+      "origin": [
+        -6.2,
+        8.4,
+        -2.9
+      ]
+    },
+    {
+      "name": "scale_pan_back",
+      "parent": "scale_beam",
+      "origin": [
+        -6.2,
+        8.4,
+        2.9
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        28,
+        0
+      ]
+    }
+  ],
+  "held_props": {
+    "scale": "left_hand",
+    "max_gap_px": 0
+  },
+  "hat_tip_contact": true,
+  "handedness": "character right is +X (model faces north/-Z); balance in the left fist, right hand tips the hat",
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.8,
+      0,
+      -4.8
+    ],
+    "to": [
+      4.8,
+      34.8,
+      4.8
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "keyframes": 156
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 2.4942,
+    "max_width": 1.7411
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_market_merchant.bbmodel": "e283b6924847c3f368d415a64e7da82561dea682269c684a20e86f11451ff899",
+    "output/lobby-concept/assets/models/npc_market_merchant.png": "3c5c8ea82af27fd7fe83d6e25b8811985443a61edec4412df9e8b21a1859a1f0",
+    "output/lobby-concept/assets/models/npc_market_merchant-pose-checks.json": "178f4b478fb9318d96975dbf39437612d00629e32e4058fd63604de8f4552a07",
+    "output/lobby-concept/assets/models/npc_market_merchant-back.png": "125cfca8543f9430c8624dc275504ccada9a90f43e12b2985808136029ab7090",
+    "output/lobby-concept/assets/models/npc_market_merchant-front.png": "e57eee4c49275df176faf2ae2150920dee0408f17dfdfa56ae7d96f7b4ece035",
+    "output/lobby-concept/assets/models/npc_market_merchant-greet-hat-tip.png": "fbbd9adaedf1a73e33a53060f7f3ba5477267dbb4d52863fdf8520eb9c3fd0cd",
+    "output/lobby-concept/assets/models/npc_market_merchant-idle.png": "9705a0a59b377edcf591a0ddbec9cd112def81c6734f3ac6d45b4f3b11ed0af6",
+    "output/lobby-concept/assets/models/npc_market_merchant-preview.png": "fd1db1bd2b92a5913eb4cc884cd16207f49803d365faaf0f08df0b4a358d6931",
+    "output/lobby-concept/assets/models/npc_market_merchant-right.png": "ec2b6506d2cda8b07079b138c642c10f46f840eceb7720c1c5bd1851b33f021e",
+    "output/lobby-concept/assets/models/npc_market_merchant-sale-success.png": "14996b9c0934567f7c7b3308f8c7681627fcbb84a338389f5dd632db0a849493",
+    "output/lobby-concept/assets/models/npc_market_merchant-show-wares.png": "b0d43c1c110bb2ea5c0ba66e7358f230b5eab36ba06590751c3da9aeff2974c1",
+    "output/lobby-concept/assets/models/npc_market_merchant-weigh-goods.png": "7f62423d4cb30d79db32a7cb217366dc9cdddaa250fb307b013013e086b4db54"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens runtime or client evidence yet",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "No ChatGPT reference sheet yet; designed from the zone 06 ticket and the v2 NPC family",
+    "179 cubes is above the 40-70 town NPC budget; suited to one shopkeeper per shop, needs a LOD variant for crowds"
+  ]
+}

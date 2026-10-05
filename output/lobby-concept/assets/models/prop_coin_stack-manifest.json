@@ -1,0 +1,50 @@
+{
+  "id": "prop_coin_stack",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 36,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_coin_stack",
+  "gui_extent_units": [
+    -5.79,
+    5.79,
+    -3.62,
+    3.62
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_coin_stack.json": "e92126d110d8fed219b6739a166e651ebb549a3f881423c06a3a3eaff45c78a5",
+    "output/lobby-concept/assets/models/prop_coin_stack.bbmodel": "6d7ef75bf9e0b55d293a18dbf99af4f74ffb4b65ff53d83d76fcddf25bccf269",
+    "output/lobby-concept/assets/models/prop_coin_stack.png": "4038c6a7f1218f0cf9ec0c9f92a8ef8c0a9e5688b9f13f85168931cf845cf586",
+    "output/lobby-concept/assets/models/prop_coin_stack-display.png": "92a887a13c4d0e27e3ecf64c5a6b0fc6a51ae94802d70403a2f69fc9e07f4577",
+    "output/lobby-concept/assets/models/prop_coin_stack-preview.png": "4769573dd0bbf7e48c35742f986e9ad3d9bd36663e0098ddb8d8836557a39595",
+    "output/lobby-concept/assets/models/prop_coin_stack-front.png": "1ff8d8a64971de2f2ff21eb148106774fdc1027af6377f0248e829cd7b4579f1"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

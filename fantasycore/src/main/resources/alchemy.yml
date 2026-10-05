@@ -1,0 +1,49 @@
+# ยาดื่ม vanilla พร้อมชื่อ/สี/serial ของ Core; ใช้ journal CRAFT เดิมและ namespace alchemy_
+# gold-cost ใช้เฉพาะ gold.wallet, วันใหม่ตาม Asia/Bangkok, ผลทุกครั้งเข้า /mail
+enabled: true
+recipes:
+  alchemy_moondew:
+    enabled: true
+    version: 1
+    name: น้ำค้างจันทร์
+    icon: POTION
+    daily-limit: 12
+    gold-cost: 40
+    inputs:
+      GLASS_BOTTLE: 1
+      NETHER_WART: 2
+      GLISTERING_MELON_SLICE: 1
+    output:
+      provider: core
+      template: lyra_moondew
+      version: 1
+  alchemy_lifebloom:
+    enabled: true
+    version: 1
+    name: น้ำยาดอกชีพจร
+    icon: POTION
+    daily-limit: 8
+    gold-cost: 65
+    inputs:
+      GLASS_BOTTLE: 1
+      NETHER_WART: 2
+      GHAST_TEAR: 1
+    output:
+      provider: core
+      template: lyra_lifebloom
+      version: 1
+  alchemy_starlight:
+    enabled: true
+    version: 1
+    name: แสงดาวนักสำรวจ
+    icon: POTION
+    daily-limit: 6
+    gold-cost: 60
+    inputs:
+      GLASS_BOTTLE: 1
+      NETHER_WART: 2
+      GOLDEN_CARROT: 1
+    output:
+      provider: core
+      template: lyra_starlight
+      version: 1

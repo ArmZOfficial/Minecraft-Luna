@@ -1,0 +1,106 @@
+# แม่แบบไอเทมของ FantasyCore
+# ตัวตนของไอเทมอยู่ใน PersistentDataContainer (template + version + serial) — ชื่อ/lore เป็นแค่การแสดงผล
+# ใช้ material ที่มีใน 1.16.5 เพื่อให้ client เก่าเห็นได้โดยไม่ต้องใช้ resource pack
+# v0.6: native enchant เริ่มต้นจริงตาม BALANCE-th (ไม่มี RPG trait/custom stat)
+# ห้ามแก้แม่แบบที่ออกไปแล้วใน version เดิม: เก็บ snapshot เต็มใน revisions ก่อนเพิ่ม version
+
+templates:
+  lyra_moondew:
+    version: 1
+    material: POTION
+    potion: HEALING
+    name: "<gradient:#EF6471:#DDA54A>น้ำค้างจันทร์</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · ยาดื่มฟื้นพลัง I"
+      - "<gray>ผลมาตรฐาน Minecraft · ขวดสีแดง"
+    serialized: true
+    glint: true
+  lyra_lifebloom:
+    version: 1
+    material: POTION
+    potion: REGENERATION
+    name: "<gradient:#47C8D3:#DDA54A>น้ำยาดอกชีพจร</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · ฟื้นฟูต่อเนื่อง I"
+      - "<gray>ระยะเวลามาตรฐาน Minecraft · ขวดสีฟ้า"
+    serialized: true
+    glint: true
+  lyra_starlight:
+    version: 1
+    material: POTION
+    potion: NIGHT_VISION
+    name: "<gradient:#AC79FF:#DDA54A>แสงดาวนักสำรวจ</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · มองกลางคืน"
+      - "<gray>ระยะเวลามาตรฐาน Minecraft · ขวดสีม่วง"
+    serialized: true
+    glint: true
+  starter_runeblade:
+    version: 2
+    material: IRON_SWORD
+    name: "<gradient:#47C8D3:#DDA54A>ดาบรูนผู้เริ่มต้น</gradient>"
+    lore:
+      - "<gray>อาวุธฝึกหัดของนักผจญภัยเมืองลูม่า"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
+    serialized: true
+    glint: false
+    enchantments:
+      sharpness: 2
+      sweeping_edge: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_SWORD
+        name: "<gradient:#47C8D3:#DDA54A>ดาบรูนผู้เริ่มต้น</gradient>"
+        lore:
+          - "<gray>อาวุธฝึกหัดของนักผจญภัยเมืองลูม่า"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false
+  moonstone_pickaxe:
+    version: 2
+    material: IRON_PICKAXE
+    name: "<#47C8D3>อีเต้อจันทร์นักสำรวจ"
+    lore:
+      - "<gray>ตีขึ้นจากเศษแร่ในโรงตีเหล็กเมืองลูม่า"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
+    serialized: true
+    glint: false
+    enchantments:
+      efficiency: 3
+      fortune: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_PICKAXE
+        name: "<#47C8D3>อีเต้อจันทร์นักสำรวจ"
+        lore:
+          - "<gray>ตีขึ้นจากเศษแร่ในโรงตีเหล็กเมืองลูม่า"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false
+  sentinel_chestplate:
+    version: 2
+    material: IRON_CHESTPLATE
+    name: "<#DDA54A>เกราะผู้พิทักษ์ลูม่า"
+    lore:
+      - "<gray>ชุดเกราะสำหรับผู้ดูแลทางเข้าเมือง"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
+    serialized: true
+    glint: false
+    enchantments:
+      protection: 2
+      thorns: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_CHESTPLATE
+        name: "<#DDA54A>เกราะผู้พิทักษ์ลูม่า"
+        lore:
+          - "<gray>ชุดเกราะสำหรับผู้ดูแลทางเข้าเมือง"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false

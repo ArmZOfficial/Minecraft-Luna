@@ -9,6 +9,8 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { zones, news, products, guides, serviceChecks } from "../lib/content";
+import libraryProducts from "../lib/library-products.json";
+import DevCheckout from "./dev-checkout";
 
 const Portal = createContext(null);
 const nav = [
@@ -30,6 +32,17 @@ const iconPaths = {
   portal: "M5 22V4l7-2 7 2v18 M9 22V8h6v14",
 };
 function Icon({ kind = "gem" }) {
+  const [failed, setFailed] = useState(false);
+  if (!failed)
+    return (
+      <img
+        className="pixel-icon library-icon"
+        src={asset(`library/${kind}.png`)}
+        alt=""
+        aria-hidden="true"
+        onError={() => setFailed(true)}
+      />
+    );
   return (
     <svg
       className="pixel-icon"
@@ -330,6 +343,17 @@ export function AppFrame({ children }) {
           <p className="fine">
             บริการอิสระ ไม่ใช่ผลิตภัณฑ์ทางการของ Minecraft หรือ Mojang
           </p>
+          <p className="fine">
+            ไอคอน:{" "}
+            <a
+              href="https://crystal-creations.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Crystal Creations
+            </a>{" "}
+            • ป้ายระดับ: Chamby
+          </p>
         </footer>
         <dialog
           ref={dialogRef}
@@ -476,18 +500,26 @@ function PopupContent({ popup }) {
     return (
       <>
         <h2 id="dialog-title">{p.name}</h2>
-        <img className="modal-product" src={asset(p.image)} alt={p.name} />
+        <img
+          className={`modal-product ${p.previewKind === "category-icon" ? "category-preview" : ""}`}
+          src={asset(p.image)}
+          alt={
+            p.previewKind === "category-icon" ? `ไอคอนหมวด ${p.name}` : p.name
+          }
+        />
         <p>{p.description}</p>
-        <p>
-          {popup.live ? "ราคา" : "ราคาเสนอ"} ฿{p.price} / ชำระครั้งเดียว
-        </p>
+        <p>ราคาเสนอ ฿{p.price} / ชำระครั้งเดียว</p>
         <p>
           เมื่อเปิดบริการ: ยืนยันบัญชีเกม → ชำระผ่านผู้ให้บริการ → ตรวจรับเงิน →
           ส่งของอัตโนมัติ
         </p>
-        <button className="button" disabled>
-          ยังไม่เปิดรับชำระ
-        </button>
+        {p.previewKind === "category-icon" && (
+          <p className="fine">
+            ไอคอนประจำชุด • ภาพเรนเดอร์โมเดลจริงจะเพิ่มหลังตรวจในเกม
+            ชุดนี้มีรายการอ้างอิง {p.itemCount} ชิ้น รวมโมเดลประกอบ
+          </p>
+        )}
+        <DevCheckout key={p.id} product={p} />
       </>
     );
   }
@@ -1102,21 +1134,55 @@ function WikiPage() {
 }
 function ShopPage() {
   const { open, reduced } = useContext(Portal);
-  const feed = useFeed("catalog", products);
+  const feed = useFeed("library/catalog", libraryProducts);
+  const [search, setSearch] = useState(""),
+    [category, setCategory] = useState("ทั้งหมด");
+  const list = feed.items.filter(
+    (p) =>
+      (category === "ทั้งหมด" || p.type === category) &&
+      (p.name + " " + p.description)
+        .toLowerCase()
+        .includes(search.toLowerCase()),
+  );
   return (
     <div className="shell">
-      <Head label="LUMA COSMETICS" title="ของตกแต่งจากเมือง Luma">
-        รูปลักษณ์สำหรับตัวละคร ไม่มีโบนัสโจมตีจากสินค้าตกแต่ง
+      <Head label="LUMA COLLECTIONS" title="สะสมสไตล์ของคุณ">
+        ชุดแฟนตาซี ของแต่งบ้าน และเพื่อนตัวจิ๋ว •
+        อุปกรณ์ที่มีพลังหาได้จากเควสและการสร้างในเกม
       </Head>
       <p className="shop-note">
-        {feed.live ? "แคตตาล็อกจากฐานข้อมูล" : "สินค้าและราคาเสนอเป็นตัวอย่าง"}{" "}
-        • ยังไม่เปิดชำระเงินหรือส่งของเข้าเกม
+        22 ชุดจากคลังโมเดล • ราคาและชุดสินค้าเป็นฉบับร่าง •
+        ยังไม่เปิดรับเงินจริง
       </p>
+      <div className="shop-toolbar">
+        <label htmlFor="shop-search">
+          ค้นหาชุดไอเทม
+          <input
+            id="shop-search"
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="มังกร จันทรา โรงเตี๊ยม…"
+          />
+        </label>
+        <div className="shop-filters" aria-label="หมวดสินค้า">
+          {["ทั้งหมด", "รูปลักษณ์", "เฟอร์นิเจอร์"].map((c) => (
+            <button
+              key={c}
+              aria-pressed={category === c}
+              onClick={() => setCategory(c)}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+        <span className="fine">{list.length} ชุด</span>
+      </div>
       <div className="shop-grid">
-        {feed.items.map((p) => (
+        {list.map((p) => (
           <Reveal key={p.id}>
             <motion.button
-              className="product-image"
+              className="product-image library-product-image"
               onClick={() =>
                 open({ type: "product", id: p.id, item: p, live: feed.live })
               }
@@ -1125,16 +1191,20 @@ function ShopPage() {
             >
               <img
                 src={asset(p.image)}
-                alt={`ภาพอ้างอิง ${p.name}`}
+                alt={`ไอคอนประจำชุด ${p.name}`}
                 loading="lazy"
               />
+              <span className="collection-index">{p.type}</span>
+              <span className="collection-caption">
+                {p.itemCount} รายการอ้างอิง
+              </span>
             </motion.button>
             <div className="product-info">
               <div>
                 <h2 className="product-name">{p.name}</h2>
                 <p>
                   {p.type} / ฿{p.price}
-                  {feed.live ? "" : " ราคาเสนอ"}
+                  {" ราคาเสนอ"}
                 </p>
               </div>
               <button
@@ -1148,9 +1218,13 @@ function ShopPage() {
           </Reveal>
         ))}
       </div>
-      {feed.live && !feed.items.length && (
-        <div className="empty">ยังไม่มีสินค้าที่เปิดแสดง</div>
+      {!list.length && (
+        <div className="empty">ไม่พบชุดนี้ ลองค้นหาชื่ออื่น</div>
       )}
+      <p className="fine">
+        ใช้ไอคอนแทนหมวดสินค้า ภาพนี้ไม่ใช่เรนเดอร์ไอเทมจริง • ไอคอนโดย Crystal
+        Creations
+      </p>
     </div>
   );
 }

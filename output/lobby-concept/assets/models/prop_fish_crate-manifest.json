@@ -1,0 +1,50 @@
+{
+  "id": "prop_fish_crate",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 26,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_fish_crate",
+  "gui_extent_units": [
+    -7.4,
+    7.4,
+    -6.49,
+    6.49
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_fish_crate.json": "9c24c74b6786c8dda44e8ba185b34a93b8dd034dc7ccef497563ac0c8a199888",
+    "output/lobby-concept/assets/models/prop_fish_crate.bbmodel": "fa5fb431afdc4c5879711b0d32742ebbcd0b8b8752d8d2824a3224be6d5f5a44",
+    "output/lobby-concept/assets/models/prop_fish_crate.png": "ab578a0b090346b591f842bfd3a43000fbe6754ba9f48f5e7fa7b9aaaa38b78d",
+    "output/lobby-concept/assets/models/prop_fish_crate-display.png": "362d0478f4a95afc72e7357637afccb65e6bfe0014fe608c447249f9558532fb",
+    "output/lobby-concept/assets/models/prop_fish_crate-preview.png": "860b7639b6f4dfae8949c4bcdc8c63c22001e7471dfd1a010d339b5f9cb5a570",
+    "output/lobby-concept/assets/models/prop_fish_crate-front.png": "9c412c2ec5f7b43787d99786f8a51d4c4df67039b407ed4e68a887d2a5ccc260"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

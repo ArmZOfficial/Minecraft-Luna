@@ -1,0 +1,50 @@
+{
+  "id": "prop_mailbox",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 15,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_mailbox",
+  "gui_extent_units": [
+    -5.56,
+    5.56,
+    -7.4,
+    7.4
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_mailbox.json": "08dfc7b526192aba78de4a1bc54e52cc2dad4dfb790bd54c08ddb86f1cbe6ed3",
+    "output/lobby-concept/assets/models/prop_mailbox.bbmodel": "190a7ddd0520495503ce5b26a806ad4ba109016d29021cfbf3f7bb4747020bcf",
+    "output/lobby-concept/assets/models/prop_mailbox.png": "0343bcb9701ef0c4cfbcb468b5d10a176c27b6dacdedcbd9364bc65e68653ee3",
+    "output/lobby-concept/assets/models/prop_mailbox-display.png": "ba37d962327a45e8c9ee0a9c3020c516fc00293c997db9ffee9616498a9cba69",
+    "output/lobby-concept/assets/models/prop_mailbox-preview.png": "692a1a855d9dce54b525a2de5a9130d66bba964e6eba42dac022f6b0825e9c5e",
+    "output/lobby-concept/assets/models/prop_mailbox-front.png": "8b34236765609020294c4775e95907cd44fcfd7522f16ec80e69dfadb0ea2144"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

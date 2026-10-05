@@ -1,0 +1,50 @@
+{
+  "id": "prop_portal_focus",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 20,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_portal_focus",
+  "gui_extent_units": [
+    -6.62,
+    6.62,
+    -7.11,
+    7.12
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_portal_focus.json": "9771d53d035aa2318ee6347164f618f895f429b0ab87fed559b383c895222edb",
+    "output/lobby-concept/assets/models/prop_portal_focus.bbmodel": "9f7e420aeb9419f150088b623bbd10b56c0ac01a27afcf7e5c4deb18d9c43649",
+    "output/lobby-concept/assets/models/prop_portal_focus.png": "ff9b2017b19fffc873c842a640e25a0a67e6c8c52ba521265cf4b8b6e8ff9489",
+    "output/lobby-concept/assets/models/prop_portal_focus-display.png": "e32cf26820cf912f1123b3cdf985da4d66f50287233e2941173113494e907c81",
+    "output/lobby-concept/assets/models/prop_portal_focus-preview.png": "7e15629c5744e3de85225f9c95866099bdee6d0efe33e9dbb2f1e332f2909a73",
+    "output/lobby-concept/assets/models/prop_portal_focus-front.png": "3ea3e6a9436d0528df42f68b1c65d8806f15cbbc61ee7d4ca043832155040117"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

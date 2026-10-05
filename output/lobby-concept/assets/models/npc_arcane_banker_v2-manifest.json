@@ -1,0 +1,230 @@
+{
+  "id": "npc_arcane_banker_v2",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "count_coins",
+    "inspect_ledger"
+  ],
+  "cubes": 182,
+  "bones": 17,
+  "height_target": 2.0,
+  "runtime_tested": false,
+  "reference": "assets/references/npc-arcane-banker.png",
+  "texture": [
+    512,
+    512
+  ],
+  "native_timeline_frames_checked": 17,
+  "supersedes": "npc_arcane_banker",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "builder": "tools/build_arcane_banker.py",
+  "pose_capture": "tools/preview_arcane_banker.py",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        13,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "right_coattail",
+      "parent": "waist",
+      "origin": [
+        -2.4,
+        12,
+        2.5
+      ]
+    },
+    {
+      "name": "left_coattail",
+      "parent": "waist",
+      "origin": [
+        2.4,
+        12,
+        2.5
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        24,
+        0
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        -6.3,
+        22,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        -6.3,
+        17,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        -6.3,
+        13.3,
+        -0.8
+      ]
+    },
+    {
+      "name": "coin",
+      "parent": "right_hand",
+      "origin": [
+        -6.3,
+        12.7,
+        -3.1
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        6.3,
+        22,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        6.3,
+        17,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        6.3,
+        13.3,
+        -0.8
+      ]
+    },
+    {
+      "name": "ledger",
+      "parent": "left_hand",
+      "origin": [
+        7.6,
+        14.5,
+        -3.4
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        28.4,
+        0
+      ]
+    }
+  ],
+  "held_props": {
+    "ledger": "left_hand",
+    "coin": "right_hand",
+    "max_gap_px": 0
+  },
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.5,
+      0,
+      -4.5
+    ],
+    "to": [
+      4.5,
+      32.75,
+      4.5
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "keyframes": 87
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 2.0802,
+    "max_width": 1.209
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2.bbmodel": "292ed07c475f1e7db46b05add353c4c9e56529e932095536d1fa66de9ab84d1b",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2.png": "3bd5d516e2d8b929f10ef59c99c1c839f5620702e6654329f0dac91d939ca1ef",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-pose-checks.json": "59dcdfdf7ad4973766efe24a27f980e04e987f64c60ccfb5ebd59e8897aafa1b",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-back.png": "26ce1f65b9f60da352b6bd2237e2e0f871e2daf3472121b8beb07dd43235979a",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-count-coins.png": "6eb7aa00a8ee778d237b68a62b4f10c94dbe898bfb7af8cdfb776f8d8be6441c",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-front.png": "2ef23ec72adc9cbf0bb9827ad3c0f6272668f0d44fd4114edf4da81d7c5aa1f5",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-greet.png": "6e95d5dc36e2f9aa8805d7c10f28d12f9ed9e31f40fda04e81ce6c077ab89ced",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-idle.png": "c6328bb841925e4bf38b1f22fb509f9e95c84fee1440f4644ca607ee82ee50f6",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-inspect-ledger.png": "ba777fa7c39b8703418dd75e10be1f82ce131fd339497be6af0cc3fcd0709e99",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-preview.png": "f6874e819a66252098559d848e477cad4250f2c61b22436b71ab32840ac36a11",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-right.png": "3975a20c21951ef91abb4966e0aab91e6cf39722f696e0ccba7197e58c4b567b"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens runtime or client evidence yet",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "v1 (npc_arcane_banker, 36 cubes) is kept unchanged for comparison"
+  ]
+}

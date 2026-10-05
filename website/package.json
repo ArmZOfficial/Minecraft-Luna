@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "node --env-file-if-exists=.env.local server/start.mjs",
     "db:migrate": "node --env-file-if-exists=.env.local server/migrate.mjs",
-    "test": "node --env-file-if-exists=.env.local --test server/api.test.mjs server/database.test.mjs",
+    "test": "node --env-file-if-exists=.env.local --test server/api.test.mjs server/database.test.mjs server/dev-payments.test.mjs",
     "format": "prettier --write app components lib server next.config.mjs package.json"
   },
   "engines": {

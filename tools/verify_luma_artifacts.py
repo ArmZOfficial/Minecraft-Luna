@@ -2,6 +2,7 @@
 import json
 import re
 import sys
+import struct
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -11,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 CONCEPT=ROOT/'output/lobby-concept'
 errors=[]
 link_count=0
-for file in [ROOT/'README.md',ROOT/'website/README-th.md',*CONCEPT.rglob('*.md')]:
+for file in [ROOT/'README.md',*sorted((ROOT/'website').glob('*th.md')),*sorted((ROOT/'fantasycore').glob('*th.md')),ROOT/'server/README-th.md',*sorted((ROOT/'server/content').rglob('*.md')),*CONCEPT.rglob('*.md')]:
     text=file.read_text(encoding='utf-8-sig')
     if text.count('```')%2: errors.append(f'Unbalanced code fence: {file.relative_to(ROOT)}')
     for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)',text):
@@ -36,6 +37,10 @@ for entry in manifest:
     model=json.loads((CONCEPT/f"assets/models/{entry['id']}.bbmodel").read_text(encoding='utf-8'))
     assert len(model['elements'])==entry['cubes'],entry['id']
     assert all(tex.get('source','').startswith('data:image/png;base64,') for tex in model['textures']),entry['id']
+    if 'texture' in entry:
+        png=(CONCEPT/f"assets/models/{entry['id']}.png").read_bytes()
+        assert png[:8]==b'\x89PNG\r\n\x1a\n',entry['id']
+        assert entry['texture']==list(struct.unpack('>II',png[16:24])),(entry['id'],'PNG atlas dimensions')
     animations=model.get('animations',[])
     assert sorted(a['name'] for a in animations)==sorted(entry['animations']),entry['id']
     bones=group_ids(model.get('outliner',[]))

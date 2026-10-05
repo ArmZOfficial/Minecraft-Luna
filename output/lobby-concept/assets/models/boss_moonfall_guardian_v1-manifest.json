@@ -1,0 +1,273 @@
+{
+  "id": "boss_moonfall_guardian_v1",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "walk",
+    "spawn",
+    "attack",
+    "slam",
+    "enrage",
+    "hurt",
+    "death"
+  ],
+  "cubes": 146,
+  "bones": 19,
+  "height_target": 3.375,
+  "runtime_tested": false,
+  "reference": "assets/references/boss-moonfall-guardian-turnaround.png",
+  "texture": [
+    1024,
+    1024
+  ],
+  "native_timeline_frames_checked": 29,
+  "revision": 1,
+  "built_at": "2026-10-05",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "source_project_uuid": "bfc668f9-a56a-2f84-4bbe-2b7d1c5e60b8",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "uuid": "d06298f9-0d74-14b4-27b5-fd7b36d00462",
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "hips",
+      "uuid": "bfeb3624-de79-8387-d760-37ce929b9730",
+      "origin": [
+        0,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "uuid": "934e222a-362c-8eed-f92f-43383e58d011",
+      "origin": [
+        0,
+        26,
+        0
+      ]
+    },
+    {
+      "name": "hi_head",
+      "uuid": "4d8d2dad-cee7-4a6f-15d3-80aec6ad3303",
+      "origin": [
+        0,
+        44,
+        0
+      ]
+    },
+    {
+      "name": "core",
+      "uuid": "21ecf06c-a48e-36e6-4753-1c3c59870a4c",
+      "origin": [
+        0,
+        34,
+        -8
+      ]
+    },
+    {
+      "name": "backplate",
+      "uuid": "4154ab3b-6f40-acc1-23fd-df5dea14607b",
+      "origin": [
+        0,
+        34,
+        6
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "uuid": "15b149fa-f23c-9393-24e9-459cc8056aca",
+      "origin": [
+        -13,
+        40,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "uuid": "41ec71e0-05c7-b97e-ec5f-ee042023eedf",
+      "origin": [
+        -18,
+        29,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "uuid": "044a2ba1-59eb-16c8-80dd-4f67eca5a6f5",
+      "origin": [
+        -20,
+        19,
+        0
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "uuid": "33d6d25a-32ba-80ab-6fa9-1daa8d6db8f1",
+      "origin": [
+        13,
+        40,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "uuid": "2fa2c72d-48e0-3294-2ae4-decb6728d6fd",
+      "origin": [
+        18,
+        29,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "uuid": "3c680fb9-77b9-6908-b459-4205cad0b3e6",
+      "origin": [
+        20,
+        19,
+        0
+      ]
+    },
+    {
+      "name": "right_thigh",
+      "uuid": "996a44c6-4cdf-8163-689d-200e3ab1d263",
+      "origin": [
+        -5.8,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "right_shin",
+      "uuid": "0702ad9b-f85a-9a50-3bc6-ee7073339940",
+      "origin": [
+        -5.8,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "right_foot",
+      "uuid": "8a2e5f1a-8fc5-52e9-4861-72058ec7aa63",
+      "origin": [
+        -5.8,
+        4,
+        0
+      ]
+    },
+    {
+      "name": "left_thigh",
+      "uuid": "6e3ace7d-76ae-8c77-8509-b9e71a1a2856",
+      "origin": [
+        5.8,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "left_shin",
+      "uuid": "1361b96f-7bb1-ec37-810b-7527f26cf99b",
+      "origin": [
+        5.8,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_foot",
+      "uuid": "3353a2d0-aaf8-d339-3023-d184d3f8f8a2",
+      "origin": [
+        5.8,
+        4,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "uuid": "5f9884f8-2f63-ed09-6be9-f31d31d6876b",
+      "origin": [
+        0,
+        48,
+        0
+      ]
+    }
+  ],
+  "atlas_palette": [
+    "stone",
+    "stone_edge",
+    "dark_joint",
+    "bronze",
+    "bronze_highlight",
+    "cyan",
+    "cyan_highlight",
+    "violet",
+    "violet_highlight",
+    "core_void",
+    "ash",
+    "rune_panel",
+    "armour_stone",
+    "moon_panel",
+    "bronze_shadow",
+    "violet_facet"
+  ],
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -12,
+      0,
+      -12
+    ],
+    "to": [
+      12,
+      54,
+      12
+    ],
+    "eye_y": 48,
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "slam_impact_seconds": 1.25,
+    "slam_impact_ticks": 25,
+    "keyframes": 150
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 4.236397727325948,
+    "max_width": 4.010486367333976
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.bbmodel": "eb72d2ff965240adae96aa503e9e96027c3076dae9841734210622350094a190",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.png": "4621c33ff8d15efeffc9b468fdad67ba4ebd7e60a8f8fca7362a6c9e70b082f0",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-pose-checks.json": "6031a245d8bb1091e62fe839d3b3f922211aa8a2229d2d1126e4cc64791427e2",
+    "output/lobby-concept/assets/references/boss-moonfall-guardian-turnaround.png": "8a96bb010d6b3daf9339595963b3d5787b2e34bf19bf8d2579be48b4e2821eac",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-attack.png": "d8864c0024c1213640951f46c651bbc028655346c853180bb3a39fba967c82a4",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-back.png": "8da843a856907d39f8d9168120bfc8bba7b10b8066b567f6a2b6791032ddf316",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-death.png": "92d8ee97338e3900cd0e6dd5fcc3286d6a329643be562a2c168ce43467c3c82b",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-enrage.png": "9f8123ba36b12222ef0d1e90309da49c1e266a44297ac2c7bd5519cc135fd18c",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-front.png": "ac0fa8197f67244c7c7c99dcd6975d3ae3fd1cd3975035d7f1b92884a7419f5c",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-preview.png": "3daf0519172d71fc927214a585002f70ab6bbea30796bd204c28258800e89f0f",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-right.png": "93aae6fe30adc379cb66255860786529f34ef08d2294f987b0c3be20766c47a6",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-impact.png": "66ea5fa3daf7d7a9e26b556377a3179012431eea25bb792b176b1c0600ee2ff7",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-windup.png": "64adc742600678cc7395e2902e9b9febb5f00fa276f74fff37320cd34693c88e",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-spawn.png": "9c5fcb8b171fd7b1ae3d5c0494494c77bbdb26ce7cef54f3871f648cdb78b39b",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-walk.png": "02630cda080df26574c557cff8fcf801a93a4b6827cd44b882ca85515bffd322"
+  },
+  "known_limits": [
+    "No ModelEngine/MythicMobs JAR/import/runtime/client evidence",
+    "Core 0.8 still spawns a native Husk and does not call these animations",
+    "Native editor colors are not a verified in-game emissive shader",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "MCP offscreen disposal throws a context-menu error after removal; view inventory verified empty of our temporary view"
+  ],
+  "texture_method": "per-face bake, 4 texels/unit (tools/npc_bake.py)"
+}

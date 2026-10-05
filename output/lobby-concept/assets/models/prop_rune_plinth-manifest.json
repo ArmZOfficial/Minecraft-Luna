@@ -1,0 +1,50 @@
+{
+  "id": "prop_rune_plinth",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 12,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_rune_plinth",
+  "gui_extent_units": [
+    -6.8,
+    6.8,
+    -7.4,
+    7.4
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_rune_plinth.json": "23a5321df5bd3934007d24ad9d5bb4bc2b7227864e7dc27f200821b37679e13d",
+    "output/lobby-concept/assets/models/prop_rune_plinth.bbmodel": "0875450f567f028dcc4dc66699a983616537be75904544c9fa71b127d35c21a6",
+    "output/lobby-concept/assets/models/prop_rune_plinth.png": "a5e6c89353c70b95b3b145ebbfd33b50b26089b519dcb3f33f6b45f8e7d23f8b",
+    "output/lobby-concept/assets/models/prop_rune_plinth-display.png": "db711c2688d8aa6e09499193d309b6f8560494d9083a1f985e806cb0ae4902dd",
+    "output/lobby-concept/assets/models/prop_rune_plinth-preview.png": "5a9e075713001aad20b59f485c0b2fdfc2c6f455772e5993d5699315d8b1296f",
+    "output/lobby-concept/assets/models/prop_rune_plinth-front.png": "4525db878fd904ad03459d7ad558f3d791ec8ba5966cc81bd2373344eb5d0641"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

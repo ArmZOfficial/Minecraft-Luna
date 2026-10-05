@@ -1,0 +1,262 @@
+{
+  "id": "npc_crystal_guide",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "point_direction",
+    "show_map",
+    "welcome"
+  ],
+  "cubes": 148,
+  "bones": 18,
+  "height_target": 2.1,
+  "runtime_tested": false,
+  "reference": null,
+  "texture": [
+    512,
+    512
+  ],
+  "native_timeline_frames_checked": 269,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "units_per_block": 16,
+  "direction": "north (-Z)",
+  "handedness": "character right is +X; crystal staff in the right fist, folding map in the left",
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        24,
+        0
+      ]
+    },
+    {
+      "name": "cape",
+      "parent": "body",
+      "origin": [
+        0,
+        23.6,
+        3
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        6.2,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        6.2,
+        17.7,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        6.2,
+        13.3,
+        -0.3
+      ]
+    },
+    {
+      "name": "staff",
+      "parent": "right_hand",
+      "origin": [
+        6.2,
+        12.4,
+        -2.65
+      ]
+    },
+    {
+      "name": "staff_crystal",
+      "parent": "staff",
+      "origin": [
+        6.2,
+        30.2,
+        -2.65
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -6.2,
+        23,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -6.2,
+        17.7,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -6.2,
+        13.3,
+        -0.3
+      ]
+    },
+    {
+      "name": "map",
+      "parent": "left_hand",
+      "origin": [
+        -6.2,
+        12.4,
+        -1.8
+      ]
+    },
+    {
+      "name": "map_flap",
+      "parent": "map",
+      "origin": [
+        -6.35,
+        9.2,
+        -6.4
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2.1,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        28,
+        0
+      ]
+    }
+  ],
+  "zone": "01 crystal spawn plaza (spawn_guide, navigation.main)",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, imported per-face pixel atlas and native animation",
+  "builder": "tools/build_crystal_guide.py",
+  "pose_capture": "tools/preview_crystal_guide.py",
+  "hair_revision": {
+    "style": "neat chestnut side part, stepped fringe clear of brows",
+    "repair": "tools/fix_crystal_guide_hair.py",
+    "source": "live Blockbench project including the user's fringe edits",
+    "preserved": "132 non-hair cubes, all 18 bones, 5 clips and original non-hair atlas pixels",
+    "uv": "4 texels/unit, new islands in unused atlas space; adjacent fringe faces do not overlap"
+  },
+  "timeline": {
+    "fps": 20,
+    "sampling": "every tick including both endpoints",
+    "keyframes": 110
+  },
+  "held_props": {
+    "staff": "right_hand",
+    "map": "left_hand",
+    "max_staff_grip_gap_units": 0,
+    "max_map_edge_gap_units": 0
+  },
+  "clearance": {
+    "method": "27 sample points per prop cube tested inside every other cube's local frame",
+    "staff_head_hits": 0,
+    "staff_body_hits": 0,
+    "map_body_hits": 0
+  },
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.8,
+      0,
+      -4.8
+    ],
+    "to": [
+      4.8,
+      34.4,
+      4.8
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "bounds_blocks": {
+    "max_height": 2.4424,
+    "max_width": 2.022,
+    "max_depth": 1.4171
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_crystal_guide.bbmodel": "7659da4770713530649363685a46c7e145c01778c3dd19ad6a55d288fca378b8",
+    "output/lobby-concept/assets/models/npc_crystal_guide.png": "3f5f79b3ba7caa39cb42db9c73f62a2cb28d23cd190cab84b876d94c45725af7",
+    "output/lobby-concept/assets/models/npc_crystal_guide-pose-checks.json": "0f545b5a1277ecebf3672c0313000719107d1a527a2867773c05255d1f434720",
+    "output/lobby-concept/assets/models/npc_crystal_guide-back.png": "12b9be14b5e8e77226bf75568ddcfcf6f843640e8238231e8eda7d0c35ff006b",
+    "output/lobby-concept/assets/models/npc_crystal_guide-front.png": "211131093002e84af36a2ec30ddfd749df678ae02dc0ffa4c4928147d8642393",
+    "output/lobby-concept/assets/models/npc_crystal_guide-greet.png": "0653e69a35a40ee7043a04ded45f2b99a71afe48f2ace007c6549bc96149680c",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-detail.png": "9ea1fbd45e7f3ab03839430980368526787ddddcb3a1c7f521ab4de435e66dd4",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-front.png": "c9da9d53dc8b5645ea926d0dd63778d3fcf1d1643e351046d3b82a3a08544a56",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-top.png": "a7151fc31e38bf03952aa7ee3678c3e39e923508e5928ba01c96c9429f70d778",
+    "output/lobby-concept/assets/models/npc_crystal_guide-idle.png": "02ab2a6e92e77b7ed1cbbd5c2d3c5e3f8f29a70b0544875a1116909269f59c38",
+    "output/lobby-concept/assets/models/npc_crystal_guide-point-direction.png": "a06b853149e6fddb05d894731b9865849795673617b9b018b9a4d5f222b7a513",
+    "output/lobby-concept/assets/models/npc_crystal_guide-preview.png": "05371e415fa523bec86e07463a891bf752432c585ddfee2fda994dbcd740f247",
+    "output/lobby-concept/assets/models/npc_crystal_guide-right.png": "3dba3ec264c63fc7f98e70173683566a0fd1625c0394e427b4f3bf5053ff9a45",
+    "output/lobby-concept/assets/models/npc_crystal_guide-show-map.png": "a394f5d708cc2ab627ca75c891aa537e11d7878b179eea9f8c8c524913feb0b0",
+    "output/lobby-concept/assets/models/npc_crystal_guide-welcome.png": "62589f803f9556c5fb8ddfbb18a797b5f4cc487b6ce1a0f9d7a53297fe97aab3"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens renderer integration or compiled resource pack yet",
+    "Point sampling (corners, edge and face midpoints) catches overlaps of a prop into the rig, not thin slivers between samples",
+    "No ChatGPT reference sheet; designed from the zone 01 ticket, the plaza banners and the NPC family",
+    "148 cubes is above the 40-70 town NPC budget; fine for the single spawn guide, crowds need a LOD variant"
+  ]
+}

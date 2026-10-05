@@ -1,0 +1,50 @@
+{
+  "id": "prop_tongs",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 8,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    64,
+    64
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_tongs",
+  "gui_extent_units": [
+    -2.57,
+    2.57,
+    -5.92,
+    5.93
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_tongs.json": "29c251abed940df3de4fd406e85562bd9a28d98c7345800d4f0e1a3db1cef937",
+    "output/lobby-concept/assets/models/prop_tongs.bbmodel": "5c49f634acafb6e9cf5e1333fdbd498c0fd009efab745473f4bbc599b4f816ab",
+    "output/lobby-concept/assets/models/prop_tongs.png": "0fb9bcc7f20efb68456f040148544bc4c583c76d0a12257fefdc0f1355a3b31d",
+    "output/lobby-concept/assets/models/prop_tongs-display.png": "54d5eff0eed56b5c187e394e851ebbd646a2a8a15e95c1c802999bff00a6d9fe",
+    "output/lobby-concept/assets/models/prop_tongs-preview.png": "50b12c19ec3933aeb27bb342e38ebc1cdaba90cc9f127fe4c5319edc539a053b",
+    "output/lobby-concept/assets/models/prop_tongs-front.png": "496734fb57772e0432fb971e21c99fcda16fd7f43714f326325ee1d16f1c7547"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

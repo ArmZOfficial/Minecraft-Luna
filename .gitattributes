@@ -7,3 +7,13 @@
 *.json text eol=lf
 *.bbmodel text eol=lf
 *.svg text eol=lf
+*.java text eol=lf
+*.kts text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.properties text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+gradlew text eol=lf
+*.jar binary

@@ -1,0 +1,23 @@
+{
+  "name": "luma_moon_wand",
+  "fancyName": "<#47C8D3>คทาแสงจันทร์ลูม่า",
+  "material": "BLAZE_ROD",
+  "type": "normal",
+  "stackable": false,
+  "needBlock": "AIR",
+  "lore": ["&7คลิกขวาในอากาศ: ประกายแสงจันทร์", "&7คูลดาวน์ 8 วินาที · เอฟเฟกต์ตกแต่ง", "&8ชุดทดลอง ItemsCore · ไม่ใช่อุปกรณ์ Core serial"],
+  "requirements": [{"type": "permission", "input": "luma.itemscore.trial"}],
+  "requirementMessage": "&eไอเทมทดลองสำหรับทีมทดสอบลูม่า",
+  "actions": [{
+    "trigger": "rightAction",
+    "needBlock": "AIR",
+    "cooldown": "8s",
+    "cooldownMessage": "&7รอแสงจันทร์พร้อมอีกครั้ง",
+    "steps": [
+      {"call": "core.setItemCooldown", "args": [{"var": "player"}, 8], "operatorToNext": "END"},
+      {"call": "core.createParticleByLocation", "args": [{"call": "core.addToLocation", "args": [{"call": "player.getLocation", "args": []}, 0, 1.4, 0]}, {"call": "particles.colored", "args": [71, 200, 211, 1]}, 0, 4, 5], "operatorToNext": "END"},
+      {"call": "core.playSound", "args": [{"var": "player"}, {"call": "player.getLocation", "args": []}, {"call": "core.getSound", "args": ["ENTITY_EXPERIENCE_ORB_PICKUP"]}, 0.3, 1.2], "operatorToNext": "END"}
+    ]
+  }],
+  "customEvents": []
+}

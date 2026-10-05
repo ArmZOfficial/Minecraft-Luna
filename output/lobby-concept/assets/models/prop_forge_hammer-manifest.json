@@ -1,0 +1,50 @@
+{
+  "id": "prop_forge_hammer",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 11,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_forge_hammer",
+  "gui_extent_units": [
+    -4.01,
+    4.01,
+    -7.37,
+    7.37
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_forge_hammer.json": "0476a9f9a5230de8fed5eb6218d0dea174ea3ba01758bc3cbf2a17fb17976845",
+    "output/lobby-concept/assets/models/prop_forge_hammer.bbmodel": "c9f1ace90b14a4521bea22cc51d4898c02bf028219d70d73df817acd0c5b98e7",
+    "output/lobby-concept/assets/models/prop_forge_hammer.png": "ef977c7f7d2367daa2399e0fc4b08213cf14f49182009c91dcae145ac0ef015d",
+    "output/lobby-concept/assets/models/prop_forge_hammer-display.png": "08dc78561bf028addab5f1e9e884a75c20ac2fae527c5609c231ae5ef127c4d4",
+    "output/lobby-concept/assets/models/prop_forge_hammer-preview.png": "5970e25fcc09b1b9c20dd16fd0bcbc619944ab06ce492939c55d8076b156d913",
+    "output/lobby-concept/assets/models/prop_forge_hammer-front.png": "b7a0179ccc98583eba488a85549b6f4bc26147476acff6ea6bf0b15b229e8141"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

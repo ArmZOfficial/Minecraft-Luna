@@ -1,0 +1,50 @@
+{
+  "id": "prop_bank_ledger",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 16,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_bank_ledger",
+  "gui_extent_units": [
+    -6.84,
+    6.84,
+    -4.59,
+    4.59
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_bank_ledger.json": "369e9199f4bc19a1804dc601ce31330615e82f28c715054eecb9c35de314cbec",
+    "output/lobby-concept/assets/models/prop_bank_ledger.bbmodel": "b8504634898966b887d585b82bb43eef93529efd8655e587a024e6804e6b07a1",
+    "output/lobby-concept/assets/models/prop_bank_ledger.png": "e61ea289741bf5934ec66522987ca5b057a776eb8cbf16749ab263f615f596c5",
+    "output/lobby-concept/assets/models/prop_bank_ledger-display.png": "bc942bf980efeebb96f7e1143f08de00ed6608cc9332ace73f80817f3e9cf98a",
+    "output/lobby-concept/assets/models/prop_bank_ledger-preview.png": "d77b800811662b9af3c92260779b94dad3de7942299b593d337797cf9c4a2abd",
+    "output/lobby-concept/assets/models/prop_bank_ledger-front.png": "205dc1febdbbd6c060b3effc688b695dcd5bbdde3843201bb93ddf90f9a38614"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}
