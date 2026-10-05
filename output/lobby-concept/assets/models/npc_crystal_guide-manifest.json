@@ -9,7 +9,7 @@
     "show_map",
     "welcome"
   ],
-  "cubes": 149,
+  "cubes": 148,
   "bones": 18,
   "height_target": 2.1,
   "runtime_tested": false,
@@ -19,7 +19,7 @@
     512
   ],
   "native_timeline_frames_checked": 269,
-  "revision": 1,
+  "revision": 2,
   "built_at": "2026-10-06",
   "units_per_block": 16,
   "direction": "north (-Z)",
@@ -192,6 +192,13 @@
   "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, imported per-face pixel atlas and native animation",
   "builder": "tools/build_crystal_guide.py",
   "pose_capture": "tools/preview_crystal_guide.py",
+  "hair_revision": {
+    "style": "neat chestnut side part, stepped fringe clear of brows",
+    "repair": "tools/fix_crystal_guide_hair.py",
+    "source": "live Blockbench project including the user's fringe edits",
+    "preserved": "132 non-hair cubes, all 18 bones, 5 clips and original non-hair atlas pixels",
+    "uv": "4 texels/unit, new islands in unused atlas space; adjacent fringe faces do not overlap"
+  },
   "timeline": {
     "fps": 20,
     "sampling": "every tick including both endpoints",
@@ -230,23 +237,26 @@
     "max_depth": 1.4171
   },
   "sha256": {
-    "output/lobby-concept/assets/models/npc_crystal_guide.bbmodel": "f696e707f01052ad2aaed28b2206836d7d5703f563087abd0a9c8312c74255f2",
-    "output/lobby-concept/assets/models/npc_crystal_guide.png": "ea952eb4b322dc6a7aae446407596fdff1f59c3ea0e0814d8312f9f2b79ec5fb",
-    "output/lobby-concept/assets/models/npc_crystal_guide-pose-checks.json": "b2c312f89f2fdb91f7a2e9208213f54b2748e78a90eb107b7c11799285c52a64",
-    "output/lobby-concept/assets/models/npc_crystal_guide-back.png": "9819313ab1fd55c7a23bdca68cd2deff063e61357fc4f4118efb8d516c762e16",
-    "output/lobby-concept/assets/models/npc_crystal_guide-front.png": "d47b4979e4c1702c08809e65eb6fa4305e90c4d673169d1db99088aca7fff7e1",
-    "output/lobby-concept/assets/models/npc_crystal_guide-greet.png": "9759a524a975b7c22ab235eedbaa9de82df8c805bceca2767f263a5118a25ba7",
-    "output/lobby-concept/assets/models/npc_crystal_guide-idle.png": "8a31c3d958e6dff9eff47eef0dae06169ba5c69460f8aa5891903300e0d11e48",
-    "output/lobby-concept/assets/models/npc_crystal_guide-point-direction.png": "15571487e4dd85775a5369f8f7857e28f153dc8000a067d9667955a18dd3ef7a",
-    "output/lobby-concept/assets/models/npc_crystal_guide-preview.png": "d4a6fbb81a9bd142672cb8f69d56f224e6275a5806d628f7476543ff02783f38",
-    "output/lobby-concept/assets/models/npc_crystal_guide-right.png": "f9ead27baaa1dafa53cdb091c5661e9e55376c83bb7eebe7f4ef8a58728c0eb3",
-    "output/lobby-concept/assets/models/npc_crystal_guide-show-map.png": "b7c596ae9c797b156339647ab34d4b8ad27d0ce20d6f5cf2f86dd1ecc269cbd5",
-    "output/lobby-concept/assets/models/npc_crystal_guide-welcome.png": "b68d0e73bfe51f1b355dc76b0a041e3c4cc6eb6311509a291d8c5f71b1eea12b"
+    "output/lobby-concept/assets/models/npc_crystal_guide.bbmodel": "7659da4770713530649363685a46c7e145c01778c3dd19ad6a55d288fca378b8",
+    "output/lobby-concept/assets/models/npc_crystal_guide.png": "3f5f79b3ba7caa39cb42db9c73f62a2cb28d23cd190cab84b876d94c45725af7",
+    "output/lobby-concept/assets/models/npc_crystal_guide-pose-checks.json": "0f545b5a1277ecebf3672c0313000719107d1a527a2867773c05255d1f434720",
+    "output/lobby-concept/assets/models/npc_crystal_guide-back.png": "12b9be14b5e8e77226bf75568ddcfcf6f843640e8238231e8eda7d0c35ff006b",
+    "output/lobby-concept/assets/models/npc_crystal_guide-front.png": "211131093002e84af36a2ec30ddfd749df678ae02dc0ffa4c4928147d8642393",
+    "output/lobby-concept/assets/models/npc_crystal_guide-greet.png": "0653e69a35a40ee7043a04ded45f2b99a71afe48f2ace007c6549bc96149680c",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-detail.png": "9ea1fbd45e7f3ab03839430980368526787ddddcb3a1c7f521ab4de435e66dd4",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-front.png": "c9da9d53dc8b5645ea926d0dd63778d3fcf1d1643e351046d3b82a3a08544a56",
+    "output/lobby-concept/assets/models/npc_crystal_guide-hair-top.png": "a7151fc31e38bf03952aa7ee3678c3e39e923508e5928ba01c96c9429f70d778",
+    "output/lobby-concept/assets/models/npc_crystal_guide-idle.png": "02ab2a6e92e77b7ed1cbbd5c2d3c5e3f8f29a70b0544875a1116909269f59c38",
+    "output/lobby-concept/assets/models/npc_crystal_guide-point-direction.png": "a06b853149e6fddb05d894731b9865849795673617b9b018b9a4d5f222b7a513",
+    "output/lobby-concept/assets/models/npc_crystal_guide-preview.png": "05371e415fa523bec86e07463a891bf752432c585ddfee2fda994dbcd740f247",
+    "output/lobby-concept/assets/models/npc_crystal_guide-right.png": "3dba3ec264c63fc7f98e70173683566a0fd1625c0394e427b4f3bf5053ff9a45",
+    "output/lobby-concept/assets/models/npc_crystal_guide-show-map.png": "a394f5d708cc2ab627ca75c891aa537e11d7878b179eea9f8c8c524913feb0b0",
+    "output/lobby-concept/assets/models/npc_crystal_guide-welcome.png": "62589f803f9556c5fb8ddfbb18a797b5f4cc487b6ce1a0f9d7a53297fe97aab3"
   },
   "known_limits": [
     "No ModelEngine/Citizens renderer integration or compiled resource pack yet",
     "Point sampling (corners, edge and face midpoints) catches overlaps of a prop into the rig, not thin slivers between samples",
     "No ChatGPT reference sheet; designed from the zone 01 ticket, the plaza banners and the NPC family",
-    "149 cubes is above the 40-70 town NPC budget; fine for the single spawn guide, crowds need a LOD variant"
+    "148 cubes is above the 40-70 town NPC budget; fine for the single spawn guide, crowds need a LOD variant"
   ]
 }

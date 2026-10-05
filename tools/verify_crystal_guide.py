@@ -35,6 +35,14 @@ def check():
     assert len(references)==len(cubes) and set(references)==set(cubes)
     names={item["node"]["name"]:gid for gid,item in groups.items()}
     assert len(names)==len(groups)
+    # The repaired fringe meets edge-to-edge, with no overlapping coplanar front faces.
+    fringe=sorted((c for c in cubes.values() if c['name'].startswith('fringe_')),key=lambda c:c['from'][0])
+    assert len(fringe)==6
+    assert all(abs(a['to'][0]-b['from'][0])<1e-6 for a,b in zip(fringe,fringe[1:]))
+    assert all(c['from'][1]>29.2 for c in fringe)  # brows remain visible
+    assert not any(c['name'] in ('fringe_swoop','cowlick','cowlick_tip') for c in cubes.values())
+    head_children=set(groups[names['hi_head']]['node']['children'])
+    assert all(c['uuid'] in head_children for c in fringe)
     parent=lambda n:groups[groups[names[n]]["parent"]]["node"]["name"]
     for side in ["right","left"]:
         assert parent(side+"_forearm")==side+"_upper_arm" and parent(side+"_hand")==side+"_forearm"
@@ -89,7 +97,9 @@ def check():
     for name,states in poses.items():
         # Sampled on every 20 FPS tick including both ends.
         assert len(states)==round(animations[name]["length"]*20)+1
-        assert len({tuple(s["max"]) for s in states})>1 or name=="idle"
+        # A moving arm/head may stay within the stationary staff's outer bounds.
+        # Prove pose motion from landmarks as well as the mesh bounds, not max-height alone.
+        assert len({tuple(s['min']+s['max']+s['face_dir']+s['left_hand']+s['crystal']+s['map_size']) for s in states})>1
         for s in states:
             assert s["selected"]==name and 0<=s["time"]<=animations[name]["length"]+1e-7
             assert s["staff_gap"]==0 and s["map_gap"]==0

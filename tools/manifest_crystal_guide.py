@@ -22,11 +22,16 @@ def main():
     path.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
     files=[MODELS/(NAME+".bbmodel"),MODELS/(NAME+".png"),MODELS/(NAME+"-pose-checks.json"),
            *sorted(MODELS.glob(NAME+"-*.png"))]
-    detail={**entry,"revision":1,"built_at":"2026-10-06","units_per_block":16,"direction":"north (-Z)",
+    detail={**entry,"revision":2,"built_at":"2026-10-06","units_per_block":16,"direction":"north (-Z)",
             "handedness":"character right is +X; crystal staff in the right fist, folding map in the left",
             "skeleton":rig(model),"zone":"01 crystal spawn plaza (spawn_guide, navigation.main)",
             "build_method":"Blockbench 5.2.1 / local MCP 1.10.0 native geometry, imported per-face pixel atlas and native animation",
             "builder":"tools/build_crystal_guide.py","pose_capture":"tools/preview_crystal_guide.py",
+            "hair_revision":{"style":"neat chestnut side part, stepped fringe clear of brows",
+                             "repair":"tools/fix_crystal_guide_hair.py",
+                             "source":"live Blockbench project including the user's fringe edits",
+                             "preserved":"132 non-hair cubes, all 18 bones, 5 clips and original non-hair atlas pixels",
+                             "uv":"4 texels/unit, new islands in unused atlas space; adjacent fringe faces do not overlap"},
             "timeline":{"fps":20,"sampling":"every tick including both endpoints",
                         "keyframes":sum(len(b.get("keyframes",[])) for a in model["animations"] for b in a["animators"].values())},
             "held_props":{"staff":"right_hand","map":"left_hand",
@@ -44,7 +49,7 @@ def main():
             "known_limits":["No ModelEngine/Citizens renderer integration or compiled resource pack yet",
                             "Point sampling (corners, edge and face midpoints) catches overlaps of a prop into the rig, not thin slivers between samples",
                             "No ChatGPT reference sheet; designed from the zone 01 ticket, the plaza banners and the NPC family",
-                            "149 cubes is above the 40-70 town NPC budget; fine for the single spawn guide, crowds need a LOD variant"]}
+                            f"{len(model['elements'])} cubes is above the 40-70 town NPC budget; fine for the single spawn guide, crowds need a LOD variant"]}
     (MODELS/(NAME+"-manifest.json")).write_text(json.dumps(detail,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
     print(json.dumps({"asset":entry,"keyframes":detail["timeline"]["keyframes"],"bounds":detail["bounds_blocks"]}))
 

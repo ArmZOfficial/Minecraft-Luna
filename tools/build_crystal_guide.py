@@ -136,25 +136,31 @@ for side,sign in [("right",1),("left",-1)]:
     m("leg","toe_trim",[.45,.95,-3.15],[3.75,1.3,-3],2)
     m("leg","sole",[.3,0,-3.2],[3.9,.55,2],7)
 
-# Head: painted face, tousled chestnut hair with a cowlick, small crystal stud in one ear.
+# Head: painted face, neat side-parted chestnut hair, small crystal stud in one ear.
 box("hi_head","head",[-3.8,24,-3.75],[3.8,31.65,3.05],9)
 box("hi_head","nose",[-.35,26.7,-4.15],[.35,28.2,-3.73],4)
-box("hi_head","hair_cap",[-4.05,30.4,-3.5],[4.05,32.6,3.45],5)
-box("hi_head","hair_crown",[-2.8,32.4,-2.6],[2.6,33.1,2.6],5)
-box("hi_head","hair_back",[-4.05,25.0,2.7],[4.05,31.2,3.85],5)
-box("hi_head","hair_nape",[-3.3,24.2,2.9],[3.3,25.4,3.75],5)
-box("hi_head","cowlick",[-.5,32.7,-2.2],[.6,34.0,-1.2],5,[22.5,0,0],[0,32.9,-1.7])
-box("hi_head","cowlick_tip",[-1.1,32.9,-.9],[-.1,33.7,.2],5,[0,0,22.5],[-.6,33.2,-.4])
+box("hi_head","hair_cap",[-4.05,30.35,-3.9],[4.05,32.25,3.45],5)
+box("hi_head","hair_crown",[-3.65,32.18,-3.2],[3.45,32.85,2.95],5)
+box("hi_head","hair_back",[-4.05,25.55,2.7],[4.05,31.2,3.65],5)
+box("hi_head","hair_nape",[-3.45,25.28,2.85],[3.45,25.85,3.5],5)
+box("hi_head","hair_crown_sweep_right",[-3.25,32.75,-2.8],[-.55,33.2,2.2],5)
+box("hi_head","hair_crown_sweep_left",[-.65,32.70,-2.4],[2.6,33.0,2.5],5)
 for sign in [-1,1]:
     x=sign*3.85
-    box("hi_head","temple_"+str(sign),[x-.4,28.1,-2.8],[x+.4,31.2,2.7],5)
+    box("hi_head","temple_"+str(sign),[x-.4,28.1,-3.85],[x+.4,31.75,3.0],5)
     x0,x1=sorted([3.75*sign,4.25*sign])
     box("hi_head","ear_"+str(sign),[x0,26.6,-.7],[x1,28.5,.7],4)
-    box("hi_head","sideburn_"+str(sign),[sign*3.85-.35,26.6,-1.9],[sign*3.85+.35,28.2,-1.0],5)
+    box("hi_head","sideburn_"+str(sign),[sign*3.85-.3,27.0,-2.9],[sign*3.85+.3,28.3,-1.2],5)
 box("hi_head","ear_crystal",[-4.45,26.55,-.2],[-4.1,27.05,.25],8)
-for i,(x,y,w) in enumerate([(-2.9,29.4,.8),(-1.6,29.0,.75),(-.35,29.5,.7),(.95,29.2,.75),(2.35,29.7,.8),(3.3,29.9,.5)]):
-    box("hi_head","fringe_"+str(i),[x-w,y,-4.1],[x+w,31.0,-3.45],5)
-box("hi_head","fringe_swoop",[-3.6,30.3,-4.35],[.4,31.15,-3.9],5,[0,0,-22.5],[-1.6,30.7,-4.1])
+# Adjacent locks meet at their X edges; they never overlap on a coplanar north face.
+# Staggered tips open the brow and define a gentle part rather than hiding the eyes.
+for i,(x0,x1,y,z,top) in enumerate([(-4.0,-2.65,29.55,-4.24,31.8),
+                                  (-2.65,-1.2,29.9,-4.22,31.95),
+                                  (-1.2,.1,30.2,-4.16,32.02),
+                                  (.1,1.5,29.9,-4.25,32.0),
+                                  (1.5,2.85,29.6,-4.30,31.9),
+                                  (2.85,4.0,29.45,-4.23,31.65)]):
+    box("hi_head","fringe_"+str(i),[x0,y,z],[x1,top,-3.8],5)
 
 # Crystal staff: wrapped grip, bronze bands, brass cage holding a glowing cyan crystal.
 box("staff","shaft_low",[5.9,1.2,-2.1],[6.5,10.6,-1.5],11)
@@ -291,7 +297,21 @@ def guide_face(c,face,rng):
         c.set(cx+out*(hw+1),y0-2,h[3])
     for fx,fy in [(.36,.66),(.41,.69),(.59,.69),(.64,.66),(.39,.72),(.62,.72)]: c.set(int(fx*w),int(fy*c.h),s[2])
 
-ARTS={"portrait":guide_face,"tabard":panel("royal",tabard),"tabard_hem":panel("royal",tabard_skirt),
+def guide_hair(c,face,rng):
+    """Broad chestnut locks with restrained strand highlights, not alternating bright stripes."""
+    r=RAMPS["hair_chestnut"]
+    base=4 if face=="up" else (2 if face=="down" else 3)
+    for y in range(c.h):
+        for x in range(c.w):
+            # Front locks gently sweep away from the part; crown grain runs front to back.
+            shift=(c.h-1-y)//4 if face in ("north","south") else 0
+            band=(x+shift)%9
+            tone=base+(1 if band in (2,3) else (-1 if band==8 else 0))
+            if face not in ("up","down") and y>=c.h-2:
+                tone-=1
+            c.set(x,y,r[max(0,min(6,tone))])
+
+ARTS={"hair_chestnut":guide_hair,"portrait":guide_face,"tabard":panel("royal",tabard),"tabard_hem":panel("royal",tabard_skirt),
       "cape_rose":panel("royal",cape_rose),"map":map_art,"compass_dial":compass_dial,"satchel_flap":satchel_flap}
 
 def rot(items):return [{"time":t,"rotation":v} for t,v in items]

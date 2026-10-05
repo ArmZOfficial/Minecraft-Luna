@@ -12,16 +12,18 @@ from build_crystal_guide import NAME, ANIMATIONS
 
 SHOTS={("idle",2):"idle",("greet",.85):"greet",("point_direction",1.2):"point-direction",
        ("show_map",1.4):"show-map",("welcome",1.0):"welcome"}
-PROBE="""(()=>{const box=n=>{const b=new THREE.Box3();for(const c of Cube.all){if(!c.mesh||!c.visibility)continue;
+PROBE="""(()=>{for(const c of Cube.all)if(c.mesh)c.mesh.geometry.computeBoundingBox();
+const bounds=c=>{c.mesh.updateWorldMatrix(true,true);return c.mesh.geometry.boundingBox.clone().applyMatrix4(c.mesh.matrixWorld)};
+const box=n=>{const b=new THREE.Box3();for(const c of Cube.all){if(!c.mesh||!c.visibility)continue;
 let g=c.parent;while(g&&g!=='root'&&g.name!==n)g=g.parent;if(!g||g==='root')continue;
-c.mesh.updateWorldMatrix(true,true);b.union(new THREE.Box3().setFromObject(c.mesh))}return b};
+b.union(bounds(c))}return b};
 const own=n=>{const b=new THREE.Box3();for(const c of Cube.all){if(!c.mesh||c.parent?.name!==n)continue;
-c.mesh.updateWorldMatrix(true,true);b.union(new THREE.Box3().setFromObject(c.mesh))}return b};
-const cube=n=>{const c=Cube.all.find(c=>c.name===n);c.mesh.updateWorldMatrix(true,true);return new THREE.Box3().setFromObject(c.mesh)};
+b.union(bounds(c))}return b};
+const cube=n=>bounds(Cube.all.find(c=>c.name===n));
 const ctr=b=>b.getCenter(new THREE.Vector3()).toArray().map(v=>+v.toFixed(3));
 const gap=(a,b)=>{let d=0;for(const k of ['x','y','z'])d=Math.max(d,a.min[k]-b.max[k],b.min[k]-a.max[k]);return +Math.max(0,d).toFixed(4)};
 const all=new THREE.Box3();for(const c of Cube.all){if(c.name==='collision_proxy'||!c.mesh||!c.visibility)continue;
-c.mesh.updateWorldMatrix(true,true);all.union(new THREE.Box3().setFromObject(c.mesh))}
+all.union(bounds(c))}
 const head=cube('head'),nose=cube('nose'),map=box('map'),leaf=cube('map_leaf'),flap=cube('map_flap_leaf');
 const hc=head.getCenter(new THREE.Vector3()),nc=nose.getCenter(new THREE.Vector3()),f=nc.sub(hc).normalize();
 const pts=c=>{c.mesh.updateWorldMatrix(true,true);const bb=c.mesh.geometry.boundingBox||(c.mesh.geometry.computeBoundingBox(),c.mesh.geometry.boundingBox);
