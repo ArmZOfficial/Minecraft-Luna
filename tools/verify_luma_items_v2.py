@@ -6,14 +6,21 @@ import json
 import math
 import struct
 from pathlib import Path
-from build_luma_items_v2 import DISPLAY, ITEMS as BUILDER_ITEMS
+from build_luma_items_v2 import DISPLAY as ITEM_DISPLAY, ITEMS as ITEM_BUILDERS
+from build_luma_props import DISPLAY as PROP_DISPLAY, ITEMS as PROP_BUILDERS, corners
+
+DISPLAY={**ITEM_DISPLAY,**PROP_DISPLAY}
+BUILDER_ITEMS={**ITEM_BUILDERS,**PROP_BUILDERS}
 
 ROOT=Path(__file__).resolve().parents[1]
 DIR=ROOT/"output/lobby-concept/assets/models"
 ITEMS={"item_runeblade_v2":{"texture":"luma:item/runeblade_v2","supersedes":"item_runeblade","reference":"assets/references/item-runeblade.png"},
        "item_aether_halo_v2":{"texture":"luma:item/aether_halo_v2","supersedes":"item_aether_halo","reference":"assets/references/item-aether-halo.png"},
        # Crown form requested by the user on 2026-10-06; v2 stays as the square-ring variant.
-       "item_aether_halo_v3":{"texture":"luma:item/aether_halo_v3","supersedes":"item_aether_halo_v2","reference":"user-supplied crown photo (not stored)"}}
+       "item_aether_halo_v3":{"texture":"luma:item/aether_halo_v3","supersedes":"item_aether_halo_v2","reference":"user-supplied crown photo (not stored)"},
+       # Station props from the catalog's 12-prop slice; no reference sheets exist, they follow the NPC v2 palette.
+       **{name:{"texture":"luma:item/"+name,"supersedes":None,"reference":"NPC v2 palette (no prop reference sheet)"}
+          for name,_,_ in PROP_BUILDERS.values()}}
 CONTEXTS={"thirdperson_righthand","thirdperson_lefthand","firstperson_righthand","firstperson_lefthand","gui","head","ground","fixed"}
 
 def rotate(v,angles):
@@ -28,12 +35,10 @@ def footprint(elements,slot):
     """Screen extent (x,y) of the model after a display transform, in model units around the slot centre."""
     scale=slot.get("scale",[1,1,1]); move=slot.get("translation",[0,0,0]); xs=[]; ys=[]
     for e in elements:
-        for cx in (e["from"][0],e["to"][0]):
-            for cy in (e["from"][1],e["to"][1]):
-                for cz in (e["from"][2],e["to"][2]):
-                    v=[(c-8)*s for c,s in zip((cx,cy,cz),scale)]
-                    x,y,_=rotate(v,slot.get("rotation",[0,0,0]))
-                    xs.append(x+move[0]); ys.append(y+move[1])
+        for corner in corners(e):
+            v=[(c-8)*s for c,s in zip(corner,scale)]
+            x,y,_=rotate(v,slot.get("rotation",[0,0,0]))
+            xs.append(x+move[0]); ys.append(y+move[1])
     return min(xs),max(xs),min(ys),max(ys)
 
 def check(name,spec):
@@ -75,7 +80,9 @@ def check(name,spec):
     return {"asset":name,"elements":len(elements),"contexts":len(display),"gui_extent":[round(v,2) for v in (x0,x1,y0,y1)]}
 
 def files(name):
-    return [DIR/(name+ext) for ext in [".json",".bbmodel",".png","-display.png","-preview.png","-front.png","-right.png","-top.png"]]
+    required=[DIR/(name+ext) for ext in [".json",".bbmodel",".png","-display.png","-preview.png","-front.png"]]
+    optional=[DIR/(name+ext) for ext in ["-right.png","-top.png"]]
+    return required+[f for f in optional if f.exists()]
 
 def write_manifest(name,spec,result):
     entry={"id":name,"format":"java_block","status":"model-exported-awaiting-runtime-qa","animations":[],

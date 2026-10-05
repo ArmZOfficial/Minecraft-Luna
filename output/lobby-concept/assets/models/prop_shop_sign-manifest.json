@@ -1,0 +1,49 @@
+{
+  "id": "prop_shop_sign",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 11,
+  "runtime_tested": false,
+  "reference": "NPC v2 palette (no prop reference sheet)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": null,
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_items_v2.py",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/prop_shop_sign",
+  "gui_extent_units": [
+    -4.74,
+    4.74,
+    -7.35,
+    7.35
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/prop_shop_sign.json": "099c3332c20a16a6a7abab5bbf5454f942a5ed2ed9832d14fa1a23b9ff25ef16",
+    "output/lobby-concept/assets/models/prop_shop_sign.bbmodel": "7ae58b18840a9f6ce3bc082947a5c9d0afbba3a40bff378d19e9f474e6dd6ff6",
+    "output/lobby-concept/assets/models/prop_shop_sign.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
+    "output/lobby-concept/assets/models/prop_shop_sign-display.png": "0886a929de36046626e0baeadcd78cd718414d398167fae3fe1c95e52e0ee25c",
+    "output/lobby-concept/assets/models/prop_shop_sign-preview.png": "dae3aa55862a1be9b5c8e01570411cbdb36dd67da63231a236dff768f14e8c2c",
+    "output/lobby-concept/assets/models/prop_shop_sign-front.png": "7c6826b94d354c67d46a38486c81ad190ea0b100b4df41f76233bf008e311602"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

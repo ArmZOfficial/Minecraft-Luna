@@ -6,7 +6,10 @@ import json
 from PIL import Image, ImageDraw
 from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data
-from build_luma_items_v2 import ITEMS
+from build_luma_items_v2 import ITEMS as ITEM_V2
+from build_luma_props import ITEMS as PROP_ITEMS
+
+ITEMS={**ITEM_V2,**PROP_ITEMS}
 
 LOADERS={"thirdperson_righthand":"loadThirdRight","thirdperson_lefthand":"loadThirdLeft",
          "firstperson_righthand":"loadFirstRight","firstperson_lefthand":"loadFirstLeft",

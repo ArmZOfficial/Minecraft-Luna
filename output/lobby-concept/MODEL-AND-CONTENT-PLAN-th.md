@@ -120,7 +120,7 @@ preview PNG เป็น render จากโมเดลจริง แยก�
 | **รวม** | | | **140 assets/variants ตามแผน ไม่ใช่สร้างเสร็จแล้ว** |
 
 Tier ที่ geometry เหมือนกันให้ใช้ texture variant และ data template ถ้ารันไทม์รองรับ ไม่สร้าง rigซ้ำ 4 ตัวเพื่อเปลี่ยนสี
-เริ่ม launch slice 6 pilot → 14 NPCหลัก/12props → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
+เริ่ม launch slice 6 pilot → 14 NPCหลัก/~~12props~~(เสร็จ6ต.ค.) → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
 item gameplay ต้องมีแหล่งหาในเกม สูตรคราฟต์และ balance ก่อนผลิตรูป ไม่ทำ asset มากโดยไม่มีหน้าที่
 
 ## เพิ่มเติมจากภาพระบบ Survival/casual roleplay

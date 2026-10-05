@@ -147,6 +147,28 @@ v2 (วงแหวนสี่เหลี่ยม) เก็บไว้ เ�
 display ครบ8 context: มือ3rd เอียงขึ้นแบบดาบvanilla ทั้งซ้าย/ขวา, 1st เห็นใบดาบ, GUI/กรอบไอเทมแนวทแยง (±7.86 ในช่อง), พื้นตั้งตรง
 texture อ้าง `luma:item/runeblade_v2`; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
 
+## 08 — Props ประจำจุดบริการ 12 ชิ้น (6 ต.ค.2026)
+
+![props ทั้ง 12 ชิ้น](assets/models/props-overview.png)
+
+| ชิ้น | จุดใช้ | elements | รายละเอียด |
+|---|---|---:|---|
+| [prop_bank_ledger](assets/models/prop_bank_ledger.json) | ธนาคาร | 16 | ปกน้ำเงินเขียว หน้ากระดาษ สันหนังคาดทอง มุมทอง ตราอัญมณี ตะขอ ริบบิ้น |
+| [prop_vault_key](assets/models/prop_vault_key.json) | ธนาคาร | 16 | ห่วงกุญแจทองฝังอัญมณี ปลอกทองแดง ฟันกุญแจ3ขั้น เส้นรูนฟ้าบนก้าน |
+| [prop_coin_stack](assets/models/prop_coin_stack.json) | ธนาคาร | 36 | เหรียญกลมแบบพิกเซล3กองสูงไม่เท่ากัน เหรียญพิงฝังอัญมณี |
+| [prop_forge_hammer](assets/models/prop_forge_hammer.json) | โรงตีเหล็ก | 11 | หัวเหล็กคาดทอง หน้าตีเข้ม รูนฟ้า ด้ามไม้พันหนัง |
+| [prop_tongs](assets/models/prop_tongs.json) | โรงตีเหล็ก | 8 | ขาคีมไขว้ หมุดทอง ด้ามพันหนัง คีบแท่งรูน |
+| [prop_quest_scroll](assets/models/prop_quest_scroll.json) | บอร์ดเควส | 11 | ม้วนแปดเหลี่ยม ฝาทอง ริบบิ้น ตราครั่งแดง |
+| [prop_map_table](assets/models/prop_map_table.json) | บอร์ดเควส | 15 | โต๊ะไม้ แผนที่เอียง มีเส้นทาง/หมุด เข็มทิศ หมึกกับขนนก |
+| [prop_mailbox](assets/models/prop_mailbox.json) | ไปรษณีย์ | 15 | ตู้น้ำเงินเขียวหลังคาขั้น กรอบประตูทอง จดหมายในช่อง ธงแดง |
+| [prop_shop_sign](assets/models/prop_shop_sign.json) | ร้านค้า | 11 | เสา แขนเหล็ก โซ่ ป้ายกรอบทองลายเหรียญ |
+| [prop_fish_crate](assets/models/prop_fish_crate.json) | ท่าเรือ | 26 | ลังไม้แผ่นเว้นช่อง น้ำแข็ง ปลา3ตัวมีหาง/ตา/ครีบ |
+| [prop_portal_focus](assets/models/prop_portal_focus.json) | ประตูวาร์ป | 20 | ฐานหิน ถ้วยทอง กรง4แขน คริสตัลซ้อนชั้น วงโคจรทอง |
+| [prop_rune_plinth](assets/models/prop_rune_plinth.json) | ประตูวาร์ป | 12 | แท่นหินแกะรูนเรืองแสงทุกด้าน ขอบทอง อัญมณีบนยอด |
+
+texture ชุด props 128×128 แยกจาก item อ้าง `luma:item/prop_<ชื่อ>`; GUI/กรอบไอเทมคำนวณขนาดจากรูปทรงจริงให้พอดีช่อง (ทุกชิ้น ≤±7.4) วางบนหัวแล้วนั่งบนหัวพอดี
+ไม่มีภาพ reference เฉพาะ props จึงใช้โทนสีชุด NPC v2; `python tools/build_luma_props.py [ชื่อ...]` สร้างใหม่, `python tools/verify_luma_items_v2.py` ตรวจรวมกับไอเทม; ยังไม่โหลดใน resource pack จริง
+
 ## การส่งต่อและตรวจงาน
 
 - [คำสั่งส่งต่อ Antigravity/Blockbench](ANTIGRAVITY-BLOCKBENCH-HANDOFF-th.md) — ลำดับ polish, output v2 และเงื่อนไขตรวจ

@@ -84,3 +84,4 @@ GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร�
 34. [ผู้ดูแลประตูv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 124cubes/18bones/4animations, คทาไม่ชนหัว, ทุกท่า≤2.66บล็อก, offlinegateผ่าน; เกมจริงยังรอ
 35. [ไอเทมv2 รูนดาบ+Halo](ASSET-GALLERY-th.md) — Java JSON `luma:` texture, display8context, ไอคอนGUIไม่ล้นช่อง, offlinegateผ่าน; packจริงยังรอ
 36. [Halo v3 แบบมงกุฎ](ASSET-GALLERY-th.md) — มงกุฎทอง ยอดฟันเลื่อย ทับทิม/อัญมณีฟ้า 92 elements, สวมพอดีหัว; packจริงยังรอ
+37. [Props ประจำจุดบริการ 12 ชิ้น](ASSET-GALLERY-th.md) — ธนาคาร/ตีเหล็ก/เควส/ไปรษณีย์/ร้าน/ท่าเรือ/วาร์ป, display8context, gateผ่าน; packจริงยังรอ
