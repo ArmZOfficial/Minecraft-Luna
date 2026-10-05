@@ -166,3 +166,22 @@ artist idle/greet/paint ใช้ brief และ QA pipeline เดิม; ไ�
 | Recovery | reload/restart/chunkunloadไม่มี duplicateNPC/reward/asset orphan | recovery test |
 
 คำว่าไม่มีบัคใช้เป็นเป้าหมายของ gate และการแก้ข้อบกพร่องก่อนปล่อย ไม่เป็นคำรับรองที่ยังไม่มีผลทดสอบ
+
+## งานบอสที่ผลิตแล้วและมาตรฐานรายละเอียดเพิ่ม (5 ต.ค.2026)
+
+[ผู้พิทักษ์จันทร์แตก](../../server/content/dungeons/moonfall/README-th.md) มี146cubes/19bones/atlas128×128/8animationsจริง
+AIturnaround → nativeBlockbenchgeometry/paint/rig/keys → export → viewportreview → UUID/UV/rotation/loop/hash gate ทำแล้ว
+native .bbmodel5.0แยกgroups/outliner; รูปแบบsourceยังต้องทดสอบimporterModelEngineที่จะใช้งานจริง
+Corev0.8ไม่ได้ใช้modelนี้ในเกม มี [renderercontractdisabled](../../server/content/dungeons/moonfall/model-contract.json) และHuskfallback
+
+ตามผู้ใช้กำหนดให้โมเดลลงสีละเอียดและแฟนตาซีอลังการ: ทุกrevisionใหม่ต้องมีรายละเอียดที่อ่านได้จากsilhouette/วัสดุ/UV
+- หินใช้โทนหลัก/เงา/ขอบสว่าง/รอยแตก; ผ้าใช้ตะเข็บ/ชายเสื้อ/ตราสถานี; โลหะใช้ขอบถลอก/หมุด/รอยประกอบ
+- ไม่ใช้แถบสีpaletteเดียวป้ายทั้งหน้า; UVเสื้อ/มือ/ผม/ใบหน้า/propsแยกบริเวณ มีpadding ไม่ยืดลายจนอ่านไม่ออก
+- gold/cyan/violetใช้เป็นจุดนำสายตา จำกัดรูนที่จุดทำงาน ไม่ปิดตา/มือหรือป้ายบริการด้วยeffect
+- เปรียบเทียบหน้า/ข้าง/หลัง/three-quarterกับreference เห็นเท้าครบและแอนิเมชันไม่ทำpropsหลุดจากมือ
+- บอสใช้รายละเอียดระดับชิ้นนี้เป็นbenchmarkภาพ; NPCบริการคงbudget40–70cubes/9–14bonesก่อนเพิ่ม เพราะต้องแสดงหลายตัวในเมือง
+- ไม่เพิ่มboneเพื่อทุกหมุด/รอยแตกหรือsubdivision; รายละเอียดเล็กทำในtexture ภาพสวยไม่แทนbenchmarkMSPT/clientframepacing
+
+ลำดับpolishNPCv2: banker(แว่น/สมุด/เหรียญ/ชุดคลัง) → smith(เกราะหนัง/ค้อน/ผ้ากันเปื้อน) → warden(ผ้าคลุม/scroll/pouch) → mage(hood/crystal/staff)
+itemv2ตามด้วยรูนดาบและhaloที่displayทุกcontextถูก; ไม่เปลี่ยนPDC/serial/ราคา/enchantเพื่อแค่เปลี่ยนรูป
+ทั้งหมดexportrevisionใหม่พร้อมtexture/preview/manifest และตรวจruntimeก่อนเปลี่ยนรูปสินค้าหรือประกาศproduction

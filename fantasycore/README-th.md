@@ -147,6 +147,6 @@ NPC อนิเมชันจาก Blockbench เป็นอีกเส้�
 
 รอบ v0.7: unit tests **105 รายการผ่าน** (92 เดิม + 8 Dungeon store/migration + 5 map/rules); compile กับ Paper API ที่ล็อกไว้ผ่าน
 มี [โค้ดดันฝึกเดี่ยว](DUNGEONS-th.md) ต่อจาก [ภาพ/แปลนจันทรา](../output/lobby-concept/dungeons/moonfall/README-th.md); ยังไม่เริ่ม Minecraft จริง
-สถานะ v0.7 ข้างต้นเป็นประวัติ; รุ่นปัจจุบัน v0.8 มี party/2parallelinstances/reconnect60s แล้ว แต่ custombossmodel+animationsยังเป็นแผน
+สถานะ v0.7 ข้างต้นเป็นประวัติ; รุ่นปัจจุบัน v0.8 มี party/2parallelinstances/reconnect60s แล้ว ส่วน [sourceโมเดลบอส/8animations](../server/content/dungeons/moonfall/README-th.md) exportแล้ว รอadapter+runtimeQA
 รอบ v0.8: unit tests **124 รายการผ่าน** (เพิ่ม19), compileไม่มีwarning; YAML9/MiniMessage377 ผ่าน; schema7เป็นexpand-only อ่านlegacyและquotaร่วม
 ยังไม่ได้เริ่ม Minecraft; ต้องผ่าน [checklist R/S](../server/README-th.md) ก่อนเปิด enabled/party-enabled ดู [คู่มือ v0.8](PARTY-DUNGEONS-th.md)

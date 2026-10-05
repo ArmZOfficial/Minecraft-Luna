@@ -66,5 +66,30 @@
     "animations": [],
     "cubes": 6,
     "runtime_tested": false
+  },
+  {
+    "id": "boss_moonfall_guardian_v1",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "walk",
+      "spawn",
+      "attack",
+      "slam",
+      "enrage",
+      "hurt",
+      "death"
+    ],
+    "cubes": 146,
+    "bones": 19,
+    "height_target": 3.375,
+    "runtime_tested": false,
+    "reference": "assets/references/boss-moonfall-guardian-turnaround.png",
+    "texture": [
+      128,
+      128
+    ],
+    "native_timeline_frames_checked": 29
   }
 ]

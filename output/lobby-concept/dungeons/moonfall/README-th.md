@@ -4,7 +4,8 @@
 เอกสารนี้มีภาพ AI 4 ภาพและใบงานสร้างแมพ/ระบบ; **ยังไม่มี world/schematic/instance หรือบอสที่เล่นจริง**
 อัปเดต v0.7: มี [โค้ด Moonfall ฝึกเดี่ยว](../../../../fantasycore/DUNGEONS-th.md) สร้างโครงแมพใน `luma_moonfall_training`, 3คลื่น/บอสHusk/ทุบพื้น/receipt+mail/protect/กลับออกแล้ว แต่ยังไม่รัน Minecraft
 v0.8 เพิ่ม [ปาร์ตี้/2ห้องส่วนตัว/reconnect60s](../../../../fantasycore/PARTY-DUNGEONS-th.md) แล้ว แต่ยังไม่รัน Minecraft
-สะพานหุบเหว/NPCภายใน/บอสโมเดลและตารางencounterเป้าหมายภาพด้านล่างยังเป็นแผน; ค่าที่ใช้จริงให้ยึดคู่มือv0.8
+[โมเดลบอสจันทรา146cubes/19bones/8animations](../../../../server/content/dungeons/moonfall/README-th.md) ลงสีและexportแล้ว รอprovider/gameQA
+สะพานหุบเหว/NPCภายในและตารางencounterเป้าหมายภาพด้านล่างยังเป็นแผน; ค่าที่ใช้จริงให้ยึดคู่มือv0.8
 สร้างภาพด้วย built-in `image_gen` ผ่าน skill imagegen; [prompt ทั้งชุด](PROMPTS-th.md)
 ภาพแสดงสไตล์และบรรยากาศ ไม่ใช่หลักฐานว่าบล็อก/ทางเดินถูกทุกจุด ให้ใช้ขนาดและพิกัดในใบงานนี้เป็นตัวตัดสิน
 

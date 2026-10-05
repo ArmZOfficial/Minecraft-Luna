@@ -283,6 +283,6 @@ server/
 - [ ] S15 offlineตอนจบ/login/restart→คืนจุดของคนนั้น/unsafehubfallback; คนเก่าloginในslotที่ทีมใหม่ใช้→กลับออกโดยไม่join/abortทีมใหม่; กลับfailedเก็บneeds_returnและleaveลองใหม่ได้
 - [ ] S16 cleanupม็อบ/projectile/bar/chunkticket/telegraphครบเฉพาะslot ปลดrosterหลังห้องว่าง; slot reuseไม่เอาcallback/runเก่ามาprogress; /fa dungeon abort previewระบุทุกรอบชัดเจน
 - [ ] S17 วัดTPS/MSPT/chunkload/RAM/entityระหว่าง3รอบและbuild ไม่เดาตัวเลขจากunit tests; ViaBossBar/particle/หัวข้อไทย/เกราะ/telegraph/landingทุกclientตรงกัน; packfailยังอ่านและหลบได้
-- [ ] S18 เจ้าของลงชื่อผลR/Sและgearplaytestก่อนproductionเปิด; custombossยังHuskfallback ไม่อ้างanimationพร้อม; ปิดparty/ทุกดัน+restartแล้วprotect/recoveryยังอยู่
+- [ ] S18 เจ้าของลงชื่อผลR/Sและgearplaytestก่อนproductionเปิด; CoreยังHuskfallback; sourceบอส8animationsพร้อมในBlockbench แต่ยังไม่เรียกในเกม; ปิดparty/ทุกดัน+restartแล้วprotect/recoveryยังอยู่
 
 ผลรอบพัฒนา 5 ต.ค.2026: compileไม่มีwarning + unit tests124ผ่าน (0fail/error/skip); ยังไม่มีผล S ในเกม

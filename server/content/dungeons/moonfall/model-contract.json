@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "enabled": false,
+  "status": "specification-only; no runtime provider implementation",
+  "asset_id": "boss_moonfall_guardian_v1",
+  "blueprint": "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.bbmodel",
+  "runtime_target": "ModelEngine 4, exact JAR/API/version still to be verified",
+  "core_version": "0.8.0",
+  "native_fallback": "HUSK",
+  "spawn": {
+    "world_slots": [
+      "training",
+      "party1",
+      "party2"
+    ],
+    "location": [
+      116.5,
+      20,
+      118.5
+    ],
+    "yaw": 180,
+    "visual_forward": "north (-Z)",
+    "model_scale": 1,
+    "required_landing_validation": "full proposed 1.5x1.5 hitbox and 3.375 height; existing Husk landing check alone is insufficient"
+  },
+  "ownership": {
+    "combat_ai_hp_damage_loot": "FantasyCore",
+    "visual_rig": "future ModelEngine adapter",
+    "external_mob_spawn_allowed": false,
+    "animation_keyframes_may_deal_damage": false
+  },
+  "events": {
+    "confirmed_spawn": {
+      "animation": "spawn",
+      "priority": 2,
+      "then": "idle"
+    },
+    "moving": {
+      "animation": "walk",
+      "priority": 0
+    },
+    "idle": {
+      "animation": "idle",
+      "priority": 0
+    },
+    "melee_visual_only": {
+      "animation": "attack",
+      "priority": 2,
+      "then": "idle"
+    },
+    "slam_windup": {
+      "animation": "slam",
+      "priority": 3,
+      "impact_tick": 25,
+      "damage_owner": "Core scheduled task",
+      "then": "idle"
+    },
+    "health_below_half_visual_only": {
+      "animation": "enrage",
+      "priority": 2,
+      "once_per_run": true
+    },
+    "damage_visual_only": {
+      "animation": "hurt",
+      "priority": 1,
+      "cannot_interrupt": "slam"
+    },
+    "disconnect_pause": {
+      "pause_timeline": true,
+      "cancel_slam": true,
+      "cancel_damage": true
+    },
+    "disconnect_resume": {
+      "restore_state": "idle",
+      "next_slam_delay_ticks": 80
+    },
+    "death": {
+      "animation": "death",
+      "hold": true,
+      "priority": 4,
+      "combat_rewards_owner": "Core existing completion transaction",
+      "visual_only_corpse_requires_separate_cleanup": true
+    },
+    "abort_timeout_disable_unload": {
+      "remove_model": true,
+      "stop_all_animations": true,
+      "remove_visual_entities": true
+    }
+  },
+  "pack": {
+    "namespace": "luma",
+    "minimum_client": "1.16.5",
+    "profiles": [
+      "legacy",
+      "modern"
+    ],
+    "compiled": false,
+    "verified": false,
+    "required_evidence": [
+      "ModelEngine import log and texture/bone validation",
+      "all supported client pack/collision/telegraph tests",
+      "pack-decline fallback visibility",
+      "party isolation/reconnect/cleanup/MSPT checklist"
+    ]
+  }
+}

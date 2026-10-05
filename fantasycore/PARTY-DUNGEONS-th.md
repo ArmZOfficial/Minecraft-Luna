@@ -172,7 +172,8 @@ compile ผ่าน Paper API ที่ตรึงไว้, YAML9ไฟล์
 JARที่buildตรวจรอบนี้: `FantasyCore-0.8.0.jar`, SHA256 `5EF2B8BE2749C842D05F2F64D56DEE66B5ABC68F99F41BEF86AD71B0C5A25D08`
 ตรวจลิงก์Markdown347จุดและpilotmodelเดิม6ชุดผ่าน; JARเป็นผลbuildในเครื่องและCI ไม่commit binary ลงrepo
 ยังไม่มี Bukkit runtime ใน tests; [checklist S](../server/README-th.md) ต้องทดสอบทุกข้อด้วย Minecraft จริง
-ภาพ/world decoration, ModelEngine/MythicMobs adapter, custom boss animation, gear playtest และ loot recipe ยังไม่ผ่าน/ยังไม่ได้ทำในรุ่นนี้
+ภาพ/world decoration, ModelEngine/MythicMobs adapter, gear playtest และ loot recipe ยังรอทำ/ทดสอบ
+[โมเดลบอสจันทราลงสีและ8animations](../server/content/dungeons/moonfall/README-th.md) exportผ่านBlockbenchแล้ว แต่Coreยังใช้Husk ไม่ได้เรียกmodelในเกม
 
 งานลำดับถัดไปหลัง QA: polish แมพทั้ง3โลก → reference turnaroundบอสจากภาพ04 → Blockbenchที่เชื่อมจริง
 → bbmodel/texture/animation/hitbox/telegraph export → provider adapter → clientmatrix → recipeเศษจันทราและlootcosmetic

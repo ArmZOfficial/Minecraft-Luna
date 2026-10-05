@@ -76,3 +76,5 @@ GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร�
 27. [ซากวิหารจันทรา](dungeons/moonfall/README-th.md) — 4 ภาพ AI, แปลน 144×144, NPC/ห้อง/บอส/model/reward/instance specification (ยังเป็นแผน)
 28. [Moonfall ดันฝึกเดี่ยว v0.7](../../fantasycore/DUNGEONS-th.md) — โค้ดสร้างโครงแมพ/เข้ารอบ/บอส/รางวัล/protect/กลับออกและ checklist R; ปาร์ตี้ทำต่อในv0.8; โมเดลยังเป็นแผน
 29. [Moonfall ปาร์ตี้ v0.8](../../fantasycore/PARTY-DUNGEONS-th.md) — 2instance/roster/scale/reconnect/schema7/recovery/checklist S
+
+30. [บอสจันทราลงสีละเอียด/8animations](../../server/content/dungeons/moonfall/README-th.md) — nativeBlockbench146cubes/19bones/150keys, 4มุมและ29poseframes, sourceพร้อม; ModelEngineadapter/เกมจริงยังรอ

@@ -49,3 +49,16 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 `tools/blockbench_mcp.py` ใช้ MCP HTTP initใหม่ทุก invocation; อ่าน tools/list ก่อนใช้ชื่อ/schema
 `tools/build_luma_models.py` เป็นสคริปต์สร้าง pilot ที่ทำแล้ว **ไม่ต้องรันซ้ำโดยไม่ตรวจ active project**
 ไฟล์ `.bbmodel` ใน assets/models มี embeddedtexture และ keyframesจริง แต่ต้อง polishและruntime QAต่อ
+
+## Moonfall boss — ผลงานที่ทำต่อผ่าน MCP แล้ว
+
+[ไฟล์บอสv1](assets/models/boss_moonfall_guardian_v1.bbmodel) · [reference4มุม](assets/references/boss-moonfall-guardian-turnaround.png) · [คู่มือ/contract](../../server/content/dungeons/moonfall/README-th.md)
+สร้างprojectใหม่ในlocalBlockbench5.2.1/MCP1.10.0 ลงสีatlas/geometry146cubes/19bones/8animationsแล้ว ไม่แก้NPCprojectที่เปิดอยู่ก่อน
+nativepreview29เฟรมและofflinegateผ่าน; ModelEngine/Paper/client/runtimeยังไม่ทดสอบ
+ไม่มีการส่งข้อความหรือtaskไปagentAntigravityอัตโนมัติ ผลงานรอบนี้ทำจากChatGPTผ่านlocalMCPโดยตรง
+
+> งานpolishต่อ: เปิดboss_moonfall_guardian_v1.bbmodelในprojectใหม่และออกrevisionv2 รักษาNorth/−Z/เท้าY0/16units:block/assetnamespace/animationcontractตามmodel-contract.json เพิ่มรอยหิน/UVgold/cyan/violetเท่าที่มองเห็นได้ อนิเมชันslamต้องimpactที่1.25sหรือ25ticks แล้วคืนneutral ห้ามscriptkeyframeทำdamage/loot ห้ามanimatehitbox ตรวจeyeheight/footprintชนิดจริงและทุกpose/มุมก่อนexport เก็บv1ไว้ ยืนยันexactModelEngineimportformat5และclient1.16.5/รุ่นกลาง/26.2บนstagingก่อนอ้างเกมพร้อม
+
+คำสั่งoffline: `python tools/verify_moonfall_model.py`; builder `tools/build_moonfall_boss.py --dry-run` อ่านbudgetโดยไม่เชื่อมMCP
+หากจะใช้builderจริงต้องสร้างemptyprojectชื่อบอสและส่งUUIDที่ตรวจจากget_project_info; builderปฏิเสธไฟล์revisionที่มีแล้ว
+จึงใช้เปิดv1/polishผ่านnativeMCPและexportชื่อv2สำหรับงานรอบถัดไป ไม่รันbuilderทับv1
