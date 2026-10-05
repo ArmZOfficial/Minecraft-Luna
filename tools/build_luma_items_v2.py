@@ -163,7 +163,10 @@ def main():
     call("risky_eval",{"code":"(()=>{const d="+display+";for(const [k,v] of Object.entries(d)){Project.display_settings[k]=new DisplaySlot(k,v)}return Object.keys(Project.display_settings)})()"})
     OUT.mkdir(parents=True,exist_ok=True)
     embedded(call("export_model",{"codec_id":"project","result_format":"embedded","max_content_length":2000000}),target)
-    embedded(call("export_model",{"codec_id":"java_block","result_format":"embedded","max_content_length":2000000}),OUT/(name+".json"))
+    java=OUT/(name+".json")
+    embedded(call("export_model",{"codec_id":"java_block","result_format":"embedded","max_content_length":2000000}),java)
+    # The manifest hashes this file and .gitattributes stores JSON as LF, so write LF here too.
+    java.write_bytes(java.read_bytes().replace(b"\r\n",b"\n"))
     model=json.loads(target.read_text(encoding="utf-8"))
     (OUT/(name+".png")).write_bytes(base64.b64decode(model["textures"][0]["source"].split(",",1)[1]))
     call("create_offscreen_view",{"id":"item_qa","width":1200,"height":1200,"copy_view":"none"})
