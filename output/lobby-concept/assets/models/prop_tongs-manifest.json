@@ -7,8 +7,8 @@
   "runtime_tested": false,
   "reference": "NPC v2 palette (no prop reference sheet)",
   "texture": [
-    128,
-    128
+    64,
+    64
   ],
   "display_contexts": [
     "firstperson_lefthand",
@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_tongs",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     5.93
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_tongs.json": "0d1788a7a23067a646c954244c17f159a03a1ac488d901bf93b975bf9c4aa4ff",
-    "output/lobby-concept/assets/models/prop_tongs.bbmodel": "3659b6d4826f25f081b39a152244774cc1870596036e3a1ebf94b5f0a9339cc4",
-    "output/lobby-concept/assets/models/prop_tongs.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_tongs-display.png": "a634968706b9062e452cc0f5dd34a55a1f867a4a82cc3de23fc6f371b30136dd",
-    "output/lobby-concept/assets/models/prop_tongs-preview.png": "d7364ce24ac584dce0cd879e4dbdbac78f8bc8e92aa6ad11e92fbc083e738fd6",
-    "output/lobby-concept/assets/models/prop_tongs-front.png": "1f6ab1c06a2a748502cc916fa790a5b0410e0ee9afe836fc93e1ce255daab2d1"
+    "output/lobby-concept/assets/models/prop_tongs.json": "29c251abed940df3de4fd406e85562bd9a28d98c7345800d4f0e1a3db1cef937",
+    "output/lobby-concept/assets/models/prop_tongs.bbmodel": "fd947d1ad3f12209c2c55e963301d28115aace4298b0e1485308f0642593650a",
+    "output/lobby-concept/assets/models/prop_tongs.png": "8b37f5a05475e1a1facec3df011468988da140ad2e65a53f17f712a1e9a9a827",
+    "output/lobby-concept/assets/models/prop_tongs-display.png": "3eff1a8cd0aab6f52c77a1637f1a8f5a5a5a0bedbc1e60cf554784fafa66580d",
+    "output/lobby-concept/assets/models/prop_tongs-preview.png": "9b7228ad5d78f7b185b38571f671a45a66a9893b8a296c76f2cc3e7d9ff928d9",
+    "output/lobby-concept/assets/models/prop_tongs-front.png": "c3a91846e1be7c8229fe97c6257aba9c36f2099d5858b9ab5b14f4b2e9d85afc"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_forge_hammer",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     7.37
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_forge_hammer.json": "941764a69c5afa7509fd797e47ee4e5de16a5bac959cbe029ea1d1e5d0ff1caf",
-    "output/lobby-concept/assets/models/prop_forge_hammer.bbmodel": "3627c0f4867278ca9d279f52b246d18a1770722c72ef0a7b03eb28ab58506ef5",
-    "output/lobby-concept/assets/models/prop_forge_hammer.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_forge_hammer-display.png": "2e6204c9453c6489a4ba7135274c430a918738712d742b06441e67c8ac73c74f",
-    "output/lobby-concept/assets/models/prop_forge_hammer-preview.png": "15a0ac592191ae1d5665cf09783e909fee4988f3fc8fe3ffabe18fdab8d93070",
-    "output/lobby-concept/assets/models/prop_forge_hammer-front.png": "b6c13567972d83fb16ba3d909364a45b2ab2fac1e2bcd1e1db5f85f7e2cb5cc0"
+    "output/lobby-concept/assets/models/prop_forge_hammer.json": "0476a9f9a5230de8fed5eb6218d0dea174ea3ba01758bc3cbf2a17fb17976845",
+    "output/lobby-concept/assets/models/prop_forge_hammer.bbmodel": "1e866b99091f6db4489051ff316588f1e11ce327cc79ece66815696b8e88e629",
+    "output/lobby-concept/assets/models/prop_forge_hammer.png": "1cc4676e821aa3044c353119099f4bacadeb02b2331abf729c1be04e44b16f98",
+    "output/lobby-concept/assets/models/prop_forge_hammer-display.png": "4a846d16421cbb9fc8e331911153f7101d556d41c73f074431e4015ada69c0fb",
+    "output/lobby-concept/assets/models/prop_forge_hammer-preview.png": "4797f7af618a8c626b35acb84b15eaadfcc706a4d796c469c2348e8f491ecf9d",
+    "output/lobby-concept/assets/models/prop_forge_hammer-front.png": "d693a5cbea82350b99b92f12ffc01e5c8527d25943a637a323b3bddf7c676987"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -285,8 +285,8 @@
     "runtime_tested": false,
     "reference": "NPC v2 palette (no prop reference sheet)",
     "texture": [
-      128,
-      128
+      64,
+      64
     ],
     "display_contexts": [
       "firstperson_lefthand",
@@ -357,8 +357,8 @@
     "runtime_tested": false,
     "reference": "NPC v2 palette (no prop reference sheet)",
     "texture": [
-      128,
-      128
+      64,
+      64
     ],
     "display_contexts": [
       "firstperson_lefthand",
@@ -381,8 +381,8 @@
     "runtime_tested": false,
     "reference": "NPC v2 palette (no prop reference sheet)",
     "texture": [
-      128,
-      128
+      64,
+      64
     ],
     "display_contexts": [
       "firstperson_lefthand",

@@ -1,19 +1,20 @@
 """Create the 12 Luma station props as Java item models through native Blockbench MCP.
 
+Textures are baked per face by texture_bake.py at 2 texels per unit (32px per block).
+
 Same rules as build_luma_items_v2: elements inside -16..32, one-axis 22.5/45 rotations, 0..16 UVs.
 GUI and item-frame transforms are fitted from the real geometry, so every icon stays inside its slot.
 """
 import argparse
 import base64
+import io
 import json
 import math
 from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data, embedded, dispose_view
+from texture_bake import RAMPS, bake, paint_face, ramp
 
-COLORS = ["#d4a646", "#8d95a0", "#8f6a33", "#8a5a35", "#4e3220", "#efe6cf", "#1d5b5e", "#36e2f0",
-          "#d2353c", "#cfe9ee", "#9aa3ab", "#5b3b28", "#1b1f24", "#e8dcb8", "#173e46", "#7d8691"]
-SLOTS = {"gold":0, "stone":1, "bronze":2, "wood":3, "wood_dark":4, "paper":5, "teal":6, "gem":7,
-         "ruby":8, "ice":9, "steel":10, "leather":11, "dark":12, "map":13, "sign":14, "rune_stone":15}
+DENSITY = 2   # texels per model unit = 32px per block, uniform on every face
 
 class Prop:
     def __init__(self): self.rows=[]
@@ -26,9 +27,9 @@ class Prop:
 
 def bank_ledger():
     p=Prop()
-    p.box("cover_bottom",[2,0,3.5],[14,.6,12.5],"teal")
+    p.box("cover_bottom",[2,0,3.5],[14,.6,12.5],"teal_leather")
     p.box("pages",[2.5,.6,3.9],[13.6,2.4,12.1],"paper")
-    p.box("cover_top",[2,2.4,3.5],[14,3.0,12.5],"teal")
+    p.box("cover_top",[2,2.4,3.5],[14,3.0,12.5],"teal_leather")
     p.box("spine",[1.5,0,3.5],[2.5,3.0,12.5],"leather")
     for z in [5,7.6,10.2]: p.box("spine_band_"+str(z),[1.3,0,z],[2.6,3.2,z+.6],"gold")
     for x in [2.4,12.6]:
@@ -64,13 +65,13 @@ def coin_stack():
     for sname,(x,z,n) in {"a":(5,5,5),"b":(10.5,6,3),"c":(7.5,10.5,7)}.items():
         for i in range(n):
             y=i*.55
-            mat="bronze" if i%3==1 else "gold"
+            mat="coin"
             # Two crossed slabs give the cut-corner outline of a pixel-art coin.
             p.box("coin_"+sname+str(i),[x-1.8,y,z-1.1],[x+1.8,y+.55,z+1.1],mat)
             p.box("coin_"+sname+str(i)+"_cross",[x-1.1,y+.01,z-1.8],[x+1.1,y+.54,z+1.8],mat)
-        p.box("stamp_"+sname,[x-.6,n*.55,z-.6],[x+.6,n*.55+.12,z+.6],"bronze")
-    p.box("leaning_coin",[10.6,.6,11.0],[14.0,2.8,11.55],"gold","x",-22.5,[12.3,0,11.3])
-    p.box("leaning_coin_cross",[11.2,0,11.01],[13.4,3.4,11.54],"gold","x",-22.5,[12.3,0,11.3])
+        p.box("stamp_"+sname,[x-.6,n*.55,z-.6],[x+.6,n*.55+.12,z+.6],"gold")
+    p.box("leaning_coin",[10.6,.6,11.0],[14.0,2.8,11.55],"coin","x",-22.5,[12.3,0,11.3])
+    p.box("leaning_coin_cross",[11.2,0,11.01],[13.4,3.4,11.54],"coin","x",-22.5,[12.3,0,11.3])
     p.box("leaning_coin_gem",[11.8,1.2,10.85],[12.8,2.2,11.0],"gem","x",-22.5,[12.3,0,11.3])
     return p
 
@@ -134,10 +135,10 @@ def mailbox():
     p=Prop()
     p.box("base_plate",[5.5,0,5.5],[10.5,.6,10.5],"stone")
     p.box("post",[7,.6,7],[9,8,9],"wood_dark")
-    p.box("box_body",[3.5,8,4],[12.5,13,12],"teal")
+    p.box("box_body",[3.5,8,4],[12.5,13,12],"teal_metal")
     p.box("roof_trim",[3.2,12.9,3.7],[12.8,13.3,12.3],"gold")
-    p.box("roof_low",[3.7,13.3,4],[12.3,14.1,12],"teal")
-    p.box("roof_high",[4.6,14.1,4.2],[11.4,14.8,11.8],"teal")
+    p.box("roof_low",[3.7,13.3,4],[12.3,14.1,12],"teal_metal")
+    p.box("roof_high",[4.6,14.1,4.2],[11.4,14.8,11.8],"teal_metal")
     for name,a,b in [("top",[4.3,12.0,3.75],[11.7,12.4,4.0]),("bottom",[4.3,8.6,3.75],[11.7,9.0,4.0]),
                      ("left",[4.3,9.0,3.75],[4.7,12.0,4.0]),("right",[11.3,9.0,3.75],[11.7,12.0,4.0])]:
         p.box("door_frame_"+name,a,b,"gold")
@@ -173,9 +174,9 @@ def fish_crate():
         p.box("plank_west_"+str(y0),[1.1,y0,3.2],[1.9,y1,12.8],"wood")
         p.box("plank_east_"+str(y0),[14.1,y0,3.2],[14.9,y1,12.8],"wood")
     p.box("ice_bed",[2.2,1,3.2],[13.8,6.4,12.8],"ice")
-    for name,(z0,z1),(x0,x1),body,tail,angle in [("a",(4.4,6.2),(3.0,10.6),"steel","teal",0),
-                                                 ("b",(7.4,9.2),(5.0,12.6),"teal","steel",22.5),
-                                                 ("c",(10.0,11.6),(3.6,9.8),"steel","teal",-22.5)]:
+    for name,(z0,z1),(x0,x1),body,tail,angle in [("a",(4.4,6.2),(3.0,10.6),"steel","teal_metal",0),
+                                                 ("b",(7.4,9.2),(5.0,12.6),"teal_metal","steel",22.5),
+                                                 ("c",(10.0,11.6),(3.6,9.8),"steel","teal_metal",-22.5)]:
         cz=(z0+z1)/2
         origin=[(x0+x1)/2,7,cz]
         axis="y" if angle else None
@@ -273,38 +274,93 @@ def display_for(rows):
 
 DISPLAY={key:display_for(fn().rows) for key,fn in PROPS.items()}
 
-PAINT="""(()=>{const t=Texture.all[0];t.edit(canvas=>{
-const c=canvas.getContext('2d'),colors=COLORS;let seed=61121;
-const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
-const rect=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
-colors.forEach((col,i)=>{const ox=(i%4)*32,oy=Math.floor(i/4)*32;rect(ox,oy,32,32,col);
-for(let y=0;y<32;y++)for(let x=0;x<32;x++){rect(ox+x,oy+y,1,1,rand()>.5?'rgba(255,255,255,.06)':'rgba(0,0,0,.06)')}
-if([0,2,10].includes(i)){const hi={0:'#f7dc8f',2:'#b98d4e',10:'#d5dbe0'}[i],lo={0:'#8c6720',2:'#5a3f1d',10:'#5d646b'}[i];
- rect(ox,oy,32,2,hi);rect(ox,oy,2,32,hi);rect(ox+30,oy,2,32,lo);rect(ox,oy+30,32,2,lo);}
-if(i===1||i===15){rect(ox,oy,32,2,'#a9b1ba');rect(ox,oy+30,32,2,'#666d76');
- for(let j=0;j<6;j++){const x=2+Math.floor(rand()*26),y=2+Math.floor(rand()*26);rect(ox+x,oy+y,4,1,'#6f7781');rect(ox+x+3,oy+y+1,1,2,'#6f7781');}}
-if(i===3||i===4){for(let y=0;y<32;y+=8){rect(ox,oy+y,32,1,i===3?'#5e3b21':'#2d1c11');}
- for(let j=0;j<20;j++)rect(ox+Math.floor(rand()*30),oy+1+Math.floor(rand()*30),3,1,i===3?'#a2704a':'#694430');}
-if(i===5){for(let y=4;y<30;y+=4)rect(ox+3,oy+y,26,1,'rgba(140,120,90,.25)');}
-if(i===6||i===14){rect(ox,oy,32,2,'#2f7f82');rect(ox,oy+30,32,2,'#0d3134');}
-if(i===7||i===8){const a=i===7?['#1ec3d6','#4cecf8','#a5f9ff','#0e8796']:['#b0262d','#e85a5f','#ff9a9c','#7a161c'];
- rect(ox,oy,32,32,a[0]);rect(ox+3,oy+3,26,26,a[1]);rect(ox+8,oy+8,16,16,a[2]);rect(ox+8,oy+8,6,6,'#ffffff');
- rect(ox,oy+29,32,3,a[3]);rect(ox+29,oy,3,32,a[3]);}
-if(i===9){for(let j=0;j<18;j++)rect(ox+Math.floor(rand()*28),oy+Math.floor(rand()*28),4,2,'rgba(255,255,255,.45)');}
-if(i===11){for(let y=2;y<32;y+=3){rect(ox+2,oy+y,1,1,'#a07a52');rect(ox+29,oy+y,1,1,'#a07a52');}}
-if(i===13){rect(ox+1,oy+1,30,30,'#e8dcb8');rect(ox+3,oy+4,12,10,'#9cc39a');rect(ox+15,oy+6,6,5,'#9cc39a');rect(ox+18,oy+16,10,12,'#9cc39a');
- rect(ox+3,oy+18,9,9,'#7fb3cf');rect(ox+20,oy+3,9,8,'#7fb3cf');
- for(let k=0;k<8;k++)rect(ox+6+k*2,oy+14+(k%2),1,1,'#b0262d');rect(ox+22,oy+20,3,1,'#b0262d');rect(ox+23,oy+19,1,3,'#b0262d');
- rect(ox,oy,32,1,'#b39c6a');rect(ox,oy+31,32,1,'#b39c6a');rect(ox,oy,1,32,'#b39c6a');rect(ox+31,oy,1,32,'#b39c6a');}
-if(i===14){rect(ox+3,oy+3,26,26,'#d4a646');rect(ox+5,oy+5,22,22,'#173e46');
- rect(ox+10,oy+9,12,14,'#d4a646');rect(ox+9,oy+11,14,10,'#d4a646');rect(ox+13,oy+12,6,8,'#36e2f0');rect(ox+14,oy+13,2,2,'#ffffff');}
-if(i===15){const g='#45e8f6';for(let k=0;k<6;k++){rect(ox+15-k,oy+4+k,2,1,g);rect(ox+15+k,oy+4+k,2,1,g);rect(ox+10+k,oy+10+k,2,1,g);rect(ox+20-k,oy+10+k,2,1,g);}
- rect(ox+15,oy+16,2,9,g);rect(ox+14,oy+26,4,3,'#c6fdff');rect(ox+15,oy+9,2,3,'#c6fdff');}
-});},{edit_name:'Luma props atlas'});return true})()"""
+def _fill(c,col):
+    for y in range(c.h):
+        for x in range(c.w): c.set(x,y,col)
 
-def uv_for(mat):
-    i=SLOTS[mat]; u=(i%4)*4; v=(i//4)*4
-    return [u+.05,v+.05,u+3.95,v+3.95]
+def map_art(c,face,rng):
+    """Parchment map on the top face: sea, coastlined islands, dotted route and an X."""
+    paper=RAMPS["paper"]
+    if face!="up":
+        _fill(c,paper[3]); return
+    sea=ramp("#4f7f99","#6d9db5","#8fbdd0"); land=ramp("#6c5a32","#8f9a58","#b2bb73","#d6d49a")
+    blobs=[(rng.uniform(.15,.85)*c.w,rng.uniform(.15,.85)*c.h,rng.uniform(.18,.3)*min(c.w,c.h)) for _ in range(4)]
+    def is_land(x,y): return any((x-bx)**2+(y-by)**2<(r+(x*7+y*3)%3-1)**2 for bx,by,r in blobs)
+    for y in range(c.h):
+        for x in range(c.w):
+            if is_land(x,y):
+                coast=not all(is_land(x+dx,y+dy) for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)))
+                c.set(x,y,land[0] if coast else land[2 if (x//3+y//3)%2 else 3])
+            else:
+                c.set(x,y,sea[1] if (x+2*y)%9 else sea[2])
+    ruby=RAMPS["ruby"]
+    (x0,y0,_),(x1,y1,_)=blobs[0],blobs[1]
+    for i in range(0,12,2):
+        t=i/11; c.set(int(x0+(x1-x0)*t),int(y0+(y1-y0)*t),ruby[3])
+    for d in (-1,0,1):
+        c.set(int(x1)+d,int(y1)+d,ruby[4]); c.set(int(x1)+d,int(y1)-d,ruby[4])
+    for x in range(c.w): c.set(x,0,paper[1]); c.set(x,c.h-1,paper[0])
+    for y in range(c.h): c.set(0,y,paper[1]); c.set(c.w-1,y,paper[0])
+
+def sign_art(c,face,rng):
+    """Shop board: deep teal field, inset gold line and a shaded coin emblem with a gem."""
+    if face not in ("east","west"):
+        _fill(c,RAMPS["wood_dark"][3]); return
+    teal=RAMPS["teal"]; gold=RAMPS["gold"]; gem=RAMPS["gem"]
+    for y in range(c.h):
+        for x in range(c.w): c.set(x,y,teal[2] if y>c.h*.5 else teal[3])
+    for x in range(2,c.w-2): c.set(x,2,gold[4]); c.set(x,c.h-3,gold[2])
+    for y in range(2,c.h-2): c.set(2,y,gold[4]); c.set(c.w-3,y,gold[2])
+    cx,cy,r=(c.w-1)/2,(c.h-1)/2,min(c.w,c.h)*.3
+    for y in range(c.h):
+        for x in range(c.w):
+            d=((x-cx)**2+(y-cy)**2)**.5
+            if d<=r:
+                lit=(-(x-cx)-(y-cy))/max(r,1)
+                c.set(x,y,gold[max(0,min(6,3+round(lit*1.5)))] if d<r-1.2 else gold[1])
+            if d<=r*.38: c.set(x,y,gem[4] if y<cy else gem[2])
+    c.set(int(cx-r*.15),int(cy-r*.15),gem[6])
+
+def rune_art(c,face,rng):
+    """Stone bricks with a glowing diamond rune sized to each side face."""
+    c.px=paint_face("stone",face,c.w,c.h,rng).px
+    if face in ("up","down"): return
+    glow=RAMPS["gem"]; cx=c.w//2; top=int(c.h*.14); s=max(3,int(min(c.w,c.h)*.2))
+    pts=set()
+    for k in range(s+1):
+        for x,y in ((cx-k,top+k),(cx+k,top+k),(cx-k,top+2*s-k),(cx+k,top+2*s-k)): pts.add((x,y))
+    for y in range(top+2*s,int(c.h*.82)): pts.add((cx,y))
+    for x,y in pts:
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
+            if (x+dx,y+dy) not in pts: c.set(x+dx,y+dy,glow[1])
+    for x,y in pts: c.set(x,y,glow[4])
+    c.set(cx,top+s,glow[6]); c.set(cx,int(c.h*.82)+1,glow[6])
+
+def coin_art(c,face,rng):
+    """Coin faces get a rim, inner ring and stamped centre; thin edges get reeded ridges."""
+    gold=RAMPS["gold"]
+    if c.w>=4 and c.h>=4:
+        cx,cy=(c.w-1)/2,(c.h-1)/2
+        for y in range(c.h):
+            for x in range(c.w):
+                e=max(abs(x-cx)/(c.w/2),abs(y-cy)/(c.h/2))
+                tone=1 if e>.86 else (5 if e>.7 else (2 if e>.58 else 4))
+                if e<=.3: tone=5 if (x+y)%3 else 6
+                c.set(x,y,gold[tone])
+        c.set(1,1,gold[6])
+    else:
+        for y in range(c.h):
+            for x in range(c.w): c.set(x,y,gold[4] if x%2==0 else gold[3])
+
+ARTS={"map":map_art,"sign":sign_art,"rune_stone":rune_art,"coin":coin_art}
+
+def load_atlas(call,img):
+    """Draw a baked PIL atlas into the project's single texture through Blockbench's edit()."""
+    buf=io.BytesIO(); img.save(buf,"PNG")
+    # risky_eval rejects any '//' (comment filter) and base64 can contain it, so ship '/' as '!'.
+    data_b64=base64.b64encode(buf.getvalue()).decode().replace("/","!")
+    call("risky_eval",{"code":"(async()=>{const im=new Image();await new Promise(r=>{im.onload=r;im.src='data:image/png;base64,'+'"+data_b64+"'.split('!').join('/')});"
+        "Texture.all[0].edit(cv=>{const g=cv.getContext('2d');g.clearRect(0,0,cv.width,cv.height);g.drawImage(im,0,0)},{edit_name:'Baked atlas'});return true})()"})
 
 def build(key,uuid,client):
     name,texture,fn=ITEMS[key]
@@ -318,15 +374,18 @@ def build(key,uuid,client):
     def call(tool,arguments): guard(); return client.call(tool,arguments)
     if any(guard()["counts"].get(k,0) for k in ["cubes","meshes","groups","textures"]): raise RuntimeError("Project must be empty")
     call("set_mode",{"mode_id":"edit"})
-    call("create_texture",{"name":texture+".png","width":128,"height":128,"fill_color":COLORS[0]})
-    call("risky_eval",{"code":PAINT.replace("COLORS",json.dumps(COLORS))})
+    atlas,face_uv=bake(rows,DENSITY,ARTS,seed=sum(map(ord,key)))
+    size=atlas.size[0]
+    call("create_texture",{"name":texture+".png","width":size,"height":size,"fill_color":"#000000"})
+    load_atlas(call,atlas)
     call("risky_eval",{"code":"(()=>{const t=Texture.all[0];t.namespace='luma';t.folder='item';return t.name})()"})
     call("add_group",{"name":"prop","origin":[8,8,8],"parent":"root"})
-    for mat in SLOTS:
-        batch=[{k:v for k,v in r.items() if k!="mat"} for r in rows if r["mat"]==mat]
-        if batch:
-            call("place_cube",{"elements":batch,"group":"prop","texture":texture+".png",
-                              "faces":[{"face":f,"uv":uv_for(mat)} for f in ["north","south","east","west","up","down"]]})
+    call("place_cube",{"elements":[{k:v for k,v in r.items() if k!="mat"} for r in rows],"group":"prop","texture":texture+".png",
+                      "faces":[{"face":f,"uv":[0,0,1,1]} for f in ["north","south","east","west","up","down"]]})
+    # Java UVs are 0..16 regardless of atlas resolution.
+    java_uv={n:{f:[round(v*16/size,4) for v in box] for f,box in faces.items()} for n,faces in face_uv.items()}
+    call("risky_eval",{"code":"(()=>{const m="+json.dumps(java_uv)+";for(const c of Cube.all){const f=m[c.name];if(!f)continue;"
+        "for(const k in f)c.faces[k].uv=f[k];c.preview_controller.updateUV(c)}return Cube.all.length})()"})
     call("risky_eval",{"code":"(()=>{const d="+json.dumps(DISPLAY[key])+";for(const [k,v] of Object.entries(d)){Project.display_settings[k]=new DisplaySlot(k,v)}return true})()"})
     embedded(call("export_model",{"codec_id":"project","result_format":"embedded","max_content_length":2000000}),target)
     java=OUT/(name+".json")

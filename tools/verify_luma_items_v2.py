@@ -74,10 +74,12 @@ def check(name,spec):
     x0,x1,y0,y1=footprint(elements,display["gui"])
     assert -8.01<=x0 and x1<=8.01 and -8.01<=y0 and y1<=8.01,(name,x0,x1,y0,y1)
     png=(DIR/(name+".png")).read_bytes()
-    assert png[:8]==b"\x89PNG\r\n\x1a\n" and struct.unpack(">II",png[16:24])==(128,128)
+    size=struct.unpack(">II",png[16:24])
+    # Swatch atlases are 128px; baked per-face atlases are any square power of two.
+    assert png[:8]==b"\x89PNG\r\n\x1a\n" and size[0]==size[1] and size[0]&(size[0]-1)==0 and 16<=size[0]<=1024
     assert base64.b64decode(model["textures"][0]["source"].split(",",1)[1])==png
     assert (DIR/(name+"-display.png")).exists()
-    return {"asset":name,"elements":len(elements),"contexts":len(display),"gui_extent":[round(v,2) for v in (x0,x1,y0,y1)]}
+    return {"asset":name,"elements":len(elements),"contexts":len(display),"gui_extent":[round(v,2) for v in (x0,x1,y0,y1)],"texture":list(size)}
 
 def files(name):
     required=[DIR/(name+ext) for ext in [".json",".bbmodel",".png","-display.png","-preview.png","-front.png"]]
@@ -86,12 +88,14 @@ def files(name):
 
 def write_manifest(name,spec,result):
     entry={"id":name,"format":"java_block","status":"model-exported-awaiting-runtime-qa","animations":[],
-           "cubes":result["elements"],"runtime_tested":False,"reference":spec["reference"],"texture":[128,128],
+           "cubes":result["elements"],"runtime_tested":False,"reference":spec["reference"],"texture":result["texture"],
            "display_contexts":sorted(CONTEXTS),"supersedes":spec["supersedes"]}
     path=DIR/"manifest.json"
     manifest=[e for e in json.loads(path.read_text(encoding="utf-8")) if e["id"]!=name]+[entry]
     path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
-    detail={**entry,"revision":2,"built_at":"2026-10-06","builder":"tools/build_luma_items_v2.py",
+    prop=name.startswith("prop_")
+    detail={**entry,"revision":2,"built_at":"2026-10-06","builder":"tools/build_luma_props.py" if prop else "tools/build_luma_items_v2.py",
+            "texture_method":"per-face bake, 2 texels/unit (tools/texture_bake.py)" if prop else "shared swatch atlas",
             "display_capture":"tools/preview_luma_items_v2.py","pack_texture":spec["texture"],"gui_extent_units":result["gui_extent"],
             "sha256":{str(f.relative_to(ROOT)).replace("\\","/"):hashlib.sha256(f.read_bytes()).hexdigest() for f in files(name)},
             "known_limits":["Not loaded in a real client/resource pack yet","Legacy 1.16.5 CustomModelData mapping still untested",

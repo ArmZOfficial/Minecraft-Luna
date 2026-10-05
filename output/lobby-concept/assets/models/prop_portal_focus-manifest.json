@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_portal_focus",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     7.12
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_portal_focus.json": "13cc49baa09742ac644a900a0b91b25c6830da19f1f183b00b59d72b4775a9f7",
-    "output/lobby-concept/assets/models/prop_portal_focus.bbmodel": "cc3f8dbf23d4d91b2838976dac9353ec94a2fe9fd5d564e6c8017ed8ab5ee937",
-    "output/lobby-concept/assets/models/prop_portal_focus.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_portal_focus-display.png": "e539559c2d0f79de1b8a30bc9e59bc0c416302e91b1c8b1b0296527bee2b38e5",
-    "output/lobby-concept/assets/models/prop_portal_focus-preview.png": "7987ac8644d9eac268ae7370d01ff0e72d970f81a00fa092f8ee5987944c2178",
-    "output/lobby-concept/assets/models/prop_portal_focus-front.png": "0b40aa52ec52b05227936bd95982d96aebe703f5db7fb700252af6fc934f06fb"
+    "output/lobby-concept/assets/models/prop_portal_focus.json": "9771d53d035aa2318ee6347164f618f895f429b0ab87fed559b383c895222edb",
+    "output/lobby-concept/assets/models/prop_portal_focus.bbmodel": "5d0e69dea9840932b790cbb1203945ec47df6db97350f1a289dfc22a7a728439",
+    "output/lobby-concept/assets/models/prop_portal_focus.png": "d7ef9dfb809797611637454fc3d9e812e36c18337b58114517da1449afdadd4b",
+    "output/lobby-concept/assets/models/prop_portal_focus-display.png": "282493bec6f1522af47318dee2b50f00db41a5559e4786425bf66c2bc7c96860",
+    "output/lobby-concept/assets/models/prop_portal_focus-preview.png": "6a6b1c3d7f89e2babbce799cf0c865dcdae7ccd82d8ca45e14c662e3b72acb7b",
+    "output/lobby-concept/assets/models/prop_portal_focus-front.png": "6aa801fec9d37ac8adc996fc5ca66131fd0c09c04665fbbd6ae3ac413e488ca4"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

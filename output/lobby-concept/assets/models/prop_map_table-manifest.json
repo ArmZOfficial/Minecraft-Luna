@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_map_table",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     7.4
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_map_table.json": "f4a80580ee0b2cfd1a48e13590d227456bc0a6a4269b9cd98f52ef921d5fae9a",
-    "output/lobby-concept/assets/models/prop_map_table.bbmodel": "6d0c655ae9903d2c6f666ee57253c9cde3e08a18c59ceb8b2d53768c67e8d771",
-    "output/lobby-concept/assets/models/prop_map_table.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_map_table-display.png": "f1ba97c44df85e62db813de5678a996b05023b6d792db4cdb68c6f3496d5425f",
-    "output/lobby-concept/assets/models/prop_map_table-preview.png": "f5d0324094252427aa1a5971bfa3c8267f901d23f3b6d0f605e8b8635e92b4cd",
-    "output/lobby-concept/assets/models/prop_map_table-front.png": "9ae985fb6c7c60eb8e0f6507d7302dd11bd8b195b650918cf318b5df8e9aa96a"
+    "output/lobby-concept/assets/models/prop_map_table.json": "07d53be1e165c5da0732b88a18459fd37fd107149b82cbd529e7a944c9a556f6",
+    "output/lobby-concept/assets/models/prop_map_table.bbmodel": "c58c5c7b97eeb1c25647be587dfac8f9aee72f2a8f56f1892902328521a708d9",
+    "output/lobby-concept/assets/models/prop_map_table.png": "070290e180c24b7788cfb3cc2b1904da88d28a6be324b0b7637805e406129d16",
+    "output/lobby-concept/assets/models/prop_map_table-display.png": "cb7e839f0d5cda9c2a4e32f0916313600bc7c07f555c511a0dcbd0babd8f1e86",
+    "output/lobby-concept/assets/models/prop_map_table-preview.png": "88d32ea1b42f03cc7e968d4e93b4d13eb28f1413b0480cb4335040698e24844e",
+    "output/lobby-concept/assets/models/prop_map_table-front.png": "e9ccd431a87b9b9989edaff26e5b90d9cfc5082931e5bbd91cfd95812ed46d58"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

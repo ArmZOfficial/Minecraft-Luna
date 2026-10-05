@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_mailbox",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     7.4
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_mailbox.json": "f3f49936c073a2e8765b62da8fcecf6db2111074edc179fa88ce8b5c1531d019",
-    "output/lobby-concept/assets/models/prop_mailbox.bbmodel": "5d0373867982e3ac60b807b18d4e3a3ca361a5127ac4a6dc89686e73b63d1a92",
-    "output/lobby-concept/assets/models/prop_mailbox.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_mailbox-display.png": "e89a6597e82e0698335bbb369b6c75d3747747259ed5f86824119f34a096b231",
-    "output/lobby-concept/assets/models/prop_mailbox-preview.png": "f000967e681306ccd78f815ab04e5cf7565704e260dfbb8e8058a30ce8e19bb5",
-    "output/lobby-concept/assets/models/prop_mailbox-front.png": "8ceb88466e4ec9f5fa4061ce5b03411547d25d8325e5997b4663ad7a49e2a12f"
+    "output/lobby-concept/assets/models/prop_mailbox.json": "08dfc7b526192aba78de4a1bc54e52cc2dad4dfb790bd54c08ddb86f1cbe6ed3",
+    "output/lobby-concept/assets/models/prop_mailbox.bbmodel": "ae39e188347afc67b6f3f9fb52c6733b518bce396852d6ad0115818096d6b4b1",
+    "output/lobby-concept/assets/models/prop_mailbox.png": "7df371ef6888b247710bd38dab5789f5252bdec0d5872b4241d04036e708669c",
+    "output/lobby-concept/assets/models/prop_mailbox-display.png": "3ed3eaa76a37c8c4e11f577b162a95c8fb036cba35eb59920eb55178807c16fe",
+    "output/lobby-concept/assets/models/prop_mailbox-preview.png": "71e2478d8c501d3730a56cb8de50f9fb055d481b2f84f0f853fedb7b2b515f7e",
+    "output/lobby-concept/assets/models/prop_mailbox-front.png": "78e8131c24f66d9daa8b26ac691a641a36cfc796cd8c2aefa090156e18ab7623"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -7,8 +7,8 @@
   "runtime_tested": false,
   "reference": "NPC v2 palette (no prop reference sheet)",
   "texture": [
-    128,
-    128
+    64,
+    64
   ],
   "display_contexts": [
     "firstperson_lefthand",
@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_quest_scroll",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     3.7
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_quest_scroll.json": "a8821d44e0d9b7038aacf02bfdc8d54b74e8cc8d03da40449f14072c9da3dff6",
-    "output/lobby-concept/assets/models/prop_quest_scroll.bbmodel": "4ea2e41b6bc36dcb43c6a586455219e65b02175c07f3e558d9ec0d8502d78b93",
-    "output/lobby-concept/assets/models/prop_quest_scroll.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_quest_scroll-display.png": "8b0a9e3855ef4277cd2e121d3852980ab9357c46e365dfedc11c001efbb6cc8f",
-    "output/lobby-concept/assets/models/prop_quest_scroll-preview.png": "d1b62016076f8d2f951e997d6a32ab25b7bcd604e4ccf1c0a7674f700db951ac",
-    "output/lobby-concept/assets/models/prop_quest_scroll-front.png": "06e85895ebaaac54205923c4567937b4fbd8fff531b2a633b5354ffcad132d14"
+    "output/lobby-concept/assets/models/prop_quest_scroll.json": "de8a127d74d7292e16f9eb35cb21bc7e24ff921bd62687b7d1b91d10bda6529a",
+    "output/lobby-concept/assets/models/prop_quest_scroll.bbmodel": "c733d59965e9951dd7c764507a72bccf0eb58b83abc6e6fd8c19cd794dbac515",
+    "output/lobby-concept/assets/models/prop_quest_scroll.png": "b2b9148f8c3deb5fae3f3858da3abe269b1a46ddfe641e11e748d315a73d5d54",
+    "output/lobby-concept/assets/models/prop_quest_scroll-display.png": "bf7ae1a67df673b69ae6a8cafb020344be41817f9ae8b441f750f3f18f84a1e6",
+    "output/lobby-concept/assets/models/prop_quest_scroll-preview.png": "a227222d0a38dc65944877f3630545d56101a62c96f820531bfb110e0177a367",
+    "output/lobby-concept/assets/models/prop_quest_scroll-front.png": "683d7838c7e4e93830bee08c2ad17aedcb8378ce5b347668a660340ab44c2b8b"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

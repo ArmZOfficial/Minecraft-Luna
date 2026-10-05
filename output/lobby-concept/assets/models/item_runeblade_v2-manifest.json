@@ -24,6 +24,7 @@
   "revision": 2,
   "built_at": "2026-10-06",
   "builder": "tools/build_luma_items_v2.py",
+  "texture_method": "shared swatch atlas",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/runeblade_v2",
   "gui_extent_units": [

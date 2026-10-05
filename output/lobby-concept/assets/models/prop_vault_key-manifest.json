@@ -7,8 +7,8 @@
   "runtime_tested": false,
   "reference": "NPC v2 palette (no prop reference sheet)",
   "texture": [
-    128,
-    128
+    64,
+    64
   ],
   "display_contexts": [
     "firstperson_lefthand",
@@ -23,7 +23,8 @@
   "supersedes": null,
   "revision": 2,
   "built_at": "2026-10-06",
-  "builder": "tools/build_luma_items_v2.py",
+  "builder": "tools/build_luma_props.py",
+  "texture_method": "per-face bake, 2 texels/unit (tools/texture_bake.py)",
   "display_capture": "tools/preview_luma_items_v2.py",
   "pack_texture": "luma:item/prop_vault_key",
   "gui_extent_units": [
@@ -33,12 +34,12 @@
     6.72
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/prop_vault_key.json": "75a3d6657b0d4927e829a5946a30f7895c4c45a834706fd1ef28824f10eda4b3",
-    "output/lobby-concept/assets/models/prop_vault_key.bbmodel": "576209470b6a00d583dc0284afaba41c9909ed8f7d75edd558e639edb152906b",
-    "output/lobby-concept/assets/models/prop_vault_key.png": "f814fccf2e5304d82516c4679883bd780bb28b4c270ae4075e67fdc1642159bf",
-    "output/lobby-concept/assets/models/prop_vault_key-display.png": "fe86df384dc15a85b34b282a156d58960ea1a167b04d25e4146fd71fd27bc0db",
-    "output/lobby-concept/assets/models/prop_vault_key-preview.png": "bcd0aa0469daf3da75c9b087f6b10d379365795185f2f912ba117c3c2f475510",
-    "output/lobby-concept/assets/models/prop_vault_key-front.png": "16a27134a4f01c468f2a4fb3aa52ed02a9bb4bf4cc3558d07322e347c99cef92"
+    "output/lobby-concept/assets/models/prop_vault_key.json": "5a505d69159c7b74516a3b3d8e6b2bc92d3ef412c768e7a1a8497c4ea8ad6c49",
+    "output/lobby-concept/assets/models/prop_vault_key.bbmodel": "7ca0d041ba34199ae5e9481d2c52cf621f17881fcab2e4125ebb6f272ebc189d",
+    "output/lobby-concept/assets/models/prop_vault_key.png": "3d29c4848ef9157c79ffeb2dde62d701520a420e29c752ed32128a4c83ac9c25",
+    "output/lobby-concept/assets/models/prop_vault_key-display.png": "102e2f2336a1346268c3a0fafdfaa1c4dd38f654d5cd204eb78a04a1e3710ae0",
+    "output/lobby-concept/assets/models/prop_vault_key-preview.png": "d814f00742d072085c4f7da8e11a38c8196388b8c250b79261cea7d275bb3744",
+    "output/lobby-concept/assets/models/prop_vault_key-front.png": "0f75c9c946ba5ffbc4bc89f75511a4a06522fac0a134da03520be9577ecb82d5"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

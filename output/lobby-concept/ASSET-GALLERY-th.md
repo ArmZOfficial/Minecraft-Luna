@@ -166,7 +166,7 @@ texture อ้าง `luma:item/runeblade_v2`; `python tools/verify_luma_items_v
 | [prop_portal_focus](assets/models/prop_portal_focus.json) | ประตูวาร์ป | 20 | ฐานหิน ถ้วยทอง กรง4แขน คริสตัลซ้อนชั้น วงโคจรทอง |
 | [prop_rune_plinth](assets/models/prop_rune_plinth.json) | ประตูวาร์ป | 12 | แท่นหินแกะรูนเรืองแสงทุกด้าน ขอบทอง อัญมณีบนยอด |
 
-texture ชุด props 128×128 แยกจาก item อ้าง `luma:item/prop_<ชื่อ>`; GUI/กรอบไอเทมคำนวณขนาดจากรูปทรงจริงให้พอดีช่อง (ทุกชิ้น ≤±7.4) วางบนหัวแล้วนั่งบนหัวพอดี
+texture แบบ bake ทีละหน้า 2 texel/หน่วย (32px ต่อบล็อก ไม่ยืด) ไล่เฉดอุ่น/เย็น ลายไม้/อิฐหิน/หนังเย็บ/เพชรเจียระไน/เหรียญปั๊ม/แผนที่/ป้าย/รูนวาดตามขนาดหน้า อ้าง `luma:item/prop_<ชื่อ>`; GUI/กรอบไอเทมคำนวณขนาดจากรูปทรงจริงให้พอดีช่อง (ทุกชิ้น ≤±7.4) วางบนหัวแล้วนั่งบนหัวพอดี
 ไม่มีภาพ reference เฉพาะ props จึงใช้โทนสีชุด NPC v2; `python tools/build_luma_props.py [ชื่อ...]` สร้างใหม่, `python tools/verify_luma_items_v2.py` ตรวจรวมกับไอเทม; ยังไม่โหลดใน resource pack จริง
 
 ## การส่งต่อและตรวจงาน
