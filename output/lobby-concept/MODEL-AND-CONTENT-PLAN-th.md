@@ -123,6 +123,14 @@ Tier ที่ geometry เหมือนกันให้ใช้ texture va
 เริ่ม launch slice 6 pilot → 14 NPCหลัก/12props → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
 item gameplay ต้องมีแหล่งหาในเกม สูตรคราฟต์และ balance ก่อนผลิตรูป ไม่ทำ asset มากโดยไม่มีหน้าที่
 
+## เพิ่มเติมจากภาพระบบ Survival/casual roleplay
+
+อ่าน [ชุดระบบใหม่](CASUAL-SURVIVAL-SYSTEMS-th.md) และ [Protect tiers](PROTECTIONSTONES-TIERS-th.md)
+เพิ่ม backlog artist variant, paintbrush, easel และหินกันบ้าน 5 texture variants; ยังไม่ได้ผลิตรูป/โมเดลของรายการเหล่านี้
+สกินไอเทมเป้าหมาย 12 แบบเป็น catalog ย่อยที่ต้อง reconcile กับ cosmetic/weapon_skin เดิม ไม่บวกเลขรวม 140 โดยนับซ้ำ
+หิน Protect ทั้ง 5 ระดับใช้ shape ร่วมเมื่อทำได้ สี/lore ต่างกัน; placement authority อยู่กับ PS/Core ไม่ใช้ decorative entity เป็น claim ที่สอง
+artist idle/greet/paint ใช้ brief และ QA pipeline เดิม; ไฟล์ model/texture/animation ต้องมีจริงก่อน publish catalog
+
 ## Casual roleplay โดยไม่เพิ่มความซับซ้อน
 
 - เควส/อาชีพ/ตลาดเป็นกิจกรรมหลักที่เข้าได้ทันที; บทสนทนา NPC มีปุ่ม “เปิดบริการ” ข้ามเรื่องเล่า

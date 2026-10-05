@@ -32,6 +32,9 @@ Searchใช้chatinputใน1.16.5 มีcancelและtimeout; คำตอ�
 | Items | registry, preview, give/revokeโดยserial, balance | templateversion/soulbound/stat/gemsไม่หาย |
 | NPC | เลือกstation, snaplocation, facinganchor, previewanimation, toggle, servicebinding | bodyyawกับmodeloffset, collision, persistentID, ไม่spawnซ้ำ |
 | แมพ | zones/regions, POI, warp landing, lightingaudit, blockedpath | ไม่วางWorldEditบนliveโดยไม่มีstaging/snapshot |
+| บ้าน/Protect | tier/ขอบเขต/member/home/unclaim preview | bounds จริง, owner, revision, reserved funds และ snapshot |
+| Canvas | draft/submitted/approve/reject/print receipts | artwork owner/version/hash, moderation แยกจาก permission เงิน |
+| สกิน/Exchange/RTP | unlock/recipe/profile/cooldown | typed adapter, serial/receipt, landing validator ไม่มี arbitrary command |
 | เควส | objectives/rewards/cooldown, testplayerpreview | rewardtransactionไม่ซ้ำ; adaptervalidation |
 | รางวัล | daily/online/AFK/boss/crate | เวลาBangkok, earnedvsclaimed, recipientcorrect |
 | ตลาด | offers/orders/escrow/refunds/auctionเมื่อเปิด | refundcompensatingtransaction, partialfillcorrect |
@@ -86,6 +89,8 @@ Previewfieldไม่เป็นpermissiongateที่ต้องถามhum
 
 ใช้ LuckPerms nodes `fantasyadmin.view`, `.player`, `.economy.adjust`, `.npc.edit`, `.content.edit`, `.content.publish`, `.web.orders`, `.ui.edit`, `.audit`, `.ops.freeze` แยกกัน ไม่ใช้ `isOp()`อย่างเดียว
 Webadminใช้RBAC + MFA/recentreauthงานรับเงิน ความสามารถตรงกับingamepanel แต่ไม่มีRCONpublic
+ชุดระบบใหม่ใช้ `.claims.inspect/.adjust/.unclaim`, `.rewards.edit`, `.skins.grant`, `.exchange.edit`, `.canvas.moderate`, `.travel.edit`
+อ่าน [flow และเกณฑ์ตรวจ](CASUAL-SURVIVAL-SYSTEMS-th.md) และ [Protect 5 ระดับ](PROTECTIONSTONES-TIERS-th.md); การมี node ในสเปกไม่ใช่ผลติดตั้งแล้ว
 
 ## Inventory implementation ที่ต้องเนี๊ยบ
 

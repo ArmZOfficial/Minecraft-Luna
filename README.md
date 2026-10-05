@@ -8,6 +8,8 @@
 - [ผังแมพและแปลนภายใน](output/lobby-concept/INTERIOR-AND-MAP-PLAN-th.md)
 - [ใบงานสร้าง 12 โซน](output/lobby-concept/ZONE-BUILD-TICKETS-th.md)
 - [ระบบและปลั๊กอิน](output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
+- [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
+- [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
 
 ## สถานะงาน

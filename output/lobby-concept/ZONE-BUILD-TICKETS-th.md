@@ -58,12 +58,14 @@ origin/กรอบนี้เป็นplacementproposal ไม่ใช่พ�
 | forge_repair | rune_smith | 55.5,33.5 | 51.5,33.5 | 90 | repair.preview |
 | jobs_master | jobmaster variant | 59.5,-77.5 | 55.5,-77.5 | 90 | jobs.main |
 | portal_keeper | portal_mage | 55.5,-12.5 | 55.5,-17.5 | 180 | travel.main |
+| market_artist | artist merchant variant (ยังไม่มีโมเดล) | -91.5,57.5 | -91.5,54.5 | 180 | canvas.main |
 | pet_keeper | petkeeper variant | 78.5,78.5 | 78.5,75.5 | 180 | pets.main |
 | fisher | fisher variant | 94.5,100.5 | 94.5,103.5 | 0 | fishing.catalog |
 | afk_caretaker | healer variant | -125.5,10.5 | -125.5,7.5 | 180 | afk.info |
 
 ยังไม่มีtemplateทั้งหมดในตารางถูกผลิต: pilotมี4ตัว; variant/ใหม่ใช้catalogส่งงานตามลำดับ
 Marketstationsกำหนดในticket06ด้านล่าง รูนไม่มีactiveNPCในlaunch
+บริการ RTP/daily/skins/exchange/home เพิ่มผ่าน station เดิมตาม [สเปกชุดระบบใหม่](CASUAL-SURVIVAL-SYSTEMS-th.md)
 NPCหนึ่งตัวเรียกเมนูรวมได้เพื่อลดจำนวน อย่าสร้างspawnซ้ำทุกreload; persistentstationIDเป็นkeyเดียวกันทั้งCore/BlueMap/admin
 
 ## 01 ลานคริสตัล — จุดเกิดและนำทาง
@@ -136,6 +138,7 @@ NPCหนึ่งตัวเรียกเมนูรวมได้เพ�
 - วางบอร์ดordersหลังcounter ตู้รับของข้างร้าน และป้ายค่าธรรมเนียมก่อนsubmit
 - **Model:** merchant, alchemist, shop_sign4symbols, herbjar/fishcrate/scale; ใช้vanillabarrels/cratesส่วนใหญ่
 - Animationmerchantgreet, alchemiststirone-shot; jarไม่ใช้physicsที่เก็บpickupผิด
+- แผงเดิมที่ X-91/Z57 ใช้ artist/easel/palette สำหรับ Canvas ตาม station registry; วาง counter ไม่บัง target และถนน ไม่เพิ่มอาคารใหญ่
 - ตรวจ: buy/sellราคาserver, orderescrowpartialfill/refund, itemserialboundpolicy, webไม่เปิดorderคนอื่น
 
 ## 07 โรงตีเหล็กรูน — คราฟต์ อัปเกรด ซ่อม
@@ -167,6 +170,7 @@ NPCหนึ่งตัวเรียกเมนูรวมได้เพ�
 - กรอบ76×31 ซุ้ม7จุดวางเหนือ4/ใต้3ขนาด7–9wide/9–11high ทางกลาง5blockคงว่าง
 - labelโลกสำรวจ/ทรัพยากร/dungeon/3boss/PvPสื่อหน้าที่และdifficulty; previewปลายทาง+cooldownก่อนวาร์ป
 - Mageตามregistryไม่ยืนกลางwarptrigger; claimsample13×13กับบ้าน7×7อยู่มุมแยก
+- sample Protect ในมุมสอนใช้ขอบจริง 11×11 ของระดับ I; ป้ายแสดง 21/31/51/81 ตาม [Protect tiers](PROTECTIONSTONES-TIERS-th.md) ไม่สร้าง demo ทุกขนาดใน lobby
 - **Model:** portal_mage, portal_focus/crystal และgatecrest; archใช้บล็อก แสง/particleเป็นส่วนเสริม
 - Castone-shotเมื่อยืนยันtravel; no loopcastตลอดspawn; warpไม่รอanimationจนtransactionค้าง
 - ตรวจ: destinationloaded, solidfloor2×2, headroom3, region/PvPstate, cooldown/logout/retryไม่วาร์ปซ้ำและไม่ตกvoid

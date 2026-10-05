@@ -38,6 +38,10 @@ Productionต้องมีserverendpoint/DB/secrets/paymentmerchantและFa
 ไม่แสดงstatusonline/fakeplayercountจนรับsnapshotจริง; oldsnapshotขึ้น“ข้อมูลล่าสุดเมื่อ...”และ“ยังไม่เชื่อม” ไม่แสดง0เป็นข้อมูลจริง
 เมนูMinecraftดูมีความเป็นเกมจากlogo/images/icons/เขียวทอง ส่วนฟอร์มราคาและorderstatusอ่านง่ายไม่ตกแต่งจนบังข้อมูล
 
+ส่วนขยายจาก [ชุดระบบตามภาพ](CASUAL-SURVIVAL-SYSTEMS-th.md): Wiki เพิ่มคู่มือ RTP/daily/land/skins/exchange/Canvas/home
+Account เพิ่มบ้านของฉัน/wardrobe/reward receipts ผ่าน linked UUID; Canvas pixel editor และ moderation ยังไม่ได้สร้างในเว็บปัจจุบัน
+แสดง [Protect tiers](PROTECTIONSTONES-TIERS-th.md) public ได้ แต่พิกัดบ้าน/สมาชิก/artwork private ไม่อยู่ใน public API หรือ BlueMap โดยไม่มี opt-in
+
 ## Skillที่ผู้ใช้ให้มา
 
 - Ponytailมีและใช้: stdlib/nativeCSS, dependencyเท่าที่ต้องใช้, ไม่สร้างElectronappเพื่อให้เปิดเว็บได้
@@ -180,7 +184,7 @@ PublicAPIไม่มีIPผู้เล่น/UUIDที่ไม่ต้อ�
 เริ่มmonolithweb+DB+Corebridgeแทนmicroservicesหลายชุด; providerหนึ่งตัว/packownerหนึ่งตัว/ledgerownerCoreหนึ่งตัว
 Webเป็นเจ้าของposts/catalog/orders/provider_events/outbox/account_links; Coreเป็นเจ้าของeconomy/items/inbox/entitlements/physicaldeliveryjournal
 อย่าให้webเขียนwalletrowตรง และอย่าส่งdatafeedที่clientแก้goldจากdashboardเอง
-SQLite/D1/Postgresเลือกจากhostingจริง transactionconstraintsไม่เหมือนกัน ใช้schemaที่เลือกจริงในimplementation ห้ามใช้DBtransactionsyntaxเดียวข้ามทุกตัวโดยไม่ตรวจ
+ผู้ใช้เลือก PostgreSQL แล้ว เว็บในเครื่องใช้ schema จริงของ PostgreSQL; Core modules ใหม่ต้องมี migration/schema แยกตาม authority ก่อนเชื่อม ไม่ถือว่าตาราง home/claims/Canvas มีแล้ว
 StaticSitesprototypeปัจจุบันไม่มีbindingsเหล่านี้ ถ้าสร้างbackendผ่านSitesต้องใช้Workerstarter/auth/storagecapabilitiesที่รองรับและHTTPSสำหรับexternalAPI (ไม่rawTCPSQL)
 
 ## Automationที่ต้องมีในsoftware

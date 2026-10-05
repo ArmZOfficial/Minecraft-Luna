@@ -59,7 +59,7 @@
 | NPC | Citizens | ตัวละครจุดบริการ; เรียก action ของ Core ผ่าน adapter |
 | พื้นที่ | WorldEdit + WorldGuard | งานสร้างและ region ล็อบบี้/สนาม |
 | Protect | ProtectionStones หรือ Core Claim adapter | การเคลมด้วยบล็อก; ตรวจขนาดที่ต้องการจริง |
-| utility | EssentialsX เฉพาะ home/spawn/ข้อความที่ต้องใช้ | ปิดเส้นทาง economy/repair/item grant ที่ข้าม Core; ไม่เป็นแหล่งยอดเงินอีกตัว |
+| utility | EssentialsX เฉพาะ spawn/ข้อความที่ต้องใช้ | Core Home เป็นเจ้าของ home/sethome ตามแผนใหม่; ปิดเส้นทาง economy/repair/item grant ที่ข้าม Core |
 | placeholders | PlaceholderAPI | แสดงข้อมูลที่ Core เปิดให้; ไม่เก็บยอดเงินเอง |
 | อาชีพ | Jobs Reborn | งาน/XP และ payout ที่เชื่อม gold ผ่าน Vault; ตรวจ anti-farm |
 | เควสเนื้อเรื่อง | BetonQuest เมื่อจำเป็น | objective/conversation; เงินและรางวัลผ่าน Core action เดียว |
@@ -72,6 +72,9 @@
 **อย่าให้ EssentialsX Economy, ปลั๊กอินธนาคาร และ Core แต่ละตัวมียอดทองอิสระแล้วพยายาม sync กัน** ชุดแนะนำให้ Core เป็นเจ้าของเงิน และเปิด Vault provider สำหรับทองเพียงชนิดเดียว เงินแดงเรียกผ่าน Core API โดยตรง
 
 [Vault repository](https://github.com/MilkBowl/Vault) อธิบายบทบาท API เชื่อม ส่วน [ProtectionStones](https://github.com/espidev/ProtectionStones) รองรับการเคลมผ่านบล็อกและขนาดใน config; ขนาด 10 × 10 ต้องตรวจว่าผลลัพธ์รวมขอบตรงที่ต้องการ ไม่เทียบกับค่ารัศมีโดยอัตโนมัติ
+
+แผน Luma ฉบับเพิ่มเติมเลือก Protect จริง 5 ระดับ: 11 × 11, 21 × 21, 31 × 31, 51 × 51, 81 × 81
+อ่าน [ตารางขนาด/ราคา/ความสูง/สมาชิก](PROTECTIONSTONES-TIERS-th.md) ซึ่งใช้แทนค่าตัวอย่าง 10 × 10 สำหรับการพัฒนา Luma
 
 ## 4. แผนรองรับ Java หลายเวอร์ชัน
 
@@ -225,7 +228,8 @@ SQL transaction ไม่สามารถทำ atomic ร่วมกับ i
 ### Guild / jobs / land / cosmetics
 - กิลด์: สมาชิก บทบาท และคะแนนเริ่มแบบง่าย สูตรคะแนนกำหนดเองและใช้ event ที่ตรวจสอบได้
 - Jobs: แยก XP ของอาชีพออกจาก rank; ไม่จ่ายจากการวางแล้วขุดบล็อกเดิมซ้ำโดยไร้เงื่อนไข
-- Protect: ทดสอบเพื่อนร่วมพื้นที่ การรื้อบล็อก การขยาย และ world whitelist
+- Protect: ใช้ 5 ระดับตาม [สเปก Protect](PROTECTIONSTONES-TIERS-th.md) ทดสอบสมาชิก การรื้อ/ขยาย world whitelist และช่องโหว่ข้ามขอบ
+- บ้าน/RTP/daily/สกิน/exchange/วาดรูป: ใช้ [ชุดระบบตามภาพ](CASUAL-SURVIVAL-SYSTEMS-th.md); Core Home แทน ownership ของ home จาก utility
 - คอสเมติก/title: เป็นสิทธิ์ server-side ลูกค้าปลอมชื่อ item ไม่ได้สิทธิ์
 - Pet: capture cost ตัวอย่าง 20 red เป็นค่า config เมื่อเลือกสูตรแล้ว; summon จำกัดต่อคนและเครดิตบอสสัมพันธ์กับกติกา
 - Furniture: ใช้ vanilla ก่อน ถ้าผู้เล่นวางในบ้านต้องบันทึก ownership และป้องกัน dupes/region bypass
@@ -242,7 +246,7 @@ SQL transaction ไม่สามารถทำ atomic ร่วมกับ i
 | เควสทอง/แดง | 03 | Core หรือ BetonQuest adapter | หลัก |
 | อาชีพ/XP | 08 | Jobs Reborn | หลัก |
 | กิลด์/อันดับ | 04 | Core simple guild หรือ candidate ที่ตรวจแล้ว | หลัก |
-| โลกฟาร์ม/บ้าน/Protect | 09 | Essentials utility + ProtectionStones adapter | หลัก |
+| โลกฟาร์ม/บ้าน/Protect | 09 | Core Home/Travel + ProtectionStones adapter | หลัก; 11 × 11 ถึง 81 × 81 ตามแผน |
 | ดันเจี้ยน/บอส/อันดับดาเมจ | 09 | MythicMobs + Core | หลัก |
 | Shop และออเดอร์รับจ้าง | 06 | Core Market | หลัก |
 | เฟอร์นิเจอร์/หัวตกแต่ง | 06 | vanilla stock + Core shop | หลัก |
@@ -263,6 +267,10 @@ SQL transaction ไม่สามารถทำ atomic ร่วมกับ i
 | หุ่นทดสอบ DPS | 08 | Dummy + bounded damage session | เสริม |
 | ปาร์ตี้/หาเพื่อนลงดัน | 09 | Core party roster | เสริม |
 | ร้านแผนที่/วาร์ปเร็ว | 09 | Travel permissions | เสริม |
+| สุ่มพื้นที่โลก / RTP | 09 | Core Travel + landing/region/border validator | เพิ่มตามภาพ |
+| เควสแลกของ | 03 | Core QuestExchange + item journal/mailbox | เพิ่มตามภาพ |
+| วาดรูป pixel art | 06 | Core Canvas + map renderer + linked web editor | เพิ่มตามภาพ; ยังไม่มี editor |
+| สกินไอเทมและตั้งบ้าน | 02/09 | Core Cosmetic / Core Home | รายละเอียดเพิ่มในสเปกชุดภาพ |
 | ศาลาฟื้นฟู/กลับเมือง | 11 | safe-region heal cooldown | เสริม; ไม่เพิ่ม resurrection fee โดยอ้างคลิป |
 | Mailbox/รับของค้าง | 02 | Core delivery | จำเป็นเพื่อความทนทาน |
 | กระดานเทศกาล/เควสรายสัปดาห์ | 03 | scheduled content + claim period | เสริม |
@@ -317,3 +325,5 @@ SQL transaction ไม่สามารถทำ atomic ร่วมกับ i
 - [ภาพแยกโซน](ZONE-ILLUSTRATIONS-th.md)
 - [แหล่งทางการของปลั๊กอิน](PLUGIN-RESEARCH-SOURCES-th.md)
 - [คู่มือตกแต่งโครงสร้างเดิม](LOBBY-DECORATION-COMPACT-th.md)
+- [ระบบ Survival/casual roleplay ตามภาพ](CASUAL-SURVIVAL-SYSTEMS-th.md)
+- [หิน Protect 5 ระดับ](PROTECTIONSTONES-TIERS-th.md)

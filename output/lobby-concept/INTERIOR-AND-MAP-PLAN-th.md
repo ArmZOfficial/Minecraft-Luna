@@ -274,6 +274,8 @@ NPC ซ่อมอยู่ตรงหน้ามองเห็นจาก�
 
 ### พื้นที่ Protect
 บ้านตัวอย่าง 7 × 7 ในมุมสอน 13 × 13 แสดงกรอบที่ดินด้วยเสา 4 จุดและบล็อก Protect 1 จุด พื้นที่จริงทดสอบตาม config ไม่ใช้บ้านตัวอย่างเป็น claim ของผู้เล่น
+แผนใหม่ให้กรอบสาธิตระดับ I เป็น 11 × 11 และป้ายระดับ II–V เป็น 21/31/51/81 ตาม [สเปก ProtectionStones](PROTECTIONSTONES-TIERS-th.md)
+เมนู portal keeper รวมสุ่มวาร์ป/ที่ดิน/บ้าน ตาม [ชุดระบบจากภาพ](CASUAL-SURVIVAL-SYSTEMS-th.md) โดยคง footprint เดิม
 
 ### พื้นที่ก่อนออกผจญภัย
 NPC guide 1 จุด มีข้อมูลเตรียมของ, bank link, repair link และ return rules
