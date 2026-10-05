@@ -18,8 +18,8 @@
   "runtime_tested": false,
   "reference": "assets/references/boss-moonfall-guardian-turnaround.png",
   "texture": [
-    128,
-    128
+    1024,
+    1024
   ],
   "native_timeline_frames_checked": 29,
   "revision": 1,
@@ -246,21 +246,21 @@
     "max_width": 4.010486367333976
   },
   "sha256": {
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.bbmodel": "b79008f59a5aade71955222715ab14427c9545e8e89151516c39ae0af13bc462",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.png": "480e354b7ae9d7acd6cbd13fc7d8489421d82c9a87c65f822605334c07dae52b",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.bbmodel": "eb72d2ff965240adae96aa503e9e96027c3076dae9841734210622350094a190",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1.png": "4621c33ff8d15efeffc9b468fdad67ba4ebd7e60a8f8fca7362a6c9e70b082f0",
     "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-pose-checks.json": "6031a245d8bb1091e62fe839d3b3f922211aa8a2229d2d1126e4cc64791427e2",
     "output/lobby-concept/assets/references/boss-moonfall-guardian-turnaround.png": "8a96bb010d6b3daf9339595963b3d5787b2e34bf19bf8d2579be48b4e2821eac",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-attack.png": "ce806859e9a7f4bb5c7a8ce3681112f8ed7d2298585864e9a72b4ab36cfb367e",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-back.png": "c4f0031ed496a67bb64d3f08e57d69ebe63cee6d3ba9dfee063c2c42527e1058",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-death.png": "5c77aacc0e6c4a3d1c0f6a5bee7db2f96afee362aa151f9af8018c004c0b0ef1",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-enrage.png": "e091f020378084746cdb389cf9bcd9059117d2bdaf9c33888a316a8535a4bb44",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-front.png": "8f853de887239143e104cefea0e05880a7b09e45bbbad76d31068206b415e755",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-preview.png": "841e5cd6dfc4172d7dacec5f980210230aee3a6a9f60b62731039cea10253b10",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-right.png": "91d0119a65bb4115a48d7f7668ec5468ac97236e7b5f090ed6fbdc9e86d511c1",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-impact.png": "c852edb8fe1a0edc4caec5551308bc8b5dd09a55faa616b6ed2c9b367af780db",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-windup.png": "f1eec3b91fa40b981828b0f1cc1fe7d8438ca175dc62584df57382175b9da6c2",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-spawn.png": "9e71e2747dabc8d64d04641a367680e0c48513ca31205be32a1af9fe39b75607",
-    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-walk.png": "465462205ec426e50e5941b1dca40b04787198e913e9df4a8b7e8704aeafda8f"
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-attack.png": "d8864c0024c1213640951f46c651bbc028655346c853180bb3a39fba967c82a4",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-back.png": "8da843a856907d39f8d9168120bfc8bba7b10b8066b567f6a2b6791032ddf316",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-death.png": "92d8ee97338e3900cd0e6dd5fcc3286d6a329643be562a2c168ce43467c3c82b",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-enrage.png": "9f8123ba36b12222ef0d1e90309da49c1e266a44297ac2c7bd5519cc135fd18c",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-front.png": "ac0fa8197f67244c7c7c99dcd6975d3ae3fd1cd3975035d7f1b92884a7419f5c",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-preview.png": "3daf0519172d71fc927214a585002f70ab6bbea30796bd204c28258800e89f0f",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-right.png": "93aae6fe30adc379cb66255860786529f34ef08d2294f987b0c3be20766c47a6",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-impact.png": "66ea5fa3daf7d7a9e26b556377a3179012431eea25bb792b176b1c0600ee2ff7",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-slam-windup.png": "64adc742600678cc7395e2902e9b9febb5f00fa276f74fff37320cd34693c88e",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-spawn.png": "9c5fcb8b171fd7b1ae3d5c0494494c77bbdb26ce7cef54f3871f648cdb78b39b",
+    "output/lobby-concept/assets/models/boss_moonfall_guardian_v1-walk.png": "02630cda080df26574c557cff8fcf801a93a4b6827cd44b882ca85515bffd322"
   },
   "known_limits": [
     "No ModelEngine/MythicMobs JAR/import/runtime/client evidence",
@@ -268,5 +268,6 @@
     "Native editor colors are not a verified in-game emissive shader",
     "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
     "MCP offscreen disposal throws a context-menu error after removal; view inventory verified empty of our temporary view"
-  ]
+  ],
+  "texture_method": "per-face bake, 4 texels/unit (tools/npc_bake.py)"
 }

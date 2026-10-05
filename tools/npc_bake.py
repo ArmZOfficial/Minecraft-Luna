@@ -30,6 +30,18 @@ for name in ("hair_white","hair_brown","hair_ivory"): KIND[name]="hair"
 for name in ("cloth_charcoal","cloth_dark","cloth_brown","teal_deep","teal_light","cloth_ivory"): KIND[name]="cloth"
 KIND.update({"fur_ivory":"fur","leather_dark":"leather","iron":"metal","shadow":"plain"})
 
+# Moonfall boss: dark blue stone, armour plates, ash, violet crystal and the void core.
+RAMPS.update({
+ "boss_stone":ramp("#15181f","#222731","#2f3542","#414858","#555d6e","#6c7486","#8c94a5"),
+ "boss_stone_light":ramp("#3a404c","#4d5462","#626a7a","#777d8a","#8f96a3","#a9afba","#c7ccd4"),
+ "boss_armor":ramp("#1d2530","#2a3442","#3a4656","#536376","#687a90","#8195ab","#a3b4c6"),
+ "ash":ramp("#5d5953","#7a756e","#9a958c","#b3aea4","#c2bdb0","#d6d2c7","#ece9e1"),
+ "violet_gem":ramp("#24093f","#3c1468","#5a2496","#7140d2","#9b6ff0","#c7a8ff","#f3eaff"),
+ "void":ramp("#07030c","#0f0718","#170c24","#241436","#331e4a","#45295f","#5a3778"),
+})
+KIND.update({"boss_stone":"slab","boss_stone_light":"slab","boss_armor":"slab","ash":"slab",
+             "violet_gem":"gem","void":"plain"})
+
 def fill(c,mat,face,rng):
     c.px=paint_face(mat,face,c.w,c.h,rng).px
 
@@ -180,6 +192,30 @@ def mage_emblem(c,face,rng):
     for y in range(1,c.h-1): c.set(cx,y,g[4])
     diamond(c,cx,int(c.h*.4),max(3,c.w//3),g[5],None)
     diamond(c,cx,int(c.h*.4),1,gem[5],gem[4])
+
+def boss_rune(c,face,rng):
+    """Boss rune panel: dark stone with a glowing cyan sigil on its front face."""
+    fill(c,"boss_stone",face,rng)
+    if face!="north": return
+    glow=RAMPS["gem"]; cx,cy=c.w//2,c.h//2; s=max(2,min(c.w,c.h)//3)
+    for k in range(-s,s+1):
+        c.set(cx+k,cy,glow[4]); c.set(cx,cy+k,glow[4])
+    diamond(c,cx,cy,max(1,s//2),glow[5],glow[3])
+    c.set(cx,cy,glow[6])
+
+def moon_panel(c,face,rng):
+    """Back plate: armour stone with a violet crescent and cyan star on the outward (south) face."""
+    fill(c,"boss_armor",face,rng)
+    if face!="south": return
+    vio=RAMPS["violet_gem"]; gem=RAMPS["gem"]
+    cx,cy,r=c.w/2,c.h*.45,min(c.w,c.h)*.32
+    for y in range(c.h):
+        for x in range(c.w):
+            d1=((x-cx)**2+(y-cy)**2)**.5; d2=((x-cx-r*.45)**2+(y-cy+r*.2)**2)**.5
+            if d1<=r and d2>r*.82: c.set(x,y,vio[4] if d1<r-1.5 else vio[2])
+    sx,sy=int(cx+r*.55),int(cy-r*.15)
+    for k in range(-2,3): c.set(sx+k,sy,gem[5]); c.set(sx,sy+k,gem[5])
+    c.set(sx,sy,gem[6])
 
 def bake_npc(rows,mats,arts,overrides=None,seed=7):
     """rows: [(bone,color,row)] -> (atlas, {cube:{face:[x0,y0,x1,y1]}}) in pixels at DENSITY."""

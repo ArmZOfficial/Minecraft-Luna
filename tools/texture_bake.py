@@ -103,6 +103,26 @@ def paint_face(mat,face,w,h,rng,art=None):
         for _ in range(max(1,w*h//60)):
             x,y=rng.randrange(w),rng.randrange(h); c.set(x,y,shade(r,base-2)); c.set(x+1,y+1,shade(r,base-2))
         bevel(c,r,base,hard=True)
+    elif kind=="slab":
+        # Large carved blocks with uneven joints and hairline cracks (ancient masonry, not brick).
+        y=0
+        while y<h:
+            bh=rng.randint(9,13); x=-rng.randint(0,8)
+            while x<w:
+                bw=rng.randint(10,18); tone=base+rng.choice([-1,0,0,1])
+                for yy in range(y,min(h,y+bh)):
+                    for xx in range(max(0,x),min(w,x+bw)):
+                        t=tone
+                        if yy==y+bh-1 or xx==x+bw-1: t=base-2                          # joint shadow
+                        elif yy==y or xx==x: t=tone+1                                    # chiselled lit edge
+                        c.set(xx,yy,shade(r,t))
+                if bw*bh>120 and rng.random()<.6:                                       # hairline crack
+                    cx,cy=x+rng.randint(2,bw-3),y+rng.randint(2,bh-3)
+                    for _ in range(rng.randint(3,6)):
+                        c.set(cx,cy,shade(r,base-2)); cx+=rng.choice([-1,0,1]); cy+=1
+                x+=bw
+            y+=bh
+        bevel(c,r,base,hard=True)
     elif kind=="cloth":
         for y in range(h):
             for x in range(w):
@@ -184,7 +204,7 @@ def gem(c,r):
             for x in range(w): c.set(x,y,shade(r,4))
         c.set(0,0,shade(r,6)); c.set(w-1,h-1,shade(r,1))
 
-GLOWING={"gem","ruby","rune"}
+GLOWING={"gem","ruby","rune","violet_gem"}
 
 def light(canvas,row,face,density,ymin,ymax):
     """World-height light: one continuous gradient over the whole model, so stacked

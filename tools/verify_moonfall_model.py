@@ -15,7 +15,9 @@ def check():
     manifest=json.loads((DIR/(NAME+"-manifest.json")).read_text(encoding="utf-8"))
     contract=json.loads((ROOT/"server/content/dungeons/moonfall/model-contract.json").read_text(encoding="utf-8"))
     assert model["meta"]["model_format"]=="free"
-    assert model["resolution"]=={"width":128,"height":128}
+    size=model["resolution"]["width"]
+    # Baked per-face atlas: square power of two at 4 texels per unit.
+    assert model["resolution"]["height"]==size and size&(size-1)==0 and 128<=size<=2048
     assert not manifest["runtime_tested"] and not contract["enabled"] and not contract["pack"]["compiled"]
     assert len(model["elements"])==manifest["cubes"]==146
     cubes={e["uuid"]:e for e in model["elements"]}
@@ -46,7 +48,7 @@ def check():
     texture_ids={t["uuid"] for t in model["textures"]}
     assert len(texture_ids)==1
     png=(DIR/(NAME+".png")).read_bytes()
-    assert png[:8]==b"\x89PNG\r\n\x1a\n" and struct.unpack(">II",png[16:24])==(128,128)
+    assert png[:8]==b"\x89PNG\r\n\x1a\n" and struct.unpack(">II",png[16:24])==(size,size)
     assert base64.b64decode(model["textures"][0]["source"].split(",",1)[1])==png
     for cube in cubes.values():
         assert all(math.isfinite(v) for v in cube["from"]+cube["to"])
@@ -55,7 +57,7 @@ def check():
         assert sum(abs(a)>1e-7 for a in angles)<=1 and all(a in [0,22.5,-22.5,45,-45] for a in angles)
         for face in cube.get("faces",{}).values():
             assert face["texture"] in texture_ids or face["texture"]==0
-            assert len(face["uv"])==4 and all(math.isfinite(v) and 0<=v<=128 for v in face["uv"])
+            assert len(face["uv"])==4 and all(math.isfinite(v) and 0<=v<=size for v in face["uv"])
     animations={a["name"]:a for a in model["animations"]}
     assert set(animations)=={"idle","walk","spawn","attack","slam","enrage","hurt","death"}
     key_count=0

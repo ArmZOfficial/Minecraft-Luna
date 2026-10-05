@@ -195,49 +195,10 @@ ANIMATIONS=[("idle",4,True,idle),("walk",1.6,True,walk),("spawn",2,False,spawn),
             ("enrage",1.6,False,enrage),("hurt",.5,False,hurt),("death",2,False,death)]
 
 # Procedural painting is performed in Blockbench's native texture canvas.
-PAINT = """(()=>{
-const t=Texture.all[0];
-t.edit(canvas=>{
- const c=canvas.getContext('2d'),colors=COLORS;
- let seed=71337;
- const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
- colors.forEach((color,i)=>{
-  const ox=(i%4)*32,oy=Math.floor(i/4)*32;
-  c.fillStyle=color;c.fillRect(ox,oy,32,32);
-  for(let y=0;y<32;y++)for(let x=0;x<32;x++){
-    const alpha=rand()*.16;
-    c.fillStyle=rand()>.5?'rgba(255,255,255,'+alpha+')':'rgba(0,0,0,'+alpha+')';c.fillRect(ox+x,oy+y,1,1);
-  }
-  if([0,1,12].includes(i)){
-    c.fillStyle='rgba(0,0,0,.4)';
-    c.fillRect(ox,oy+15,32,1);c.fillRect(ox+10,oy,1,16);c.fillRect(ox+23,oy+16,1,16);
-    c.fillStyle='rgba(255,255,255,.11)';c.fillRect(ox,oy+16,32,1);
-    for(let j=0;j<3;j++){let x=3+j*9,y=4+j*5;c.fillStyle='rgba(12,15,23,.35)';
-      for(let k=0;k<6;k++){c.fillRect(ox+x,oy+y+k,1,2);x+=(k%2?1:-1);}}
-  }
-  if([3,4,14].includes(i)){
-    c.fillStyle='rgba(255,238,189,.32)';c.fillRect(ox+1,oy+1,30,2);c.fillRect(ox+1,oy+3,2,28);
-    c.fillStyle='rgba(49,27,13,.36)';c.fillRect(ox+29,oy+3,2,28);c.fillRect(ox+3,oy+29,28,2);
-    for(let j=0;j<18;j++){c.fillStyle='rgba(72,38,17,.25)';c.fillRect(ox+Math.floor(rand()*30),oy+Math.floor(rand()*30),2,1);}
-  }
-  if([7,8,15].includes(i)){
-    for(let y=0;y<32;y+=4){c.fillStyle=y%8?'rgba(237,183,255,.21)':'rgba(28,8,74,.2)';c.fillRect(ox+y/2,oy+y,24-y/2,2);}
-  }
-  if(i===11){
-    c.fillStyle=colors[6];c.fillRect(ox+14,oy+4,4,24);c.fillRect(ox+5,oy+14,22,4);
-    c.fillStyle=colors[5];c.fillRect(ox+9,oy+9,14,2);c.fillRect(ox+9,oy+21,14,2);
-  }
-  if(i===13){
-    c.fillStyle=colors[4];c.fillRect(ox+4,oy+1,24,2);c.fillRect(ox+4,oy+29,24,2);
-    c.beginPath();c.arc(ox+16,oy+16,9,0,Math.PI*2);c.fill();
-    c.fillStyle=colors[13];c.beginPath();c.arc(ox+20,oy+13,8,0,Math.PI*2);c.fill();
-    c.fillStyle=colors[4];c.fillRect(ox+15,oy+3,2,5);c.fillRect(ox+13,oy+5,6,1);
-    c.fillRect(ox+15,oy+25,2,5);c.fillRect(ox+13,oy+27,6,1);
-  }
- });
-},{edit_name:'Moonfall stone bronze rune atlas'});
-return {texture:t.name,size:[t.width,t.height]};
-})()"""
+# Baked materials per colour index (see COLORS); runes, crystals and panels keep their glow.
+MATS=["boss_stone","boss_stone_light","iron","bronze","gold","gem","gem","violet_gem","violet_gem","void",
+      "ash","boss_rune","boss_armor","moon_panel","gold_dark","violet_gem"]
+ARTS={}   # filled by _bake_imports (npc_bake imports this module, so import lazily)
 
 def data(result):
     if result.get("structuredContent"): return result["structuredContent"]
@@ -255,15 +216,22 @@ def embedded(result,path):
             if "blob" in resource: path.write_bytes(base64.b64decode(resource["blob"])); return
     raise RuntimeError("Blockbench did not return a complete export")
 
+def _bake_imports():
+    global bake_npc,uv_js,boss_rune,moon_panel,load_atlas
+    from npc_bake import bake_npc,uv_js,boss_rune,moon_panel
+    from build_luma_props import load_atlas
+    ARTS.update({"boss_rune":boss_rune,"moon_panel":moon_panel})
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--project-uuid")
     parser.add_argument("--dry-run",action="store_true")
     args=parser.parse_args()
+    _bake_imports()
     assert len(ROWS)<=240 and len(BONES)<=24,(len(ROWS),len(BONES))
     assert len({r[2]["name"] for r in ROWS})==len(ROWS)
     assert len({b[0] for b in BONES})==len(BONES)
-    summary={"asset":NAME,"cubes":len(ROWS),"bones":len(BONES),"animations":[a[0] for a in ANIMATIONS],"atlas":[128,128]}
+    summary={"asset":NAME,"cubes":len(ROWS),"bones":len(BONES),"animations":[a[0] for a in ANIMATIONS],"atlas":"baked per face, 4 texels/unit"}
     if args.dry_run: print(json.dumps(summary)); return
     if not args.project_uuid: parser.error("--project-uuid is required")
     target=OUT/(NAME+".bbmodel")
@@ -279,35 +247,18 @@ def main():
     first=guard()
     if any(first.get("counts",{}).get(key,0) for key in ["cubes","meshes","groups","textures"]): raise RuntimeError("Boss project is not empty")
     call("set_mode",{"mode_id":"edit"})
-    call("create_texture",{"name":NAME+".png","width":128,"height":128,"uv_width":128,"uv_height":128,"fill_color":COLORS[0]})
-    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=128;Project.texture_height=128;Undo.finishEdit('Moonfall UV resolution');return {width:Project.texture_width,height:Project.texture_height}})()"})
-    call("risky_eval",{"code":PAINT.replace("COLORS",json.dumps(COLORS))})
+    atlas,face_uv=bake_npc(ROWS,MATS,ARTS,{},seed=sum(map(ord,NAME)))
+    size=atlas.size[0]
+    call("create_texture",{"name":NAME+".png","width":size,"height":size,"uv_width":size,"uv_height":size,"fill_color":"#000000"})
+    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=%d;Project.texture_height=%d;Undo.finishEdit('Moonfall baked UV size');return true})()"%(size,size)})
+    load_atlas(call,atlas)
     for name,pivot,parent in BONES: call("add_group",{"name":name,"origin":pivot,"parent":parent})
-    batches=defaultdict(list)
-    for bone,color,row in ROWS: batches[(bone,color)].append(row)
-    for (bone,color),rows in batches.items():
-        ox=(color%4)*32; oy=(color//4)*32
+    by_bone=defaultdict(list)
+    for bone,_,row in ROWS: by_bone[bone].append(row)
+    for bone,rows in by_bone.items():
         call("place_cube",{"elements":rows,"group":bone,"texture":NAME+".png",
-                          "faces":[{"face":face,"uv":[ox+2,oy+2,ox+30,oy+30]} for face in ["north","south","east","west","up","down"]]})
-    colors={row["name"]:color for _,color,row in ROWS}
-    uv_code="""(()=>{
-const materials=MATERIALS,elements=Cube.all.slice();
-Undo.initEdit({elements,uv_only:true,outliner:true});
-for(const cube of elements){
- const i=materials[cube.name],ox=(i%4)*32,oy=Math.floor(i/4)*32;
- const d=cube.to.map((v,k)=>v-cube.from[k]);
- for(const [face,axis] of Object.entries({north:[0,1],south:[0,1],east:[2,1],west:[2,1],up:[0,2],down:[0,2]})){
-   let w=Math.max(1,Math.min(28,Math.round(d[axis[0]]*1.8))),h=Math.max(1,Math.min(28,Math.round(d[axis[1]]*1.8)));
-   if(i===13||i===11){w=28;h=28}
-   cube.faces[face].uv=[ox+2,oy+2,ox+2+w,oy+2+h];
- }
- if(cube.name==='collision_proxy'){cube.visibility=false}
- cube.preview_controller.updateUV(cube);cube.preview_controller.updateVisibility(cube);
-}
-const hit=Group.all.find(g=>g.name==='hitbox');hit.visibility=false;hit.preview_controller.updateVisibility(hit);
-Undo.finishEdit('Moonfall per-face atlas UV and hidden hitbox');return {cubes:elements.length,bones:Group.all.length};
-})()""".replace("MATERIALS",json.dumps(colors))
-    call("risky_eval",{"code":uv_code})
+                          "faces":[{"face":f,"uv":[0,0,1,1]} for f in ["north","south","east","west","up","down"]]})
+    call("risky_eval",{"code":uv_js(face_uv)})
     print(json.dumps({"geometry":summary}),flush=True)
     call("set_mode",{"mode_id":"animate"})
     for name,length,loop,bones in ANIMATIONS:

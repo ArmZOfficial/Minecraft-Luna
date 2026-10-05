@@ -197,5 +197,6 @@ SQL/ระบบบริการอยู่ที่ FantasyCore ไม่ผ
 [ไฟล์ .bbmodel](assets/models/boss_moonfall_guardian_v1.bbmodel) · [texture128×128](assets/models/boss_moonfall_guardian_v1.png) · [คู่มือและanimation](../../server/content/dungeons/moonfall/README-th.md)
 146cubes/19bones/8animations/150keys: idle, walk, spawn, attack, slam, enrage, hurt, death
 มีหินแตกร้าว ขอบทองแดงหลายเฉด หมุด นิ้ว/ข้อต่อ รูนฟ้า แกนม่วงซ้อนชั้น และตราจันทร์ด้านหลัง
+texture bake ใหม่ 6 ต.ค. (4 texel/หน่วย, atlas 1024): หินก้อนใหญ่สลักมีรอยร้าว เกราะทองแดงเงามันเส้นเดียว รูนฟ้าเรืองแสง คริสตัลม่วงเจียระไน แผ่นหลังรูปจันทร์เสี้ยว แสงไล่ตามความสูงทั้งตัว
 ภาพviewport29เฟรม/UUID/UV/loop/hashตรวจผ่าน; ยังไม่มีModelEnginepackหรือผลMinecraftจริง CoreยังHuskfallback
 บอสชิ้นนี้สร้างเพิ่ม ไม่ทับNPC/itempilot6ตัวเดิม; มาตรฐานสีและรายละเอียดสำหรับrevisionNPCv2อยู่ใน [แผนโมเดล](MODEL-AND-CONTENT-PLAN-th.md)

@@ -87,8 +87,8 @@
     "runtime_tested": false,
     "reference": "assets/references/boss-moonfall-guardian-turnaround.png",
     "texture": [
-      128,
-      128
+      1024,
+      1024
     ],
     "native_timeline_frames_checked": 29
   },
