@@ -1,0 +1,284 @@
+# ข้อความภาษาไทยของ FantasyCore (รูปแบบ MiniMessage: https://docs.advntr.dev/minimessage/format.html)
+# แก้ไฟล์นี้ในโฟลเดอร์ plugins/FantasyCore/ แล้วรีสตาร์ตเซิร์ฟ — key ที่ลบทิ้งจะใช้ค่าจากในปลั๊กอินแทน
+# สี: ทอง #DDA54A (เน้น), ฟ้าคริสตัล #47C8D3 (ตัวเลข), งาช้าง #EDF4E9 (ข้อความ) ตาม BRAND-GUIDE
+
+prefix: '<#DDA54A><bold>ลูม่า</bold></#DDA54A> <dark_gray>»</dark_gray> <#EDF4E9>'
+
+common:
+  no-permission: '<red>คุณยังไม่มีสิทธิ์ใช้งานนี้'
+  players-only: '<red>คำสั่งนี้ใช้ได้เฉพาะผู้เล่นในเกม'
+  storage-error: '<red>ระบบบันทึกข้อมูลขัดข้อง ยังไม่มีการเปลี่ยนแปลงใด ๆ — ลองใหม่หรือแจ้งทีมงาน'
+  busy: '<yellow>รายการก่อนหน้ายังทำไม่เสร็จ รอสักครู่แล้วลองใหม่'
+  invalid-amount: '<red>จำนวน "<input>" ไม่ถูกต้อง — ใช้ตัวเลขจำนวนเต็มมากกว่า 0 หรือพิมพ์ all'
+
+core:
+  version: 'FantasyCore <#47C8D3><version></#47C8D3> — พิมพ์ <#DDA54A>/menu</#DDA54A> เพื่อเปิดเมนูหลัก'
+
+service:
+  not-connected: '<yellow>บริการ <#DDA54A><action></#DDA54A> ยังไม่เชื่อมระบบในรุ่นนี้ — ทีมงานกำลังพัฒนา'
+  unknown: '<red>ไม่รู้จักบริการ <action>'
+  go-to-station: '<yellow>บริการนี้ใช้ได้ที่จุดบริการในเมือง (<action>) หรือเมื่อแรงค์ปลดล็อกการใช้ทางไกล'
+
+menu:
+  close: '<red>ปิดเมนู'
+  back: '<gray>« กลับ'
+  busy: '<yellow>กำลังทำรายการ…'
+  status:
+    ready: '<green>● พร้อมใช้'
+    not-connected: '<gray>○ ยังไม่เชื่อม (เร็ว ๆ นี้)'
+  main:
+    title: '<#194D39>เมนูหลัก · ลูม่า'
+    profile:
+      name: '<#DDA54A><player>'
+      lore: |-
+        <gray>ทองที่พก: <#DDA54A><wallet></#DDA54A>
+        <gray>เงินฝาก: <#DDA54A><bank></#DDA54A>
+        <gray>เงินแดง: <red><redcoin></red>
+    explore:
+      name: '<#47C8D3>สำรวจโลก / สุ่มวาร์ป'
+      lore: |-
+        <gray>สุ่มจุดปลอดภัยในโลกบ้านหรือโลกทรัพยากร
+    rewards:
+      name: '<#DDA54A>รางวัลของฉัน'
+      lore: |-
+        <gray>รับของรายวันและรางวัลสะสม
+    land:
+      name: '<#DDA54A>ที่ดินและบ้าน'
+      lore: |-
+        <gray>จุดกลับบ้านของคุณ (/sethome, /home)
+        <gray>ดูแปลงตรงที่ยืน: /land
+    skins:
+      name: '<#DDA54A>ห้องแต่งไอเทม'
+      lore: |-
+        <gray>เปลี่ยนภาพอุปกรณ์โดยคงความสามารถ
+    exchange:
+      name: '<#DDA54A>กระดานแลกของ'
+      lore: |-
+        <gray>ส่งวัตถุดิบ รับของที่เห็นล่วงหน้า
+    paint:
+      name: '<#DDA54A>สตูดิโอภาพพิกเซล'
+      lore: |-
+        <gray>วาดรูปไปติดบ้าน
+    upgrade:
+      name: '<#DDA54A>อัปเกรดอุปกรณ์'
+      lore: |-
+        <gray>ดูสูตร ราคา และผลลัพธ์ก่อนยืนยัน
+    bank:
+      name: '<#DDA54A>ธนาคาร'
+      lore: |-
+        <gray>ฝาก/ถอนทอง เงินฝากไม่หายเมื่อเสียชีวิต
+        <gray>ใช้ได้ที่ธนาคารโซน 05 หรือเมื่อแรงค์ปลดล็อก
+    spawn:
+      name: '<#47C8D3>กลับจุดเกิด'
+      lore: |-
+        <gray>วาร์ปกลับลานกลางเมือง (/spawn)
+
+bank:
+  menu:
+    title: '<#194D39>ธนาคารลูม่า'
+    balance:
+      name: '<#DDA54A>ยอดเงินของคุณ'
+      lore: |-
+        <gray>ทองที่พก: <#DDA54A><wallet></#DDA54A>
+        <gray>เงินฝาก: <#DDA54A><bank></#DDA54A>
+        <gray>เงินแดง: <red><redcoin></red>
+    deposit:
+      name: '<green>ฝาก <amount> ทอง'
+      lore: |-
+        <gray>ย้ายจากทองที่พกเข้าเงินฝาก
+    withdraw:
+      name: '<gold>ถอน <amount> ทอง'
+      lore: |-
+        <gray>ย้ายจากเงินฝากมาเป็นทองที่พก
+    deposit-all:
+      name: '<green>ฝากทั้งหมด'
+      lore: |-
+        <gray>ฝากทองที่พกทั้งหมด ณ ตอนยืนยัน
+    withdraw-all:
+      name: '<gold>ถอนทั้งหมด'
+      lore: |-
+        <gray>ถอนเงินฝากทั้งหมด ณ ตอนยืนยัน
+    history:
+      name: '<#47C8D3>ประวัติ 10 รายการล่าสุด'
+      lore: |-
+        <gray>แสดงในแชท พร้อมรหัสอ้างอิง
+    rules:
+      name: '<#DDA54A>กติกาเมื่อเสียชีวิต'
+      lore: |-
+        <gray>โลกนี้: เสียทองที่พก <red><percent>%</red> ปัดลง
+        <gray>เงินฝากและเงินแดง <green>ไม่หาย</green>
+  deposited: '<green>ฝาก <#DDA54A><amount></#DDA54A> ทองแล้ว</green> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A>'
+  withdrew: '<green>ถอน <#DDA54A><amount></#DDA54A> ทองแล้ว</green> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A>'
+  nothing-to-deposit: '<yellow>ไม่มีทองที่พกให้ฝาก'
+  nothing-to-withdraw: '<yellow>ไม่มีเงินฝากให้ถอน'
+  not-enough-wallet: '<red>ทองที่พกไม่พอ</red> (มี <#DDA54A><wallet></#DDA54A>)'
+  not-enough-bank: '<red>เงินฝากไม่พอ</red> (มี <#DDA54A><bank></#DDA54A>)'
+  limit: '<red>เกินเพดานต่อรายการ (<max> ทอง)'
+  failed: '<red>ทำรายการไม่สำเร็จ (<status>) — ยังไม่มีการเปลี่ยนแปลงยอด'
+  usage: '<gray>ใช้: <#DDA54A>/bank</#DDA54A> · <#DDA54A>/bank deposit <จำนวน|all></#DDA54A> · <#DDA54A>/bank withdraw <จำนวน|all></#DDA54A> · <#DDA54A>/bank history</#DDA54A>'
+  history:
+    empty: '<gray>ยังไม่มีประวัติเงินของ <player>'
+    header: '<#DDA54A>ประวัติเงินล่าสุดของ <player></#DDA54A> <gray>(เวลาไทย)'
+    line: '<dark_gray><time></dark_gray> <gray><bucket></gray> <#47C8D3><delta></#47C8D3> <dark_gray>→</dark_gray> <white><after></white> <gray><reason></gray> <dark_gray>#<op></dark_gray>'
+
+economy:
+  balance: 'ทองที่พก <#DDA54A><wallet></#DDA54A> · เงินฝาก <#DDA54A><bank></#DDA54A> · เงินแดง <red><redcoin></red>'
+  adjusted-by-staff: '<gray>ทีมงานปรับยอด <bucket> ของคุณ <#47C8D3><delta></#47C8D3> (ดูรายละเอียดใน /bank history)'
+
+death:
+  gold-lost: '<red>คุณเสียชีวิตและเสียทองที่พก <#DDA54A><amount></#DDA54A> (<percent>%)</red> — เหลือพก <#DDA54A><wallet></#DDA54A> · เงินฝาก <#DDA54A><bank></#DDA54A> ยังอยู่ครบ'
+
+travel:
+  combat: '<red>ยังอยู่ในการต่อสู้ — วาร์ปได้อีก <seconds> วินาที'
+  already-pending: '<yellow>คุณมีการวาร์ปที่กำลังนับถอยหลังอยู่แล้ว'
+  warmup-start: 'กำลังวาร์ปไป <destination> ใน <#47C8D3><seconds></#47C8D3> วินาที <gray>(อย่าขยับหรือโดนโจมตี)'
+  countdown: '<#47C8D3>วาร์ปใน <seconds>…'
+  failed: '<red>วาร์ปไม่สำเร็จ (ถูกยกเลิกโดยระบบอื่น) — ไม่มีการบันทึกเวลารอ'
+  cancel-moved: '<yellow>ยกเลิกการวาร์ปเพราะคุณขยับ'
+  cancel-damaged: '<yellow>ยกเลิกการวาร์ปเพราะคุณโดนโจมตี'
+
+spawn:
+  label: '<#DDA54A>ลานกลางเมือง'
+  arrived: '<green>ถึงลานกลางเมืองแล้ว'
+
+rtp:
+  unknown-profile: '<red>ไม่รู้จักโลกนี้ — เลือกได้: <profiles>'
+  world-not-loaded: '<red><world> ยังไม่เปิดใช้งาน (โลกไม่ได้โหลด) — แจ้งทีมงาน'
+  retry-wait: '<yellow>รออีก <seconds> วินาทีก่อนสุ่มใหม่'
+  already-searching: '<yellow>กำลังหาจุดให้อยู่ รอสักครู่'
+  cooldown: '<yellow>สุ่มวาร์ปได้อีกครั้งใน <#47C8D3><seconds></#47C8D3> วินาที'
+  searching: '<gray>กำลังหาจุดปลอดภัยใน <world>…'
+  not-found: '<yellow>ยังหาจุดปลอดภัยใน <world> ไม่เจอ — ไม่เสียเวลารอ ลองใหม่อีกครั้งได้'
+  label: '<#47C8D3><world></#47C8D3>'
+  arrived: '<green>ถึง <world> แล้ว</green> <gray>(<x>, <y>, <z>) — ตั้งบ้านได้เมื่อมีหินกันบ้าน'
+  target-changed: '<yellow>จุดลงจอดเปลี่ยนไประหว่างนับถอยหลัง (ไม่ปลอดภัยหรือมีคนเคลม) — ไม่เสียเวลารอ ลองใหม่ได้'
+  menu:
+    title: '<#194D39>สำรวจโลก · สุ่มวาร์ป'
+    info:
+      name: '<#DDA54A>กติกาสุ่มวาร์ป'
+      lore: |-
+        <gray>รอระหว่างครั้ง: <#47C8D3><cooldown></#47C8D3> วินาที
+        <gray>นับถอยหลัง: <#47C8D3><warmup></#47C8D3> วินาที (อย่าขยับ)
+        <gray>หลังต่อสู้ต้องรอ: <#47C8D3><combat></#47C8D3> วินาที
+        <gray>ไม่สุ่มลงที่ดินของใครและพื้นอันตราย
+    profile:
+      name: '<#47C8D3><world>'
+      lore: |-
+        <gray>ระยะจากศูนย์กลาง <min>–<max> บล็อก
+    status:
+      ready: '<green>● พร้อม — คลิกเพื่อสุ่ม'
+      cooldown: '<yellow>● รออีก <seconds> วินาที'
+      missing: '<red>● โลกยังไม่เปิด'
+
+home:
+  invalid-name: '<red>ชื่อบ้านใช้ได้ 1–<max> ตัวอักษร: ไทย, a-z, 0-9, _ หรือ -'
+  unsafe-here: '<red>จุดที่ยืนไม่ปลอดภัยสำหรับตั้งบ้าน (ของเหลว/บล็อกอันตราย/ไม่มีพื้น)'
+  created: '<green>ตั้งบ้าน <#DDA54A><name></#DDA54A> แล้ว</green> <gray>(<coords>) — ใช้ไป <count>/<limit>'
+  moved: '<green>ย้ายบ้าน <#DDA54A><name></#DDA54A> แล้ว</green> <gray>(<old> → <coords>)'
+  confirm-move: '<yellow>มีบ้านชื่อ <name> แล้วที่ <old></yellow> — พิมพ์ <#DDA54A>/sethome <name> confirm</#DDA54A> เพื่อย้ายมาที่ <coords>'
+  limit: '<red>ตั้งบ้านครบ <limit> หลังแล้ว</red> — ลบหลังเดิมด้วย <#DDA54A>/delhome <ชื่อ></#DDA54A> หรือปลดล็อกเพิ่มจากเควสบ้าน'
+  world-not-allowed: '<red>ตั้งบ้านได้เฉพาะในโลก: <worlds>'
+  claims-unavailable: '<red>ระบบที่ดินยังไม่เชื่อม จึงตั้งบ้านไม่ได้ชั่วคราว — แจ้งทีมงาน'
+  not-in-claim: '<red>ต้องอยู่ในแปลงที่คุณเป็นเจ้าของหรือเพื่อนที่เชื่อถือ — วางหินกันบ้านก่อน'
+  not-member: '<red>แปลงนี้ไม่ใช่ของคุณและคุณไม่ได้เป็นเพื่อนที่เชื่อถือ'
+  label: '<#DDA54A>บ้าน <name>'
+  arrived: '<green>ถึงบ้าน <name> แล้ว'
+  world-missing: '<red>โลกของบ้าน <name> ไม่ได้โหลดอยู่ — ลองใหม่ภายหลังหรือแจ้งทีมงาน'
+  no-longer-valid: '<red>ไปบ้าน <name> ไม่ได้: สิทธิ์ในแปลงหายหรือพื้นที่ไม่อนุญาตแล้ว — ตั้งบ้านใหม่ในแปลงของคุณ'
+  unsafe-target: '<red>จุดบ้าน <name> ไม่ปลอดภัยแล้ว (ถูกปิด/พื้นหาย) — ไปที่บ้านแล้วตั้งใหม่ด้วย /sethome <name> confirm'
+  none: '<yellow>คุณยังไม่มีบ้าน — ยืนในแปลงของคุณแล้วพิมพ์ <#DDA54A>/sethome</#DDA54A>'
+  not-found: '<red>ไม่พบบ้านชื่อ <name></red> <gray>(มี: <names>)'
+  deleted: '<green>ลบจุดบ้าน <name> แล้ว</green> <gray>(ตัวบ้านและที่ดินไม่ถูกลบ)'
+  usage-delete: '<gray>ใช้: <#DDA54A>/delhome <ชื่อ>'
+  menu:
+    title: '<#194D39>บ้านของฉัน'
+    info:
+      name: '<#DDA54A>จุดกลับบ้าน <count>/<limit>'
+      lore: |-
+        <gray>ตั้งบ้าน: ยืนในแปลงของคุณแล้วพิมพ์ /sethome <ชื่อ>
+        <gray>ลบ: /delhome <ชื่อ>
+        <gray>โลกที่ตั้งได้: <worlds>
+    entry:
+      name: '<#DDA54A><name>'
+      lore: |-
+        <gray><world> · <coords>
+        <green>คลิกเพื่อวาร์ป
+    empty:
+      name: '<gray>ยังไม่มีบ้าน'
+      lore: |-
+        <gray>วางหินกันบ้านในโลกบ้าน แล้ว /sethome
+
+land:
+  provider-missing: '<red>ระบบที่ดิน (WorldGuard) ยังไม่เชื่อม'
+  none-here: '<gray>ตรงนี้ใน <world> ยังไม่มีแปลงของผู้เล่น'
+  here: 'แปลง <#DDA54A><region></#DDA54A> ขนาด <#47C8D3><x> × <z></#47C8D3> บล็อก (Y <miny>..<maxy>) — คุณเป็น <role>'
+  role:
+    owner: '<green>เจ้าของ'
+    member: '<#47C8D3>เพื่อนที่เชื่อถือ'
+    visitor: '<gray>ผู้เยี่ยมชม'
+  next-phase: '<dark_gray>ซื้อหิน/อัปเกรด/สมาชิกผ่านเมนู /land จะเปิดใน phase ถัดไป — ตอนนี้ทีมงานทดสอบด้วยคำสั่ง /ps บน staging'
+
+admin:
+  help: |-
+    <#DDA54A>FantasyAdmin (ข้อความ) — GUI เต็มอยู่ phase ถัดไป</#DDA54A>
+    <gray>/fa doctor <dark_gray>— ตรวจสถานะระบบและ adapter
+    <gray>/fa bank <ผู้เล่น> <dark_gray>— ดูยอดและประวัติ
+    <gray>/fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผล> <dark_gray>— preview แล้ว /fa confirm
+    <gray>/fa npc spawn|anchor <action> [ชื่อ] · remove · unanchor · list
+    <gray>/fa item list · give <ผู้เล่น> <template> · inspect
+    <gray>/fa audit [ผู้เล่น]
+  doctor:
+    header: '<#DDA54A>ตรวจระบบ FantasyCore <version>'
+    line: '<status> <white><name></white> <dark_gray>—</dark_gray> <gray><detail>'
+  status:
+    ready: '<green>[พร้อม]'
+    broken: '<red>[ต้องแก้ไข]'
+    fix: '<gold>[ต้องแก้ไข]'
+    missing: '<yellow>[ไม่ได้เชื่อม]'
+    'off': '<gray>[ปิด]'
+  usage:
+    bank: '<gray>ใช้: /fa bank <ผู้เล่น>'
+    eco: '<gray>ใช้: /fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผลอย่างน้อย 3 ตัวอักษร>'
+    confirm: '<gray>ใช้: /fa confirm <รหัส>'
+    npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc anchor <action> · /fa npc remove (มอง NPC) · /fa npc unanchor · /fa npc list'
+    item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
+  bank:
+    summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
+  reason-required: '<red>ต้องใส่เหตุผลอย่างน้อย 3 ตัวอักษร (เก็บใน audit)'
+  eco:
+    would-be-negative: '<red>ยอดจะติดลบ (ตอนนี้มี <before>) — ปรับจำนวนแล้ว preview ใหม่'
+    preview: '<yellow>ตัวอย่าง:</yellow> <white><player></white> <gray><bucket></gray> <#47C8D3><delta></#47C8D3> (<before> → <after>) เหตุผล "<reason>" — ยืนยันด้วย <#DDA54A>/fa confirm <token></#DDA54A> ภายใน 60 วินาที'
+    applied: '<green>ปรับยอดแล้ว</green> <player> <bucket> = <#DDA54A><after></#DDA54A> <dark_gray>op <op>'
+    changed: '<yellow>ยอดเปลี่ยนระหว่าง preview — ไม่ได้ปรับ กรุณา preview ใหม่'
+    duplicate: '<yellow>operation <op> ถูกใช้ไปแล้ว — ไม่ทำซ้ำ'
+    failed: '<red>ปรับยอดไม่สำเร็จ (<status>)'
+  confirm:
+    applying: '<gray>กำลังบันทึก…'
+    expired: '<red>รหัสหมดอายุ — preview ใหม่'
+    wrong-actor: '<red>รหัสนี้ไม่ใช่ของคุณ'
+    unknown: '<red>ไม่พบรหัสนี้ (หรือใช้ไปแล้ว)'
+  npc:
+    list-header: '<#DDA54A>จุดบริการทั้งหมด <count> จุด'
+    list-line: '<gray><kind></gray> <white><action></white> <dark_gray><world></dark_gray> <gray><coords></gray> <dark_gray>#<id>'
+    unknown-action: '<red>ไม่รู้จัก action <action></red> <gray>— ที่รู้จัก: <known>'
+    spawned: '<green>วาง NPC <action> แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>)'
+    anchored: '<green>ผูก anchor <action> ที่ตำแหน่งนี้แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>) — ตั้ง Citizens: /npc command add -p fc action <action>'
+    spawn-blocked: '<red>วาง NPC ไม่สำเร็จ: <detail>'
+    no-target: '<red>มองไปที่ NPC ของ Core ในระยะ 6 บล็อกก่อน'
+    removed: '<green>ลบ NPC แล้ว'
+    unanchored: '<green>ลบ anchor ที่ใกล้ที่สุดแล้ว'
+    no-anchor: '<yellow>ไม่มี anchor ในระยะ 3 บล็อก'
+  item:
+    list-header: '<#DDA54A>แม่แบบไอเทม <count> รายการ'
+    list-line: '<white><id></white> <gray>v<version> · <material>'
+    not-core: '<yellow>ไอเทมในมือไม่ใช่ของ Core (ไม่มี template ใน PDC) — ชื่อ/lore ไม่นับเป็นหลักฐาน'
+    identity: 'template <#DDA54A><template></#DDA54A> v<version> · serial <#47C8D3><serial></#47C8D3> · สถานะ <state>'
+    unknown: '<red>ไม่พบ template <id> — ดู /fa item list'
+    inventory-full: '<red>ช่องเก็บของของ <player> เต็ม — ยังไม่ออกไอเทม (ระบบกล่องจดหมายอยู่ phase ถัดไป)'
+    given: '<green>ส่ง <id> ให้ <player> แล้ว</green> <dark_gray>#<serial>'
+    delivery-failed: '<red>บันทึก serial แล้วแต่ส่งของไม่สำเร็จ</red> <dark_gray>#<serial></dark_gray> <gray>— สถานะ DELIVERY_FAILED ตรวจด้วย /fa audit'
+  player-offline: '<red><player> ไม่ได้ออนไลน์'
+  player-unknown: '<red>ไม่พบผู้เล่น <player> ในทะเบียน (ต้องเคยเข้าเซิร์ฟนี้)'
+  audit:
+    header: '<#DDA54A>Audit — <target></#DDA54A> <gray>(<count> รายการล่าสุด)'
+    line: '<dark_gray><time></dark_gray> <white><actor></white> <gray><action></gray> <#47C8D3><detail></#47C8D3> <dark_gray>เหตุผล: <reason>'

@@ -1,0 +1,15 @@
+# แม่แบบไอเทมของ FantasyCore
+# ตัวตนของไอเทมอยู่ใน PersistentDataContainer (template + version + serial) — ชื่อ/lore เป็นแค่การแสดงผล
+# ใช้ material ที่มีใน 1.16.5 เพื่อให้ client เก่าเห็นได้โดยไม่ต้องใช้ resource pack
+# ค่าพลังเป็น vanilla ของ material ไปก่อน — สูตร stat จริงยังไม่ได้กำหนด (SERVER-SYSTEMS-PLAN §11)
+
+templates:
+  starter_runeblade:
+    version: 1
+    material: IRON_SWORD
+    name: "<gradient:#47C8D3:#DDA54A>ดาบรูนผู้เริ่มต้น</gradient>"
+    lore:
+      - "<gray>อาวุธฝึกหัดของนักผจญภัยเมืองลูม่า"
+      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+    serialized: true
+    glint: false

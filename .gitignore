@@ -17,3 +17,9 @@ output/*report*.json
 **/*mcp_config*.json
 **/*.backup*
 .codex/
+
+# FantasyCore / staging server
+fantasycore/build/
+fantasycore/.gradle/
+!fantasycore/gradle/wrapper/gradle-wrapper.jar
+server/runtime/

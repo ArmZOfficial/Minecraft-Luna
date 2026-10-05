@@ -23,6 +23,8 @@
 16. [Next.js / React / Node / PostgreSQL](NEXT-POSTGRES-IMPLEMENTATION-th.md) — source เว็บปัจจุบัน animation ฐานข้อมูลและผลทดสอบ
 17. [ชุดระบบตามภาพเพิ่มเติม](CASUAL-SURVIVAL-SYSTEMS-th.md) — RTP, daily, หินกันบ้าน, สกินไอเทม, เควสแลกของ, วาดรูป, อัปเกรดและตั้งบ้าน
 18. [ProtectionStones 5 ระดับ](PROTECTIONSTONES-TIERS-th.md) — ขนาดจริง 11 × 11 ถึง 81 × 81 ความสูง ราคา สมาชิกและ recovery
+19. [FantasyCore v0.1](../../fantasycore/README-th.md) — ปลั๊กอินแกนที่เขียนแล้ว: เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP
+20. [เซิร์ฟ staging + checklist](../../server/README-th.md) — Paper 26.2, Java 25, ปลั๊กอินที่ล็อกเวอร์ชัน และรายการทดสอบในเกม
 
 ## ข้อเลือกสำคัญ
 
@@ -42,7 +44,10 @@
 มีโลโก้ต้นฉบับ และ NPC pilot 4 ตัวที่มี idle/greet/ท่างาน พร้อม item pilot 2 ชิ้น
 เชื่อม Blockbench MCP ในเครื่องและเพิ่ม config สำหรับ Antigravity แล้ว แต่ Antigravity ต้อง refresh server เพื่อโหลด config ใหม่
 
-ยังไม่ได้แก้โลกจริง ติดตั้ง JAR หรือทดสอบบนเซิร์ฟเวอร์ Minecraft
+ฝั่งเซิร์ฟเริ่มลงมือแล้ว (5 ต.ค. 2026): backend ล็อกเป็น **Paper 26.2 build 129 + Java 25** (26.3 ยังเป็น experimental)
+และเขียน FantasyCore v0.1 ตามลำดับพัฒนาข้อ 1–3 + บ้าน/RTP — compile และ unit test ผ่าน แต่ **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง**
+ProtectionStones 2.10.6 ยังไม่ประกาศรองรับ 26.x ต้องยืนยันบน staging ก่อน
+ยังไม่ได้แก้โลกเมืองจริง
 เว็บยังไม่เชื่อมแผนที่สด ผู้ให้บริการชำระเงิน หรือคิวส่งของเข้าเกม
 เว็บย้ายเป็น Next.js + React แล้ว Node API เชื่อม PostgreSQL จริงในเครื่อง สร้าง schema และผ่าน integration tests
 GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร่ source งานชุดแรกแล้ว

@@ -11,16 +11,34 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
+- [ปลั๊กอิน FantasyCore v0.1](fantasycore/README-th.md) — แกนระบบเงิน/ธนาคาร/บ้าน/RTP/NPC
+- [เซิร์ฟ staging + checklist ทดสอบ](server/README-th.md) — Paper 26.2 + Java 25
 
 ## สถานะงาน
 
 มีเว็บต้นแบบที่ทดลองเมนู ค้นหาโซน คู่มือ ข่าว และศูนย์บัญชีได้ พร้อมภาพและเอกสารออกแบบ
 เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
 มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
-ยังไม่มีโลก Minecraft ที่ติดตั้งระบบจริง, plugin JAR, แผนที่สด, payment backend หรือการส่งของจริง
 
-เป้าหมาย client คือ Java 1.16.5 ขึ้นไป ต้องผ่าน staging matrix ก่อนยืนยันการรองรับจริง
+**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.1 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี,
+item template, บ้าน, RTP และ claim adapter — compile กับ Paper 26.2 API และ unit test ผ่าน
+พร้อมชุด staging (สคริปต์ดาวน์โหลด Paper + ปลั๊กอินที่ล็อกเวอร์ชันและตรวจ hash, หิน Protect 5 ระดับ, LuckPerms/WorldGuard setup)
+**ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง** — ขั้นต่อไปคือทำ checklist ใน [server/README-th.md](server/README-th.md)
+ยังไม่มีโลกเมืองที่สร้างเสร็จ, แผนที่สด, payment backend หรือการส่งของจริง
+
+เป้าหมาย client คือ Java 1.16.5 ขึ้นไป (backend Paper 26.2 + ViaVersion/ViaBackwards) ต้องผ่าน staging matrix ก่อนยืนยันการรองรับจริง
 ไฟล์โลกและ schematic ที่ดาวน์โหลดมาเดิมไม่ได้รวมใน repository
+
+## เปิดเซิร์ฟ staging (Windows)
+
+```powershell
+cd server
+.\build-plugin.cmd
+.\setup-staging.cmd -AcceptEula   # ใส่ -AcceptEula หลังอ่าน https://aka.ms/MinecraftEULA แล้ว
+.\start-staging.cmd
+```
+
+ต้องมี Java 25 — รายละเอียดและ checklist อยู่ใน [server/README-th.md](server/README-th.md)
 
 ## เปิดเว็บในเครื่อง
 

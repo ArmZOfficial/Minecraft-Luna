@@ -1,0 +1,156 @@
+package com.armzofficial.fantasycore.storage;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+/** schema ของ FantasyCore; เพิ่ม version ใหม่ต่อท้ายเท่านั้น ห้ามแก้ version ที่ปล่อยแล้ว */
+public final class Migrations {
+
+    private static final List<String[]> VERSIONS = List.<String[]>of(
+            // version 1 — economy, ledger, audit, players, homes, items, stations, travel receipts
+            new String[]{
+                    """
+                    CREATE TABLE players (
+                        player_uuid TEXT PRIMARY KEY,
+                        last_name   TEXT NOT NULL,
+                        first_seen  INTEGER NOT NULL,
+                        last_seen   INTEGER NOT NULL
+                    )""",
+                    """
+                    CREATE TABLE accounts (
+                        player_uuid TEXT NOT NULL,
+                        bucket      TEXT NOT NULL,
+                        balance     INTEGER NOT NULL DEFAULT 0 CHECK (balance >= 0),
+                        updated_at  INTEGER NOT NULL,
+                        PRIMARY KEY (player_uuid, bucket)
+                    )""",
+                    """
+                    CREATE TABLE operations (
+                        op_id       TEXT PRIMARY KEY,
+                        kind        TEXT NOT NULL,
+                        player_uuid TEXT,
+                        actor       TEXT NOT NULL,
+                        status      TEXT NOT NULL,
+                        detail      TEXT,
+                        created_at  INTEGER NOT NULL
+                    )""",
+                    """
+                    CREATE TABLE ledger (
+                        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                        op_id         TEXT NOT NULL REFERENCES operations(op_id),
+                        player_uuid   TEXT NOT NULL,
+                        bucket        TEXT NOT NULL,
+                        delta         INTEGER NOT NULL,
+                        balance_after INTEGER NOT NULL,
+                        reason        TEXT NOT NULL,
+                        ref           TEXT,
+                        created_at    INTEGER NOT NULL
+                    )""",
+                    "CREATE INDEX ledger_player ON ledger(player_uuid, id DESC)",
+                    """
+                    CREATE TABLE audit_log (
+                        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                        actor_uuid  TEXT,
+                        actor_name  TEXT NOT NULL,
+                        action      TEXT NOT NULL,
+                        target      TEXT,
+                        detail      TEXT,
+                        reason      TEXT,
+                        op_id       TEXT,
+                        created_at  INTEGER NOT NULL
+                    )""",
+                    "CREATE INDEX audit_target ON audit_log(target, id DESC)",
+                    """
+                    CREATE TABLE homes (
+                        player_uuid TEXT NOT NULL,
+                        home_key    TEXT NOT NULL,
+                        display     TEXT NOT NULL,
+                        world_uuid  TEXT NOT NULL,
+                        world_name  TEXT NOT NULL,
+                        x REAL NOT NULL, y REAL NOT NULL, z REAL NOT NULL,
+                        yaw REAL NOT NULL, pitch REAL NOT NULL,
+                        region_id   TEXT,
+                        created_at  INTEGER NOT NULL,
+                        updated_at  INTEGER NOT NULL,
+                        PRIMARY KEY (player_uuid, home_key)
+                    )""",
+                    """
+                    CREATE TABLE item_instances (
+                        serial           TEXT PRIMARY KEY,
+                        template_id      TEXT NOT NULL,
+                        template_version INTEGER NOT NULL,
+                        owner_uuid       TEXT,
+                        op_id            TEXT NOT NULL UNIQUE,
+                        issued_by        TEXT NOT NULL,
+                        state            TEXT NOT NULL,
+                        created_at       INTEGER NOT NULL,
+                        updated_at       INTEGER NOT NULL
+                    )""",
+                    """
+                    CREATE TABLE stations (
+                        station_id  TEXT PRIMARY KEY,
+                        action_id   TEXT NOT NULL,
+                        kind        TEXT NOT NULL,
+                        world_uuid  TEXT NOT NULL,
+                        world_name  TEXT NOT NULL,
+                        x REAL NOT NULL, y REAL NOT NULL, z REAL NOT NULL,
+                        yaw REAL NOT NULL,
+                        entity_uuid TEXT,
+                        label       TEXT,
+                        created_by  TEXT NOT NULL,
+                        created_at  INTEGER NOT NULL
+                    )""",
+                    """
+                    CREATE TABLE travel_receipts (
+                        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                        player_uuid TEXT NOT NULL,
+                        kind        TEXT NOT NULL,
+                        world_name  TEXT NOT NULL,
+                        x INTEGER NOT NULL, y INTEGER NOT NULL, z INTEGER NOT NULL,
+                        created_at  INTEGER NOT NULL
+                    )""",
+                    "CREATE INDEX travel_player ON travel_receipts(player_uuid, kind, created_at DESC)"
+            }
+    );
+
+    private Migrations() {
+    }
+
+    public static int latestVersion() {
+        return VERSIONS.size();
+    }
+
+    /** คืนเลข version หลัง migrate */
+    public static int apply(Database database) throws SQLException {
+        return database.transaction(connection -> {
+            try (Statement statement = connection.createStatement()) {
+                statement.execute("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)");
+            }
+            int current = currentVersion(connection);
+            if (current > VERSIONS.size()) {
+                throw new SQLException("ฐานข้อมูลเป็น schema v" + current + " ใหม่กว่าปลั๊กอินนี้ (v" + VERSIONS.size()
+                        + ") — ห้ามย้อนเวอร์ชันปลั๊กอินโดยไม่กู้ backup");
+            }
+            for (int version = current + 1; version <= VERSIONS.size(); version++) {
+                try (Statement statement = connection.createStatement()) {
+                    for (String sql : VERSIONS.get(version - 1)) {
+                        statement.execute(sql);
+                    }
+                    statement.execute("DELETE FROM schema_version");
+                    statement.execute("INSERT INTO schema_version(version) VALUES (" + version + ")");
+                }
+            }
+            return VERSIONS.size();
+        });
+    }
+
+    static int currentVersion(Connection connection) throws SQLException {
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT MAX(version) FROM schema_version")) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
+    }
+}

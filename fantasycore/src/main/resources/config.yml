@@ -1,0 +1,106 @@
+# FantasyCore v0.1 — Luma (staging defaults)
+# ค่าทั้งหมดเป็นค่าเริ่มต้นสำหรับทดสอบบน staging ไม่ใช่ตัวเลข balance ที่ยืนยันแล้ว
+# แก้แล้วรีสตาร์ตเซิร์ฟ (ไม่มี /reload กลางธุรกรรม)
+
+database:
+  # SQLite ในโฟลเดอร์ plugins/FantasyCore/ — สำรองไฟล์นี้พร้อม world + WorldGuard regions เป็นชุดเดียวกัน
+  file: fantasycore.db
+
+economy:
+  currency:
+    gold: "ทอง"
+  # เพดานต่อรายการ (ทอง/เงินแดง) กันพิมพ์เลขผิดหลัก
+  max-transaction: 1000000000
+  bank:
+    quick-amounts: [100, 1000, 10000]
+
+death:
+  # โลกที่ไม่อยู่ใน worlds ใช้ default
+  default:
+    gold-loss-percent: 0
+    keep-inventory: false
+  worlds:
+    # ฉากตัวอย่างในคลิป: เสียทองที่พก 30% ปัดลง เงินฝาก/เงินแดงไม่เสีย ของไม่ดรอป
+    luma_housing:
+      gold-loss-percent: 30
+      keep-inventory: true
+    luma_resource:
+      gold-loss-percent: 30
+      keep-inventory: true
+
+worlds:
+  # FantasyCore โหลด/สร้างโลกเหล่านี้ตอนเปิดเซิร์ฟ — โลกหลัก (hub) มาจาก level-name ใน server.properties
+  luma_housing:
+    create: true
+    environment: NORMAL
+    seed: ""
+    border:
+      center-x: 0
+      center-z: 0
+      radius: 5000
+  luma_resource:
+    create: true
+    environment: NORMAL
+    seed: ""
+    border:
+      center-x: 0
+      center-z: 0
+      radius: 3000
+
+spawn:
+  # ว่าง = โลกหลักของเซิร์ฟ (hub)
+  world: ""
+
+travel:
+  warmup-seconds: 3
+  combat-lock-seconds: 15
+  # ช่วงความสูงที่ RTP เลือกลง — client 1.16.5 มองนอก Y 0–255 ไม่ได้ (ViaBackwards)
+  safe-y:
+    min: 16
+    max: 200
+
+homes:
+  allowed-worlds: [luma_housing]
+  # true = ต้องยืนในแปลงที่เป็นเจ้าของ/สมาชิก (region ของ ProtectionStones) ถึงตั้งบ้านได้
+  require-claim: true
+  default-limit: 1
+  # สิทธิ์ปลดล็อกจำนวนบ้าน (ใน YAML ใช้ _ แทน . — fantasy_home_limit_3 = fantasy.home.limit.3)
+  limits:
+    fantasy_home_limit_3: 3
+    fantasy_home_limit_5: 5
+  max-limit: 5
+
+claims:
+  # auto = ใช้ WorldGuard ถ้ามี | none = ปิด
+  provider: auto
+  # region ที่นับเป็น "แปลงของผู้เล่น" — ProtectionStones ตั้งชื่อ ps<x>x<y>y<z>z
+  player-region-prefixes: ["ps"]
+  # RTP เว้นระยะจาก region ใด ๆ อย่างน้อยกี่บล็อก
+  rtp-claim-buffer: 8
+
+rtp:
+  cooldown-seconds: 120
+  # หาไม่เจอแล้วต้องรอกี่วินาทีก่อนลองใหม่ (กันสั่งโหลด chunk รัว ๆ)
+  failure-retry-seconds: 15
+  max-candidates: 24
+  timeout-seconds: 10
+  max-concurrent-chunk-jobs-per-world: 2
+  profiles:
+    housing:
+      world: luma_housing
+      display: "โลกบ้าน"
+      center-x: 0
+      center-z: 0
+      min-radius: 500
+      max-radius: 4000
+    resource:
+      world: luma_resource
+      display: "โลกทรัพยากร"
+      center-x: 0
+      center-z: 0
+      min-radius: 200
+      max-radius: 2800
+
+stations:
+  # ระยะจาก NPC/anchor ที่ถือว่า "อยู่ที่จุดบริการ" (เช่น /bank deposit ต้องอยู่ใกล้ธนาคาร)
+  remote-radius: 6

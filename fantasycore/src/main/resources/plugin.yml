@@ -1,0 +1,94 @@
+name: FantasyCore
+version: '${version}'
+main: com.armzofficial.fantasycore.FantasyCorePlugin
+api-version: '26.2'
+description: 'Luma core: economy, bank, ledger, death rules, menus, stations, homes, RTP'
+authors: [ArmZOfficial]
+website: https://github.com/ArmZOfficial/Minecraft-Luna
+softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, PlaceholderAPI, Citizens]
+
+commands:
+  menu:
+    description: เปิดเมนูหลัก
+    aliases: [luma]
+    permission: fantasy.menu
+  bank:
+    description: ธนาคาร ฝาก/ถอน/ประวัติ
+    usage: /bank [deposit|withdraw <amount|all>|history]
+    permission: fantasy.bank.use
+  balance:
+    description: ดูยอดเงิน
+    aliases: [bal, money]
+    permission: fantasy.balance
+  sethome:
+    description: ตั้งจุดกลับบ้าน
+    usage: /sethome [name] [confirm]
+    permission: fantasy.home.use
+  home:
+    description: กลับบ้าน
+    usage: /home [name]
+    permission: fantasy.home.use
+  delhome:
+    description: ลบจุดกลับบ้าน
+    usage: /delhome <name>
+    permission: fantasy.home.use
+  homes:
+    description: รายการบ้าน
+    permission: fantasy.home.use
+  rtp:
+    description: สุ่มวาร์ปในโลกที่อนุญาต
+    usage: /rtp [housing|resource]
+    permission: fantasy.rtp.use
+  spawn:
+    description: กลับลานกลางเมือง
+    permission: fantasy.spawn
+  land:
+    description: ดูแปลงตรงที่ยืน
+    permission: fantasy.land.use
+  fantasycore:
+    description: ข้อมูลปลั๊กอิน / ทางเข้าบริการสำหรับ NPC ของ Citizens
+    usage: /fantasycore action <id>
+    aliases: [fc]
+  fa:
+    description: เครื่องมือแอดมิน FantasyCore
+    permission: fantasyadmin.view
+
+permissions:
+  fantasy.player:
+    description: สิทธิ์พื้นฐานของผู้เล่น
+    default: true
+    children:
+      fantasy.menu: true
+      fantasy.balance: true
+      fantasy.bank.use: true
+      fantasy.home.use: true
+      fantasy.rtp.use: true
+      fantasy.spawn: true
+      fantasy.land.use: true
+  fantasy.bank.remote:
+    description: ใช้ธนาคารได้จากทุกที่ (ปลดล็อกตามแรงค์)
+    default: false
+  fantasy.home.limit.3:
+    description: ตั้งบ้านได้ 3 หลัง
+    default: false
+  fantasy.home.limit.5:
+    description: ตั้งบ้านได้ 5 หลัง
+    default: false
+  fantasy.rtp.bypass-cooldown:
+    description: สุ่มวาร์ปโดยไม่ติด cooldown (staff/ทดสอบ)
+    default: op
+  fantasyadmin.view:
+    description: เปิด /fa ดูสถานะและข้อมูล
+    default: op
+  fantasyadmin.economy.adjust:
+    description: ปรับยอดเงินผู้เล่น (ต้องใส่เหตุผล + ยืนยัน)
+    default: op
+  fantasyadmin.npc.edit:
+    description: วาง/ลบ NPC และ anchor ของจุดบริการ
+    default: op
+  fantasyadmin.content.edit:
+    description: ออกไอเทมจากแม่แบบ
+    default: op
+  fantasyadmin.audit:
+    description: อ่าน audit log
+    default: op

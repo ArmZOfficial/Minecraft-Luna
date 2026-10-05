@@ -1,0 +1,25 @@
+# Luma staging — กติกาโลกด้วย WorldGuard (วางใน console หลังเซิร์ฟเปิดครั้งแรกและโลก luma_* ถูกสร้างแล้ว)
+# หมายเหตุ: นี่คือค่าตั้งต้นของ staging ไม่ใช่การยืนยันว่าป้องกันครบทุกกรณี (ต้องผ่าน checklist ใน server/README-th.md)
+
+# ---------- hub (ลานเมือง/ล็อบบี้) — ไม่มี PvP ไม่มีม็อบ ไม่มีระเบิด ผู้เล่นสร้าง/ทุบไม่ได้
+rg flag __global__ -w hub pvp deny
+# ใช้ deny-spawn เฉพาะม็อบศัตรู (ไม่ใช้ mob-spawning deny) เพราะ WorldGuard บล็อก plugin spawn ด้วย
+# ซึ่งจะทำให้ /fa npc spawn วาง NPC สถานีไม่ได้
+rg flag __global__ -w hub deny-spawn zombie,zombie_villager,husk,drowned,skeleton,stray,creeper,spider,cave_spider,enderman,witch,slime,phantom,pillager,vindicator,evoker,ravager,silverfish
+rg flag __global__ -w hub tnt deny
+rg flag __global__ -w hub creeper-explosion deny
+rg flag __global__ -w hub other-explosion deny
+rg flag __global__ -w hub fire-spread deny
+rg flag __global__ -w hub build deny
+rg flag __global__ -w hub passthrough deny
+
+# ---------- luma_housing (โลกบ้านถาวร) — สร้างในป่าได้ แต่ไม่มี PvP/ระเบิดทำลายพื้นที่
+rg flag __global__ -w luma_housing pvp deny
+rg flag __global__ -w luma_housing tnt deny
+rg flag __global__ -w luma_housing creeper-explosion deny
+rg flag __global__ -w luma_housing other-explosion deny
+
+# ---------- luma_resource (โลกทรัพยากร รีเซ็ตได้) — ไม่มี PvP
+rg flag __global__ -w luma_resource pvp deny
+
+# ตรวจผล: rg info __global__ -w hub

@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "status": "candidate — ยังไม่ผ่าน staging matrix; เปลี่ยนเป็น locked หลังผ่าน checklist ใน server/README-th.md",
+  "checked_at": "2026-10-05",
+  "java": {
+    "major": 25,
+    "vendor": "Eclipse Temurin",
+    "version": "25.0.4.1+1 LTS",
+    "download": "https://adoptium.net/temurin/releases/?version=25",
+    "reason": "Paper 26.1 ขึ้นไปต้องใช้ Java 25 (docs.papermc.io/paper/getting-started)"
+  },
+  "backend": {
+    "project": "paper",
+    "minecraft": "26.2",
+    "build": 129,
+    "channel_at_check": "stable — papermc.io/downloads แสดง 26.2 #129 เป็นตัวหลัก, 26.3 อยู่ใต้ experimental",
+    "api_dependency": "io.papermc.paper:paper-api:26.2.build.+",
+    "plugin_api_version": "26.2",
+    "not_chosen": "26.3 ยังเป็น experimental ณ วันที่ตรวจ และอัปโลกเป็น 26.3 แล้วย้อนกลับไม่ได้ (papermc.io/news/26-3)"
+  },
+  "clients": {
+    "minimum": "1.16.5",
+    "standard": "26.2",
+    "translation": "ViaVersion + ViaBackwards (ไม่ต้องใช้ ViaRewind เพราะไม่รองรับต่ำกว่า 1.16.5)",
+    "legacy_limits": "client < 1.17 มอง/โต้ตอบนอก Y 0–255 ไม่ได้ → บริการหลักและ RTP อยู่ใน Y 16–200"
+  },
+  "plugins": [
+    {
+      "id": "viaversion",
+      "name": "ViaVersion",
+      "version": "5.12.0",
+      "source": "modrinth",
+      "slug": "viaversion",
+      "required": true,
+      "evidence": "Modrinth: release 5.12.0 (2026-09-18) อยู่ในรายการเวอร์ชันที่รองรับ 26.2",
+      "role": "แปล protocol ให้ client หลายเวอร์ชันเข้า backend เดียว"
+    },
+    {
+      "id": "viabackwards",
+      "name": "ViaBackwards",
+      "version": "5.12.0",
+      "source": "modrinth",
+      "slug": "viabackwards",
+      "required": true,
+      "evidence": "Modrinth: release 5.12.0 (2026-09-18) รองรับ 26.2",
+      "role": "ให้ client เก่า (ถึง 1.16.5) เข้า backend 26.2"
+    },
+    {
+      "id": "luckperms",
+      "name": "LuckPerms",
+      "version": "v5.5.71-bukkit",
+      "source": "modrinth",
+      "slug": "luckperms",
+      "required": true,
+      "evidence": "Modrinth: v5.5.71-bukkit (2026-08-06) อยู่ในผลกรอง game_versions=26.2",
+      "role": "สิทธิ์ผู้เล่น แรงค์ และ node ของ fantasy.* / fantasyadmin.*"
+    },
+    {
+      "id": "vaultunlocked",
+      "name": "VaultUnlocked",
+      "version": "2.20.3",
+      "source": "modrinth",
+      "slug": "vaultunlocked",
+      "required": true,
+      "evidence": "Modrinth: 2.20.3 (2026-09-16) อยู่ในผลกรอง game_versions=26.2",
+      "role": "สะพาน Vault API — FantasyCore ลงทะเบียน provider ของ gold.wallet; Vault 1.7.3 ดั้งเดิม (2020) เป็นทางสำรอง"
+    },
+    {
+      "id": "worldedit",
+      "name": "WorldEdit",
+      "version": "7.4.5",
+      "source": "modrinth",
+      "slug": "worldedit",
+      "required": true,
+      "evidence": "Modrinth: release 7.4.5 (2026-08-09) อยู่ในผลกรอง game_versions=26.2",
+      "role": "dependency ของ WorldGuard และงานสร้างแมพ"
+    },
+    {
+      "id": "worldguard",
+      "name": "WorldGuard",
+      "version": "7.0.19",
+      "source": "modrinth",
+      "slug": "worldguard",
+      "required": true,
+      "evidence": "Modrinth: 7.0.19 (2026-09-18) ระบุ 26.2–26.3",
+      "role": "region ของเมืองและแปลงผู้เล่น (FantasyCore อ่านผ่าน ClaimAdapter)"
+    },
+    {
+      "id": "protectionstones",
+      "name": "ProtectionStones",
+      "version": "2.10.6",
+      "source": "modrinth",
+      "slug": "protectionstones",
+      "modrinth_game_version": "1.21.10",
+      "required": true,
+      "risk": "Modrinth ระบุถึง 1.21.10 เท่านั้น ยังไม่ประกาศ 26.x — ต้องยืนยันบน staging ก่อน; ถ้าไม่ผ่าน ให้ build tag 2.10.7 (git 2026-09-27) จาก source หรือประเมิน fork ProtectionStones-Folia",
+      "evidence": "Modrinth: 2.10.6 (2026-01-30) release ล่าสุด",
+      "role": "หินกันบ้าน 5 ระดับ (templates/plugins/ProtectionStones/blocks)"
+    },
+    {
+      "id": "placeholderapi",
+      "name": "PlaceholderAPI",
+      "version": "2.12.3",
+      "source": "modrinth",
+      "slug": "placeholderapi",
+      "required": false,
+      "evidence": "Modrinth: 2.12.3 (2026-07-03) ระบุ 26.1–26.3",
+      "role": "%fantasycore_gold% / _bank / _red สำหรับ TAB/scoreboard ภายหลัง"
+    },
+    {
+      "id": "citizens",
+      "name": "Citizens",
+      "source": "manual",
+      "file_prefix": "Citizens",
+      "url": "https://ci.citizensnpcs.co/job/Citizens2/",
+      "required": false,
+      "role": "ไม่บังคับใน PoC — FantasyCore มี NPC สถานีของตัวเอง; ถ้าใช้ Citizens ให้ผูกด้วย /fa npc anchor + /npc command add -p fc action <id>"
+    },
+    {
+      "id": "fantasycore",
+      "name": "FantasyCore",
+      "version": "0.1.0",
+      "source": "local",
+      "path": "fantasycore/build/libs/FantasyCore-0.1.0.jar",
+      "required": true,
+      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP)"
+    }
+  ],
+  "deferred": [
+    {
+      "name": "Jobs Reborn",
+      "when": "ลำดับพัฒนา ข้อ 5 (เควส + Jobs payout)"
+    },
+    {
+      "name": "MMOItems + MythicLib",
+      "when": "ข้อ 4 (item adapter + recipe + repair) หลังตรวจ license/รุ่น"
+    },
+    {
+      "name": "MythicMobs",
+      "when": "ข้อ 6 (ดันเจี้ยน 1 tier + บอส 1 ตัว)"
+    },
+    {
+      "name": "BetonQuest",
+      "when": "เมื่อเควสเนื้อเรื่องเกินที่ Core ทำเอง"
+    },
+    {
+      "name": "EssentialsX",
+      "when": "ไม่จำเป็นใน PoC — FantasyCore เป็นเจ้าของ home/spawn/economy; ถ้าลงต้องปิด home/economy/repair ของ Essentials"
+    },
+    {
+      "name": "TAB",
+      "when": "ตาม HUD-TAB-SCOREBOARD-SPEC"
+    },
+    {
+      "name": "BlueMap",
+      "when": "phase เชื่อมเว็บ"
+    },
+    {
+      "name": "Geyser + Floodgate",
+      "when": "Bedrock หลัง Java ผ่านเกณฑ์"
+    }
+  ]
+}
