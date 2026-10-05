@@ -31,7 +31,7 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 |---|---|---|---|
 | banker ✅ | assets/references/npc-arcane-banker.png | npc_arcane_banker_v2.bbmodel | ทำแล้ว: `tools/build_arcane_banker.py` → `preview_arcane_banker.py` → `manifest_arcane_banker.py` → `verify_arcane_banker.py` |
 | smith ✅ | assets/references/npc-rune-smith.png | npc_rune_smith_v2.bbmodel | ทำแล้ว: `tools/build_rune_smith.py` → `preview_rune_smith.py` → `manifest_rune_smith.py` → `verify_rune_smith.py`; ขวามือ=+X (โมเดลหันทิศเหนือ/−Z) |
-| quest | assets/references/npc-quest-warden.png | npc_quest_warden_v2.bbmodel | segmented coattails, scroll left hand, height2.1 |
+| quest ✅ | assets/references/npc-quest-warden.png | npc_quest_warden_v2.bbmodel | ทำแล้ว: `tools/build_quest_warden.py` → `preview_quest_warden.py` → `manifest_quest_warden.py` → `verify_quest_warden.py` |
 | mage | assets/references/npc-portal-mage.png | npc_portal_mage_v2.bbmodel | hi_head hoodchildren, staffsocket, no arm above2.8blockworkingclearance |
 | halo | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | horizontal square ring, all display contexts, legacy headpreview |
 | sword | assets/references/item-runeblade.png | item_runeblade_v2.bbmodel/JSON | stepped pointedtip, groove, modestguard, hand/GUI/ground/mirror |

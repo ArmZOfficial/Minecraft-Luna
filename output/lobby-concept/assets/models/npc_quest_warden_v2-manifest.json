@@ -1,0 +1,231 @@
+{
+  "id": "npc_quest_warden_v2",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "offer_scroll",
+    "point_direction"
+  ],
+  "cubes": 123,
+  "bones": 17,
+  "height_target": 2.1,
+  "runtime_tested": false,
+  "reference": "assets/references/npc-quest-warden.png",
+  "texture": [
+    256,
+    256
+  ],
+  "native_timeline_frames_checked": 17,
+  "supersedes": "npc_quest_warden",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "builder": "tools/build_quest_warden.py",
+  "pose_capture": "tools/preview_quest_warden.py",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "right_coattail",
+      "parent": "waist",
+      "origin": [
+        2.4,
+        12.2,
+        0
+      ]
+    },
+    {
+      "name": "left_coattail",
+      "parent": "waist",
+      "origin": [
+        -2.4,
+        12.2,
+        0
+      ]
+    },
+    {
+      "name": "compass",
+      "parent": "waist",
+      "origin": [
+        4.2,
+        12.2,
+        -2.7
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        24,
+        0
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        5.7,
+        23.5,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        5.7,
+        18,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        5.7,
+        13,
+        -0.3
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -5.7,
+        23.5,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -5.7,
+        18,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -5.7,
+        13,
+        -0.3
+      ]
+    },
+    {
+      "name": "scroll",
+      "parent": "left_hand",
+      "origin": [
+        -5.7,
+        11.85,
+        -1.3
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2,
+        12,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        28,
+        0
+      ]
+    }
+  ],
+  "held_props": {
+    "scroll": "left_hand",
+    "compass": "waist",
+    "max_gap_px": 0
+  },
+  "handedness": "character right is +X (model faces north/-Z); scroll in the left hand per the ticket",
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.4,
+      0,
+      -4.4
+    ],
+    "to": [
+      4.4,
+      33.6,
+      4.4
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "keyframes": 74
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 2.1148,
+    "max_width": 1.0792
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_quest_warden_v2.bbmodel": "adef338d6307ab17d077b26357a9a871f6709515bda4a098767a84efaa208d2c",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2.png": "c36f425d29f11d060d71a1df53d6614f613525644e2f8ae1ce0fb87a33950a31",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-pose-checks.json": "097b14f55a03a3b392b2bbaae1795317d29a6f6feaa153280d4e135f7b2dcb9b",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-back.png": "7a187ce37649549657179dd7b103ffe12994ae694e7bc4bad253d890c3b372d0",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-front.png": "d8f0fd88a6f749776e1a3a42c0f306ca7c62c93a4b690fb49ef828c740ac1262",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-greet.png": "7774a0d5bf4a63fcabfd236ba36de8278bee6a22b1f1ec79acd8e6d3eed9b946",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-idle.png": "0a50b1f09758b0a96c8c3a7285560f090527855f38843a7a986f01cee23f849c",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-offer-scroll.png": "0c7b7ac3d48c79caf5afad7a5b9c9449c0356d7bb643ab46b4feab4a6bbd496e",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-point-direction.png": "215d53bef79fa0c00bfe0e9063ed4e27d07f3e887734f2a6a040c2cb9bd6ef5d",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-preview.png": "312a1c1e518144a3eb94840ded21f3bc6582936813d929ab2b2c2608a39cc4b3",
+    "output/lobby-concept/assets/models/npc_quest_warden_v2-right.png": "3913d8ccc04035d3134ab831753731235c08ad6752d2369b0d2e08e6eaa34244"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens runtime or client evidence yet",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "v1 (npc_quest_warden) is kept unchanged for comparison"
+  ]
+}

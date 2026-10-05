@@ -135,5 +135,27 @@
     ],
     "native_timeline_frames_checked": 19,
     "supersedes": "npc_rune_smith"
+  },
+  {
+    "id": "npc_quest_warden_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "offer_scroll",
+      "point_direction"
+    ],
+    "cubes": 123,
+    "bones": 17,
+    "height_target": 2.1,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-quest-warden.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_quest_warden"
   }
 ]
