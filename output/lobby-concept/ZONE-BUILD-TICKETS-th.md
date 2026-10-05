@@ -45,7 +45,7 @@ origin/กรอบนี้เป็นplacementproposal ไม่ใช่พ�
 
 | Station | NPC/template | ตำแหน่ง X,Z | target X,Z | yaw | Action |
 |---|---|---|---|---:|---|
-| spawn_guide | quest_warden variantguide | -8.5,15.5 | -3.5,15.5 | -90 | navigation.main |
+| spawn_guide | npc_crystal_guide (ทำแล้ว6ต.ค.) | -8.5,15.5 | -3.5,15.5 | -90 | navigation.main |
 | welcome_rewards | quest_warden concierge | 9.5,57.5 | 9.5,53.5 | 180 | reward.main |
 | welcome_wardrobe | concierge variant | -10.5,57.5 | -10.5,53.5 | 180 | cosmetic.wardrobe |
 | quest_gold | quest_warden | -64.5,-63.5 | -60.5,-63.5 | -90 | quest.gold |
@@ -78,7 +78,7 @@ NPCหนึ่งตัวเรียกเมนูรวมได้เพ�
 - Spawn(0.5,12.5)เท้าY0+1บนtileแห้ง มีช่องอากาศสูง3blockและพื้นเต็มใต้ตัว
 - Guideอยู่ตามregistry ไม่บังเส้นเข้าwelcome/quest; ป้ายไทย4ทิศ วางม้านั่งออกนอกroadclearance
 - **ทำmodelใหม่:** navigationcompass/ป้ายสัญลักษณ์ optional; ไม่ทำคริสตัลใหญ่นี้เป็นentitymodelเพียงเพื่อสวย
-- Animationguideidle/greet; crystalparticleเฉพาะใกล้ระยะ24และลดได้ ไม่วนcommandblockทุกtick
+- Animationguideidle/greet (โมเดล npc_crystal_guide มี point_direction/show_map/welcome เพิ่ม); crystalparticleเฉพาะใกล้ระยะ24และลดได้ ไม่วนcommandblockทุกtick
 - ตรวจ: firstjoin/respawn/warpต่างyawไม่ตกน้ำ, lineofsightguide, คืนจากdungeonไม่ไปยืนบนคริสตัล
 
 ## 02 หอรับรอง — รางวัล ตู้จดหมาย และชุดตกแต่ง

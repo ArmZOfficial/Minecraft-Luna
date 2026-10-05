@@ -198,6 +198,26 @@ texture แบบ bake ทีละหน้า 2 texel/หน่วย (32px �
 `python tools/verify_market_merchant.py` ผ่าน, สร้างใหม่ทั้งชุดได้ด้วย `python tools/rebuild_npc.py merchant`
 ใช้ได้กับร้าน A–D โซน06 (หันหน้าตาม station yaw); ยังไม่มีภาพอ้างอิงจาก ChatGPT และยังไม่ทดสอบในเกม; เกินbudgetNPCเมืองจึงเหมาะร้านละหนึ่งตัว
 
+## 10 — ผู้นำทางลานคริสตัล (NPC บริการตัวที่ 7, 6 ต.ค.2026)
+
+![ผู้นำทาง](assets/models/npc_crystal_guide-preview.png)
+![ด้านหน้า](assets/models/npc_crystal_guide-front.png)
+![ด้านหลัง](assets/models/npc_crystal_guide-back.png)
+![โบกมือทักทาย](assets/models/npc_crystal_guide-greet.png)
+![ชี้ทาง](assets/models/npc_crystal_guide-point-direction.png)
+![กางแผนที่](assets/models/npc_crystal_guide-show-map.png)
+![ต้อนรับ](assets/models/npc_crystal_guide-welcome.png)
+
+[ไฟล์](assets/models/npc_crystal_guide.bbmodel) · [texture512×512](assets/models/npc_crystal_guide.png) · [manifest](assets/models/npc_crystal_guide-manifest.json)
+149cubes/18bones/5animations/110keys: idle, greet (โบกแผนที่เหนือหัว), point_direction (ชี้ทางด้วยแผนที่ หันหน้าตาม), show_map (ยกแผนที่ขึ้นหน้าอกแล้วกางออก ก้มมอง), welcome (กางแขนต้อนรับ ไม้เท้ายกออกข้าง คริสตัลหมุน); สูงพร้อมไม้เท้า 2.15บล็อก
+ใช้กับ spawn_guide โซน01 (navigation.main) แทน quest_warden variant; สีชุดอิงธงลานคริสตัล: เสื้อคลุมน้ำเงินหลวงคาดผ้าทาบอกลายกากบาทขาว กลางกากบาทเป็นคริสตัลฟ้า
+ชุด: เสื้อตัวในสีงาช้าง ผ้าคลุมไหล่ขอบทอง เข็มกลัดคริสตัลคู่ที่คอ ผ้าคลุมหลังลายเข็มทิศ (แฉกงาช้าง วงทอง คริสตัลกลาง) ฮู้ดพับที่ต้นคอมีพู่ทอง
+อุปกรณ์: มือขวาถือไม้เท้าครอบทองเหลืองใส่คริสตัลฟ้าเรืองแสง (มีเศษคริสตัลม่วง), มือซ้ายถือแผนที่พับวาดชายฝั่ง ป่า ภูเขา เส้นทางจุดแดง และจุดคริสตัล; เอวมีเข็มทิศห้อย ถุงใส่แผนที่ และกระบอกม้วนกระดาษ
+หน้าตา: ผมน้ำตาลแดงยุ่ง ๆ มีปอยชี้ คิ้ว ตาฟ้า กระบนจมูก หูมีคริสตัลเม็ดเล็ก
+ตรวจ269เฟรม (ทุก tick ที่20FPS ทั้ง5ท่า): ไม้เท้าและแผนที่ติดกำปั้นทุกเฟรม (gap 0); ทดสอบ27จุดต่อชิ้นในกรอบของทุกชิ้น ไม้เท้าไม่ทะลุหัว/ตัว และแผนที่ไม่ทะลุตัว/แขนเลยสักจุด; ไม่จมพื้น สูงไม่เกิน40px
+ปัญหาที่เจอแล้วแก้: ไม้เท้าทะลุผ้าคลุมไหล่/ปลอกแขน → เลื่อนมาข้างหน้า0.85และทำกำปั้นลึกขึ้น; แผนที่นอนแบนและพับเข้าแขน → เปลี่ยนจุดจับเป็นมุมแผนที่ บานพับไปไว้ขอบไกล แล้วค้นมุมแขนใน Blockbench ให้แผนที่ตั้งตรงหันหาตาและไม่ชนทุกเฟรม; ท่าต้อนรับเดิมไม้เท้าบังหน้า → เปลี่ยนเป็นยกออกข้าง
+`python tools/verify_crystal_guide.py` ผ่าน, สร้างใหม่ทั้งชุดได้ด้วย `python tools/rebuild_npc.py guide`; ยังไม่มีภาพอ้างอิงจาก ChatGPT และยังไม่ทดสอบในเกม; เกินbudgetNPCเมืองแต่มีตัวเดียวที่จุดเกิด
+
 ## การส่งต่อและตรวจงาน
 
 - [คำสั่งส่งต่อ Antigravity/Blockbench](ANTIGRAVITY-BLOCKBENCH-HANDOFF-th.md) — ลำดับ polish, output v2 และเงื่อนไขตรวจ

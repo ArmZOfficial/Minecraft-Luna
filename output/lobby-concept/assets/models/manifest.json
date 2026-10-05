@@ -583,5 +583,27 @@
       512
     ],
     "native_timeline_frames_checked": 265
+  },
+  {
+    "id": "npc_crystal_guide",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "point_direction",
+      "show_map",
+      "welcome"
+    ],
+    "cubes": 149,
+    "bones": 18,
+    "height_target": 2.1,
+    "runtime_tested": false,
+    "reference": null,
+    "texture": [
+      512,
+      512
+    ],
+    "native_timeline_frames_checked": 269
   }
 ]

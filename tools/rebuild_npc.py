@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 MODELS=ROOT/"output/lobby-concept/assets/models"
 NPCS={"banker":("npc_arcane_banker_v2","arcane_banker"),"smith":("npc_rune_smith_v2","rune_smith"),
       "warden":("npc_quest_warden_v2","quest_warden"),"mage":("npc_portal_mage_v2","portal_mage"),
-      "merchant":("npc_market_merchant","market_merchant")}
+      "merchant":("npc_market_merchant","market_merchant"),"guide":("npc_crystal_guide","crystal_guide")}
 
 def run(*args):
     result=subprocess.run([sys.executable,*args],cwd=ROOT/"tools",capture_output=True,text=True)

@@ -35,6 +35,7 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 | mage ✅ | assets/references/npc-portal-mage.png | npc_portal_mage_v2.bbmodel | ทำแล้ว: hood ใต้hi_head, staff_socket, ทุกท่า≤2.66บล็อก; `tools/build_portal_mage.py` → `preview_portal_mage.py` → `manifest_portal_mage.py` → `verify_portal_mage.py` |
 | halo ✅ | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | ทำแล้ว: display8context; legacy 1.16.5 ยังต้องทดสอบ; `tools/build_luma_items_v2.py halo` → `preview_luma_items_v2.py` → `verify_luma_items_v2.py --write-manifest` |
 | sword ✅ | assets/references/item-runeblade.png | item_runeblade_v2.bbmodel/JSON | ทำแล้ว: ปลายขั้น/ร่องรูน/การ์ด, display8context รวมมือซ้าย(mirror); `tools/build_luma_items_v2.py runeblade` |
+| guide ✅ | ไม่มี (ออกแบบจากใบงานโซน01/ธงลาน) | npc_crystal_guide.bbmodel | ทำแล้ว: 149ชิ้น/18bones/5ท่า, ไม้เท้าขวา/แผนที่ซ้ายติดมือ, ทดสอบทะลุ27จุดต่อชิ้น,269เฟรม; `build_crystal_guide.py` → `preview_crystal_guide.py` → `manifest_crystal_guide.py` → `verify_crystal_guide.py` |
 | alchemist ✅ | assets/references/npc-lyra-alchemist-turnaround.png | npc_lyra_alchemist.bbmodel | ทำแล้ว: 206ชิ้น/21bones/5ท่า, คอขวดซ้าย/ด้ามไม้ขวาติดมือ, เตา root ไม่เคลื่อน,265เฟรม; `build_alchemist.py` → `preview_alchemist.py` → `manifest_alchemist.py` → `verify_alchemist.py` |
 
 ## ข้อกำหนดไฟล์
