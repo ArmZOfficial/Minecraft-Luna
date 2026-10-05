@@ -1,0 +1,51 @@
+# เริ่มอ่านที่นี่ — Fantasy MMO RPG Lobby
+
+ฉบับล่าสุด 5 ตุลาคม 2026: **Luma / ลูม่า** เมืองขนาด 400 × 400 บล็อกสำหรับ fantasy และ casual roleplay
+มีภาพ 12 โซน แผนภายใน เว็บต้นแบบ โลโก้ และโมเดล pilot ที่ export ผ่าน Blockbench MCP
+
+## เอกสารหลัก
+
+1. [ภาพประกอบ 12 โซน](ZONE-ILLUSTRATIONS-th.md) — ภาพคอนเซปต์เห็นเคาน์เตอร์ NPC และการตกแต่ง
+2. [ผังแมพและแปลนภายใน](INTERIOR-AND-MAP-PLAN-th.md) — พิกัดโซน ขนาดอาคาร ตารางเฟอร์นิเจอร์ local และ service action
+3. [ระบบและสเปกปลั๊กอิน](SERVER-SYSTEMS-PLAN-th.md) — เทียบคลิป ชุดปลั๊กอิน FantasyCore ฐานข้อมูล ธุรกรรมและแผนทดสอบ
+4. [ผลวิจัยจากแหล่งผู้พัฒนา](PLUGIN-RESEARCH-SOURCES-th.md) — ลิงก์ทางการ ตัวเลือก และข้อจำกัด
+5. [คู่มือตกแต่งโครงสร้าง](LOBBY-DECORATION-COMPACT-th.md) — รูปทรงคริสตัล หอเวท ถนน และชุดวัสดุ
+6. [ใบงานสร้าง 12 โซน](ZONE-BUILD-TICKETS-th.md) — กำกับแต่ละภาพ พิกัดจุดบริการ ทิศ NPC โมเดลและเกณฑ์ตรวจบล็อก
+7. [แกลเลอรีภาพและโมเดล](ASSET-GALLERY-th.md) — reference 6 ชุดและไฟล์ NPC/item pilot แก้ไขได้
+8. [แผนคลังโมเดลและ modern item](MODEL-AND-CONTENT-PLAN-th.md) — rig, animation, asset budget, legacy/modern pack
+9. [ส่งต่อ Antigravity / Blockbench](ANTIGRAVITY-BLOCKBENCH-HANDOFF-th.md) — การเชื่อมที่ทำแล้วและคำสั่ง polish รุ่นถัดไป
+10. [TAB / Scoreboard / HUD / MOTD](HUD-TAB-SCOREBOARD-SPEC-th.md) — ล็อกองค์ประกอบตามภาพอ้างอิง พร้อมข้อจำกัดแต่ละ client
+11. [FantasyAdminPanel](ADMIN-PANEL-SPEC-th.md) — เมนู คำสั่งสั้น สิทธิ์ และกระบวนการ preview/apply
+12. [เว็บและ automation](WEB-AND-AUTOMATION-PLAN-th.md) — BlueMap, ชำระเงิน, ส่งของ, บัญชี และ recovery
+13. [แบรนด์ โลโก้และภาพเว็บ](BRAND-GUIDE-th.md) — เขียวหยก/ทอง TAB concept และหน้าหลักเว็บรุ่นใหม่
+14. [เปิดเว็บต้นแบบ](../../website/README-th.md) — วิธีรันและเมนูที่ใช้งานได้
+15. [แหล่งข้อมูล modern modeling](MODERN-MODELING-SOURCES-th.md) — เอกสารทางการและ compatibility gates
+
+## ข้อเลือกสำคัญ
+
+- Java-first เพื่อความละเอียดและความเสถียร เป้าหมาย client ต่ำสุด 1.16.5
+- backend ใช้ Paper รุ่นเดียวที่ยังรองรับและผ่านชุด plugin matrix; client เก่าเข้าโดย ViaVersion/ViaBackwards
+- Bedrock เป็นงานขยายภายหลัง ไม่บังคับให้ภาพและระบบ Java ลดคุณภาพในรอบแรก
+- ของรุ่นใหม่ใช้เป็นภาพเสริมได้ แต่ป้าย ทางเดิน เมนู และบล็อกหลักมี fallback ที่ client 1.16.5 ใช้ได้
+- เงินสองชนิด ธนาคาร รางวัลบอส ซ่อมอาวุธ และตลาดต้องมีเจ้าของข้อมูลชัดเจน
+- ระบบที่เห็นในคลิปเป็นชุดหลัก; ประมูล ร้านยา ตีบวก DPS dummy และชุดแฟนตาซีเพิ่มเติมเป็นตัวเลือก
+- รูนเป็นพื้นที่อนาคตตามที่ผู้เล่ากล่าว ณ เวลาถ่าย
+
+## สถานะงาน
+
+เว็บต้นแบบทดลองข่าว ค้นหา 12 โซน คู่มือ กิจกรรม อันดับแบบรอข้อมูล และศูนย์บัญชีได้แล้ว
+มีโลโก้ต้นฉบับ และ NPC pilot 4 ตัวที่มี idle/greet/ท่างาน พร้อม item pilot 2 ชิ้น
+เชื่อม Blockbench MCP ในเครื่องและเพิ่ม config สำหรับ Antigravity แล้ว แต่ Antigravity ต้อง refresh server เพื่อโหลด config ใหม่
+
+ยังไม่ได้แก้โลกจริง ติดตั้ง JAR หรือทดสอบบนเซิร์ฟเวอร์ Minecraft
+เว็บยังไม่เชื่อมแผนที่สด ผู้ให้บริการชำระเงิน หรือคิวส่งของเข้าเกม
+รายการปลั๊กอินเป็นข้อเสนอจากแหล่งทางการ ไม่ได้ยืนยันรายชื่อ plugin ของ SIXPIXEL
+
+ตัวเลขค่าธรรมเนียม/ดาเมจ/เวลาในคลิปเป็นตัวอย่างและคำกล่าวของผู้เล่า สูตรและตารางรางวัลต้นฉบับยังไม่มีครบ จึงยังอ้างว่าเหมือนทุกค่าไม่ได้
+
+## ภาพที่เก็บไว้
+
+- [ภาพเมือง Fantasy ขนาดกลาง](lobby-compact-fantasy.png)
+- [ภาพเมืองขนาดกลางก่อนปรับ Fantasy](lobby-compact.png)
+- [ภาพเมืองขนาดใหญ่เดิม](lobby-overview.png) และ [ผังใหญ่เดิม](lobby-zones.png)
+- ภาพรายโซนทั้งหมดอยู่ในโฟลเดอร์ zones พร้อม [พรอมป์ต์ภาพ](zones/PROMPTS.md)

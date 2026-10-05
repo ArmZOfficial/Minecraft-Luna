@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"current_format_codec\": \"project\",\n  \"count\": 1,\n  \"codecs\": [\n    {\n      \"id\": \"project\",\n      \"name\": \"Blockbench Project\",\n      \"extension\": \"bbmodel\",\n      \"has_compile\": true,\n      \"has_export\": true,\n      \"supports_partial_export\": true,\n      \"belongs_to_current_format\": true,\n      \"available\": true\n    }\n  ]\n}"
+    }
+  ]
+}

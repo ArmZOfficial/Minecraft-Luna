@@ -1,0 +1,951 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"blockbench\":{\"version\":\"5.2.1\",\"environment\":\"desktop\",\"platform\":\"win32\",\"is_mobile\":false},\"plugin\":{\"version\":\"1.10.0\",\"build_id\":\"4ee93c50e0e04e2a5385ac9d0281318dd4471db5ff6c1677a1c4a6e1b767e4b3\",\"build_mode\":\"production\"},\"project\":null,\"format\":null,\"formats\":[{\"id\":\"bedrock\",\"name\":\"Bedrock Entity\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"animation_mode\",\"animation_files\",\"animation_controllers\",\"box_uv\",\"optional_box_uv\",\"single_texture\",\"uv_rotation\",\"pbr\",\"rotate_cubes\",\"texture_meshes\",\"locators\",\"molang\"]},{\"id\":\"bedrock_block\",\"name\":\"Bedrock Block\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"display_mode\",\"optional_box_uv\",\"uv_rotation\",\"pbr\",\"rotate_cubes\",\"texture_meshes\",\"molang\"]},{\"id\":\"bedrock_old\",\"name\":\"Bedrock Legacy Model\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"animation_mode\",\"animation_files\",\"animation_controllers\",\"box_uv\",\"single_texture\",\"pbr\",\"locators\",\"molang\"]},{\"id\":\"free\",\"name\":\"Generic Model\",\"supported_features\":[\"meshes\",\"bone_rig\",\"edit_mode\",\"paint_mode\",\"animation_mode\",\"optional_box_uv\",\"per_texture_uv_size\",\"uv_rotation\",\"armature_rig\",\"pbr\",\"rotate_cubes\",\"locators\",\"molang\"]},{\"id\":\"gltf_to_minecraft_zip\",\"name\":\"glTF to GeckoLib\",\"supported_features\":[\"edit_mode\",\"paint_mode\",\"molang\"]},{\"id\":\"image\",\"name\":\"Image\",\"supported_features\":[\"paint_mode\",\"image_editor\",\"single_texture\",\"per_texture_uv_size\",\"molang\"]},{\"id\":\"java_block\",\"name\":\"Java Block/Item\",\"supported_features\":[\"edit_mode\",\"paint_mode\",\"display_mode\",\"optional_box_uv\",\"uv_rotation\",\"pbr\",\"rotate_cubes\",\"rotation_limit\"]},{\"id\":\"minecraft_title\",\"name\":\"Minecraft Title\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"per_texture_uv_size\",\"uv_rotation\",\"rotate_cubes\",\"molang\"]},{\"id\":\"modded_entity\",\"name\":\"Modded Entity\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"animation_mode\",\"box_uv\",\"single_texture\",\"box_uv_float_size\",\"pbr\",\"rotate_cubes\",\"molang\"],\"unknown_features\":[\"integer_size\"]},{\"id\":\"optifine_entity\",\"name\":\"OptiFine Entity\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"box_uv\",\"optional_box_uv\",\"per_texture_uv_size\",\"per_group_texture\",\"pbr\"],\"unknown_features\":[\"integer_size\"]},{\"id\":\"optifine_part\",\"name\":\"OptiFine Part\",\"supported_features\":[\"bone_rig\",\"edit_mode\",\"paint_mode\",\"box_uv\",\"optional_box_uv\",\"per_texture_uv_size\",\"per_group_texture\",\"pbr\"],\"unknown_features\":[\"integer_size\"]},{\"id\":\"skin\",\"name\":\"Minecraft Skin\",\"supported_features\":[\"bone_rig\",\"paint_mode\",\"box_uv\",\"single_texture\",\"integer_size\",\"molang\"]}],\"tools\":[{\"name\":\"activate_texture\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"add_armature\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"add_armature_bone\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"add_group\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"add_locator\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"add_texture_group\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"animation_copy_paste\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"animation_graph_editor\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"animation_timeline\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"apply_texture\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"assign_texture_channel\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"auto_uv_mesh\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"batch_keyframe_operations\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"bone_rigging\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"bulk_set_material_instances\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"capture_app_screenshot\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"capture_screenshot\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"clear_material_instances\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"clear_vertex_weights\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"color_picker_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"configure_material\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"copy_brush_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_animation\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"create_brush_preset\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"create_cylinder\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_mesh_face\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_offscreen_view\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"create_particle_effect\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_pbr_material\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_polyhedron\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"create_project\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"create_sphere\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"create_texture\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"delete_mesh_elements\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"delete_offscreen_view\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"delete_texture\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"draw_shape_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"duplicate_element\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"emulate_clicks\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"enter_display_mode\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"eraser_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"export_model\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"export_particle_pack\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"extrude_mesh\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"fill_dialog\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"filter_by_material\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"find_elements_by_criteria\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"flip_in_place\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"from_geo_json\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"geckolib_export_animations\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_export_display\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_export_model\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_get_format_info\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_get_keyframe_easing\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_list_easings\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"geckolib_reverse_keyframe_easing\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_set_keyframe_easing\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_set_project_settings\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"geckolib_validate_model\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"get_armature\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_armature_bone\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_average_fps\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"get_capabilities\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"get_cube_uv\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_display_transform\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"get_face_material_instances\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_material_info\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_mesh_info\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_project_info\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_selection\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_texture\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_undo_stack\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"get_vertex_weights\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"gradient_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_create_quad\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_create_visibility_keyframe\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_get_cube_properties\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_get_cube_stretch\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_get_format_info\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_list_attachment_pieces\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_list_attachments\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_set_animation_loop\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_set_attachment_piece\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_set_cube_properties\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_set_cube_stretch\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"hytale_validate_model\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"import_texture_set\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"inspect_block_bounds\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"knife_cut_cube\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"knife_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"list_armature_bones\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_armatures\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_export_formats\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"list_material_instances\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_materials\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_modes\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"list_molang_variables\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"list_outline\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_particle_effects\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"list_particle_presets\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"list_textures\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"list_views\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"load_brush_preset\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"loop_cut_mesh\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"manage_keyframes\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"manage_particle_keyframes\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"merge_mesh_vertices\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"modify_cube\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"move_mesh_vertices\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"paint_fill_tool\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"paint_settings\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"paint_with_brush\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"place_cube\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"place_mesh\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"redo\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"remove_armature\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"remove_armature_bone\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"remove_element\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"rename_element\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"resize_offscreen_view\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"risky_eval\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"rotate_mesh_uv\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"save_checkpoint\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"save_material_config\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"select_all_of_type\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"select_armature_bones\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"select_mesh_elements\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_camera_angle\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_cube_uv\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_display_transform\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_face_material_instance\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_ik_controller\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_mesh_uv\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"set_mode\",\"status\":\"stable\",\"enabled\":true},{\"name\":\"set_vertex_weight\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"set_vertex_weights_batch\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"slice_cubes_to_block_grid\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"subdivide_mesh\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"texture_layer_management\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"texture_selection\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"trigger_action\",\"status\":\"experimental\",\"enabled\":true},{\"name\":\"undo\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"update_armature\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"update_armature_bone\",\"status\":\"stable\",\"enabled\":false},{\"name\":\"update_armature_bones_batch\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"update_particle_effect\",\"status\":\"experimental\",\"enabled\":false},{\"name\":\"variable_placeholders\",\"status\":\"experimental\",\"enabled\":false}],\"notes\":[\"Format features are host declarations, not guarantees of MCP tool compatibility. Null or unknown_features means the host did not declare a boolean value; supported_features lists true flags.\",\"Tool enabled state reflects native editor conditions. Use list_modes and set_mode to change editor tabs, then refresh tools/list. Calls still validate individual arguments.\"]}"
+    }
+  ],
+  "structuredContent": {
+    "blockbench": {
+      "version": "5.2.1",
+      "environment": "desktop",
+      "platform": "win32",
+      "is_mobile": false
+    },
+    "plugin": {
+      "version": "1.10.0",
+      "build_id": "4ee93c50e0e04e2a5385ac9d0281318dd4471db5ff6c1677a1c4a6e1b767e4b3",
+      "build_mode": "production"
+    },
+    "project": null,
+    "format": null,
+    "formats": [
+      {
+        "id": "bedrock",
+        "name": "Bedrock Entity",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "animation_mode",
+          "animation_files",
+          "animation_controllers",
+          "box_uv",
+          "optional_box_uv",
+          "single_texture",
+          "uv_rotation",
+          "pbr",
+          "rotate_cubes",
+          "texture_meshes",
+          "locators",
+          "molang"
+        ]
+      },
+      {
+        "id": "bedrock_block",
+        "name": "Bedrock Block",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "display_mode",
+          "optional_box_uv",
+          "uv_rotation",
+          "pbr",
+          "rotate_cubes",
+          "texture_meshes",
+          "molang"
+        ]
+      },
+      {
+        "id": "bedrock_old",
+        "name": "Bedrock Legacy Model",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "animation_mode",
+          "animation_files",
+          "animation_controllers",
+          "box_uv",
+          "single_texture",
+          "pbr",
+          "locators",
+          "molang"
+        ]
+      },
+      {
+        "id": "free",
+        "name": "Generic Model",
+        "supported_features": [
+          "meshes",
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "animation_mode",
+          "optional_box_uv",
+          "per_texture_uv_size",
+          "uv_rotation",
+          "armature_rig",
+          "pbr",
+          "rotate_cubes",
+          "locators",
+          "molang"
+        ]
+      },
+      {
+        "id": "gltf_to_minecraft_zip",
+        "name": "glTF to GeckoLib",
+        "supported_features": [
+          "edit_mode",
+          "paint_mode",
+          "molang"
+        ]
+      },
+      {
+        "id": "image",
+        "name": "Image",
+        "supported_features": [
+          "paint_mode",
+          "image_editor",
+          "single_texture",
+          "per_texture_uv_size",
+          "molang"
+        ]
+      },
+      {
+        "id": "java_block",
+        "name": "Java Block/Item",
+        "supported_features": [
+          "edit_mode",
+          "paint_mode",
+          "display_mode",
+          "optional_box_uv",
+          "uv_rotation",
+          "pbr",
+          "rotate_cubes",
+          "rotation_limit"
+        ]
+      },
+      {
+        "id": "minecraft_title",
+        "name": "Minecraft Title",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "per_texture_uv_size",
+          "uv_rotation",
+          "rotate_cubes",
+          "molang"
+        ]
+      },
+      {
+        "id": "modded_entity",
+        "name": "Modded Entity",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "animation_mode",
+          "box_uv",
+          "single_texture",
+          "box_uv_float_size",
+          "pbr",
+          "rotate_cubes",
+          "molang"
+        ],
+        "unknown_features": [
+          "integer_size"
+        ]
+      },
+      {
+        "id": "optifine_entity",
+        "name": "OptiFine Entity",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "box_uv",
+          "optional_box_uv",
+          "per_texture_uv_size",
+          "per_group_texture",
+          "pbr"
+        ],
+        "unknown_features": [
+          "integer_size"
+        ]
+      },
+      {
+        "id": "optifine_part",
+        "name": "OptiFine Part",
+        "supported_features": [
+          "bone_rig",
+          "edit_mode",
+          "paint_mode",
+          "box_uv",
+          "optional_box_uv",
+          "per_texture_uv_size",
+          "per_group_texture",
+          "pbr"
+        ],
+        "unknown_features": [
+          "integer_size"
+        ]
+      },
+      {
+        "id": "skin",
+        "name": "Minecraft Skin",
+        "supported_features": [
+          "bone_rig",
+          "paint_mode",
+          "box_uv",
+          "single_texture",
+          "integer_size",
+          "molang"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "name": "activate_texture",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "add_armature",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "add_armature_bone",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "add_group",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "add_locator",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "add_texture_group",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "animation_copy_paste",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "animation_graph_editor",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "animation_timeline",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "apply_texture",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "assign_texture_channel",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "auto_uv_mesh",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "batch_keyframe_operations",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "bone_rigging",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "bulk_set_material_instances",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "capture_app_screenshot",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "capture_screenshot",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "clear_material_instances",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "clear_vertex_weights",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "color_picker_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "configure_material",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "copy_brush_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_animation",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "create_brush_preset",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "create_cylinder",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_mesh_face",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_offscreen_view",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "create_particle_effect",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_pbr_material",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_polyhedron",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "create_project",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "create_sphere",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "create_texture",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "delete_mesh_elements",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "delete_offscreen_view",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "delete_texture",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "draw_shape_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "duplicate_element",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "emulate_clicks",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "enter_display_mode",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "eraser_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "export_model",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "export_particle_pack",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "extrude_mesh",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "fill_dialog",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "filter_by_material",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "find_elements_by_criteria",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "flip_in_place",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "from_geo_json",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_export_animations",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_export_display",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_export_model",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_get_format_info",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_get_keyframe_easing",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_list_easings",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "geckolib_reverse_keyframe_easing",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_set_keyframe_easing",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_set_project_settings",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "geckolib_validate_model",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "get_armature",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_armature_bone",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_average_fps",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "get_capabilities",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "get_cube_uv",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_display_transform",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "get_face_material_instances",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_material_info",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_mesh_info",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_project_info",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_selection",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_texture",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_undo_stack",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "get_vertex_weights",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "gradient_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_create_quad",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_create_visibility_keyframe",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_get_cube_properties",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_get_cube_stretch",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_get_format_info",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_list_attachment_pieces",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_list_attachments",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_set_animation_loop",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_set_attachment_piece",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_set_cube_properties",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_set_cube_stretch",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "hytale_validate_model",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "import_texture_set",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "inspect_block_bounds",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "knife_cut_cube",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "knife_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "list_armature_bones",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_armatures",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_export_formats",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "list_material_instances",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_materials",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_modes",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "list_molang_variables",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "list_outline",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_particle_effects",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "list_particle_presets",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "list_textures",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "list_views",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "load_brush_preset",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "loop_cut_mesh",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "manage_keyframes",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "manage_particle_keyframes",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "merge_mesh_vertices",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "modify_cube",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "move_mesh_vertices",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "paint_fill_tool",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "paint_settings",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "paint_with_brush",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "place_cube",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "place_mesh",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "redo",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "remove_armature",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "remove_armature_bone",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "remove_element",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "rename_element",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "resize_offscreen_view",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "risky_eval",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "rotate_mesh_uv",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "save_checkpoint",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "save_material_config",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "select_all_of_type",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "select_armature_bones",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "select_mesh_elements",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_camera_angle",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_cube_uv",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_display_transform",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_face_material_instance",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_ik_controller",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_mesh_uv",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "set_mode",
+        "status": "stable",
+        "enabled": true
+      },
+      {
+        "name": "set_vertex_weight",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "set_vertex_weights_batch",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "slice_cubes_to_block_grid",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "subdivide_mesh",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "texture_layer_management",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "texture_selection",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "trigger_action",
+        "status": "experimental",
+        "enabled": true
+      },
+      {
+        "name": "undo",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "update_armature",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "update_armature_bone",
+        "status": "stable",
+        "enabled": false
+      },
+      {
+        "name": "update_armature_bones_batch",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "update_particle_effect",
+        "status": "experimental",
+        "enabled": false
+      },
+      {
+        "name": "variable_placeholders",
+        "status": "experimental",
+        "enabled": false
+      }
+    ],
+    "notes": [
+      "Format features are host declarations, not guarantees of MCP tool compatibility. Null or unknown_features means the host did not declare a boolean value; supported_features lists true flags.",
+      "Tool enabled state reflects native editor conditions. Use list_modes and set_mode to change editor tabs, then refresh tools/list. Calls still validate individual arguments."
+    ]
+  }
+}

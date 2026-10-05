@@ -1,0 +1,70 @@
+[
+  {
+    "id": "npc_arcane_banker",
+    "format": "free",
+    "status": "pilot-model-exported",
+    "animations": [
+      "idle",
+      "greet",
+      "count_coins"
+    ],
+    "cubes": 36,
+    "height_target": 2.0,
+    "runtime_tested": false
+  },
+  {
+    "id": "npc_rune_smith",
+    "format": "free",
+    "status": "pilot-model-exported",
+    "animations": [
+      "idle",
+      "greet",
+      "hammer"
+    ],
+    "cubes": 38,
+    "height_target": 2.2,
+    "runtime_tested": false
+  },
+  {
+    "id": "npc_quest_warden",
+    "format": "free",
+    "status": "pilot-model-exported",
+    "animations": [
+      "idle",
+      "greet",
+      "offer_scroll"
+    ],
+    "cubes": 30,
+    "height_target": 2.1,
+    "runtime_tested": false
+  },
+  {
+    "id": "npc_portal_mage",
+    "format": "free",
+    "status": "pilot-model-exported",
+    "animations": [
+      "idle",
+      "greet",
+      "cast"
+    ],
+    "cubes": 36,
+    "height_target": 2.3,
+    "runtime_tested": false
+  },
+  {
+    "id": "item_aether_halo",
+    "format": "java_block",
+    "status": "pilot-model-exported",
+    "animations": [],
+    "cubes": 12,
+    "runtime_tested": false
+  },
+  {
+    "id": "item_runeblade",
+    "format": "java_block",
+    "status": "pilot-model-exported",
+    "animations": [],
+    "cubes": 6,
+    "runtime_tested": false
+  }
+]

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Luma เมืองแฟนตาซีสำหรับ Minecraft ข่าวสาร แผนที่เมือง และของตกแต่ง">
+  <title>Luma | เมืองของเรา</title>
+  <meta name="theme-color" content="#0d211a">
+  <meta property="og:title" content="Luma • Fantasy Town">
+  <meta property="og:description" content="เมือง Minecraft แฟนตาซี เล่นบทบาทตามใจคุณ สำรวจเมือง อ่านข่าว และค้นหาระบบเกม">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="portal.css">
+  <script src="portal.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+  <header class="nav">
+    <a class="wordmark" href="#home" aria-label="Luma หน้าหลัก"><img class="brand-logo" src="assets/luma-logo.webp" alt="Luma Fantasy Town" width="160" height="64"></a>
+    <button id="menu-toggle" class="icon-button menu-toggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="primary-nav">☰</button>
+    <nav id="primary-nav" aria-label="เมนูหลัก"><a href="#home">หน้าหลัก</a><a href="#news">ข่าวสาร</a><a href="#map">แผนที่</a><a href="#wiki">คู่มือเกม</a><a href="#events">กิจกรรม</a><a href="#shop">ร้านค้า</a></nav>
+    <div class="nav-actions"><button id="search-open" class="icon-button" aria-label="ค้นหาทั้งเว็บ"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></button><button id="theme" class="text-button" aria-label="สลับโหมดสี">โหมดสว่าง</button><a class="account-link" href="#account">บัญชีของฉัน</a></div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <footer><a class="wordmark" href="#home"><img class="brand-logo" src="assets/luma-logo.webp" alt="Luma Fantasy Town" width="160" height="64"></a><div><p>สร้างเรื่องราวของคุณในเมือง Luma</p><div class="footer-links"><a href="#status">สถานะบริการ</a><a href="#rankings">อันดับผู้เล่น</a><a href="#wiki">คู่มือและกติกา</a><a href="#privacy">ความเป็นส่วนตัว</a><a href="#terms">เงื่อนไขบริการ</a></div></div><p class="fine">ต้นแบบเว็บ • ยังไม่เชื่อมข้อมูลเกมหรือเปิดรับชำระเงินจริง</p><p class="fine">บริการอิสระ ไม่ใช่ผลิตภัณฑ์ทางการของ Minecraft หรือ Mojang</p></footer>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span>LUMA</span><button id="close-dialog" aria-label="ปิดหน้าต่าง">ปิด</button></div><div id="dialog-content"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

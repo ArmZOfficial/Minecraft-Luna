@@ -1,0 +1,19 @@
+# Original world downloads are not part of the authored project.
+/*.zip
+/*.schem
+*.jar
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.log
+**/.sites-checkout*/
+**/.sites-runtime/
+output/luma-site-source/
+output/luma-site.tar.gz
+output/*report*.json
+**/*mcp_config*.json
+**/*.backup*
+.codex/
