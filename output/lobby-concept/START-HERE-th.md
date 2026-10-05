@@ -78,3 +78,4 @@ GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร�
 29. [Moonfall ปาร์ตี้ v0.8](../../fantasycore/PARTY-DUNGEONS-th.md) — 2instance/roster/scale/reconnect/schema7/recovery/checklist S
 
 30. [บอสจันทราลงสีละเอียด/8animations](../../server/content/dungeons/moonfall/README-th.md) — nativeBlockbench146cubes/19bones/150keys, 4มุมและ29poseframes, sourceพร้อม; ModelEngineadapter/เกมจริงยังรอ
+31. [นายธนาคารv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 182cubes/17bones/4animations, สมุด/เหรียญติดมือทุกเฟรม, offlinegateผ่าน; เกมจริงยังรอ

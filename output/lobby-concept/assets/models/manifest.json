@@ -91,5 +91,27 @@
       128
     ],
     "native_timeline_frames_checked": 29
+  },
+  {
+    "id": "npc_arcane_banker_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "count_coins",
+      "inspect_ledger"
+    ],
+    "cubes": 182,
+    "bones": 17,
+    "height_target": 2.0,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-arcane-banker.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_arcane_banker"
   }
 ]

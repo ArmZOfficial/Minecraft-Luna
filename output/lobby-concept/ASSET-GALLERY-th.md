@@ -13,6 +13,20 @@
 สร้างเสื้อคลุมเขียวหยก ขอบทอง สมุดบัญชีและตราคลัง เพิ่ม texture เสื้อ/มือและเหรียญใน v2
 วางที่ bank teller ตามใบงานโซน 05 หันเข้าจุดยืนผู้เล่น ใช้ hitbox ของเคาน์เตอร์ที่อ่านทิศได้ชัดเจน
 
+### v2 ลงรายละเอียดเต็ม (6 ต.ค.2026)
+
+![โมเดลธนาคารv2](assets/models/npc_arcane_banker_v2-preview.png)
+![v2ด้านหน้า](assets/models/npc_arcane_banker_v2-front.png)
+![v2เปิดสมุด](assets/models/npc_arcane_banker_v2-inspect-ledger.png)
+
+[ไฟล์v2](assets/models/npc_arcane_banker_v2.bbmodel) · [texture256×256](assets/models/npc_arcane_banker_v2.png) · [manifest](assets/models/npc_arcane_banker_v2-manifest.json)
+182cubes/17bones/4animations/87keys: idle, greet, count_coins, inspect_ledger
+แว่นกรอบโปร่งเห็นตา หูยื่นแยกผม เคราแก้ม/กราม/ปลายพร้อมหัวเข็มขัด ปกเสื้องาช้าง สายสร้อยและเหรียญตรา
+บ่าทองฝังคริสตัล ข้อมือขอบทอง นิ้วแยก แหวน ชายเสื้อแยกซ้ายขวาพร้อมแถบงาช้าง กุญแจนิรภัยและกระเป๋าเหรียญที่เอว รองเท้ามีหัวเข็มขัด
+สมุดบัญชีมีปก/หน้ากระดาษ/สัน/มุมทอง/ตรา/ริบบิ้น และนิ้วโป้งจับปก; เหรียญแปดเหลี่ยมอยู่ในนิ้วขวา หลังเสื้อปักกุญแจห้องนิรภัย
+ตรวจ17เฟรมจากtimelineจริง: สมุด/เหรียญติดมือทุกเฟรม (gap 0) และ `python tools/verify_arcane_banker.py` ผ่าน; v1เก็บไว้ไม่แก้
+เกินbudgetNPCเมือง(40–70cubes) จึงเหมาะกับnpcธนาคารตัวเดียวที่เคาน์เตอร์ ถ้าวางหลายตัวต้องทำLOD/ตัวเบาแยก; ยังไม่ทดสอบในเกม
+
 ## 02 — ช่างตีเหล็กรูน
 
 ![ภาพอ้างอิงช่าง](assets/references/npc-rune-smith.png)

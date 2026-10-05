@@ -92,7 +92,7 @@ base material ของ legacy hat ต้องเลือกและทดส
 
 | ID | ไฟล์ต้นทาง | Animation จริง | งาน polish ที่ต้องทำ |
 |---|---|---|---|
-| npc_arcane_banker | assets/models/npc_arcane_banker.bbmodel | idle/greet/count_coins | ใบหน้า หนวด ขอบทอง/เหรียญ texture; มือ count ต้องถือ coin |
+| npc_arcane_banker | assets/models/npc_arcane_banker.bbmodel | idle/greet/count_coins | v2 ทำแล้ว: npc_arcane_banker_v2.bbmodel 182cubes/17bones + inspect_ledger; เหลือruntime QA |
 | npc_rune_smith | assets/models/npc_rune_smith.bbmodel | idle/greet/hammer | ค้อนตรงทั่ง เพิ่มแว่นและลายรูนตาม reference |
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | หู/ผม เสื้อแยกชาย และ gesture ม้วนเควส |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | hood silhouette, staff socket, ตั้ง cast ไม่ชนเพดาน |
@@ -182,6 +182,6 @@ Corev0.8ไม่ได้ใช้modelนี้ในเกม มี [rendere
 - บอสใช้รายละเอียดระดับชิ้นนี้เป็นbenchmarkภาพ; NPCบริการคงbudget40–70cubes/9–14bonesก่อนเพิ่ม เพราะต้องแสดงหลายตัวในเมือง
 - ไม่เพิ่มboneเพื่อทุกหมุด/รอยแตกหรือsubdivision; รายละเอียดเล็กทำในtexture ภาพสวยไม่แทนbenchmarkMSPT/clientframepacing
 
-ลำดับpolishNPCv2: banker(แว่น/สมุด/เหรียญ/ชุดคลัง) → smith(เกราะหนัง/ค้อน/ผ้ากันเปื้อน) → warden(ผ้าคลุม/scroll/pouch) → mage(hood/crystal/staff)
+ลำดับpolishNPCv2: ~~banker(แว่น/สมุด/เหรียญ/ชุดคลัง)~~ เสร็จ6ต.ค. → smith(เกราะหนัง/ค้อน/ผ้ากันเปื้อน) → warden(ผ้าคลุม/scroll/pouch) → mage(hood/crystal/staff)
 itemv2ตามด้วยรูนดาบและhaloที่displayทุกcontextถูก; ไม่เปลี่ยนPDC/serial/ราคา/enchantเพื่อแค่เปลี่ยนรูป
 ทั้งหมดexportrevisionใหม่พร้อมtexture/preview/manifest และตรวจruntimeก่อนเปลี่ยนรูปสินค้าหรือประกาศproduction
