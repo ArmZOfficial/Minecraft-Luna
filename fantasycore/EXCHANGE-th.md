@@ -105,7 +105,8 @@ afterLength=0 หมายถึงช่องว่าง; ItemStack bytes ต
 state COMMITTED + จดหมายทุกชิ้น + mail_id + audit ถูก commit ใน **SQLite transaction เดียว**
 หาก insert mail หรือ audit ล้มเหลว จะ rollback ทั้งชุด และไม่เปิดให้ทำ operation เดิมซ้ำ
 normal complete และ staff resolve มีการเปลี่ยนสถานะแบบมีเงื่อนไข จึงไม่ enqueue รางวัลเดิมซ้ำ
-ข้อมูลอยู่ SQLite Core schema v3; PostgreSQL ฝั่งเว็บยังไม่ได้เขียน wallet/แลกของจากเว็บโดยตรง
+ตาราง Exchange เพิ่มใน schema v3; Core v0.4 ใช้ schema v4 เพิ่มตารางซ่อม โดย flow Exchange เดิมยังอยู่
+PostgreSQL ฝั่งเว็บยังไม่ได้เขียน wallet/แลกของจากเว็บโดยตรง
 
 **player inventory และ SQLite ไม่ได้เป็น transaction เดียวกัน**
 เรียก `Player.saveData()` บน main thread หลังตัดของ ก่อน commit รางวัล และก่อนปิดสถานะจดหมายที่รับ
@@ -139,8 +140,8 @@ normal complete และ staff resolve มีการเปลี่ยนส�
 ## 6. อัปเกรด สำรอง และทดสอบ
 
 หยุดเซิร์ฟ → สำรอง `plugins/FantasyCore` + playerdata/world + WorldGuard regions เป็นชุดเดียว → เปลี่ยน JAR → เปิดใหม่
-v0.1/v0.2 migrate schema v3 อัตโนมัติ; unit test พิสูจน์ synthetic DB v2 ว่าเงินและจดหมายเดิมยังอยู่
-ห้าม downgrade JAR อย่างเดียวหลัง schema v3; rollback ต้องใช้ backup ทั้งชุดที่ตรงเวลากัน
+Core v0.4 migrate ฐานข้อมูลเดิมเป็น schema v4 อัตโนมัติ; unit test พิสูจน์ synthetic DB v2 ไป schema ปัจจุบันว่าเงินและจดหมายเดิมยังอยู่
+ห้าม downgrade JAR อย่างเดียวหลัง migration; rollback ต้องใช้ backup ทั้งชุดที่ตรงเวลากัน
 ไม่ restore playerdata เก่าทับขณะ DB ยังถือ COMMITTED ใหม่ เพราะทำให้วัตถุดิบกลับมาแต่รางวัลยังอยู่
 
 ทำตาม [staging checklist หมวด K](../server/README-th.md) ทั้ง client 26.2 และแถว ★ กับ 1.16.5

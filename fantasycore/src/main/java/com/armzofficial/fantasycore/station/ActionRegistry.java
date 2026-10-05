@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.claim.LandInfo;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.menu.BankMenu;
 import com.armzofficial.fantasycore.menu.ExchangeMenu;
+import com.armzofficial.fantasycore.menu.RepairMenu;
 import com.armzofficial.fantasycore.menu.HomesMenu;
 import com.armzofficial.fantasycore.menu.MailMenu;
 import com.armzofficial.fantasycore.menu.MainMenu;
@@ -42,7 +43,7 @@ public final class ActionRegistry {
     /** action ที่มีในแผนแต่ยังไม่มีระบบ — วาง NPC ได้ แต่คลิกแล้วบอกว่า "ยังไม่เชื่อม" */
     private static final Set<String> PLANNED = Set.of(
             "reward.progress", "reward.online", "quest.gold", "quest.red",
-            "cosmetic.item_skin", "cosmetic.title", "equipment.upgrade", "repair.main", "craft.main", "canvas.main",
+            "cosmetic.item_skin", "cosmetic.title", "equipment.upgrade", "craft.main", "canvas.main",
             "market.main", "market.orders", "guild.main", "jobs.main", "pet.main", "afk.main",
             "dungeon.main", "boss.main", "pvp.main");
 
@@ -69,6 +70,8 @@ public final class ActionRegistry {
                 (p, s) -> new MailMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("quest.exchange", "fantasy.exchange", false, null,
                 (p, s) -> new ExchangeMenu(p.getUniqueId(), services.get()).open(p)));
+        register(new ActionDef("repair.main", "fantasy.repair.use", true, "fantasy.repair.remote",
+                (p, s) -> new RepairMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("land.main", "fantasy.land.use", false, null,
                 (p, s) -> {
                     p.closeInventory();

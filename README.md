@@ -11,8 +11,9 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
-- [ปลั๊กอิน FantasyCore v0.3](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/กล่องจดหมาย/รางวัลรายวัน/เควสแลกของ
+- [ปลั๊กอิน FantasyCore v0.4](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/กล่องจดหมาย/รางวัลรายวัน/แลกของ/ซ่อม
 - [ใช้และกู้คืนระบบแลกของ](fantasycore/EXCHANGE-th.md) — สูตร, โควตา, snapshot และรายการรอแอดมินตรวจ
+- [ItemAdapter และระบบซ่อม](fantasycore/REPAIR-th.md) — identity, ราคา, NPC โรงตีเหล็กและ journal คืนเงิน
 - [เซิร์ฟ staging + checklist ทดสอบ](server/README-th.md) — Paper 26.2 + Java 25
 
 ## สถานะงาน
@@ -21,9 +22,9 @@
 เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
 มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
 
-**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.3 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
+**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.4 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
 item template, บ้าน, RTP, claim adapter, กล่องจดหมาย, รับของรายวัน และ `/exchange` (3 สูตร vanilla + preview + journal recovery)
-— build กับ Paper 26.2 API ผ่าน และ unit tests 42 รายการผ่าน
+และ `/repair` (vanilla/Core serial + preview + ค่าจอง/คืนเงิน + journal) — build กับ Paper 26.2 API ผ่าน และ unit tests 58 รายการผ่าน
 พร้อมชุด staging (สคริปต์ดาวน์โหลด Paper + ปลั๊กอินที่ล็อกเวอร์ชันและตรวจ hash, หิน Protect 5 ระดับ, LuckPerms/WorldGuard setup)
 **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง** — ขั้นต่อไปคือทำ checklist ใน [server/README-th.md](server/README-th.md)
 ยังไม่มีโลกเมืองที่สร้างเสร็จ, แผนที่สด, payment backend หรือการส่งของจริง

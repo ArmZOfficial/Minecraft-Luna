@@ -69,6 +69,11 @@ menu:
       lore: |-
         <gray>ฝาก/ถอนทอง เงินฝากไม่หายเมื่อเสียชีวิต
         <gray>ใช้ได้ที่ธนาคารโซน 05 หรือเมื่อแรงค์ปลดล็อก
+    repair:
+      name: '<#DDA54A>ช่างซ่อมอุปกรณ์'
+      lore: |-
+        <gray>ถือของในมือหลัก ดูราคาและยืนยันก่อนซ่อม
+        <gray>ใช้ได้ที่โรงตีเหล็กโซน 07 (/repair)
     mail:
       name: '<#DDA54A>กล่องจดหมาย'
       lore: |-
@@ -326,6 +331,49 @@ exchange:
         <gray>หากปิดหน้าต่างก่อนเริ่มตัดจะยกเลิก
         <yellow>รางวัลเข้า /mail ไม่มีของตกพื้น
 
+repair:
+  disabled: '<yellow>ระบบซ่อมยังไม่พร้อม หรือปิดการบันทึกผู้เล่น — แจ้งทีมงานตรวจ /fa doctor'
+  full: '<green>อุปกรณ์เต็มความทนทานแล้ว — ไม่ต้องซ่อมเพิ่มเติม'
+  item-invalid: '<yellow>ซ่อมของชิ้นนี้ไม่ได้: <reason>'
+  identity-invalid: '<yellow>ทะเบียน Core ไม่ตรงเจ้าของ/แม่แบบ/สถานะ หรือของยังอยู่ในจดหมายรอรับ — ต้องตรวจไอเทมก่อน'
+  changed: '<yellow>ยกเลิกก่อนซ่อม เพราะของ/หน้าต่าง/สิทธิ์/ระยะ/preview เปลี่ยนหรือหมดอายุ — เงินที่จองไว้คืนแล้ว'
+  busy: '<yellow>มีรายการซ่อมกำลังทำงานหรือค้างตรวจ กรุณารอทีมงาน'
+  funds: '<red>ทองที่พกไม่พอ — ไม่ได้จองเงินหรือซ่อม'
+  limit: '<red>ค่าซ่อมเกินวงเงินที่ระบบยอมรับ — แจ้งทีมงานตรวจ config'
+  success: '<green>ซ่อมชิ้นเดิมเต็มความทนทานแล้ว ค่าบริการ <price> ทอง</green> <dark_gray>op <op>'
+  review: '<yellow>รายการซ่อมถูกพักตรวจ: <op> — ไม่คืนเงินหรือแก้ของซ้ำอัตโนมัติ โปรดแจ้งทีมงาน'
+  native-blocked: '<yellow>ช่องทาง native นี้ไม่รองรับอุปกรณ์ Core หรือข้ามค่าซ่อม — ใช้ /repair ที่ช่างก่อน'
+  menu:
+    title: '<#DDA54A>โรงตีเหล็ก · ซ่อมอุปกรณ์'
+    no-item: '<gray>ยังไม่มีรายการที่ซ่อมได้ — เปลี่ยนของในมือแล้วเปิด /repair ใหม่'
+    refresh: '<#47C8D3>ตรวจของและราคาใหม่'
+    arrow: '<#DDA54A>ซ่อมชิ้นเดิม'
+    info:
+      name: '<#DDA54A>ช่างซ่อมแห่งลูม่า'
+      lore: |-
+        <gray>ซ่อมเฉพาะอุปกรณ์ 1 ชิ้นในมือหลัก
+        <gray>ไม่ต้องลากของใส่เมนู · ของจาก provider อื่นรอ adapter
+        <gray>preview มีอายุ 60 วินาที ตรวจของ/ราคาแล้วค่อยยืนยัน
+    before:
+      name: '<yellow>ก่อนซ่อม'
+      lore: |-
+        <gray>อุปกรณ์: <white><material>
+        <gray>ความทนทานเหลือ <white><current>/<max>
+        <gray>provider: <provider>
+    after:
+      name: '<green>หลังซ่อม'
+      lore: |-
+        <gray>ความทนทาน <green><max>/<max>
+        <gray>ค่าซ่อม <#DDA54A><price> ทองที่พก
+        <gray>ทองที่พกขณะแสดง: <wallet> (อ่านยอดใหม่ตอนยืนยัน)
+        <gray>เปลี่ยนเฉพาะ DAMAGE คงชื่อ/enchant/ข้อมูลอื่นของชิ้นเดิม
+    confirm:
+      name: '<green>ยืนยันราคาและซ่อม'
+      lore: |-
+        <gray>จองเงินตามราคาด้านบนก่อนซ่อม
+        <gray>เปลี่ยนมือ/ออกจากสถานี/ปิดก่อนเริ่มซ่อม → คืนเงิน
+        <yellow>ถ้าค้างหลังเริ่มซ่อม ทีมงานตรวจด้วย operation ID
+
 land:
   provider-missing: '<red>ระบบที่ดิน (WorldGuard) ยังไม่เชื่อม'
   none-here: '<gray>ตรงนี้ใน <world> ยังไม่มีแปลงของผู้เล่น'
@@ -345,6 +393,7 @@ admin:
     <gray>/fa npc spawn <action> [ชื่อ] · bind <action> (Citizens) · unbind · remove · anchor · unanchor · list
     <gray>/fa mail review · release|void <id> <เหตุผล> · give <ผู้เล่น> <เหตุผล> (ของในมือ)
     <gray>/fa exchange review · complete|cancel <op> <เหตุผล> → /fa confirm
+    <gray>/fa repair review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa item list · give <ผู้เล่น> <template> · inspect
     <gray>/fa audit [ผู้เล่น]
   doctor:
@@ -363,6 +412,7 @@ admin:
     npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc bind <action> (มอง NPC ของ Citizens) · /fa npc unbind · /fa npc remove (มอง NPC) · /fa npc anchor <action> · /fa npc unanchor · /fa npc list'
     mail: '<gray>ใช้: /fa mail review · /fa mail release|void <id> <เหตุผล> · /fa mail give <ผู้เล่น> <เหตุผล>'
     exchange: '<gray>ใช้: /fa exchange review · /fa exchange complete|cancel <op> <เหตุผล> → /fa confirm'
+    repair: '<gray>ใช้: /fa repair review · /fa repair complete|cancel <op> <เหตุผล> → /fa confirm'
     item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
   bank:
     summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
@@ -421,6 +471,14 @@ admin:
     cancel-effect: '<yellow>ปิดรายการและคืนโควตา โดยไม่คืนวัตถุดิบ (ใช้เมื่อไม่ถูกตัด/ชดเชยแล้ว)'
     resolved: '<green>ตัดสินรายการ <op> แล้ว ดู audit และ /mail'
     not-review: '<yellow>รายการ <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
+  repair:
+    header: '<#DDA54A>รายการซ่อมรอตรวจ <count> รายการแรก (สูงสุด 20)</#DDA54A> <gray>ตรวจ snapshot/playerdata ว่าซ่อมจริงแล้วหรือยัง ก่อนตัดสิน'
+    line: '<white>op <op></white> <gray><player> · <material> damage <damage>/<max> · จอง <price> ทอง · serial <serial>'
+    preview: '<yellow><effect></yellow> <gray>เหตุผล: <reason> — /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ปิดเป็นซ่อมสำเร็จ คงค่าบริการเดิม ไม่แก้หรือแจกของอีก (ยืนยันว่าซ่อมแล้ว)'
+    cancel-effect: '<yellow>ปิดและคืนค่าจอง ไม่เปลี่ยน item (ยืนยันว่าไม่ซ่อม/ย้อนผลซ่อมแล้ว)'
+    resolved: '<green>ตัดสินรายการซ่อม <op> แล้ว ตรวจยอดเงินและ audit'
+    not-review: '<yellow>รายการซ่อม <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
   player-offline: '<red><player> ไม่ได้ออนไลน์'
   player-unknown: '<red>ไม่พบผู้เล่น <player> ในทะเบียน (ต้องเคยเข้าเซิร์ฟนี้)'
   audit:

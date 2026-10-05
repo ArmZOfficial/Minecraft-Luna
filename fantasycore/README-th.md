@@ -1,9 +1,10 @@
-# FantasyCore — แกนระบบของ Luma (v0.3)
+# FantasyCore — แกนระบบของ Luma (v0.4)
 
 ปลั๊กอิน Paper ตาม [SERVER-SYSTEMS-PLAN §6](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 - v0.1: **ลำดับพัฒนาข้อ 1–3** และ **CASUAL-SURVIVAL §12 ข้อ 2 (บ้าน + RTP)**
 - v0.2: ผูก NPC ของ Citizens ตรง, **กล่องจดหมาย** (ส่วน mailbox ของข้อ 4) และ **รับของรายวัน** (CASUAL-SURVIVAL §4 / §12 ข้อ 3 ส่วน Reward)
 - v0.3: **QuestExchange** (CASUAL §7) — เลือกสูตร → preview → ยืนยัน → ตัดวัตถุดิบ → รางวัลเข้า `/mail`; 3 สูตร vanilla พร้อมโควตาและ recovery
+- v0.4: **ItemAdapter + Repair** — vanilla/Core registry validation, เมนูก่อน/หลัง, ค่าจองทอง + journal, native result guard และ staff recovery
 Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่าน ViaVersion/ViaBackwards
 
 ## มีอะไรในรุ่นนี้
@@ -21,6 +22,7 @@ Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่�
 | รับของรายวัน | `/rewards` ปฏิทินรอบสะสม 7 ครั้ง วันใหม่ 00:00 เวลาไทย รับวันละครั้ง (ไม่ไล่ย้อนหลัง); สิทธิ์ + เงิน + ของในกล่อง commit ใน transaction เดียว; แจ้งตอนเข้าเกมถ้ายังไม่รับ | CASUAL §4 |
 | แลกของ | `/exchange`, เมนู 3 สูตร vanilla, batch 1–16, โควตาต่อวันไทยรวมทุก recipe version, ไม่ตัด custom/named/PDC; ของรอรับใน `/mail`; journal เก็บ slot ก่อน/หลัง + รางวัลที่ตรึงไว้; รายการค้าง CONSUMING → REVIEW และต้องแอดมินยืนยัน | CASUAL §7 / [คู่มือ Exchange](EXCHANGE-th.md) |
 | ไอเทม | แม่แบบใน `items.yml` (ตัวอย่าง `starter_runeblade`), ตัวตนอยู่ใน PDC + serial ลงทะเบียนใน DB, ไม่ทิ้งของลงพื้น | §6 ItemAdapter |
+| ซ่อม | `/repair` ที่สถานี `repair.main`, main hand 1 ชิ้น, preview 60 วิ, จองทองและซ่อมเฉพาะ DAMAGE; Core ตรวจเจ้าของ/serial/เวอร์ชันและ pending mail; ค้างหลังเริ่มซ่อมไป REVIEW แอดมินตัดสิน | §7 / [คู่มือ Repair](REPAIR-th.md) |
 | บ้าน | `/sethome [ชื่อ] [confirm]`, `/home [ชื่อ]`, `/delhome`, `/homes`; เฉพาะ `luma_housing` + ต้องเป็นเจ้าของ/สมาชิกแปลง PS, ตรวจซ้ำทุกครั้งก่อนวาร์ป, โควตา 1/3/5 | CASUAL §9 |
 | RTP | `/rtp [housing|resource]` วงแหวนกระจายตามพื้นที่, footprint 2×2 + ช่องหัว 3, ไม่ลงพื้นอันตราย/border/region, โหลด chunk async ≤2 งาน/โลก, 24 จุด/10 วิ, cooldown จาก receipt ในฐานข้อมูล | CASUAL §3 |
 | วาร์ป | อุ่นเครื่อง 3 วิ ยกเลิกเมื่อขยับ/โดนตี, ล็อกหลังต่อสู้ 15 วิ, บันทึกผลเมื่อ teleport สำเร็จจริงเท่านั้น; `/spawn` | §3, §9 |
@@ -37,7 +39,7 @@ Paper API ที่ใช้ compile ถูกตรึงเป็น `26.2.bui
 
 ```powershell
 cd fantasycore
-.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.3.0.jar
+.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.4.0.jar
 ```
 
 หรือใช้ `server\build-plugin.cmd` ซึ่ง build แล้วคัดลอกเข้าเซิร์ฟ staging ให้
@@ -61,17 +63,19 @@ Set-Location fantasycore
 
 | Node | ค่าเริ่มต้น | ใช้ทำ |
 |---|---|---|
-| `fantasy.player` (menu, balance, bank.use, home.use, rtp.use, spawn, land.use, rewards, mail, exchange) | ทุกคน | ใช้งานพื้นฐาน |
+| `fantasy.player` (menu, balance, bank.use, home.use, rtp.use, spawn, land.use, rewards, mail, exchange, repair.use) | ทุกคน | ใช้งานพื้นฐาน |
 | `fantasy.bank.remote` | ไม่มี | ใช้ธนาคารจากทุกที่ (แรงค์) |
 | `fantasy.home.limit.3` / `.5` | ไม่มี | โควตาบ้าน (เควส housing_workshop / housing_community) |
 | `fantasy.rtp.bypass-cooldown` | OP | ทดสอบ |
 | `fantasyadmin.view` / `.economy.adjust` / `.npc.edit` / `.content.edit` / `.audit` | OP | งานแอดมิน — แจกผ่านกลุ่ม LuckPerms ใน `server/setup/luckperms-setup.txt` |
 | `fantasyadmin.exchange.resolve` | OP | ตัดสินรายการแลกที่ค้าง โดย preview + เหตุผล + `/fa confirm` |
+| `fantasy.repair.remote` | ไม่มี | ใช้ซ่อมนอกสถานี (ยังคิดราคาเดิม) |
+| `fantasyadmin.repair.resolve` | OP | ตัดสินรายการซ่อมค้างพร้อม preview + เหตุผล + confirm |
 
 ## ข้อมูลและการกู้คืน
 
-- ฐานข้อมูล `plugins/FantasyCore/fantasycore.db` (SQLite WAL, schema v3) — ตาราง `accounts`, `operations`, `ledger`, `audit_log`, `players`, `homes`, `item_instances`, `stations`, `travel_receipts`, `mail`, `reward_claims`, `exchange_operations`, `exchange_outputs`
-- อัปจาก v0.1/v0.2 → v0.3: สำรองก่อน ปลั๊กอิน migrate เป็น schema v3 และสร้าง `exchanges.yml` เมื่อยังไม่มี โดยไม่เขียนทับ config ที่แก้แล้ว
+- ฐานข้อมูล `plugins/FantasyCore/fantasycore.db` (SQLite WAL, schema v4) — ตาราง `accounts`, `operations`, `ledger`, `audit_log`, `players`, `homes`, `item_instances`, `stations`, `travel_receipts`, `mail`, `reward_claims`, `exchange_operations`, `exchange_outputs`, `repair_operations`
+- อัปจาก v0.1/v0.2/v0.3 → v0.4: สำรองก่อน migrate schema v4 อัตโนมัติ สร้าง `exchanges.yml`/`repair.yml` เมื่อยังไม่มี โดยไม่เขียนทับ config ที่แก้แล้ว
 - SQLite นี้เป็นข้อมูล Core ฝั่งเกม ส่วน PostgreSQL เป็นข้อมูลเว็บ; ยังไม่มี bridge payment/ส่งคำสั่งจากเว็บในรุ่นนี้
 - หยุดเซิร์ฟก่อนสำรอง `.db` (+ `-wal`/`-shm` ถ้ายังมี) **พร้อมกับ** playerdata/โฟลเดอร์โลกและ `plugins/WorldGuard/worlds/*/regions.yml` เป็นชุดเดียว
 - เปิดฐานข้อมูลไม่ได้ → ปลั๊กอินปิดตัวเอง (fail closed) ไม่ให้บริการเงินครึ่ง ๆ กลาง ๆ
@@ -90,6 +94,7 @@ station/   ActionRegistry (action ID → บริการ), StationService, St
 mail/      MailStore (สถานะจดหมาย), MailService (ส่งเข้า inventory หรือกล่อง)
 reward/    RewardStore (สิทธิ์รายวัน + เงิน + จดหมายใน transaction เดียว), RewardService
 exchange/  ExchangePlanner, ExchangeStore (journal + quota + recovery), ExchangeService (inventory + recipes)
+repair/    RepairPrice, RepairStore (ค่าจอง + journal), RepairService, NativeRepairListener
 menu/      Menu + MenuListener (กันย้ายของ), MainMenu, BankMenu, HomesMenu, RtpMenu, RewardMenu, MailMenu
 item/      ItemTemplateService, ItemInstanceStore
 hook/      VaultHook/VaultEconomyProvider, PlaceholderHook (โหลดเฉพาะเมื่อมีปลั๊กอินนั้น), CitizensBridge (reflection)
@@ -98,10 +103,14 @@ command/   PlayerCommands, CoreCommand (/fc), AdminCommand (/fa), PendingConfirm
 
 ## สิ่งที่ตรวจแล้วในรอบนี้ และสิ่งที่ยังไม่ได้ตรวจ
 
-รอบ v0.3: build กับ Paper API 26.2 + Java 25 ผ่าน, unit tests **42 รายการผ่าน** (27 เดิม + 15 ใหม่)
+รอบ v0.4: build กับ Paper API 26.2 + Java 25 ผ่าน, unit tests **58 รายการผ่าน** (42 เดิม + 16 ใหม่)
 รวมตัดเฉพาะของธรรมดา, วัตถุดิบไม่ครบ, โควตาข้าม recipe version/วัน, จองพร้อมกัน 20 รายการได้ 1 รายการ,
 commit ซ้ำไม่แจกซ้ำ, rollback เมื่อ mailbox เขียนไม่ได้, การกักสถานะ CONSUMING, resolve ซ้ำ, migration v2→v3 รักษาเงินและจดหมาย,
 และการปิดจดหมายพร้อมส่วนเกินใน transaction เดียว
+
+ส่วน Repair เพิ่ม registry validation/owner/state, สูตรราคาปัดขึ้นจำนวนเต็ม, reserve/refund once, rollback,
+recovery, pending mail, จองพร้อมกัน 20 ครั้งได้ 1 ครั้ง และ migration v3→v4 รักษาเงิน/mail/exchange
+รายละเอียด item/provider ที่รองรับและ native policy อยู่ใน [REPAIR-th.md](REPAIR-th.md)
 
 การตัด inventory กับ SQLite เป็นคนละระบบ แม้เรียก `Player.saveData()` ก่อน commit ก็ยังไม่ใช่ transaction เดียวกัน
 ข้อจำกัด disk failure/การ restore backup และวิธีกู้คืนอยู่ใน [คู่มือ Exchange](EXCHANGE-th.md) — ต้องผ่าน staging ก่อนเปิดบริการจริง

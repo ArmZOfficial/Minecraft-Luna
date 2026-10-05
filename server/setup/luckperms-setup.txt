@@ -56,6 +56,11 @@ lp group staff_economy parent add staff_observer
 lp group staff_economy permission set fantasyadmin.economy.adjust true
 lp group staff_economy permission set fantasyadmin.audit true
 lp group staff_economy permission set fantasyadmin.exchange.resolve true
+lp group staff_economy permission set fantasyadmin.repair.resolve true
+
+# ถ้าติดตั้ง EssentialsX เพิ่มภายหลัง ห้าม utility repair ข้ามราคา Core
+lp group default permission set essentials.repair false
+lp group default permission set essentials.repair.all false
 
 lp creategroup staff_owner
 lp group staff_owner parent add staff_builder

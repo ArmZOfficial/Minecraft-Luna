@@ -10,6 +10,8 @@ import com.armzofficial.fantasycore.home.HomeService;
 import com.armzofficial.fantasycore.hook.CitizensBridge;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.item.ItemAdapter;
+import com.armzofficial.fantasycore.repair.RepairService;
 import com.armzofficial.fantasycore.mail.MailService;
 import com.armzofficial.fantasycore.reward.RewardService;
 import com.armzofficial.fantasycore.station.ActionRegistry;
@@ -47,5 +49,7 @@ public record Services(
         MailService mail,
         RewardService rewards,
         ExchangeService exchange,
+        ItemAdapter itemAdapter,
+        RepairService repair,
         Optional<CitizensBridge> citizens) {
 }

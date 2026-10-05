@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.audit.AuditStore;
 import com.armzofficial.fantasycore.storage.Database;
 
 import java.sql.PreparedStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -56,21 +57,24 @@ public final class ItemInstanceStore {
     }
 
     public Optional<Instance> find(UUID serial) throws SQLException {
-        return database.read(connection -> {
-            try (PreparedStatement ps = connection.prepareStatement(
-                    "SELECT template_id, template_version, owner_uuid, state, issued_by, created_at FROM item_instances WHERE serial = ?")) {
-                ps.setString(1, serial.toString());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (!rs.next()) {
-                        return Optional.empty();
-                    }
-                    String owner = rs.getString(3);
-                    return Optional.of(new Instance(serial, rs.getString(1), rs.getInt(2),
-                            owner == null ? null : UUID.fromString(owner), rs.getString(4), rs.getString(5),
-                            rs.getLong(6)));
+        return database.read(connection -> findIn(connection, serial));
+    }
+
+    /** อ่านภายใน transaction ของบริการ item โดยไม่เปิด transaction ซ้อน */
+    public static Optional<Instance> findIn(Connection connection, UUID serial) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(
+                "SELECT template_id, template_version, owner_uuid, state, issued_by, created_at FROM item_instances WHERE serial = ?")) {
+            ps.setString(1, serial.toString());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return Optional.empty();
                 }
+                String owner = rs.getString(3);
+                return Optional.of(new Instance(serial, rs.getString(1), rs.getInt(2),
+                        owner == null ? null : UUID.fromString(owner), rs.getString(4), rs.getString(5),
+                        rs.getLong(6)));
             }
-        });
+        }
     }
 
     public record Instance(UUID serial, String templateId, int version, UUID owner, String state, String issuedBy,

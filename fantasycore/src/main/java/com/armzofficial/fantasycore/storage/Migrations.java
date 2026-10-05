@@ -168,6 +168,30 @@ public final class Migrations {
                         mail_id INTEGER REFERENCES mail(id),
                         PRIMARY KEY (op_id, ordinal)
                     )"""
+            },
+            // version 4 — repair: จองค่าซ่อมก่อนแก้ item; รายการที่เริ่มแก้แล้วต้องตรวจเมื่อไม่ทราบผล
+            new String[]{
+                    """
+                    CREATE TABLE repair_operations (
+                        op_id TEXT PRIMARY KEY,
+                        player_uuid TEXT NOT NULL,
+                        provider TEXT NOT NULL CHECK (provider IN ('vanilla','core')),
+                        template_id TEXT,
+                        template_version INTEGER NOT NULL,
+                        serial TEXT,
+                        material TEXT NOT NULL,
+                        slot INTEGER NOT NULL CHECK (slot BETWEEN 0 AND 8),
+                        damage INTEGER NOT NULL CHECK (damage > 0),
+                        max_damage INTEGER NOT NULL CHECK (max_damage > damage),
+                        price INTEGER NOT NULL CHECK (price > 0),
+                        before_data BLOB NOT NULL,
+                        repaired_data BLOB NOT NULL,
+                        state TEXT NOT NULL CHECK (state IN ('RESERVED','APPLYING','COMMITTED','CANCELLED','REVIEW')),
+                        created_at INTEGER NOT NULL,
+                        updated_at INTEGER NOT NULL
+                    )""",
+                    "CREATE UNIQUE INDEX repair_active_player ON repair_operations(player_uuid) WHERE state IN ('RESERVED','APPLYING','REVIEW')",
+                    "CREATE UNIQUE INDEX repair_active_serial ON repair_operations(serial) WHERE serial IS NOT NULL AND state IN ('RESERVED','APPLYING','REVIEW')"
             }
     );
 

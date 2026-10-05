@@ -21,6 +21,10 @@ import com.armzofficial.fantasycore.home.HomeService;
 import com.armzofficial.fantasycore.home.HomeStore;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.item.ItemAdapter;
+import com.armzofficial.fantasycore.repair.RepairService;
+import com.armzofficial.fantasycore.repair.RepairStore;
+import com.armzofficial.fantasycore.repair.NativeRepairListener;
 import com.armzofficial.fantasycore.mail.MailService;
 import com.armzofficial.fantasycore.mail.MailStore;
 import com.armzofficial.fantasycore.menu.MenuListener;
@@ -70,6 +74,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         saveIfMissing("messages_th.yml");
         saveIfMissing("items.yml");
         saveIfMissing("exchanges.yml");
+        saveIfMissing("repair.yml");
 
         Settings settings = Settings.load(getConfig(), getLogger());
         Messages messages = Messages.load(this);
@@ -91,9 +96,15 @@ public final class FantasyCorePlugin extends JavaPlugin {
         EconomyService economy = new EconomyService(database, economyStore);
         MailStore mailStore = new MailStore(database, System::currentTimeMillis);
         ExchangeStore exchangeStore = new ExchangeStore(database, mailStore, System::currentTimeMillis);
+        RepairStore repairStore = new RepairStore(database, economyStore, System::currentTimeMillis);
         try {
             int interrupted = mailStore.quarantineInterrupted();
             ExchangeStore.Recovery recovery = exchangeStore.quarantineInterrupted();
+            RepairStore.Recovery repairRecovery = repairStore.quarantineInterrupted();
+            if (repairRecovery.refunded() + repairRecovery.review() > 0) {
+                getLogger().warning("Repair recovery: คืนค่าจองก่อนซ่อม " + repairRecovery.refunded()
+                        + ", ค้างระหว่างซ่อม " + repairRecovery.review() + " → /fa repair review");
+            }
             if (recovery.cancelled() + recovery.review() > 0) {
                 getLogger().warning("Exchange recovery: ยกเลิกก่อนตัด " + recovery.cancelled()
                         + ", ค้างระหว่างตัด " + recovery.review() + " → /fa exchange review");
@@ -102,7 +113,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
                 getLogger().warning("จดหมาย " + interrupted + " รายการค้างกลางการส่งจากรอบก่อน → ย้ายไป REVIEW (ตรวจด้วย /fa mail review)");
             }
         } catch (Exception e) {
-            getLogger().log(Level.SEVERE, "ตรวจกล่องจดหมาย/การแลกค้างไม่ได้ — ปิด FantasyCore", e);
+            getLogger().log(Level.SEVERE, "ตรวจกล่องจดหมาย/การแลก/การซ่อมค้างไม่ได้ — ปิด FantasyCore", e);
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -130,12 +141,16 @@ public final class FantasyCorePlugin extends JavaPlugin {
         RtpService rtp = new RtpService(this, settings, messages, landing, claims, teleports, new TravelStore(database), database, tasks);
         ItemTemplateService items = new ItemTemplateService(this);
         StationService stations = new StationService(this, database, new StationStore(database), settings.stationRadius());
+        ItemAdapter itemAdapter = new ItemAdapter(items);
+        RepairService repair = new RepairService(this, messages, database, tasks, itemAdapter, repairStore, economy,
+                stations, settings.maxTransaction());
+        repair.problems().forEach(p -> getLogger().warning("repair.yml: " + p));
         ActionRegistry actions = new ActionRegistry(() -> services);
         Optional<CitizensBridge> citizens = CitizensBridge.detect(getLogger());
         citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, citizens);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, itemAdapter, repair, citizens);
 
         tasks.then(stations.load(), (count, error) -> {
             if (count != null) {
@@ -144,11 +159,12 @@ public final class FantasyCorePlugin extends JavaPlugin {
         });
 
         register(combat, teleports, new MenuListener(this), new StationListener(stations, actions, citizens.orElse(null)),
+                new NativeRepairListener(items, repair, messages),
                 new DeathListener(settings, messages, economy, tasks), new SessionListener(services));
 
         PlayerCommands playerCommands = new PlayerCommands(services);
         for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
-                "rewards", "mail", "exchange"}) {
+                "rewards", "mail", "exchange", "repair"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));

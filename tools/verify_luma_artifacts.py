@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 CONCEPT=ROOT/'output/lobby-concept'
 errors=[]
 link_count=0
-for file in [ROOT/'README.md',ROOT/'website/README-th.md',ROOT/'fantasycore/README-th.md',ROOT/'fantasycore/EXCHANGE-th.md',ROOT/'server/README-th.md',*CONCEPT.rglob('*.md')]:
+for file in [ROOT/'README.md',ROOT/'website/README-th.md',ROOT/'fantasycore/README-th.md',ROOT/'fantasycore/EXCHANGE-th.md',ROOT/'fantasycore/REPAIR-th.md',ROOT/'server/README-th.md',*CONCEPT.rglob('*.md')]:
     text=file.read_text(encoding='utf-8-sig')
     if text.count('```')%2: errors.append(f'Unbalanced code fence: {file.relative_to(ROOT)}')
     for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)',text):

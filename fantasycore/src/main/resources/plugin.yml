@@ -58,6 +58,10 @@ commands:
     description: เลือกสูตรและยืนยันแลกวัตถุดิบเป็นของรางวัล
     usage: /exchange
     permission: fantasy.exchange
+  repair:
+    description: ดูราคาและยืนยันซ่อมของในมือหลักที่โรงตีเหล็ก
+    usage: /repair
+    permission: fantasy.repair.use
   fantasycore:
     description: ข้อมูลปลั๊กอิน / ทางเข้าบริการสำหรับ NPC ของ Citizens
     usage: /fantasycore action <id>
@@ -81,6 +85,10 @@ permissions:
       fantasy.rewards: true
       fantasy.mail: true
       fantasy.exchange: true
+      fantasy.repair.use: true
+  fantasy.repair.remote:
+    description: ซ่อมของจากทุกที่ (ต้องจ่ายค่าซ่อมเหมือนเดิม)
+    default: false
   fantasy.bank.remote:
     description: ใช้ธนาคารได้จากทุกที่ (ปลดล็อกตามแรงค์)
     default: false
@@ -110,4 +118,7 @@ permissions:
     default: op
   fantasyadmin.exchange.resolve:
     description: ตัดสินการแลกที่ค้าง (ต้องใส่เหตุผล + ยืนยัน)
+    default: op
+  fantasyadmin.repair.resolve:
+    description: ตัดสินรายการซ่อมค้าง (ต้องมีเหตุผลและยืนยัน)
     default: op

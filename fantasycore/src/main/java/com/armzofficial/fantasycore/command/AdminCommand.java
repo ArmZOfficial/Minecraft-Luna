@@ -71,6 +71,7 @@ public final class AdminCommand implements TabExecutor {
             case "item" -> item(sender, args);
             case "mail" -> mail(sender, args);
             case "exchange" -> exchange(sender, args);
+            case "repair" -> repair(sender, args);
             case "audit" -> audit(sender, args);
             default -> m.send(sender, "admin.help");
         }
@@ -134,6 +135,14 @@ public final class AdminCommand implements TabExecutor {
         for (String problem : services.exchange().problems()) {
             line(sender, "fix", "exchanges.yml", problem);
         }
+        line(sender, services.repair().enabled() ? "ready" : "off", "ซ่อมอุปกรณ์", "vanilla + Core serial — /repair ที่สถานี repair.main");
+        for (String problem : services.repair().problems()) {
+            line(sender, "fix", "repair.yml", problem);
+        }
+        services.tasks().then(services.database().async(() -> services.repair().store().countReview()), (count, error) -> {
+            line(sender, error != null ? "broken" : count == 0 ? "ready" : "fix", "Repair journal",
+                    error != null ? "อ่านรายการค้างไม่ได้" : count + " รายการรอตรวจ — /fa repair review");
+        });
         services.tasks().then(services.database().async(() -> services.exchange().store().countReview()), (count, error) -> {
             if (error != null) {
                 line(sender, "broken", "Exchange journal", "อ่านรายการค้างไม่ได้");
@@ -673,6 +682,57 @@ public final class AdminCommand implements TabExecutor {
 
     // ------------------------------------------------------------ audit
 
+    private void repair(CommandSender sender, String[] args) {
+        Messages m = services.messages();
+        String sub = args.length < 2 ? "review" : args[1].toLowerCase(Locale.ROOT);
+        if (sub.equals("review")) {
+            services.tasks().then(services.database().async(() -> services.repair().store().review(20)), (rows, error) -> {
+                if (error != null) { m.send(sender, "common.storage-error"); return; }
+                m.send(sender, "admin.repair.header", Messages.p("count", rows.size()));
+                for (var row : rows) { repairLine(sender, row); }
+            });
+            return;
+        }
+        if (!sub.equals("complete") && !sub.equals("cancel")) { m.send(sender, "admin.usage.repair"); return; }
+        if (!sender.hasPermission("fantasyadmin.repair.resolve")) { m.send(sender, "common.no-permission"); return; }
+        if (args.length < 4) { m.send(sender, "admin.usage.repair"); return; }
+        String opId = args[2];
+        String reason = String.join(" ", Arrays.copyOfRange(args, 3, args.length)).trim();
+        if (reason.length() < 3) { m.send(sender, "admin.reason-required"); return; }
+        boolean complete = sub.equals("complete");
+        UUID actor = sender instanceof Player p ? p.getUniqueId() : null;
+        services.tasks().then(services.database().async(() -> services.repair().store().findReview(opId)), (row, error) -> {
+            if (error != null) { m.send(sender, "common.storage-error"); }
+            else if (row.isEmpty()) { m.send(sender, "admin.repair.not-review", Messages.p("op", opId)); }
+            else {
+                var review = row.get();
+                AuditEntry audit = new AuditEntry(actor == null ? null : actor.toString(), sender.getName(),
+                        complete ? "item.repair.resolve_complete" : "item.repair.resolve_cancel", review.player().toString(),
+                        review.material() + " damage " + review.damage() + "/" + review.maxDamage() + " cost " + review.price(), reason);
+                String token = confirmations.create(actor, () -> {
+                    if (!sender.hasPermission("fantasyadmin.repair.resolve")) { m.send(sender, "common.no-permission"); return; }
+                    services.tasks().then(services.database().async(() -> services.repair().store().resolveReview(opId, complete, audit)),
+                            (resolved, resolveError) -> {
+                                m.send(sender, resolveError != null ? "common.storage-error" : Boolean.TRUE.equals(resolved)
+                                        ? "admin.repair.resolved" : "admin.repair.not-review", Messages.p("op", opId));
+                                if (resolveError == null && Boolean.TRUE.equals(resolved) && Bukkit.getPlayer(review.player()) != null) {
+                                    services.economy().load(review.player());
+                                }
+                            });
+                });
+                repairLine(sender, review);
+                m.send(sender, "admin.repair.preview", Messages.p("reason", reason), Messages.p("token", token),
+                        Messages.c("effect", m.plain(complete ? "admin.repair.complete-effect" : "admin.repair.cancel-effect")));
+            }
+        });
+    }
+
+    private void repairLine(CommandSender sender, com.armzofficial.fantasycore.repair.RepairStore.Review row) {
+        services.messages().send(sender, "admin.repair.line", Messages.p("op", row.opId()), Messages.p("player", row.player()),
+                Messages.p("material", row.material()), Messages.p("damage", row.damage()), Messages.p("max", row.maxDamage()),
+                Messages.p("price", Money.format(row.price())), Messages.p("serial", row.serial() == null ? "vanilla" : row.serial()));
+    }
+
     private void audit(CommandSender sender, String[] args) {
         Messages m = services.messages();
         if (!sender.hasPermission("fantasyadmin.audit")) {
@@ -728,13 +788,14 @@ public final class AdminCommand implements TabExecutor {
                                       String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "audit"));
+            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "audit"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
                 case "npc" -> options.addAll(List.of("spawn", "bind", "unbind", "anchor", "remove", "unanchor", "list"));
                 case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
                 case "exchange" -> options.addAll(List.of("review", "complete", "cancel"));
+                case "repair" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {

@@ -117,7 +117,7 @@ server/
 ### H. ความทนทาน
 - [ ] H1 ปิดเซิร์ฟด้วย `stop` ระหว่างมีคนเปิดเมนูธนาคาร → เปิดใหม่ ยอดตรงกับ ledger
 - [ ] H2 ลบ/ย้าย VaultUnlocked ออกชั่วคราว → FantasyCore ยังเปิดได้ (แจ้งเตือนเรื่อง Vault) ระบบเงินในเกมยังใช้ได้
-- [ ] H3 อัปจาก v0.1 → v0.2 บนฐานข้อมูลเดิม → log ขึ้น `schema v2` ยอดเงิน/บ้าน/NPC เดิมอยู่ครบ
+- [ ] H3 อัปจาก v0.1/v0.2/v0.3 → v0.4 บนสำเนาฐานข้อมูลเดิม → log ขึ้น `schema v4` ยอดเงิน/บ้าน/NPC/mail/reward/exchange เดิมอยู่ครบ
 
 ### K. เควสแลกของ (v0.3)
 - [ ] K1 ★ `/exchange` และ `/menu` → กระดานแลกของ เปิด 3 สูตร; คลิก NPC `quest.exchange` ได้เมนูเดียวกัน
@@ -130,11 +130,28 @@ server/
 - [ ] K8 บน staging disposable ใช้ debugger/harness หยุดตามจุด: หลัง PREPARED, หลัง CONSUMING ก่อนตัด, หลังตัดก่อน saveData, หลัง saveData ก่อน DB commit, หลัง commit ก่อนข้อความ แล้ว terminate process → เปิดใหม่และตรวจ state/playerdata/mail ทุกจุด (เก็บ backup และ log)
 - [ ] K9 PREPARED ค้าง → CANCELLED; CONSUMING ค้าง → REVIEW บล็อกการแลกทั้งหมดของ UUID; COMMITTED คงเดิมและ mail เดิมไม่เพิ่ม; CLAIMING ของ mail → ใช้หมวด J/review แยกกัน
 - [ ] K10 `/fa exchange complete|cancel <op> เหตุผล` แสดง preview → `/fa confirm`; reason/actor/permission/expiry ผิดไม่ apply; confirm ซ้ำไม่สร้างของเพิ่ม; audit ครบ; cancel ไม่คืนวัตถุดิบเอง
-- [ ] K11 อัปฐานข้อมูล v0.2 จริงบนสำเนา → schema v3 เงิน/บ้าน/NPC/mail/daily เดิมอยู่ครบ; สูตรผิดปิดเฉพาะสูตรนั้น; config เดิมไม่ถูกเขียนทับ
+- [ ] K11 อัปฐานข้อมูล v0.2 จริงบนสำเนาด้วย Core v0.4 → schema v4 เงิน/บ้าน/NPC/mail/daily เดิมอยู่ครบ; สูตรผิดปิดเฉพาะสูตรนั้น; config เดิมไม่ถูกเขียนทับ
 - [ ] K12 ตั้ง `players.disable-saving: true` บน staging แล้ว restart → แลกและรับ mail ไม่ได้; คืน false แล้วทดสอบ disk write failure และดู `Failed to save player data` — ถ้าผล inventory/DB ไม่ตรงต้องแก้ก่อนเปิด public
 - [ ] K13 วัด MSPT/เวลาตอบกลับเมื่อหลายคนแลกและรับ mail พร้อมกัน เพราะ saveData เป็น synchronous I/O; บันทึกค่าจริงก่อนตั้งจำนวนผู้เล่นที่รองรับ
 
 รายละเอียด flow/ข้อจำกัด storage/การกู้คืน: [EXCHANGE-th.md](../fantasycore/EXCHANGE-th.md)
 
+### L. ItemAdapter + ซ่อม (v0.4)
+- [ ] L1 ★ วาง/ผูก NPC `repair.main` ที่โซน 07; `/repair` และปุ่มช่างใน `/menu` เปิดในระยะ 6 บล็อก โลกเดียวกัน; นอกระยะไม่มี remote ใช้ไม่ได้
+- [ ] L2 ★ ถือ vanilla IRON_SWORD damage=100/max=250, ทอง≥230 → preview 150/250 → 250/250 ราคา 230; ยืนยันซ่อมใน slot เดิม ทองลด 230 เงินฝาก/เงินแดงคงเดิม ไม่มี mail/ของตกพื้น
+- [ ] L3 ★ ของเต็ม/ไม่ใช่อุปกรณ์/unbreakable/amount>1/ค่า damage ผิดช่วง → ไม่จองเงิน; เงินไม่พอ/ราคาผิด config → ไม่เปลี่ยน item
+- [ ] L4 ★ vanilla มีชื่อจาก anvil + enchant + repair-cost → ซ่อมแล้วค่าที่ไม่ใช่ DAMAGE เหมือนเดิม; lore/model/attributes/custom data แปลกต้องถูกปฏิเสธ (เทียบ ItemStack serialized/components จริง)
+- [ ] L5 ★ `/fa item give <คุณ> starter_runeblade` ให้ทะเบียน DELIVERED แล้วใช้จนเสีย durability → ซ่อมคง template/version/serial/lore/enchant; เปลี่ยน holder/version/material/registry state หรือชนิด PDC ให้เสียรูปบน staging → ปฏิเสธก่อนหักเงิน
+- [ ] L6 ★ Core ที่ MAILED ยังมี pending/claiming/review mail → ซ่อมไม่ได้; หลังรับสำเร็จจึงซ่อมได้; สำเนา serial 2 ชิ้นใน storage/เกราะ/มือรองหรือ stack>1 → ปฏิเสธ (ใช้สำเนาทดสอบแยกจาก world public)
+- [ ] L7 ★ double click/shift/drag/hotbar/double-collect หยิบไอคอนไม่ได้; preview เกิน 60 วิ/ปิด/เปลี่ยน item/สลับ slot/ย้ายออกระยะ/ตาย/ถอนสิทธิ์ก่อนแก้ของ → cancel คืนค่าจองครั้งเดียว ไม่ย้อนธุรกรรมอื่น
+- [ ] L8 vanilla repair ผ่าน anvil, grindstone สองชิ้น, crafting สองอุปกรณ์ถูกบล็อกทั้ง Prepare และ result pickup/shift/number-key; Core marker ใด ๆ ใช้ใน native crafting/anvil/grindstone ไม่ได้; การคราฟต์ปกติและ Mending/enchant table ที่อนุญาตยังทำงาน
+- [ ] L9 ตรวจทุก plugin ที่มีคำสั่ง repair/aliases และ LuckPerms ด้วย non-OP ไม่ให้ซ่อมข้ามราคา Core; remote node ไม่ทำราคาเป็นศูนย์; WorldGuard flags/NPC/model click ไม่ข้ามสิทธิ์หรือระยะ
+- [ ] L10 หยุด process บน staging disposable หลัง RESERVED, หลัง APPLYING ก่อนแก้ item, หลังแก้ก่อน saveData, หลัง saveData ก่อน complete และหลัง complete → เทียบ DB/ledger/playerdata; RESERVED คืน, APPLYING เป็น REVIEW ไม่คืนเอง, COMMITTED ไม่ซ่อมหรือหักซ้ำ
+- [ ] L11 `/fa repair complete|cancel <op> เหตุผล` → อ่าน preview → confirm ผู้สั่งเดิมใน 60 วิ; role/reason/expiry ผิดไม่ apply, confirm ซ้ำไม่ทำซ้ำ; complete ไม่แจก/ซ่อมอีก, cancel คืนจำนวนค่าจอง ไม่แก้ item; audit ครบ
+- [ ] L12 `players.disable-saving=true`/bridge อ่านไม่ได้ → repair ไม่คิดเงิน; จำลอง disk failure ตรวจ log และ state; ทดสอบอัป v0.3 DB จริงบนสำเนา → schema v4 และเงิน/บ้าน/NPC/mail/daily/exchange เดิมครบ
+- [ ] L13 วัด MSPT และเวลาจริงเมื่อผู้เล่นหลายคนยืนยันซ่อมพร้อมกัน; saveData เป็น synchronous I/O จึงยังรับรองจำนวน concurrent users จาก unit tests ไม่ได้
+
+คู่มือราคา/provider/ผัง NPC/recovery: [REPAIR-th.md](../fantasycore/REPAIR-th.md)
+
 เมื่อผ่านครบ: เปลี่ยน `status` ใน manifest เป็น locked, commit `plugins.lock.json` และบันทึกผลในเอกสารสถานะ
-แถวที่ไม่ผ่านให้จดข้อความ error/ภาพหน้าจอ แล้วแก้ก่อนไปลำดับข้อ 4 ส่วนที่เหลือ (item adapter + custom recipe + repair)
+แถวที่ไม่ผ่านให้จดข้อความ error/ภาพหน้าจอ แล้วแก้ก่อนต่อ provider adapter, custom recipe/coupon และ upgrade

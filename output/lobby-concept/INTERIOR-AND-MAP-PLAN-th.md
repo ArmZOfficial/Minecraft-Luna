@@ -241,6 +241,9 @@ repair.preview แสดงความทนทานปัจจุบัน/�
 upgrade.preview แสดงผล/โอกาส/สิ่งที่เสียถ้าใช้ระบบตีบวก ไม่ซ่อนกติกาในข้อความตกแต่ง
 NPC ซ่อมอยู่ตรงหน้ามองเห็นจากทางวาร์ป ไม่ต้องเข้าห้องเตาหรือขึ้นชั้นบน
 
+Core v0.4 มี `repair.main` และ `/repair` สำหรับ vanilla/Core แล้ว ดู [ใบงาน NPC ซ่อมและ policy](../../fantasycore/REPAIR-th.md)
+craft/upgrade และ provider MMOItems/Nexo/ItemsAdder ยังไม่เปิดใน JAR รุ่นนี้
+
 อุปกรณ์โชว์เป็น item ตัวอย่างที่ไม่รับซื้อคืน/ไม่หยิบได้ ผ่าน permission และ Core item policy
 
 ## 11. โซน 08 — หออาชีพและลานฝึก

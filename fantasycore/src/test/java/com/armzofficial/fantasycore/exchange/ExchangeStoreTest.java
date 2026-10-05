@@ -168,12 +168,13 @@ class ExchangeStoreTest {
             try (var st = c.createStatement()) {
                 st.execute("DROP TABLE exchange_outputs");
                 st.execute("DROP TABLE exchange_operations");
+                st.execute("DROP TABLE repair_operations");
                 st.execute("UPDATE schema_version SET version = 2");
                 st.execute("INSERT INTO accounts VALUES ('" + player + "', 'gold.wallet', 1234, 1000)");
             }
             return null;
         });
-        assertEquals(3, Migrations.apply(db));
+        assertEquals(Migrations.latestVersion(), Migrations.apply(db));
         assertEquals(1234L, db.read(c -> {
             try (var st = c.createStatement(); var rs = st.executeQuery("SELECT balance FROM accounts")) {
                 return rs.next() ? rs.getLong(1) : -1;

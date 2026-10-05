@@ -51,6 +51,7 @@ public final class MainMenu extends Menu {
         button(24, Material.PAINTING, "canvas.main", "menu.main.paint");
         button(25, Material.ANVIL, "equipment.upgrade", "menu.main.upgrade");
         // แถว 3: ธนาคาร (ต้องอยู่ที่ธนาคารหรือมีสิทธิ์ใช้ทางไกล) และกลับจุดเกิด
+        button(29, Material.ANVIL, "repair.main", "menu.main.repair");
         button(30, Material.GOLD_INGOT, "bank.main", "menu.main.bank");
         button(31, Material.BARREL, "mail.main", "menu.main.mail");
         button(32, Material.LODESTONE, "travel.spawn", "menu.main.spawn");

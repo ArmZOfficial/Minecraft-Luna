@@ -119,16 +119,19 @@ public final class ItemTemplateService {
             return Optional.empty();
         }
         PersistentDataContainer pdc = item.getItemMeta().getPersistentDataContainer();
-        String id = pdc.get(templateKey, PersistentDataType.STRING);
+        String id = pdc.has(templateKey, PersistentDataType.STRING) ? pdc.get(templateKey, PersistentDataType.STRING) : null;
         if (id == null) {
             return Optional.empty();
         }
-        Integer version = pdc.get(versionKey, PersistentDataType.INTEGER);
-        String serial = pdc.get(serialKey, PersistentDataType.STRING);
+        Integer version = pdc.has(versionKey, PersistentDataType.INTEGER) ? pdc.get(versionKey, PersistentDataType.INTEGER) : null;
+        String serial = pdc.has(serialKey, PersistentDataType.STRING) ? pdc.get(serialKey, PersistentDataType.STRING) : null;
         UUID serialId = null;
         if (serial != null) {
             try {
                 serialId = UUID.fromString(serial);
+                if (!serialId.toString().equals(serial)) {
+                    serialId = null;
+                }
             } catch (IllegalArgumentException ignored) {
                 // serial ผิดรูปแบบ = ไม่ใช่ของที่ Core ออก
             }
@@ -137,5 +140,14 @@ public final class ItemTemplateService {
     }
 
     public record Identity(String templateId, int version, UUID serial) {
+    }
+
+    /** รวม marker ที่ชนิดข้อมูลผิดด้วย เพื่อไม่ให้ไอเทม Core เสียรูป fallback เป็น vanilla */
+    public boolean hasIdentityFields(ItemStack item) {
+        if (item == null || item.isEmpty()) {
+            return false;
+        }
+        var keys = item.getPersistentDataContainer().getKeys();
+        return keys.contains(templateKey) || keys.contains(versionKey) || keys.contains(serialKey);
     }
 }

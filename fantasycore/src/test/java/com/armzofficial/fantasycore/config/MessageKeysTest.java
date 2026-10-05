@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessageKeysTest {
 
     private static final Pattern LITERAL = Pattern.compile(
-            "\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange)\\.[a-z0-9._-]+)\"");
+            "\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair)\\.[a-z0-9._-]+)\"");
 
     /** string ที่หน้าตาเหมือน key แต่เป็น action ID / ชนิด operation / audit action */
     private static final Set<String> NOT_MESSAGES = Set.of(
@@ -30,7 +30,7 @@ class MessageKeysTest {
             "bank.deposit", "bank.withdraw", "death.loss", "economy.adjust", "admin.adjust",
             "reward.daily", "reward.progress", "reward.online", "mail.main", "mail.give", "mail.release", "mail.void",
             // path ใน config.yml
-            "economy.currency.gold", "rewards.daily");
+            "economy.currency.gold", "rewards.daily", "repair.main", "repair.yml");
 
     /** key ที่ประกอบขึ้นตอนรัน */
     private static final List<String> DYNAMIC = List.of(
