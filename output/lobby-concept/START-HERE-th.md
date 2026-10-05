@@ -79,3 +79,4 @@ GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร�
 
 30. [บอสจันทราลงสีละเอียด/8animations](../../server/content/dungeons/moonfall/README-th.md) — nativeBlockbench146cubes/19bones/150keys, 4มุมและ29poseframes, sourceพร้อม; ModelEngineadapter/เกมจริงยังรอ
 31. [นายธนาคารv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 182cubes/17bones/4animations, สมุด/เหรียญติดมือทุกเฟรม, offlinegateผ่าน; เกมจริงยังรอ
+32. [ช่างตีเหล็กv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 171cubes/16bones/4animations, ตีค้อนtick11/25, offlinegateผ่าน; เกมจริงยังรอ

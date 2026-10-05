@@ -113,5 +113,27 @@
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_arcane_banker"
+  },
+  {
+    "id": "npc_rune_smith_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "hammer",
+      "craft_success"
+    ],
+    "cubes": 171,
+    "bones": 16,
+    "height_target": 2.2,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-rune-smith.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 19,
+    "supersedes": "npc_rune_smith"
   }
 ]

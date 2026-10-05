@@ -30,7 +30,7 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 | Asset | Reference | Outputใหม่ | ข้อกำหนดเฉพาะ |
 |---|---|---|---|
 | banker ✅ | assets/references/npc-arcane-banker.png | npc_arcane_banker_v2.bbmodel | ทำแล้ว: `tools/build_arcane_banker.py` → `preview_arcane_banker.py` → `manifest_arcane_banker.py` → `verify_arcane_banker.py` |
-| smith | assets/references/npc-rune-smith.png | npc_rune_smith_v2.bbmodel | hammer right hand, anvil-facing workvariant, no flames baked body, height2.2 |
+| smith ✅ | assets/references/npc-rune-smith.png | npc_rune_smith_v2.bbmodel | ทำแล้ว: `tools/build_rune_smith.py` → `preview_rune_smith.py` → `manifest_rune_smith.py` → `verify_rune_smith.py`; ขวามือ=+X (โมเดลหันทิศเหนือ/−Z) |
 | quest | assets/references/npc-quest-warden.png | npc_quest_warden_v2.bbmodel | segmented coattails, scroll left hand, height2.1 |
 | mage | assets/references/npc-portal-mage.png | npc_portal_mage_v2.bbmodel | hi_head hoodchildren, staffsocket, no arm above2.8blockworkingclearance |
 | halo | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | horizontal square ring, all display contexts, legacy headpreview |
