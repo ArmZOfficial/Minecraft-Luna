@@ -22,6 +22,7 @@ public final class TestDatabases {
 
     /** สร้าง fixture schema ก่อน v5 โดยรักษา rows เดิมไว้ */
     public static void removeCraftColumns(Connection c) throws SQLException {
+        removeDungeonTables(c);
         try (var st = c.createStatement()) {
             st.execute("DROP INDEX exchange_output_serial");
             st.execute("ALTER TABLE exchange_outputs DROP COLUMN serial");
@@ -30,5 +31,8 @@ public final class TestDatabases {
             st.execute("ALTER TABLE exchange_operations DROP COLUMN kind");
             st.execute("ALTER TABLE exchange_operations DROP COLUMN gold_cost");
         }
+    }
+    public static void removeDungeonTables(Connection c) throws SQLException {
+        try(var st=c.createStatement()) { st.execute("DROP TABLE dungeon_rewards"); st.execute("DROP TABLE dungeon_runs"); }
     }
 }

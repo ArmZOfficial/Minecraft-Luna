@@ -1,5 +1,8 @@
 # Core Craft v0.6 — อุปกรณ์รูนและเคาน์เตอร์โรงตีเหล็ก
 
+ระบบ craft/enchant นี้ยังอยู่ใน JAR v0.7; ขั้นตอน schema v5 ด้านล่างอธิบายการอัปถึง v0.6
+JAR ปัจจุบัน v0.7 ใช้ schema v6 ดู [ขั้นตอนอัปและ rollback](DUNGEONS-th.md) โดยคง archive/serial/สูตรเดิมตามหน้านี้
+
 ฉบับ 5 ตุลาคม 2026: source/JAR build ได้และ unit tests ผ่าน แต่ **ยังไม่ได้ทดสอบใน Minecraft runtime จริง**
 ใช้แผน [SERVER-SYSTEMS §7](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md) และ
 [INTERIOR โซน 07](../output/lobby-concept/INTERIOR-AND-MAP-PLAN-th.md) เป็นบริบท

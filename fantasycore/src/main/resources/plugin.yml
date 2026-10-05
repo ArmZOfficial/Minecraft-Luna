@@ -9,6 +9,11 @@ softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, Plac
 loadbefore: [ItemsCore]
 
 commands:
+  dungeon:
+    description: ดันเจี้ยนฝึกเดี่ยว Moonfall
+    usage: /dungeon [join|leave]
+    aliases: [dun]
+    permission: fantasy.dungeon
   craft:
     description: ดูสูตรและยืนยันคราฟต์อุปกรณ์รูนที่โรงตีเหล็ก
     usage: /craft
@@ -92,6 +97,10 @@ permissions:
       fantasy.exchange: true
       fantasy.repair.use: true
       fantasy.craft.use: true
+      fantasy.dungeon: true
+  fantasyadmin.dungeon.manage:
+    description: สร้าง/ตรวจโลกดันฝึกและยกเลิกรอบ (build/abort ต้องยืนยันและมีเหตุผล)
+    default: op
   fantasy.craft.remote:
     description: คราฟต์จากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
     default: false

@@ -73,6 +73,7 @@ public final class AdminCommand implements TabExecutor {
             case "mail" -> mail(sender, args);
             case "exchange", "craft" -> exchange(sender, args);
             case "repair" -> repair(sender, args);
+            case "dungeon" -> dungeon(sender, args);
             case "audit" -> audit(sender, args);
             default -> m.send(sender, "admin.help");
         }
@@ -174,6 +175,8 @@ public final class AdminCommand implements TabExecutor {
             line(sender, "fix", "items.yml", problem);
         }
         line(sender, services.monsters().enabled() ? "ready" : "fix", "Depth monsters", services.monsters().status());
+        line(sender, services.dungeon().ready() ? "ready" : "off", "Moonfall solo training", services.dungeon().status());
+        services.dungeon().problems().forEach(problem -> line(sender,"fix","dungeons.yml",problem));
         services.monsters().problems().forEach(problem -> line(sender, "fix", "monsters.yml", problem));
         for (String key : services.messages().missingKeys()) {
             line(sender, "fix", "messages_th.yml", "ขาด key " + key);
@@ -186,6 +189,29 @@ public final class AdminCommand implements TabExecutor {
                         count == 0 ? "ไม่มีรายการค้างตรวจ" : count + " รายการรอทีมงานตัดสิน — /fa mail review");
             }
         });
+    }
+
+    private void dungeon(CommandSender sender, String[] args) {
+        Messages m=services.messages();
+        String sub=args.length>=2?args[1].toLowerCase(Locale.ROOT):"status";
+        if(sub.equals("status")) { m.send(sender,"dungeon.admin-report",Messages.p("detail",services.dungeon().status())); return; }
+        if(!sender.hasPermission("fantasyadmin.dungeon.manage")) { m.send(sender,"common.no-permission"); return; }
+        if(sub.equals("visit") && sender instanceof Player player) { services.dungeon().visit(player); return; }
+        if((sub.equals("build") || sub.equals("abort")) && args.length>=3) {
+            String reason=String.join(" ",Arrays.copyOfRange(args,2,args.length)).trim();
+            if(reason.length()<3 || reason.length()>200) { m.send(sender,"admin.reason-required"); return; }
+            UUID actor=sender instanceof Player p?p.getUniqueId():null;
+            String token=confirmations.create(actor,() -> {
+                if(!sender.hasPermission("fantasyadmin.dungeon.manage")) { m.send(sender,"common.no-permission"); return; }
+                AuditEntry entry=new AuditEntry(actor==null?null:actor.toString(),sender.getName(),"dungeon.admin."+sub,"moonfall_training",services.dungeon().status(),reason);
+                services.tasks().then(services.database().async(() -> { services.audit().record(entry,OpMeta.newOpId()); return null; }),(ignored,error) -> {
+                    if(error!=null) { m.send(sender,"dungeon.storage-error"); return; }
+                    if(sub.equals("build")) { services.dungeon().build(sender); } else { services.dungeon().abort(sender); }
+                });
+            });
+            m.send(sender,"dungeon.admin-preview",Messages.p("action",sub),Messages.p("reason",reason),Messages.p("token",token)); return;
+        }
+        m.send(sender,"dungeon.admin-usage");
     }
 
     private void line(CommandSender sender, String status, String name, String detail) {
@@ -812,7 +838,7 @@ public final class AdminCommand implements TabExecutor {
                                       String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "craft", "audit"));
+            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "craft", "audit", "dungeon"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
@@ -820,6 +846,7 @@ public final class AdminCommand implements TabExecutor {
                 case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
                 case "exchange", "repair", "craft" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
+                case "dungeon" -> options.addAll(List.of("status", "build", "visit", "abort"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {
                 }

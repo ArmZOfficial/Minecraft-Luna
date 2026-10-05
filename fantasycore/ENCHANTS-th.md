@@ -1,5 +1,8 @@
 # FantasyCore v0.6 — Enchant จริงและแม่แบบย้อนหลัง
 
+ระบบ enchant เริ่มใน v0.6 และยังใช้ใน v0.7; ขั้นตอน schema v5 ด้านล่างเป็นของ JAR v0.6 โดยเฉพาะ
+หากใช้ JAR ปัจจุบัน v0.7 ให้ backup และ migrate schema v6 ตาม [คู่มือดันฝึก](DUNGEONS-th.md) พร้อมขั้นตอน archive แม่แบบเดิมในหน้านี้
+
 ฉบับ 5 ตุลาคม 2026: เพิ่ม native enchant ใน factory ของ Core, แสดงค่าก่อนคราฟต์ และอ่านแม่แบบหลายเวอร์ชันเพื่อซ่อมไอเทมเดิม
 **สถานะ: source/JAR build และ unit tests; ยังไม่ผ่าน Minecraft runtime QA**
 ใช้ Paper/Java ตาม [manifest](../server/manifest/compatibility-manifest.json); เป้าหมาย client Java 1.16.5+ ยังต้องผ่าน ViaVersion matrix จริง

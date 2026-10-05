@@ -201,6 +201,40 @@ public final class Migrations {
                     "ALTER TABLE exchange_outputs ADD COLUMN template_id TEXT",
                     "ALTER TABLE exchange_outputs ADD COLUMN template_version INTEGER",
                     "CREATE UNIQUE INDEX exchange_output_serial ON exchange_outputs(serial) WHERE serial IS NOT NULL"
+            },
+            // version 6 — solo training run, frozen reward, daily receipt, durable return obligation
+            new String[]{
+                    """
+                    CREATE TABLE dungeon_runs (
+                        run_id TEXT PRIMARY KEY,
+                        dungeon_id TEXT NOT NULL,
+                        player_uuid TEXT NOT NULL,
+                        state TEXT NOT NULL CHECK (state IN ('PREPARING','ACTIVE','COMPLETED','ABORTED')),
+                        stage INTEGER NOT NULL DEFAULT 0 CHECK (stage BETWEEN 0 AND 3),
+                        needs_return INTEGER NOT NULL DEFAULT 1 CHECK (needs_return IN (0,1)),
+                        return_world TEXT NOT NULL,
+                        return_x REAL NOT NULL, return_y REAL NOT NULL, return_z REAL NOT NULL,
+                        return_yaw REAL NOT NULL, return_pitch REAL NOT NULL,
+                        reward_version INTEGER NOT NULL CHECK (reward_version > 0),
+                        reward_label TEXT NOT NULL,
+                        reward_data BLOB NOT NULL,
+                        reason TEXT,
+                        created_at INTEGER NOT NULL,
+                        updated_at INTEGER NOT NULL
+                    )""",
+                    "CREATE UNIQUE INDEX dungeon_open_lane ON dungeon_runs(dungeon_id) WHERE state IN ('PREPARING','ACTIVE')",
+                    "CREATE UNIQUE INDEX dungeon_return_player ON dungeon_runs(player_uuid) WHERE needs_return = 1",
+                    """
+                    CREATE TABLE dungeon_rewards (
+                        run_id TEXT PRIMARY KEY REFERENCES dungeon_runs(run_id),
+                        player_uuid TEXT NOT NULL,
+                        dungeon_id TEXT NOT NULL,
+                        period TEXT NOT NULL,
+                        reward_version INTEGER NOT NULL,
+                        mail_id INTEGER NOT NULL UNIQUE REFERENCES mail(id),
+                        created_at INTEGER NOT NULL,
+                        UNIQUE (player_uuid, dungeon_id, period)
+                    )"""
             }
     );
 

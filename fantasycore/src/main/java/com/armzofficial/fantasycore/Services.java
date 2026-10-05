@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.claim.ClaimAdapter;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.combat.DepthMonsterService;
+import com.armzofficial.fantasycore.dungeon.DungeonService;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.exchange.ExchangeService;
 import com.armzofficial.fantasycore.home.HomeService;
@@ -54,5 +55,6 @@ public record Services(
         ItemAdapter itemAdapter,
         RepairService repair,
         DepthMonsterService monsters,
+        DungeonService dungeon,
         Optional<CitizensBridge> citizens) {
 }

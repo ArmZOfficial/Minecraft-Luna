@@ -308,8 +308,8 @@ class CraftStoreTest {
             }
             return null;
         });
-        assertEquals(5, Migrations.apply(db));
-        assertEquals(5, Migrations.apply(db));
+        assertEquals(Migrations.latestVersion(), Migrations.apply(db));
+        assertEquals(Migrations.latestVersion(), Migrations.apply(db));
         assertEquals(1000, money.balances(player).gold());
         assertEquals(1, mail.countPending(player));
         assertEquals(1, exchange.usage(player, "2026-10-05").get("food"));

@@ -1,7 +1,7 @@
 # ItemsCore + FantasyCore — แผนผสมและชุดทดสอบ
 
 ตรวจ 5 ตุลาคม 2026; ผู้ใช้เลือก **พิจารณารุ่นเต็มหลังทดสอบ**
-สถานะ: Core v0.6 มี craft/repair/native enchant/แม่แบบย้อนหลังสำหรับ Core/vanilla; มี ItemsCore trial imports 4 ไฟล์และ validator proof
+สถานะ: Core v0.7 มี craft/repair/native enchant/แม่แบบย้อนหลังและดันฝึกเดี่ยวสำหรับ Core/vanilla; มี ItemsCore trial imports 4 ไฟล์และ validator proof
 **ยังไม่มี ItemsCore JAR, ไม่ได้ import ลงเกม และยังไม่มี Java provider bridge สำหรับ craft/repair/mail**
 
 ## 1. รุ่นที่ใช้ตัดสินใจ

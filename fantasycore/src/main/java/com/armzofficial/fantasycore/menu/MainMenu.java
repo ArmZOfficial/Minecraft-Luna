@@ -56,6 +56,7 @@ public final class MainMenu extends Menu {
         button(30, Material.GOLD_INGOT, "bank.main", "menu.main.bank");
         button(31, Material.BARREL, "mail.main", "menu.main.mail");
         button(32, Material.LODESTONE, "travel.spawn", "menu.main.spawn");
+        button(33, Material.END_STONE_BRICKS, "dungeon.main", "menu.main.dungeon");
         set(49, Icons.of(Material.BARRIER, m.plain("menu.close"), List.of()), (p, c) -> p.closeInventory());
         fill(Icons.filler());
     }

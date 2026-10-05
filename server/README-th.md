@@ -3,6 +3,7 @@
 เซิร์ฟนี้ใช้ทดสอบ **ลำดับพัฒนาข้อ 1–3** ใน [SERVER-SYSTEMS-PLAN §9](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 และ **CASUAL-SURVIVAL §12 ข้อ 1–2** (PS tier I/V + บ้าน + RTP) ก่อนเปลี่ยนสถานะ manifest จาก candidate เป็น locked
 FantasyCore v0.2 เพิ่มกล่องจดหมาย, รับของรายวัน และการผูก NPC ของ Citizens (หมวด B6, I, J ด้านล่าง)
+รุ่นปัจจุบัน v0.7/schema6 เพิ่ม [ดันฝึก Moonfall](../fantasycore/DUNGEONS-th.md) (checklist R); ไม่เปิดรับผู้เล่นอัตโนมัติ
 staging เปิด whitelist ไว้เสมอ และไม่ใช่เซิร์ฟเปิดให้ผู้เล่นทั่วไป
 
 คลังโมเดล/ไอคอนที่เพิ่ม: [26 แพ็กและแปลนวางในเมือง](content/library/README-th.md), [ชื่อชุดและบาลานซ์ enchant](content/library/BALANCE-th.md)
@@ -56,7 +57,7 @@ server/
 
 ### A. เปิดเซิร์ฟและเชื่อมต่อ
 - [ ] A1 เซิร์ฟเปิดถึง `Done` ไม่มี error สีแดงจาก FantasyCore, WorldGuard, ProtectionStones, VaultUnlocked
-- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v5)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
+- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v6)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
 - [ ] A3 โลก `luma_housing` และ `luma_resource` ถูกสร้าง (`/fa doctor` แสดง border 10,000 และ 6,000)
 - [ ] A4 ★ client 26.2 และ 1.16.5 เข้าเซิร์ฟได้ทั้งคู่
 
@@ -228,6 +229,31 @@ server/
 
 - [ ] อ่าน [ใบงาน4ภาพ](../output/lobby-concept/dungeons/moonfall/README-th.md), สร้างtemplate/walkthrough/protect/NPCyawก่อนเปิดปุ่มเข้าดัน
 - [ ] dungeon party/instance/checkpoint/boss model+animation/skill/รางวัลatomic/cleanup/compatibilityต้องผ่านใบงานก่อนประกาศเล่นได้
+
+### R. Moonfall ดันฝึกเดี่ยว (v0.7 — ยังรอรัน Minecraft จริง)
+
+อ่าน [DUNGEONS-th.md](../fantasycore/DUNGEONS-th.md); tests105รายการไม่ได้แทนรายการด้านล่าง ห้ามติ๊กผ่านจาก compile/ภาพ
+
+- [ ] R1 สำเนาDBv0.6จริง→schema6: accounts/homes/items/mail/repair/craft/NPC/dailyเดิมครบ; rollbackด้วยbackupชุดเดียวกัน
+- [ ] R2 clean install enabledfalseไม่สร้างโลก/ไม่รับjoin; configเดิมไม่ถูกเขียนทับ, YAML/HP/timeoutผิด doctorแจ้งและดันปิด
+- [ ] R3 buildต้องmanage+reason+preview/confirm/audit, tokenหมดอายุ/ต่างผู้สั่ง/ยืนยันซ้ำไม่ทำงาน; existingunowned/symlink worldหยุดโดยไม่แตะบล็อก
+- [ ] R4 newworldbuildจบ/บันทึกจริงและstatusถูก; restartกลางbuildไม่ready, resumeownedincompleteได้; buildซ้ำreadyไม่ทับงานตกแต่ง
+- [ ] R5 visitแบบยังปิดไม่มีmob/reward, NPC/serviceนอกworldเปิดเมนูได้; playerสองคน/visitแข่งjoin/กดjoinซ้ำมีเพียงหนึ่งรอบ
+- [ ] R6 เดินlanding/bันได4ชุด/ประตู/roomseamsจริง ช่องหัวไม่ชน, พื้นรองรับ ไม่มีvoid/บล็อกconnection/lightค้าง; ตรวจterrainทีละchunk
+- [ ] R7 spawnCUSTOMไม่ถูกcancelด้วยgamerule/WorldGuard/provider; Zombie3/Husk2/Huskboss1 HP/อาวุธ/เกราะ/hungerจริงตรงguide, ไม่ซ้อนdepth
+- [ ] R8 gateเปิดหลังstagecommit, ยิงจากก่อนห้อง/ย้อนห้อง/ข้ามgate/บิน/เปลี่ยนmode/ขี่/ม็อบถูกremoveไม่ทำให้ชนะฟรีหรือวงค้าง
+- [ ] R9 HPbarตรงเลือดจริงหลังdamage/ตาย/regen, bossมีวงเตือน25ticksก่อนrawdamage8และarmorลดได้; wall/outsidecircleไม่โดน
+- [ ] R10 ตายรักษาinventory/XPและไม่หักwallet, durability/food/arrow/potionที่ใช้ลดตามปกติ; ไม่dropของ/XP/mobgearหรือคืนของเพิ่ม
+- [ ] R11 blockbreak/place/bucket/piston/fire/explosion/hanging/container/pickup/drop/PSregion/portalถูกป้องกัน; staff/providerที่ข้ามeventทำบนสำเนาเท่านั้น
+- [ ] R12 pearl/chorus/home/RTP/ปลั๊กอินTPเข้าออกระหว่างPREPARING/ACTIVEถูกcancel; leaveไม่ติดcombatlockแต่ยกเลิกรอบ
+- [ ] R13 quit/death/leave/adminabort/timeoutระหว่างจอง/TP/activate/wave/advance/boss/slamหยุดรอบและเคลียร์entity/bar/tasks/ticketsครบ
+- [ ] R14 asyncchunkloadเกินtimeout/callbackช้าไม่เข้าแมพหรือวาร์ปซ้ำ, ชนกับleave/recoverไม่มีผู้เล่นสองคนในlaneหรือstateค้าง
+- [ ] R15 จุดเดิม/โลกไม่พร้อมใช้safehub; TPcancel/unsafehubคงreturnflagและleaveซ้ำทำงาน; อย่าทดลองด้วยผู้เล่นจริง
+- [ ] R16 restartช่วงACTIVE/ก่อนcompleteยกเลิกไม่เดารางวัล; completeแล้วก่อนreturn/reconnectยังมีmailเพียงรายการเดียวและพาคนกลับได้
+- [ ] R17 ผ่านแล้วได้PDCเศษจันทราx2ในmailวันละครั้งไทย; เล่นซ้ำไม่แจก, วันใหม่ได้, inventoryเต็มเก็บmail; ไม่มีทอง/เงินแดง/XP/paidสิทธิ์
+- [ ] R18 fault injectionDB/mail/auditบนสำเนา: receipt+mail rollbackหรือcommitครบ, ไม่successปลอม; pendingreturn/reviewตรวจได้และของเดิมไม่หาย
+- [ ] R19 ★ Java26.2/1.16.5: stairs/roof/particles/HPbar/menu/nativegear/questshardเทียบกัน, packfailยังหลบskillได้; หันmodel/NPCตามสัญญาจริง
+- [ ] R20 วัดMSPTตอนbuild/chunkload/combat/skillและlogoutหลายคน, ถ้าไม่ผ่านลดbudget/แก้ก่อนเปิด; Party/ModelEngineยังไม่ใช้ผลนี้แทนmatrix
 
 คู่มือราคา/provider/ผัง NPC/recovery: [REPAIR-th.md](../fantasycore/REPAIR-th.md)
 

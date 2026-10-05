@@ -1,7 +1,7 @@
 # ItemAdapter และ Repair v0.4 — โรงตีเหล็กของลูม่า
 
 ฉบับ 5 ตุลาคม 2026: build + unit tests ผ่าน แต่ **ยังไม่ได้ทดสอบ Minecraft runtime จริง**
-Core ปัจจุบัน v0.6/schema v5; flow ซ่อมของ v0.4 ยังอยู่ และเพิ่ม [ช่างคราฟต์](CRAFT-th.md) ที่เคาน์เตอร์ซ้าย
+Core ปัจจุบัน v0.7/schema v6; flow ซ่อมของ v0.4 ยังอยู่ และเพิ่ม [ช่างคราฟต์](CRAFT-th.md) ที่เคาน์เตอร์ซ้าย; การอัป/ย้อน schema อยู่ใน [ดันฝึก](DUNGEONS-th.md)
 ตาม [SERVER-SYSTEMS §7 คราฟต์และซ่อม](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md) และ
 [ผังภายในโซน 07](../output/lobby-concept/INTERIOR-AND-MAP-PLAN-th.md)
 

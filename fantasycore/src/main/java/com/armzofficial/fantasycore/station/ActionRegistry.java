@@ -9,6 +9,7 @@ import com.armzofficial.fantasycore.menu.RepairMenu;
 import com.armzofficial.fantasycore.menu.HomesMenu;
 import com.armzofficial.fantasycore.menu.MailMenu;
 import com.armzofficial.fantasycore.menu.MainMenu;
+import com.armzofficial.fantasycore.menu.DungeonMenu;
 import com.armzofficial.fantasycore.menu.RewardMenu;
 import com.armzofficial.fantasycore.menu.RtpMenu;
 import com.armzofficial.fantasycore.travel.SpawnTravel;
@@ -45,13 +46,15 @@ public final class ActionRegistry {
             "reward.progress", "reward.online", "quest.gold", "quest.red",
             "cosmetic.item_skin", "cosmetic.title", "equipment.upgrade", "canvas.main",
             "market.main", "market.orders", "guild.main", "jobs.main", "pet.main", "afk.main",
-            "dungeon.main", "boss.main", "pvp.main");
+            "boss.main", "pvp.main");
 
     private final Supplier<Services> services;
     private final Map<String, ActionDef> actions = new LinkedHashMap<>();
 
     public ActionRegistry(Supplier<Services> services) {
         this.services = services;
+        register(new ActionDef("dungeon.main", "fantasy.dungeon", false, null,
+                (p, s) -> new DungeonMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("menu.main", "fantasy.menu", false, null,
                 (p, s) -> new MainMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("navigation.main", "fantasy.menu", false, null,

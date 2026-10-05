@@ -50,6 +50,7 @@ lp group staff_builder permission set worldguard.region.* true
 lp creategroup staff_content
 lp group staff_content parent add staff_observer
 lp group staff_content permission set fantasyadmin.content.edit true
+lp group staff_content permission set fantasyadmin.dungeon.manage true
 
 lp creategroup staff_economy
 lp group staff_economy parent add staff_observer

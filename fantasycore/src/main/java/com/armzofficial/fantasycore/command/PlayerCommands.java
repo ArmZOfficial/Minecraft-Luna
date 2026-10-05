@@ -39,6 +39,11 @@ public final class PlayerCommands implements TabExecutor {
             return true;
         }
         switch (command.getName().toLowerCase(Locale.ROOT)) {
+            case "dungeon" -> {
+                if (args.length==1 && args[0].equalsIgnoreCase("leave")) { services.dungeon().leave(player); }
+                else if (args.length==1 && args[0].equalsIgnoreCase("join")) { services.dungeon().join(player); }
+                else { services.actions().open(player,"dungeon.main",ActionRegistry.Source.COMMAND); }
+            }
             case "craft" -> services.actions().open(player, "craft.main", ActionRegistry.Source.COMMAND);
             case "menu" -> services.actions().open(player, "menu.main", ActionRegistry.Source.COMMAND);
             case "bank" -> bank(player, args);
@@ -165,7 +170,9 @@ public final class PlayerCommands implements TabExecutor {
                                       String[] args) {
         String name = command.getName().toLowerCase(Locale.ROOT);
         List<String> options = new ArrayList<>();
-        if (name.equals("bank") && args.length == 1) {
+        if (name.equals("dungeon") && args.length == 1) {
+            options.addAll(List.of("join", "leave"));
+        } else if (name.equals("bank") && args.length == 1) {
             options.addAll(List.of("deposit", "withdraw", "history"));
         } else if (name.equals("bank") && args.length == 2) {
             options.add("all");

@@ -10,6 +10,9 @@ import com.armzofficial.fantasycore.command.PlayerCommands;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.combat.DepthMonsterService;
+import com.armzofficial.fantasycore.dungeon.DungeonService;
+import com.armzofficial.fantasycore.dungeon.DungeonStore;
+import com.armzofficial.fantasycore.dungeon.DungeonProtection;
 import com.armzofficial.fantasycore.economy.DeathListener;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.economy.EconomyStore;
@@ -78,6 +81,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         saveIfMissing("repair.yml");
         saveIfMissing("crafting.yml");
         saveIfMissing("monsters.yml");
+        saveIfMissing("dungeons.yml");
 
         Settings settings = Settings.load(getConfig(), getLogger());
         Messages messages = Messages.load(this);
@@ -98,10 +102,13 @@ public final class FantasyCorePlugin extends JavaPlugin {
         EconomyStore economyStore = new EconomyStore(database, System::currentTimeMillis, settings.maxTransaction());
         EconomyService economy = new EconomyService(database, economyStore);
         MailStore mailStore = new MailStore(database, System::currentTimeMillis);
+        DungeonStore dungeonStore = new DungeonStore(database, mailStore, System::currentTimeMillis);
         ExchangeStore exchangeStore = new ExchangeStore(database, mailStore, System::currentTimeMillis);
         ExchangeStore craftStore = new ExchangeStore(database, mailStore, System::currentTimeMillis, economyStore, ExchangeStore.Kind.CRAFT);
         RepairStore repairStore = new RepairStore(database, economyStore, System::currentTimeMillis);
         try {
+            int abortedDungeons = dungeonStore.recoverInterrupted();
+            if (abortedDungeons > 0) { getLogger().warning("ยกเลิกรอบดันฝึกค้าง " + abortedDungeons + " รอบ — เก็บจุดกลับและ mail ที่ commit แล้วไว้"); }
             int interrupted = mailStore.quarantineInterrupted();
             ExchangeStore.Recovery recovery = exchangeStore.quarantineInterrupted();
             ExchangeStore.Recovery craftRecovery = craftStore.quarantineInterrupted();
@@ -158,13 +165,15 @@ public final class FantasyCorePlugin extends JavaPlugin {
                 stations, settings.maxTransaction());
         repair.problems().forEach(p -> getLogger().warning("repair.yml: " + p));
         DepthMonsterService monsters = new DepthMonsterService(this);
+        DungeonService dungeon = new DungeonService(this,messages,settings,database,dungeonStore,tasks,teleports,landing);
+        dungeon.problems().forEach(getLogger()::warning);
         monsters.problems().forEach(getLogger()::warning);
         ActionRegistry actions = new ActionRegistry(() -> services);
         Optional<CitizensBridge> citizens = CitizensBridge.detect(getLogger());
         citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, itemAdapter, repair, monsters, citizens);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, itemAdapter, repair, monsters, dungeon, citizens);
         register(monsters);
         monsters.start();
 
@@ -176,11 +185,12 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
         register(combat, teleports, new MenuListener(this), new StationListener(stations, actions, citizens.orElse(null)),
                 new NativeRepairListener(items, repair, messages),
-                new DeathListener(settings, messages, economy, tasks), new SessionListener(services));
+                new DeathListener(settings, messages, economy, tasks, dungeon::owns), dungeon, new DungeonProtection(dungeon), new SessionListener(services));
+        dungeon.start();
 
         PlayerCommands playerCommands = new PlayerCommands(services);
         for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
-                "rewards", "mail", "exchange", "repair", "craft"}) {
+                "rewards", "mail", "exchange", "repair", "craft", "dungeon"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));
@@ -201,7 +211,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (services != null) { services.monsters().close(); }
+        if (services != null) { services.dungeon().close(); services.monsters().close(); }
         if (teleports != null) {
             teleports.cancelAll();
         }

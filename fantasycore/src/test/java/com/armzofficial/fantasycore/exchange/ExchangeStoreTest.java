@@ -165,6 +165,7 @@ class ExchangeStoreTest {
     void migrationFromV2KeepsExistingAccountAndMail() throws Exception {
         long mailId = mail.enqueue(player, "test", "old", "bread", new byte[]{7}, null);
         db.transaction(c -> {
+            TestDatabases.removeDungeonTables(c);
             try (var st = c.createStatement()) {
                 st.execute("DROP TABLE exchange_outputs");
                 st.execute("DROP TABLE exchange_operations");

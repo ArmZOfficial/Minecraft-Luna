@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.util.Money;
 import com.armzofficial.fantasycore.util.Tasks;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,19 +24,21 @@ public final class DeathListener implements Listener {
     private final Messages messages;
     private final EconomyService economy;
     private final Tasks tasks;
+    private final java.util.function.Predicate<World> trainingWorld;
 
-    public DeathListener(Settings settings, Messages messages, EconomyService economy, Tasks tasks) {
+    public DeathListener(Settings settings, Messages messages, EconomyService economy, Tasks tasks, java.util.function.Predicate<World> trainingWorld) {
         this.settings = settings;
         this.messages = messages;
         this.economy = economy;
         this.tasks = tasks;
+        this.trainingWorld = trainingWorld;
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         String worldName = player.getWorld().getName();
-        Settings.DeathRule rule = settings.deathRule(worldName);
+        Settings.DeathRule rule = trainingWorld.test(player.getWorld()) ? new Settings.DeathRule(0,true) : settings.deathRule(worldName);
         if (rule.keepInventory()) {
             event.setKeepInventory(true);
             event.getDrops().clear();

@@ -1,0 +1,9 @@
+# FantasyCore v0.7 — Moonfall solo training. เปิดหลัง /fa dungeon build + visit + staging checklist เท่านั้น
+# โลกถูกตรึงชื่อ luma_moonfall_training; ไม่สร้างโลกอัตโนมัติจาก enabled
+enabled: false
+timeout-seconds: 1080
+hall-health: 30
+reliquary-health: 50
+boss-health: 180
+# ค่าโจมตีดิบ: hall 4, reliquary 5, boss 6, slam 8 (เกราะลดได้)
+# ผ่านแล้วได้ PRISMARINE_SHARD x2 (เศษจันทรา, PDC quest marker) ทาง /mail วันละครั้งเวลาไทย; ไม่มีค่าเข้า/เงินรางวัล/XP/drop mob
