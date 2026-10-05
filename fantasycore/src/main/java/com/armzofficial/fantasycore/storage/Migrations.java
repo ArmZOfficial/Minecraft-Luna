@@ -140,6 +140,34 @@ public final class Migrations {
                         created_at  INTEGER NOT NULL,
                         PRIMARY KEY (player_uuid, program, period)
                     )"""
+            },
+            // version 3 — exchange journal; เก็บสูตร/ของ/slot ก่อนตัดไว้ให้ recovery ไม่อาศัย config ปัจจุบัน
+            new String[]{
+                    """
+                    CREATE TABLE exchange_operations (
+                        op_id TEXT PRIMARY KEY,
+                        player_uuid TEXT NOT NULL,
+                        recipe_id TEXT NOT NULL,
+                        recipe_version INTEGER NOT NULL CHECK (recipe_version > 0),
+                        batch INTEGER NOT NULL CHECK (batch BETWEEN 1 AND 16),
+                        period TEXT NOT NULL,
+                        state TEXT NOT NULL CHECK (state IN ('PREPARED','CONSUMING','COMMITTED','CANCELLED','REVIEW')),
+                        inputs TEXT NOT NULL,
+                        slot_snapshot BLOB NOT NULL,
+                        created_at INTEGER NOT NULL,
+                        updated_at INTEGER NOT NULL
+                    )""",
+                    "CREATE INDEX exchange_quota ON exchange_operations(player_uuid, recipe_id, period, state)",
+                    "CREATE UNIQUE INDEX exchange_active_player ON exchange_operations(player_uuid) WHERE state IN ('PREPARED','CONSUMING','REVIEW')",
+                    """
+                    CREATE TABLE exchange_outputs (
+                        op_id TEXT NOT NULL REFERENCES exchange_operations(op_id),
+                        ordinal INTEGER NOT NULL,
+                        label TEXT NOT NULL,
+                        item_data BLOB NOT NULL,
+                        mail_id INTEGER REFERENCES mail(id),
+                        PRIMARY KEY (op_id, ordinal)
+                    )"""
             }
     );
 

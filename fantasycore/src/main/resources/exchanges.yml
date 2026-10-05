@@ -1,0 +1,39 @@
+# QuestExchange v0.3 — สูตรทดลอง vanilla ก่อนเชื่อม ItemAdapter/custom coupons
+# แก้แล้ว restart (ไม่รองรับ /reload). เปลี่ยน inputs/outputs ต้องเพิ่ม version.
+# daily-limit นับจำนวนรอบรวมทุก version ของ recipe ID ต่อวัน เวลาไทย 00:00
+# ไม่รับ named/enchanted/PDC/custom item เป็นวัตถุดิบ; storage 36 ช่องเท่านั้น
+enabled: true
+recipes:
+  food_bundle:
+    enabled: true
+    version: 1
+    name: 'เสบียงนักเดินทาง'
+    icon: BREAD
+    daily-limit: 16
+    inputs:
+      WHEAT: 32
+    outputs:
+      BREAD: 8
+  garden_lamp:
+    enabled: true
+    version: 1
+    name: 'โคมสวนแสงจันทร์'
+    icon: LANTERN
+    daily-limit: 16
+    inputs:
+      TORCH: 16
+      IRON_INGOT: 4
+    outputs:
+      LANTERN: 2
+  starter_tool:
+    enabled: true
+    version: 1
+    name: 'เครื่องมือนักสำรวจ'
+    icon: IRON_PICKAXE
+    daily-limit: 4
+    inputs:
+      IRON_INGOT: 6
+      STICK: 4
+    outputs:
+      IRON_PICKAXE: 1
+# repair_credit / paint_palette / wardrobe_token รอระบบที่ใช้ coupon ได้จริง

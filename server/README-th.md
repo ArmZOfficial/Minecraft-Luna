@@ -119,5 +119,22 @@ server/
 - [ ] H2 ลบ/ย้าย VaultUnlocked ออกชั่วคราว → FantasyCore ยังเปิดได้ (แจ้งเตือนเรื่อง Vault) ระบบเงินในเกมยังใช้ได้
 - [ ] H3 อัปจาก v0.1 → v0.2 บนฐานข้อมูลเดิม → log ขึ้น `schema v2` ยอดเงิน/บ้าน/NPC เดิมอยู่ครบ
 
+### K. เควสแลกของ (v0.3)
+- [ ] K1 ★ `/exchange` และ `/menu` → กระดานแลกของ เปิด 3 สูตร; คลิก NPC `quest.exchange` ได้เมนูเดียวกัน
+- [ ] K2 ★ WHEAT 32 → preview BREAD 8 → ยืนยัน: ตัด 32 พอดี, `/mail` มี 8, กดซ้ำ/รับซ้ำไม่ได้, ไม่ตกพื้น
+- [ ] K3 ★ batch 2 ของ garden_lamp ใช้ TORCH 32 + IRON_INGOT 8 → LANTERN 4; ของหลาย stack รวมได้ เหลือแต่ละ slot ตรง; เกราะ/มือรองไม่ถูกใช้
+- [ ] K4 ★ ตั้งชื่อ/เพิ่ม lore/enchants/PDC ให้ของชนิดเดียวกับวัตถุดิบ → ไม่ถูกใช้; ของธรรมดาไม่ครบหนึ่งชนิด → ไม่ตัดอะไรเลย
+- [ ] K5 ★ กระเป๋าเต็มและของครบ → แลกได้ รางวัลรอ mail; รับ mail เมื่อเต็มไม่ได้ พอมีช่องจึงรับได้; shift/drag/ปุ่มเลข/double-click หยิบไอคอนไม่ได้
+- [ ] K6 ★ ใช้ starter_tool ครบ 4 รอบ → รอบที่ 5 ไม่ได้; เพิ่ม recipe version ยังติดโควตา; วันใหม่ไทยเปิด `/exchange` ใหม่ โควตารีเซ็ต; journal ยังอยู่
+- [ ] K7 ปิดเมนู/ออกเกม/เปลี่ยนวัตถุดิบ/ถอน `fantasy.exchange` ระหว่าง PREPARED หรือรอ beginConsume → ยกเลิกก่อนตัด ไม่มี mail และคืนโควตา
+- [ ] K8 บน staging disposable ใช้ debugger/harness หยุดตามจุด: หลัง PREPARED, หลัง CONSUMING ก่อนตัด, หลังตัดก่อน saveData, หลัง saveData ก่อน DB commit, หลัง commit ก่อนข้อความ แล้ว terminate process → เปิดใหม่และตรวจ state/playerdata/mail ทุกจุด (เก็บ backup และ log)
+- [ ] K9 PREPARED ค้าง → CANCELLED; CONSUMING ค้าง → REVIEW บล็อกการแลกทั้งหมดของ UUID; COMMITTED คงเดิมและ mail เดิมไม่เพิ่ม; CLAIMING ของ mail → ใช้หมวด J/review แยกกัน
+- [ ] K10 `/fa exchange complete|cancel <op> เหตุผล` แสดง preview → `/fa confirm`; reason/actor/permission/expiry ผิดไม่ apply; confirm ซ้ำไม่สร้างของเพิ่ม; audit ครบ; cancel ไม่คืนวัตถุดิบเอง
+- [ ] K11 อัปฐานข้อมูล v0.2 จริงบนสำเนา → schema v3 เงิน/บ้าน/NPC/mail/daily เดิมอยู่ครบ; สูตรผิดปิดเฉพาะสูตรนั้น; config เดิมไม่ถูกเขียนทับ
+- [ ] K12 ตั้ง `players.disable-saving: true` บน staging แล้ว restart → แลกและรับ mail ไม่ได้; คืน false แล้วทดสอบ disk write failure และดู `Failed to save player data` — ถ้าผล inventory/DB ไม่ตรงต้องแก้ก่อนเปิด public
+- [ ] K13 วัด MSPT/เวลาตอบกลับเมื่อหลายคนแลกและรับ mail พร้อมกัน เพราะ saveData เป็น synchronous I/O; บันทึกค่าจริงก่อนตั้งจำนวนผู้เล่นที่รองรับ
+
+รายละเอียด flow/ข้อจำกัด storage/การกู้คืน: [EXCHANGE-th.md](../fantasycore/EXCHANGE-th.md)
+
 เมื่อผ่านครบ: เปลี่ยน `status` ใน manifest เป็น locked, commit `plugins.lock.json` และบันทึกผลในเอกสารสถานะ
-แถวที่ไม่ผ่านให้จดข้อความ error/ภาพหน้าจอ แล้วแก้ก่อนไปลำดับข้อ 4 ส่วนที่เหลือ (item adapter + recipe + repair) และเควสแลกของ (CASUAL §7)
+แถวที่ไม่ผ่านให้จดข้อความ error/ภาพหน้าจอ แล้วแก้ก่อนไปลำดับข้อ 4 ส่วนที่เหลือ (item adapter + custom recipe + repair)

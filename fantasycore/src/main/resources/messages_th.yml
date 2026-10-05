@@ -252,6 +252,7 @@ reward:
         <gray>รอบใหม่ในอีก <time>
 
 mail:
+  saving-disabled: '<red>เซิร์ฟปิดการบันทึกผู้เล่นหรืออ่านสถานะไม่ได้ — ยังรับของไม่ได้ โปรดแจ้งทีมงานตรวจ /fa doctor'
   join-notice: 'คุณมีของรอในกล่องจดหมาย <#47C8D3><count></#47C8D3> ชิ้น — พิมพ์ <#DDA54A>/mail</#DDA54A>'
   claimed-one: '<green>รับ <item> แล้ว'
   claimed-all: '<green>รับของจากกล่องแล้ว <count> ชิ้น'
@@ -284,6 +285,47 @@ mail:
     corrupt:
       name: '<red>จดหมาย #<id> อ่านไม่ได้'
 
+exchange:
+  disabled: '<yellow>เควสแลกของยังไม่เปิด — ดูสถานะ /fa doctor'
+  busy: '<yellow>มีรายการแลกกำลังทำงานหรือรอทีมงานตรวจ กรุณารอก่อน'
+  missing: '<red>วัตถุดิบธรรมดาไม่ครบ:</red> <gray><inputs> (ไม่ใช้ของที่มีชื่อ/ข้อมูลพิเศษ)'
+  quota: '<yellow>จำนวนรอบเกินโควตาวันนี้ — ลดจำนวนหรือรอ 00:00 เวลาไทย'
+  changed: '<yellow>ยกเลิกก่อนตัดของ — หน้าต่าง กระเป๋า หรือสถานะเปลี่ยน กรุณาเลือกใหม่'
+  success: '<green>แลก <name> ×<batch> สำเร็จ — รับรางวัลใน /mail</green> <dark_gray>op <op>'
+  review: '<yellow>รายการแลกถูกพักไว้ให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่แจกหรือคืนของอัตโนมัติ)'
+  menu:
+    title: '<#DDA54A>สมาคมนักแลกของ'
+    previous: '<white>หน้าก่อน'
+    next: '<white>หน้าถัดไป'
+    less: '<red>ลด 1 รอบ'
+    more: '<green>เพิ่ม 1 รอบ (สูงสุด 16)'
+    list:
+      name: '<#DDA54A>เลือกสูตรแลกของ'
+      lore: |-
+        <gray>หน้า <page>/<pages> · โควตารีเซ็ต 00:00 เวลาไทย
+        <gray>รับเฉพาะวัตถุดิบ vanilla ธรรมดาในกระเป๋า
+        <gray>ของมีชื่อ/enchants/PDC จะไม่ถูกใช้
+    recipe:
+      name: '<#47C8D3><name>'
+      lore: |-
+        <gray>ใช้: <white><inputs>
+        <gray>ได้รับ: <#DDA54A><outputs>
+        <gray>ใช้โควตาวันนี้ <used>/<limit> รอบ
+        <green>คลิกดูรายละเอียดก่อนยืนยัน
+    preview: |-
+      <gray>แลก <white><batch></white> รอบ
+      <gray>ตัด: <white><inputs>
+      <gray>รางวัล: <#DDA54A><outputs>
+      <gray>ใช้โควตาวันนี้ <used>/<limit> รอบ
+      <gray>รางวัลรอรับใน /mail · ตรวจจำนวนก่อนยืนยัน
+    confirm:
+      name: '<green>ยืนยันแลกตามรายละเอียด'
+      lore: |-
+        <gray>ตัดวัตถุดิบตามรายการด้านบน
+        <gray>เกราะ/มือรอง/ของที่มีข้อมูลพิเศษไม่ถูกใช้
+        <gray>หากปิดหน้าต่างก่อนเริ่มตัดจะยกเลิก
+        <yellow>รางวัลเข้า /mail ไม่มีของตกพื้น
+
 land:
   provider-missing: '<red>ระบบที่ดิน (WorldGuard) ยังไม่เชื่อม'
   none-here: '<gray>ตรงนี้ใน <world> ยังไม่มีแปลงของผู้เล่น'
@@ -302,6 +344,7 @@ admin:
     <gray>/fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผล> <dark_gray>— preview แล้ว /fa confirm
     <gray>/fa npc spawn <action> [ชื่อ] · bind <action> (Citizens) · unbind · remove · anchor · unanchor · list
     <gray>/fa mail review · release|void <id> <เหตุผล> · give <ผู้เล่น> <เหตุผล> (ของในมือ)
+    <gray>/fa exchange review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa item list · give <ผู้เล่น> <template> · inspect
     <gray>/fa audit [ผู้เล่น]
   doctor:
@@ -319,6 +362,7 @@ admin:
     confirm: '<gray>ใช้: /fa confirm <รหัส>'
     npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc bind <action> (มอง NPC ของ Citizens) · /fa npc unbind · /fa npc remove (มอง NPC) · /fa npc anchor <action> · /fa npc unanchor · /fa npc list'
     mail: '<gray>ใช้: /fa mail review · /fa mail release|void <id> <เหตุผล> · /fa mail give <ผู้เล่น> <เหตุผล>'
+    exchange: '<gray>ใช้: /fa exchange review · /fa exchange complete|cancel <op> <เหตุผล> → /fa confirm'
     item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
   bank:
     summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
@@ -369,6 +413,14 @@ admin:
     empty-hand: '<red>ถือของที่จะส่งไว้ในมือหลักก่อน'
     serialized: '<red>ของในมือมี serial — ส่งผ่าน /fa item give เพื่อไม่ให้ serial ซ้ำ'
     sent: '<green>ส่งสำเนาของในมือเข้ากล่องของ <player> แล้ว'
+  exchange:
+    header: '<#DDA54A>การแลกรอตรวจ <count> รายการแรก (สูงสุด 20)</#DDA54A> <gray>ตรวจ inventory/playerdata และ snapshot ก่อนตัดสิน'
+    line: '<white>op <op></white> <gray><player> · <recipe> v<version> ×<batch> · วัน <period> · ตัด <inputs>'
+    preview: '<yellow>op <op> → <effect></yellow> <gray>เหตุผล: <reason> — ยืนยันด้วย /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ส่งรางวัลที่บันทึกไว้เข้า /mail (ใช้เมื่อยืนยันว่าตัดของแล้ว)'
+    cancel-effect: '<yellow>ปิดรายการและคืนโควตา โดยไม่คืนวัตถุดิบ (ใช้เมื่อไม่ถูกตัด/ชดเชยแล้ว)'
+    resolved: '<green>ตัดสินรายการ <op> แล้ว ดู audit และ /mail'
+    not-review: '<yellow>รายการ <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
   player-offline: '<red><player> ไม่ได้ออนไลน์'
   player-unknown: '<red>ไม่พบผู้เล่น <player> ในทะเบียน (ต้องเคยเข้าเซิร์ฟนี้)'
   audit:

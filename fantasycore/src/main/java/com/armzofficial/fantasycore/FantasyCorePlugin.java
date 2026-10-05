@@ -12,6 +12,8 @@ import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.economy.DeathListener;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.economy.EconomyStore;
+import com.armzofficial.fantasycore.exchange.ExchangeService;
+import com.armzofficial.fantasycore.exchange.ExchangeStore;
 import com.armzofficial.fantasycore.hook.CitizensBridge;
 import com.armzofficial.fantasycore.hook.PlaceholderHook;
 import com.armzofficial.fantasycore.hook.VaultHook;
@@ -67,6 +69,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         saveDefaultConfig();
         saveIfMissing("messages_th.yml");
         saveIfMissing("items.yml");
+        saveIfMissing("exchanges.yml");
 
         Settings settings = Settings.load(getConfig(), getLogger());
         Messages messages = Messages.load(this);
@@ -87,17 +90,27 @@ public final class FantasyCorePlugin extends JavaPlugin {
         EconomyStore economyStore = new EconomyStore(database, System::currentTimeMillis, settings.maxTransaction());
         EconomyService economy = new EconomyService(database, economyStore);
         MailStore mailStore = new MailStore(database, System::currentTimeMillis);
+        ExchangeStore exchangeStore = new ExchangeStore(database, mailStore, System::currentTimeMillis);
         try {
             int interrupted = mailStore.quarantineInterrupted();
+            ExchangeStore.Recovery recovery = exchangeStore.quarantineInterrupted();
+            if (recovery.cancelled() + recovery.review() > 0) {
+                getLogger().warning("Exchange recovery: ยกเลิกก่อนตัด " + recovery.cancelled()
+                        + ", ค้างระหว่างตัด " + recovery.review() + " → /fa exchange review");
+            }
             if (interrupted > 0) {
                 getLogger().warning("จดหมาย " + interrupted + " รายการค้างกลางการส่งจากรอบก่อน → ย้ายไป REVIEW (ตรวจด้วย /fa mail review)");
             }
         } catch (Exception e) {
-            getLogger().log(Level.SEVERE, "ตรวจกล่องจดหมายค้างไม่ได้ — ปิด FantasyCore", e);
+            getLogger().log(Level.SEVERE, "ตรวจกล่องจดหมาย/การแลกค้างไม่ได้ — ปิด FantasyCore", e);
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         MailService mail = new MailService(getLogger(), messages, mailStore, database, tasks);
+        ExchangeService exchange = new ExchangeService(this, messages, exchangeStore, database, tasks);
+        for (String problem : exchange.problems()) {
+            getLogger().warning("exchanges.yml: " + problem);
+        }
         RewardService rewards = new RewardService(getConfig().getConfigurationSection("rewards.daily"), messages,
                 new RewardStore(database, economyStore, mailStore, System::currentTimeMillis), mail, database, tasks);
         for (String problem : rewards.problems()) {
@@ -122,7 +135,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, citizens);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, citizens);
 
         tasks.then(stations.load(), (count, error) -> {
             if (count != null) {
@@ -135,7 +148,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
         PlayerCommands playerCommands = new PlayerCommands(services);
         for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
-                "rewards", "mail"}) {
+                "rewards", "mail", "exchange"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));

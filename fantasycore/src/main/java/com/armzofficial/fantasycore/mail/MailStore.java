@@ -107,6 +107,27 @@ public final class MailStore {
         setStateFor(id, claimOp, "CLAIMING", "CLAIMED");
     }
 
+    /** ปิดต้นฉบับและเก็บส่วนที่ใส่ไม่ได้ใน transaction เดียว ไม่ให้ต้นฉบับหายก่อนเก็บส่วนเกิน */
+    public void finishClaimWithRemainder(long id, String claimOp, UUID player, String source, String sourceRef,
+                                         String label, List<byte[]> remainder) throws SQLException {
+        database.transaction(c -> {
+            try (PreparedStatement ps = c.prepareStatement(
+                    "UPDATE mail SET state = 'CLAIMED', updated_at = ? WHERE id = ? AND player_uuid = ? AND claim_op = ? AND state = 'CLAIMING'")) {
+                ps.setLong(1, clock.getAsLong());
+                ps.setLong(2, id);
+                ps.setString(3, player.toString());
+                ps.setString(4, claimOp);
+                if (ps.executeUpdate() != 1) {
+                    throw new SQLException("จดหมาย #" + id + " ไม่ใช่ CLAIMING ของผู้เล่น/operation นี้");
+                }
+            }
+            for (byte[] extra : remainder) {
+                enqueueIn(c, player, source, sourceRef, label, extra);
+            }
+            return null;
+        });
+    }
+
     /** ใส่ inventory ไม่ได้ (เช่น เต็มระหว่างทาง) — คืนเป็น PENDING */
     public void abortClaim(long id, String claimOp) throws SQLException {
         setStateFor(id, claimOp, "CLAIMING", "PENDING");

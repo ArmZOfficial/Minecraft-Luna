@@ -54,6 +54,10 @@ commands:
     description: กล่องจดหมาย — ของที่ส่งเข้า inventory ไม่ได้
     usage: /mail [all]
     permission: fantasy.mail
+  exchange:
+    description: เลือกสูตรและยืนยันแลกวัตถุดิบเป็นของรางวัล
+    usage: /exchange
+    permission: fantasy.exchange
   fantasycore:
     description: ข้อมูลปลั๊กอิน / ทางเข้าบริการสำหรับ NPC ของ Citizens
     usage: /fantasycore action <id>
@@ -76,6 +80,7 @@ permissions:
       fantasy.land.use: true
       fantasy.rewards: true
       fantasy.mail: true
+      fantasy.exchange: true
   fantasy.bank.remote:
     description: ใช้ธนาคารได้จากทุกที่ (ปลดล็อกตามแรงค์)
     default: false
@@ -102,4 +107,7 @@ permissions:
     default: op
   fantasyadmin.audit:
     description: อ่าน audit log
+    default: op
+  fantasyadmin.exchange.resolve:
+    description: ตัดสินการแลกที่ค้าง (ต้องใส่เหตุผล + ยืนยัน)
     default: op

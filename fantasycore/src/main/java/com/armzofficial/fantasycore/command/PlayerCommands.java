@@ -76,6 +76,7 @@ public final class PlayerCommands implements TabExecutor {
             }
             case "spawn" -> services.actions().open(player, "travel.spawn", ActionRegistry.Source.COMMAND);
             case "land" -> services.actions().open(player, "land.main", ActionRegistry.Source.COMMAND);
+            case "exchange" -> services.actions().open(player, "quest.exchange", ActionRegistry.Source.COMMAND);
             case "rewards" -> {
                 if (args.length >= 1 && args[0].equalsIgnoreCase("claim")) {
                     services.rewards().claim(player, () -> {

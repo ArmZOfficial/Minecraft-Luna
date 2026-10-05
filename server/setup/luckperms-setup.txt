@@ -55,6 +55,7 @@ lp creategroup staff_economy
 lp group staff_economy parent add staff_observer
 lp group staff_economy permission set fantasyadmin.economy.adjust true
 lp group staff_economy permission set fantasyadmin.audit true
+lp group staff_economy permission set fantasyadmin.exchange.resolve true
 
 lp creategroup staff_owner
 lp group staff_owner parent add staff_builder

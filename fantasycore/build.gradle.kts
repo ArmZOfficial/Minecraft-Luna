@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.armzofficial"
-version = "0.2.0"
+version = "0.3.0"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     // backend ที่ล็อกไว้ใน server/manifest/compatibility-manifest.json
-    compileOnly("io.papermc.paper:paper-api:26.2.build.+")
+    compileOnly("io.papermc.paper:paper-api:26.2.build.129-stable")
 
     // soft dependencies — FantasyCore ทำงานได้แม้ไม่มี แต่จะปิดความสามารถที่เกี่ยวข้อง
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.19")

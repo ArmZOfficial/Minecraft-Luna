@@ -23,3 +23,5 @@ fantasycore/build/
 fantasycore/.gradle/
 !fantasycore/gradle/wrapper/gradle-wrapper.jar
 server/runtime/
+.tools/
+.cache/

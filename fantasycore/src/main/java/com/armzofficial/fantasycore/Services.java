@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.claim.ClaimAdapter;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.economy.EconomyService;
+import com.armzofficial.fantasycore.exchange.ExchangeService;
 import com.armzofficial.fantasycore.home.HomeService;
 import com.armzofficial.fantasycore.hook.CitizensBridge;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
@@ -45,5 +46,6 @@ public record Services(
         ActionRegistry actions,
         MailService mail,
         RewardService rewards,
+        ExchangeService exchange,
         Optional<CitizensBridge> citizens) {
 }

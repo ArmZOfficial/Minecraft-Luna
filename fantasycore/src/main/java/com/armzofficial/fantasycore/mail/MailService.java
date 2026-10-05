@@ -5,6 +5,7 @@ import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.economy.OpMeta;
 import com.armzofficial.fantasycore.storage.Database;
 import com.armzofficial.fantasycore.util.Tasks;
+import com.armzofficial.fantasycore.util.PlayerDataSaving;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -147,6 +148,11 @@ public final class MailService {
      * ถ้าบันทึก CLAIMED ไม่สำเร็จ รายการจะค้าง CLAIMING และถูกย้ายไป REVIEW ตอนเปิดเซิร์ฟครั้งถัดไป (ไม่ปล่อยของซ้ำ)
      */
     public void claimOne(Player player, MailStore.MailItem item, Consumer<ClaimResult> done) {
+        if (!PlayerDataSaving.enabled()) {
+            messages.send(player, "mail.saving-disabled");
+            done.accept(ClaimResult.ERROR);
+            return;
+        }
         ItemStack stack;
         try {
             stack = ItemStack.deserializeBytes(item.data());
@@ -173,21 +179,28 @@ public final class MailService {
                 return;
             }
             Player online = Bukkit.getPlayer(playerId);
-            if (online == null || !fits(online.getInventory(), stack)) {
+            if (online == null || !PlayerDataSaving.enabled()
+                    || !fits(online.getInventory(), stack)) {
                 tasks.then(database.async(() -> {
                     store.abortClaim(item.id(), op);
                     return null;
                 }), (x, e) -> done.accept(online == null ? ClaimResult.ERROR : ClaimResult.FULL));
                 return;
             }
-            HashMap<Integer, ItemStack> leftover = online.getInventory().addItem(stack);
-            List<ItemStack> rest = new ArrayList<>(leftover.values());
+            List<byte[]> rest;
+            try {
+                HashMap<Integer, ItemStack> leftover = online.getInventory().addItem(stack);
+                // Bukkit serialization และ saveData ต้องอยู่ main thread ก่อนปิดสถานะ CLAIMING
+                rest = leftover.values().stream().map(ItemStack::serializeAsBytes).toList();
+                online.saveData();
+            } catch (RuntimeException e) {
+                log.log(Level.SEVERE, "ส่ง/บันทึก inventory ไม่สำเร็จ จดหมาย #" + item.id() + " ค้าง CLAIMING ให้ทีมงานตรวจ", e);
+                messages.send(online, "common.storage-error");
+                done.accept(ClaimResult.ERROR);
+                return;
+            }
             tasks.then(database.async(() -> {
-                store.finishClaim(item.id(), op);
-                for (ItemStack extra : rest) {
-                    // ไม่ควรเกิดเพราะตรวจที่ว่างแล้วใน tick เดียวกัน แต่ถ้าเกิด ส่วนเกินกลับเข้ากล่อง ไม่ตกพื้น
-                    store.enqueue(playerId, item.source(), item.sourceRef(), item.label(), extra.serializeAsBytes(), null);
-                }
+                store.finishClaimWithRemainder(item.id(), op, playerId, item.source(), item.sourceRef(), item.label(), rest);
                 return null;
             }), (x, finishError) -> {
                 if (finishError != null) {

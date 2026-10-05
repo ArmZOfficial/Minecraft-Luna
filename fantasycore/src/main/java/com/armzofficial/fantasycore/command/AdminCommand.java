@@ -15,6 +15,7 @@ import com.armzofficial.fantasycore.station.ActionRegistry;
 import com.armzofficial.fantasycore.station.StationRecord;
 import com.armzofficial.fantasycore.storage.PlayerStore;
 import com.armzofficial.fantasycore.util.Money;
+import com.armzofficial.fantasycore.util.PlayerDataSaving;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -69,6 +70,7 @@ public final class AdminCommand implements TabExecutor {
             case "npc" -> npc(sender, args);
             case "item" -> item(sender, args);
             case "mail" -> mail(sender, args);
+            case "exchange" -> exchange(sender, args);
             case "audit" -> audit(sender, args);
             default -> m.send(sender, "admin.help");
         }
@@ -124,6 +126,21 @@ public final class AdminCommand implements TabExecutor {
         for (String problem : services.rewards().problems()) {
             line(sender, "fix", "rewards.daily", problem);
         }
+        line(sender, services.exchange().enabled() ? "ready" : "off", "เควสแลกของ",
+                services.exchange().recipes().size() + " สูตร — /exchange");
+        boolean saving = PlayerDataSaving.enabled();
+        line(sender, saving ? "ready" : "broken", "Player data saving",
+                saving ? "เปิดการบันทึก — ต้องเฝ้า disk/log ด้วย" : "players.disable-saving = true หรือ API อ่านไม่ได้; แลกของและรับ mail ไม่ได้");
+        for (String problem : services.exchange().problems()) {
+            line(sender, "fix", "exchanges.yml", problem);
+        }
+        services.tasks().then(services.database().async(() -> services.exchange().store().countReview()), (count, error) -> {
+            if (error != null) {
+                line(sender, "broken", "Exchange journal", "อ่านรายการค้างไม่ได้");
+            } else {
+                line(sender, count == 0 ? "ready" : "fix", "Exchange journal", count + " รายการรอตรวจ — /fa exchange review");
+            }
+        });
         for (var spec : services.settings().worlds().values()) {
             World world = Bukkit.getWorld(spec.name());
             line(sender, world != null ? "ready" : "broken", "โลก " + spec.name(), world == null ? "ไม่ได้โหลด"
@@ -586,6 +603,74 @@ public final class AdminCommand implements TabExecutor {
         }
     }
 
+    // ------------------------------------------------------------ exchange recovery
+
+    private void exchange(CommandSender sender, String[] args) {
+        Messages m = services.messages();
+        String sub = args.length < 2 ? "review" : args[1].toLowerCase(Locale.ROOT);
+        if (sub.equals("review")) {
+            services.tasks().then(services.database().async(() -> services.exchange().store().review(20)), (rows, error) -> {
+                if (error != null) {
+                    m.send(sender, "common.storage-error");
+                    return;
+                }
+                m.send(sender, "admin.exchange.header", Messages.p("count", rows.size()));
+                for (var row : rows) {
+                    m.send(sender, "admin.exchange.line", Messages.p("op", row.opId()), Messages.p("player", row.player()),
+                            Messages.p("recipe", row.recipe()), Messages.p("version", row.version()), Messages.p("batch", row.batch()),
+                            Messages.p("inputs", row.inputs()), Messages.p("period", row.period()));
+                }
+            });
+            return;
+        }
+        if (!sub.equals("complete") && !sub.equals("cancel")) {
+            m.send(sender, "admin.usage.exchange");
+            return;
+        }
+        if (!sender.hasPermission("fantasyadmin.exchange.resolve")) {
+            m.send(sender, "common.no-permission");
+            return;
+        }
+        if (args.length < 4) {
+            m.send(sender, "admin.usage.exchange");
+            return;
+        }
+        String opId = args[2];
+        String reason = String.join(" ", Arrays.copyOfRange(args, 3, args.length)).trim();
+        if (reason.length() < 3) {
+            m.send(sender, "admin.reason-required");
+            return;
+        }
+        boolean complete = sub.equals("complete");
+        UUID actor = sender instanceof Player p ? p.getUniqueId() : null;
+        services.tasks().then(services.database().async(() -> services.exchange().store().findReview(opId)), (row, error) -> {
+            if (error != null) {
+                m.send(sender, "common.storage-error");
+            } else if (row.isEmpty()) {
+                m.send(sender, "admin.exchange.not-review", Messages.p("op", opId));
+            } else {
+                var review = row.get();
+                AuditEntry audit = new AuditEntry(actor == null ? null : actor.toString(), sender.getName(),
+                        complete ? "quest.exchange.resolve_complete" : "quest.exchange.resolve_cancel", review.player().toString(),
+                        review.recipe() + " v" + review.version() + " ×" + review.batch() + " · " + review.inputs(), reason);
+                String token = confirmations.create(actor, () -> {
+                    if (!sender.hasPermission("fantasyadmin.exchange.resolve")) {
+                        m.send(sender, "common.no-permission");
+                        return;
+                    }
+                    services.tasks().then(services.database().async(() -> services.exchange().store().resolveReview(opId, complete, audit)),
+                            (result, resolveError) -> m.send(sender, resolveError != null ? "common.storage-error"
+                                    : result.changed() ? "admin.exchange.resolved" : "admin.exchange.not-review", Messages.p("op", opId)));
+                });
+                m.send(sender, "admin.exchange.line", Messages.p("op", opId), Messages.p("player", review.player()),
+                        Messages.p("recipe", review.recipe()), Messages.p("version", review.version()), Messages.p("batch", review.batch()),
+                        Messages.p("inputs", review.inputs()), Messages.p("period", review.period()));
+                m.send(sender, "admin.exchange.preview", Messages.p("op", opId), Messages.p("reason", reason), Messages.p("token", token),
+                        Messages.c("effect", m.plain(complete ? "admin.exchange.complete-effect" : "admin.exchange.cancel-effect")));
+            }
+        });
+    }
+
     // ------------------------------------------------------------ audit
 
     private void audit(CommandSender sender, String[] args) {
@@ -643,12 +728,13 @@ public final class AdminCommand implements TabExecutor {
                                       String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "audit"));
+            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "audit"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
                 case "npc" -> options.addAll(List.of("spawn", "bind", "unbind", "anchor", "remove", "unanchor", "list"));
                 case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
+                case "exchange" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {
