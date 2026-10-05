@@ -5,6 +5,9 @@
 FantasyCore v0.2 เพิ่มกล่องจดหมาย, รับของรายวัน และการผูก NPC ของ Citizens (หมวด B6, I, J ด้านล่าง)
 staging เปิด whitelist ไว้เสมอ และไม่ใช่เซิร์ฟเปิดให้ผู้เล่นทั่วไป
 
+คลังโมเดล/ไอคอนที่เพิ่ม: [26 แพ็กและแปลนวางในเมือง](content/library/README-th.md), [ชื่อชุดและบาลานซ์ enchant](content/library/BALANCE-th.md)
+ไฟล์ที่แก้เป็นสำเนา local; ยังไม่ติดตั้ง JAR provider หรือรับประกัน client 1.16.5 แสดงทุกโมเดลได้
+
 ## สิ่งที่ต้องมี
 
 - Windows 10/11, RAM ว่างอย่างน้อย 6 GB

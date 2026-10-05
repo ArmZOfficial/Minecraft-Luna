@@ -61,3 +61,8 @@ npm start
 
 Remote: https://github.com/ArmZOfficial/Minecraft-Luna.git
 remote เชื่อมแล้ว และส่งงานชุดแรกขึ้น main สำเร็จ การแก้ไขใหม่ให้ดู commit ล่าสุดใน GitHub
+
+## คลังสินค้าและไอคอนที่เพิ่ม
+
+จัดชื่อไทยและแคตตาล็อกจาก `All for module` แล้ว: [โมเดล/ไอคอน/แปลนวาง](server/content/library/README-th.md), [สูตรบาลานซ์ที่เสนอ](server/content/library/BALANCE-th.md), [PromptPay DEV](website/PROMPTPAY-th.md)
+เว็บใช้ไอคอนจริงและทดสอบซื้อจำลองกับ PostgreSQL ได้ ส่วน enchant, provider และการส่งของเข้าเกมจากเว็บยังอยู่ขั้นเตรียมเชื่อมและทดสอบ

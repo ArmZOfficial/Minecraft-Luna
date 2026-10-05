@@ -29,3 +29,8 @@ server/runtime/
 # User-supplied source packs and plugin binaries stay in the local asset library
 /All for module/
 /*.tmp
+# Selected supplied assets are regenerated locally; do not redistribute paid pack files.
+website/public/assets/library/
+website/out/
+website/.next/
+server/content/library/local/

@@ -27,6 +27,9 @@
 20. [คู่มือเควสแลกของและ recovery](../../fantasycore/EXCHANGE-th.md) — 3 สูตร, batch, โควตา และการตัดสินรายการค้าง
 21. [ItemAdapter และโรงตีเหล็ก](../../fantasycore/REPAIR-th.md) — ตรวจ serial/เจ้าของ, preview ราคา, คืนเงินและ recovery
 22. [เซิร์ฟ staging + checklist](../../server/README-th.md) — Paper 26.2, Java 25, ปลั๊กอินที่ล็อกเวอร์ชัน และรายการทดสอบในเกม
+23. [คลังโมเดลและไอคอนที่ให้มา](../../server/content/library/README-th.md) — ชื่อไทย 26 แพ็ก/493 รายการ, แปลนวาง และสำเนาแก้ config
+24. [บาลานซ์และ Enchant](../../server/content/library/BALANCE-th.md) — ระดับพลัง, ทักษะประจำชุด 17 แบบ, ราคาเควส/สร้างฉบับออกแบบ
+25. [PromptPay DEV](../../website/PROMPTPAY-th.md) — สั่งซื้อจำลองกับ PostgreSQL, การป้องกันรับซ้ำ และงานที่ต้องทำก่อนรับเงินจริง
 
 ## ข้อเลือกสำคัญ
 

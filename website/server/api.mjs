@@ -3,6 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createDatabase } from "./database.mjs";
+import { devPaymentRequest, libraryProducts } from "./dev-payments.mjs";
 
 const output = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -18,6 +19,7 @@ const types = {
   ".txt": "text/plain; charset=utf-8",
   ".woff2": "font/woff2",
   ".ico": "image/x-icon",
+  ".png": "image/png",
 };
 function json(res, status, body) {
   res.writeHead(status, {
@@ -33,6 +35,7 @@ function unavailable(res, code = "DATABASE_UNCONFIGURED") {
 export function createPortalServer({
   pool = createDatabase(),
   staticRoot = output,
+  paymentMode = process.env.LUMA_PAYMENT_MODE || "disabled",
 } = {}) {
   const root = path.resolve(staticRoot);
   return createServer(async (req, res) => {
@@ -40,6 +43,20 @@ export function createPortalServer({
       const url = new URL(req.url, "http://localhost");
       const route = url.pathname;
       if (route.startsWith("/api/")) {
+        if (
+          await devPaymentRequest(req, res, route, {
+            pool,
+            mode: paymentMode,
+            json,
+          })
+        )
+          return;
+        if (route === "/api/library/catalog" && req.method === "GET")
+          return json(res, 200, {
+            items: libraryProducts,
+            mode: "draft",
+            livePayment: false,
+          });
         if (route === "/api/health" && req.method === "GET") {
           let database = pool ? "unavailable" : "unconfigured";
           if (pool)

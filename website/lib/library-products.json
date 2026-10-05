@@ -1,0 +1,398 @@
+[
+  {
+    "id": "library-azure",
+    "name": "ธาราฟ้า",
+    "type": "รูปลักษณ์",
+    "price": 149,
+    "image": "library/gem.png",
+    "setId": "azure",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ธาราฟ้า · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 27,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "azure",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-beats",
+    "name": "จังหวะดารา",
+    "type": "รูปลักษณ์",
+    "price": 149,
+    "image": "library/bard.png",
+    "setId": "beats",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด จังหวะดารา · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 27,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "beats",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-berserker",
+    "name": "พยัคฆ์คลั่ง",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/berserker.png",
+    "setId": "berserker",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด พยัคฆ์คลั่ง · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 21,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "berserker",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-commander",
+    "name": "จอมทัพเงารัตติกาล",
+    "type": "รูปลักษณ์",
+    "price": 199,
+    "image": "library/demon.png",
+    "setId": "commander",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด จอมทัพเงารัตติกาล · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 23,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "commander",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-killfx",
+    "name": "ประกายอสูร",
+    "type": "รูปลักษณ์",
+    "price": 79,
+    "image": "library/spell.png",
+    "setId": "killfx",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ประกายอสูร · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 2,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "killfx",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-dracula",
+    "name": "ขุนนางจันทราเลือด",
+    "type": "รูปลักษณ์",
+    "price": 199,
+    "image": "library/vampire.png",
+    "setId": "dracula",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ขุนนางจันทราเลือด · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 26,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "dracula",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-fiendskull",
+    "name": "กระโหลกผนึกวิญญาณ",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/necromancer.png",
+    "setId": "fiendskull",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด กระโหลกผนึกวิญญาณ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 29,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "fiendskull",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-ifrit",
+    "name": "อิฟริทเพลิงอรุณ",
+    "type": "รูปลักษณ์",
+    "price": 199,
+    "image": "library/elemental.png",
+    "setId": "ifrit",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด อิฟริทเพลิงอรุณ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 23,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "ifrit",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-inferno",
+    "name": "อัคคีล้างเงา",
+    "type": "รูปลักษณ์",
+    "price": 199,
+    "image": "library/volcano.png",
+    "setId": "inferno",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด อัคคีล้างเงา · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 29,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "inferno",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-little-dragon",
+    "name": "ผู้พิทักษ์มังกรน้อย",
+    "type": "รูปลักษณ์",
+    "price": 149,
+    "image": "library/dragon.png",
+    "setId": "little-dragon",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ผู้พิทักษ์มังกรน้อย · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 33,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "little-dragon",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-lunar-dragon",
+    "name": "มังกรจันทรา",
+    "type": "รูปลักษณ์",
+    "price": 219,
+    "image": "library/celestial.png",
+    "setId": "lunar-dragon",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด มังกรจันทรา · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 31,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "lunar-dragon",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-madhatter",
+    "name": "นักมายาหมวกพิศวง",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/mage.png",
+    "setId": "madhatter",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด นักมายาหมวกพิศวง · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 26,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "madhatter",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-kitchen",
+    "name": "ครัวรูนแสนอุ่น",
+    "type": "เฟอร์นิเจอร์",
+    "price": 99,
+    "image": "library/chef.png",
+    "setId": "kitchen",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ครัวรูนแสนอุ่น · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 18,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "kitchen",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-tavern",
+    "name": "โรงเตี๊ยมแสงจันทร์",
+    "type": "เฟอร์นิเจอร์",
+    "price": 129,
+    "image": "library/tavern.png",
+    "setId": "tavern",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด โรงเตี๊ยมแสงจันทร์ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 14,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "tavern",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-dinosaurs",
+    "name": "เพื่อนจิ๋วยุคดึกดำบรรพ์",
+    "type": "รูปลักษณ์",
+    "price": 79,
+    "image": "library/pet.png",
+    "setId": "dinosaurs",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด เพื่อนจิ๋วยุคดึกดำบรรพ์ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 12,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "dinosaurs",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-heroes",
+    "name": "ผู้พิทักษ์ตัวจิ๋ว",
+    "type": "รูปลักษณ์",
+    "price": 79,
+    "image": "library/hero.png",
+    "setId": "heroes",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ผู้พิทักษ์ตัวจิ๋ว · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 10,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "heroes",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-nora",
+    "name": "นภาผู้เดินทาง",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/explorer.png",
+    "setId": "nora",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด นภาผู้เดินทาง · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 23,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "nora",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-onepunch",
+    "name": "หมัดดาวตก",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/monk.png",
+    "setId": "onepunch",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด หมัดดาวตก · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 21,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "onepunch",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-radiance",
+    "name": "รุ่งอรุณศักดิ์สิทธิ์",
+    "type": "รูปลักษณ์",
+    "price": 219,
+    "image": "library/holy.png",
+    "setId": "radiance",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด รุ่งอรุณศักดิ์สิทธิ์ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 21,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "radiance",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-clover",
+    "name": "โคลเวอร์โชคสี่แฉก",
+    "type": "รูปลักษณ์",
+    "price": 149,
+    "image": "library/blessed.png",
+    "setId": "clover",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด โคลเวอร์โชคสี่แฉก · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 24,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "clover",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-skeleton",
+    "name": "ราชันกระดูกนิรันดร์",
+    "type": "รูปลักษณ์",
+    "price": 199,
+    "image": "library/skeleton.png",
+    "setId": "skeleton",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด ราชันกระดูกนิรันดร์ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 24,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "skeleton",
+      "version": 1,
+      "combatStats": false
+    }
+  },
+  {
+    "id": "library-starlight",
+    "name": "แสงดาวผู้พิทักษ์",
+    "type": "รูปลักษณ์",
+    "price": 179,
+    "image": "library/ethereal.png",
+    "setId": "starlight",
+    "previewKind": "category-icon",
+    "description": "รูปลักษณ์ชุด แสงดาวผู้พิทักษ์ · ไม่มีโบนัสโจมตีจากการซื้อด้วยเงินจริง",
+    "itemCount": 24,
+    "draft": true,
+    "fulfillment": {
+      "kind": "cosmetic-entitlement",
+      "setId": "starlight",
+      "version": 1,
+      "combatStats": false
+    }
+  }
+]

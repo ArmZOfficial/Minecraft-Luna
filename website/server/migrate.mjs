@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { createDatabase } from "./database.mjs";
 const pool = createDatabase();
 if (!pool) {
@@ -6,14 +6,13 @@ if (!pool) {
   process.exit(1);
 }
 try {
-  const sql = await readFile(
-    new URL("../database/001_initial.sql", import.meta.url),
-    "utf8",
-  );
-  await pool.query(sql);
-  console.log(
-    "PostgreSQL migration 001_initial completed. No players, paid orders, or sample balances were created.",
-  );
+  const directory = new URL("../database/", import.meta.url);
+  for (const file of (await readdir(directory))
+    .filter((f) => /^\d+_.*\.sql$/.test(f))
+    .sort()) {
+    await pool.query(await readFile(new URL(file, directory), "utf8"));
+    console.log(`PostgreSQL migration ${file} completed.`);
+  }
 } catch {
   console.error(
     "Migration failed. Check the PostgreSQL connection and database permissions.",

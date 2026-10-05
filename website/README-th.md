@@ -9,7 +9,9 @@
 
 **สถานะจริง:** Node API อ่านข่าว/สินค้าและตรวจ health ได้ PostgreSQL มี schema บัญชี/orders/payment/outbox/audit
 ยังไม่มี authentication, payment-provider integration หรือ Minecraft delivery bridge ที่เปิดใช้งานจริง
-ปุ่มรับเงินปิดไว้ ไม่สร้าง QR รับเงินจริง ไม่อ้างว่าตรวจรหัสเกมสำเร็จ
+ปุ่มรับเงินจริงปิดไว้ มี [PromptPay โหมดจำลอง](PROMPTPAY-th.md) สำหรับ local development พร้อม order/receipt ที่แยกตารางจากเงินจริง
+ร้าน draft เพิ่ม 22 ชุดและใช้ไอคอนจากคลังที่ผู้ใช้ให้; อ่าน [คู่มือคลังโมเดลและแปลนวาง](../server/content/library/README-th.md) กับ [บาลานซ์](../server/content/library/BALANCE-th.md)
+ไฟล์ภาพจากแพ็กต้อง regenerate ในเครื่องก่อน build ตามคู่มือ เพราะไม่ได้แจกไฟล์ผลิตภัณฑ์ต้นฉบับบน Git
 ภาพแผนที่เป็น concept art กับหมุดตัวอย่าง ไม่ใช่ BlueMap สด
 
 แผนเชื่อมระบบจริงอยู่ใน [WEB-AND-AUTOMATION-PLAN-th.md](../output/lobby-concept/WEB-AND-AUTOMATION-PLAN-th.md)

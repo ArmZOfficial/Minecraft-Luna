@@ -1,0 +1,402 @@
+[
+  {
+    "name": "admin",
+    "path": "library/admin.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/cog.png",
+    "sha256": "197220171407020680b53dca086d758004ae37d08e385d8c7042d32947ea4f26",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "bank",
+    "path": "library/bank.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/coins.png",
+    "sha256": "fd9fdd0538bad371c8f0e1ffe914b40514d8f45d13fa2c295d0c235ee95e8cae",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "banner",
+    "path": "library/banner.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/flag.png",
+    "sha256": "6befef4f52335d79c75016b69d504fa6a72c794e5513999b42bd08015387c29b",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "bard",
+    "path": "library/bard.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/star.png",
+    "sha256": "02adec078867dc1196237680cce05e52469cbcb5588d134d6c5bffa068515cf5",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "berserker",
+    "path": "library/berserker.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/sword.png",
+    "sha256": "6f15501c69341dbb6514f3b8ee851f7904bbc9f41bf6488f0bff9e0ab95fc52e",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "blessed",
+    "path": "library/blessed.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/clover.png",
+    "sha256": "1cd760c9c1b282afef2d58ff2fb8d307a3a19badbdddcd6c20ef59124c99e9d1",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "book",
+    "path": "library/book.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/book.png",
+    "sha256": "825009ca7def69117b7a006a1dd0a088f0d3496032358cc83d440b35c37ee886",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "celestial",
+    "path": "library/celestial.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/moon.png",
+    "sha256": "ed985e6944d96de71fd5af414fddc12583f34fe6ea77945e982ed80fafbc121f",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "chef",
+    "path": "library/chef.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/chef_hat.png",
+    "sha256": "5c9d3e7fd668dee3b89fc3507960484a36e08315531ba59f158b8638e17a34cd",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "chest",
+    "path": "library/chest.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/chest.png",
+    "sha256": "39796d0bb884169b758206d62743e564d79e0f82cb25e5120f35d9a9a90ee9ff",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "craft",
+    "path": "library/craft.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/anvil.png",
+    "sha256": "dc6522f70fdce4a78cc81b23ac641369a9d712db4b43a5638cf60a59d8716308",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "currency",
+    "path": "library/currency.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/coins.png",
+    "sha256": "fd9fdd0538bad371c8f0e1ffe914b40514d8f45d13fa2c295d0c235ee95e8cae",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "demon",
+    "path": "library/demon.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/skull.png",
+    "sha256": "79fcab0877ce576c907e627a1d9116bafa849db93fad91d486c27d4c65b3d98d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "dragon",
+    "path": "library/dragon.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/shield.png",
+    "sha256": "af1103434c02910042c5f9299d88574cf010f3de6063e2515ce83bcf990067c6",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "elemental",
+    "path": "library/elemental.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/fire.png",
+    "sha256": "1767c0f451e9c69a4e1701791192d80ab9947266f1347a7207b88062f5104dad",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "enchant",
+    "path": "library/enchant.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/purple_orb.png",
+    "sha256": "e3d16d904a6dbb04d3c261a27bd607cfec66bc5daf33fedc3bc0660ef0931f1f",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "ethereal",
+    "path": "library/ethereal.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/star.png",
+    "sha256": "02adec078867dc1196237680cce05e52469cbcb5588d134d6c5bffa068515cf5",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "explorer",
+    "path": "library/explorer.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/compass.png",
+    "sha256": "be2a3f135188c1a7b74c0fb3149c828ab938cb41c6b73e112abfa9c8e5baed46",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "furniture",
+    "path": "library/furniture.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/house.png",
+    "sha256": "dfd673767707ce7e7b0ee3c4534a12468220202a25fc269c6605955a1462cdde",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "gem",
+    "path": "library/gem.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/diamond.png",
+    "sha256": "ec90210e3f4debdf37c4037bbd2c4f9f37d99e028a94d3b6553fd4fd7c1f6616",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "hero",
+    "path": "library/hero.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/shield.png",
+    "sha256": "af1103434c02910042c5f9299d88574cf010f3de6063e2515ce83bcf990067c6",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "holy",
+    "path": "library/holy.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/sun.png",
+    "sha256": "24cf3b9932960bb8637ad5a453ccf8068e6b436ecb0ad44409c9ef56dd42e0e6",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "item",
+    "path": "library/item.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/chest.png",
+    "sha256": "39796d0bb884169b758206d62743e564d79e0f82cb25e5120f35d9a9a90ee9ff",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "mage",
+    "path": "library/mage.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/wizard_tower.png",
+    "sha256": "607a875d4efd47be1a30f9deabec6635d125dc330c388bf7f45bc8f253109e0d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "mail",
+    "path": "library/mail.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/chest.png",
+    "sha256": "39796d0bb884169b758206d62743e564d79e0f82cb25e5120f35d9a9a90ee9ff",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "monk",
+    "path": "library/monk.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/level_up.png",
+    "sha256": "88a81196470405e17873bc4443dbb9017337e2aada05e132e39c4f99c79afd88",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "necromancer",
+    "path": "library/necromancer.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/skull.png",
+    "sha256": "79fcab0877ce576c907e627a1d9116bafa849db93fad91d486c27d4c65b3d98d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "pet",
+    "path": "library/pet.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/heart.png",
+    "sha256": "e5a503b1146988629e1d3e5801547afa71797894abcf7651e7c196a44d00b707",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "pets",
+    "path": "library/pets.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/heart.png",
+    "sha256": "e5a503b1146988629e1d3e5801547afa71797894abcf7651e7c196a44d00b707",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "pick",
+    "path": "library/pick.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/cave.png",
+    "sha256": "491420059bbb0afaf83b976780f0259beb0e5234f48cdbfce221a684b2edb0d3",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "portal",
+    "path": "library/portal.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/wizard_tower.png",
+    "sha256": "607a875d4efd47be1a30f9deabec6635d125dc330c388bf7f45bc8f253109e0d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "quest",
+    "path": "library/quest.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/scroll.png",
+    "sha256": "cf2945291768671f333eb00db18b0867a8878423fcac848f1bff9f81760b94ab",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "repair",
+    "path": "library/repair.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/anvil.png",
+    "sha256": "dc6522f70fdce4a78cc81b23ac641369a9d712db4b43a5638cf60a59d8716308",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "shop",
+    "path": "library/shop.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/money.png",
+    "sha256": "70817375e6d4b701f13720241d4816853418f59c350450d114b91cd46a18bd1c",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "skeleton",
+    "path": "library/skeleton.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/skull.png",
+    "sha256": "79fcab0877ce576c907e627a1d9116bafa849db93fad91d486c27d4c65b3d98d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "spell",
+    "path": "library/spell.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/mana.png",
+    "sha256": "a6bcb0b1987b2d0e2b5d30ae8f9b2b7466b113cb5331fa7a16bc54d461b54ff3",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "sword",
+    "path": "library/sword.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/sword.png",
+    "sha256": "6f15501c69341dbb6514f3b8ee851f7904bbc9f41bf6488f0bff9e0ab95fc52e",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "tavern",
+    "path": "library/tavern.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/house.png",
+    "sha256": "dfd673767707ce7e7b0ee3c4534a12468220202a25fc269c6605955a1462cdde",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "tool",
+    "path": "library/tool.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/cog.png",
+    "sha256": "197220171407020680b53dca086d758004ae37d08e385d8c7042d32947ea4f26",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "town",
+    "path": "library/town.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/house.png",
+    "sha256": "dfd673767707ce7e7b0ee3c4534a12468220202a25fc269c6605955a1462cdde",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "treasure_cave",
+    "path": "library/treasure_cave.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/key.png",
+    "sha256": "dc2444ec4ab8dd0875b048bf39c9b0b0660f63e8d39e5e1c77d3b53d8773119d",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "vampire",
+    "path": "library/vampire.png",
+    "archive": "EssentialIconsVol1.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons/moon.png",
+    "sha256": "ed985e6944d96de71fd5af414fddc12583f34fe6ea77945e982ed80fafbc121f",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "volcano",
+    "path": "library/volcano.png",
+    "archive": "EssentialIconsVol2.zip",
+    "entry": "content/itemsadder/ItemsAdder/contents/crystal_creations/assets/crystal_creations/textures/essential_icons_2/fire.png",
+    "sha256": "1767c0f451e9c69a4e1701791192d80ab9947266f1347a7207b88062f5104dad",
+    "creator": "Crystal Creations"
+  },
+  {
+    "name": "tag-player",
+    "path": "library/tag-player.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/player_color_1.png",
+    "sha256": "3022cac9b47f3a0168eaeeef87abac2a143ac13381585c76f54999bd63561a31",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-admin",
+    "path": "library/tag-admin.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/admin_color_1.png",
+    "sha256": "1e5ed345b601643bcf5dc811d1f1078de71d64b6df3dc233231baf1f93110496",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-guild",
+    "path": "library/tag-guild.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/guild_color_1.png",
+    "sha256": "031a953554b1731af3a0799d08e6cc43578216321b4f3c6a8f65474470f55fae",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-rune",
+    "path": "library/tag-rune.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/rune_color_1.png",
+    "sha256": "e03b3582f10ad3d47dc20d4b1a2b214156d0eb93fca919bd407624a7e3c6a6da",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-vip",
+    "path": "library/tag-vip.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/vip_color_1.png",
+    "sha256": "cd17f3c1740665da6af7eee6f455f69e56896b8bc78b7ce3d714e185ef98d94c",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-mythic",
+    "path": "library/tag-mythic.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/mythic_color_1.png",
+    "sha256": "84e6e1008551cad2b35323bcad3bb2db0fc144b61f1efb2979ff68cd77d0eb60",
+    "creator": "Chamby"
+  },
+  {
+    "name": "tag-bank",
+    "path": "library/tag-bank.png",
+    "archive": "Essential Icons Vol.1.zip",
+    "entry": "Essential Icons Vol.1/All Images/Icon Images Color 1/bank_color_1.png",
+    "sha256": "c4ab761899ae33abf6ac889b38508cfcd758fce9921f3886c8450d26535777be",
+    "creator": "Chamby"
+  }
+]
