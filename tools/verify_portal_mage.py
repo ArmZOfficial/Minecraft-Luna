@@ -15,7 +15,9 @@ def check():
     model=json.loads((DIR/(NAME+".bbmodel")).read_text(encoding="utf-8"))
     manifest=json.loads((DIR/(NAME+"-manifest.json")).read_text(encoding="utf-8"))
     assert model["meta"]["model_format"]=="free"
-    assert model["resolution"]=={"width":256,"height":256}
+    size=model["resolution"]["width"]
+    # Baked per-face atlases are square powers of two at 4 texels per unit.
+    assert model["resolution"]["height"]==size and size&(size-1)==0 and 256<=size<=2048
     assert not manifest["runtime_tested"]
     cubes={e["uuid"]:e for e in model["elements"]}
     assert len(cubes)==len(model["elements"])==manifest["cubes"]
@@ -47,7 +49,7 @@ def check():
     texture_ids={t["uuid"] for t in model["textures"]}
     assert len(texture_ids)==1
     png=(DIR/(NAME+".png")).read_bytes()
-    assert png[:8]==b"\x89PNG\r\n\x1a\n" and struct.unpack(">II",png[16:24])==(256,256)
+    assert png[:8]==b"\x89PNG\r\n\x1a\n" and struct.unpack(">II",png[16:24])==(size,size)
     assert base64.b64decode(model["textures"][0]["source"].split(",",1)[1])==png
     for cube in cubes.values():
         assert all(math.isfinite(v) for v in cube["from"]+cube["to"])
@@ -57,7 +59,7 @@ def check():
         assert cube["from"][1]>=0
         for face in cube.get("faces",{}).values():
             assert face["texture"] in texture_ids or face["texture"]==0
-            assert len(face["uv"])==4 and all(math.isfinite(v) and 0<=v<=256 for v in face["uv"])
+            assert len(face["uv"])==4 and all(math.isfinite(v) and 0<=v<=size for v in face["uv"])
     animations={a["name"]:a for a in model["animations"]}
     assert set(animations)==set(ANIMATIONS)
     key_count=0

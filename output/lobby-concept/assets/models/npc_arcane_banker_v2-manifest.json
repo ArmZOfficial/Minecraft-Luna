@@ -210,17 +210,17 @@
     "max_width": 1.209
   },
   "sha256": {
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2.bbmodel": "0a86e18eca36fea17478fa6ff63dfd8e4e95456eb3ec356171c0bb697ad2c11d",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2.png": "7c16c6226bf50461ca262a4e2d4259eca5db2a99b55a891f8aa80be7f3ea457c",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2.bbmodel": "292ed07c475f1e7db46b05add353c4c9e56529e932095536d1fa66de9ab84d1b",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2.png": "3bd5d516e2d8b929f10ef59c99c1c839f5620702e6654329f0dac91d939ca1ef",
     "output/lobby-concept/assets/models/npc_arcane_banker_v2-pose-checks.json": "59dcdfdf7ad4973766efe24a27f980e04e987f64c60ccfb5ebd59e8897aafa1b",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-back.png": "fd4882a2b67d562dc43cc05b197f70003db79907e0dc4b4a500c2cea21527cf9",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-count-coins.png": "818526b6e6777f8d6d698b968f6b267b0069631c5896476a94d2097df117cadf",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-front.png": "39caf058d9fd01a00fa074b1acffaad25f1743d06e1275de321a359a3188a7d1",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-greet.png": "e71582ec81030d9d17fffbb601f4aa5300dbbcb8684a02c123150298eed5f448",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-idle.png": "de05d0a7f2e7119b4adf055a3731e10ae5489b5797122b3f7a0112fc4f0ded6d",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-inspect-ledger.png": "8b56e316d99709a9183507e8c6ead5eb82db626009ba43f7050e5d37d7aacbcd",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-preview.png": "4eb532f149f8587c454856c2cf20e53c170ee83e7f2bd3f3471ea5b0f9460f33",
-    "output/lobby-concept/assets/models/npc_arcane_banker_v2-right.png": "6dddabaeb025dab2eb813ffc0738330a150e4a96ecb038fe40da6a633a8fac99"
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-back.png": "26ce1f65b9f60da352b6bd2237e2e0f871e2daf3472121b8beb07dd43235979a",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-count-coins.png": "6eb7aa00a8ee778d237b68a62b4f10c94dbe898bfb7af8cdfb776f8d8be6441c",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-front.png": "2ef23ec72adc9cbf0bb9827ad3c0f6272668f0d44fd4114edf4da81d7c5aa1f5",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-greet.png": "6e95d5dc36e2f9aa8805d7c10f28d12f9ed9e31f40fda04e81ce6c077ab89ced",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-idle.png": "c6328bb841925e4bf38b1f22fb509f9e95c84fee1440f4644ca607ee82ee50f6",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-inspect-ledger.png": "ba777fa7c39b8703418dd75e10be1f82ce131fd339497be6af0cc3fcd0709e99",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-preview.png": "f6874e819a66252098559d848e477cad4250f2c61b22436b71ab32840ac36a11",
+    "output/lobby-concept/assets/models/npc_arcane_banker_v2-right.png": "3975a20c21951ef91abb4966e0aab91e6cf39722f696e0ccba7197e58c4b567b"
   },
   "known_limits": [
     "No ModelEngine/Citizens runtime or client evidence yet",

@@ -107,6 +107,9 @@ def paint_face(mat,face,w,h,rng,art=None):
         for y in range(h):
             for x in range(w):
                 if (x+y)%2==0 and (x//2+y//2)%2==0: c.set(x,y,shade(r,base+1 if face!="down" else base))
+        if face not in ("up","down") and h>=12 and h>=w*1.3:
+            for fx in range(3,w-2,6):                                                     # hanging folds
+                for y in range(h): c.set(fx,y,shade(r,base-1)); c.set(fx+1,y,shade(r,base+1))
         if w>=6 and h>=6:
             for x in range(1,w-1,2): c.set(x,1,shade(r,base+2)); c.set(x,h-2,shade(r,base+2))  # stitched hem
         bevel(c,r,base,hard=False)
@@ -129,6 +132,27 @@ def paint_face(mat,face,w,h,rng,art=None):
         bevel(c,r,base,hard=True)
     elif kind=="gem":
         gem(c,r)
+    elif kind=="skin":
+        # Clean skin (specks read as blemishes); large limb faces get a rounded-form light band.
+        if face not in ("up","down") and w>=6 and h>=8:
+            for y in range(h):
+                c.set(0,y,shade(r,base-1)); c.set(w-1,y,shade(r,base-1))
+                for x in range(int(w*.38),int(w*.55)): c.set(x,y,shade(r,base+1))
+    elif kind=="hair":
+        for x in range(w):
+            tone=base+((x*7)%3)-1
+            for y in range(h): c.set(x,y,shade(r,tone+(1 if y<max(1,h//6) else 0)))
+            if h>=4:
+                y=rng.randrange(h); L=rng.randint(2,max(2,h//2))
+                for yy in range(y,min(h,y+L)): c.set(x,yy,shade(r,tone+1 if x%2 else tone-1))   # strand streak
+        if face=="down":
+            for x in range(w): c.set(x,h-1,shade(r,base-2))
+    elif kind=="fur":
+        for _ in range(w*h//4):
+            x,y=rng.randrange(w),rng.randrange(h); t=base+rng.choice([-1,1,1,2])
+            c.set(x,y,shade(r,t)); c.set(x,y+1,shade(r,t))                                  # tufts
+        for x in range(w):
+            if x%2: c.set(x,h-1,shade(r,base-2))                                            # ragged lower edge
     elif kind=="plain":
         for _ in range(max(1,w*h//20)): c.set(rng.randrange(w),rng.randrange(h),shade(r,base+1))
     return c

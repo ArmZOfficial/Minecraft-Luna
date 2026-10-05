@@ -93,94 +93,6 @@
     "native_timeline_frames_checked": 29
   },
   {
-    "id": "npc_arcane_banker_v2",
-    "format": "free",
-    "status": "model-exported-awaiting-runtime-qa",
-    "animations": [
-      "idle",
-      "greet",
-      "count_coins",
-      "inspect_ledger"
-    ],
-    "cubes": 182,
-    "bones": 17,
-    "height_target": 2.0,
-    "runtime_tested": false,
-    "reference": "assets/references/npc-arcane-banker.png",
-    "texture": [
-      256,
-      256
-    ],
-    "native_timeline_frames_checked": 17,
-    "supersedes": "npc_arcane_banker"
-  },
-  {
-    "id": "npc_rune_smith_v2",
-    "format": "free",
-    "status": "model-exported-awaiting-runtime-qa",
-    "animations": [
-      "idle",
-      "greet",
-      "hammer",
-      "craft_success"
-    ],
-    "cubes": 171,
-    "bones": 16,
-    "height_target": 2.2,
-    "runtime_tested": false,
-    "reference": "assets/references/npc-rune-smith.png",
-    "texture": [
-      256,
-      256
-    ],
-    "native_timeline_frames_checked": 19,
-    "supersedes": "npc_rune_smith"
-  },
-  {
-    "id": "npc_quest_warden_v2",
-    "format": "free",
-    "status": "model-exported-awaiting-runtime-qa",
-    "animations": [
-      "idle",
-      "greet",
-      "offer_scroll",
-      "point_direction"
-    ],
-    "cubes": 123,
-    "bones": 17,
-    "height_target": 2.1,
-    "runtime_tested": false,
-    "reference": "assets/references/npc-quest-warden.png",
-    "texture": [
-      256,
-      256
-    ],
-    "native_timeline_frames_checked": 17,
-    "supersedes": "npc_quest_warden"
-  },
-  {
-    "id": "npc_portal_mage_v2",
-    "format": "free",
-    "status": "model-exported-awaiting-runtime-qa",
-    "animations": [
-      "idle",
-      "greet",
-      "cast",
-      "open_portal"
-    ],
-    "cubes": 124,
-    "bones": 18,
-    "height_target": 2.3,
-    "runtime_tested": false,
-    "reference": "assets/references/npc-portal-mage.png",
-    "texture": [
-      256,
-      256
-    ],
-    "native_timeline_frames_checked": 17,
-    "supersedes": "npc_portal_mage"
-  },
-  {
     "id": "item_runeblade_v2",
     "format": "java_block",
     "status": "model-exported-awaiting-runtime-qa",
@@ -539,5 +451,93 @@
       "thirdperson_righthand"
     ],
     "supersedes": null
+  },
+  {
+    "id": "npc_arcane_banker_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "count_coins",
+      "inspect_ledger"
+    ],
+    "cubes": 182,
+    "bones": 17,
+    "height_target": 2.0,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-arcane-banker.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_arcane_banker"
+  },
+  {
+    "id": "npc_rune_smith_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "hammer",
+      "craft_success"
+    ],
+    "cubes": 171,
+    "bones": 16,
+    "height_target": 2.2,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-rune-smith.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 19,
+    "supersedes": "npc_rune_smith"
+  },
+  {
+    "id": "npc_quest_warden_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "offer_scroll",
+      "point_direction"
+    ],
+    "cubes": 123,
+    "bones": 17,
+    "height_target": 2.1,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-quest-warden.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_quest_warden"
+  },
+  {
+    "id": "npc_portal_mage_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "cast",
+      "open_portal"
+    ],
+    "cubes": 124,
+    "bones": 18,
+    "height_target": 2.3,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-portal-mage.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_portal_mage"
   }
 ]

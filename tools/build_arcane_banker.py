@@ -5,6 +5,8 @@ import json
 from collections import defaultdict
 from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data, embedded, dispose_view
+from build_luma_props import load_atlas
+from npc_bake import bake_npc, uv_js, portrait, panel, embroidery, ledger_cover, coin_face, key_emblem, rune_apron, coat_motif, warden_emblem, tabard, robe_hem, mage_emblem
 
 NAME = "npc_arcane_banker_v2"
 COLORS = ["#195354", "#0e333b", "#eee1bd", "#dbb354", "#957138",
@@ -191,50 +193,15 @@ ANIMATIONS=[("idle",4,True,idle),("greet",1.6,False,greet),
             ("count_coins",3.2,False,count),("inspect_ledger",2.4,False,inspect)]
 
 # Paint new pixels on the native texture canvas, including dedicated face/book art.
-PAINT="""(()=>{const t=Texture.all[0];t.edit(canvas=>{
-const c=canvas.getContext('2d'),colors=COLORS;let seed=54131;
-const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
-const rect=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
-colors.forEach((col,i)=>{const ox=(i%4)*64,oy=Math.floor(i/4)*64;
-rect(ox,oy,64,64,col);
-for(let y=2;y<62;y++)for(let x=2;x<62;x++){
- const a=(i===5||i===10)?.025:.07;
- rect(ox+x,oy+y,1,1,rand()>.5?'rgba(255,255,255,'+a+')':'rgba(0,0,0,'+a+')');}
-if([0,1,11,15].includes(i)){
- for(let y=4;y<60;y+=4)for(let x=4;x<60;x+=4)rect(ox+x,oy+y,1,1,'rgba(164,215,201,.12)');
- rect(ox+3,oy+3,1,58,'#527d74');rect(ox+60,oy+3,1,58,'#082b32');
- for(let y=5;y<59;y+=3){rect(ox+5,oy+y,1,1,'#6b9185');rect(ox+58,oy+y,1,1,'#6b9185');}}
-if([3,4,14].includes(i)){
- rect(ox+2,oy+2,60,2,'#f9dea0');rect(ox+2,oy+4,2,57,'#ebc775');
- rect(ox+60,oy+4,2,57,'#77532b');rect(ox+4,oy+60,56,2,'#866135');
- for(let j=0;j<22;j++)rect(ox+5+Math.floor(rand()*50),oy+5+Math.floor(rand()*50),3,1,'rgba(255,228,166,.24)');}
-if(i===2){for(let x=6;x<60;x+=8){rect(ox+x,oy+3,1,57,'rgba(109,94,65,.11)');rect(ox+x+1,oy+3,1,57,'rgba(255,255,235,.16)');}}
-if(i===6){for(let x=4;x<60;x+=4){rect(ox+x,oy+3,1,58,'#a8bcb8');rect(ox+x+1,oy+3,1,58,'#eaf0e7');}rect(ox+3,oy+58,58,3,'#acbdb8');}
-if(i===7){for(let y=5;y<60;y+=3){rect(ox+4,oy+y,1,1,'#b39065');rect(ox+59,oy+y,1,1,'#b39065');}rect(ox+3,oy+3,58,1,'#946d4b');}
-if(i===9){rect(ox+3,oy+3,58,4,'#b1fff0');rect(ox+3,oy+7,5,52,'#71f0dd');
-rect(ox+48,oy+9,12,50,'#179ba0');for(let x=12;x<48;x+=8)rect(ox+x,oy+8,2,42-x/2,'rgba(196,255,246,.25)');}
-if(i===10){rect(ox,oy,64,64,'#d6aa87');rect(ox+4,oy+8,56,44,'#dfb591');
- rect(ox+6,oy+16,4,29,'#c99778');rect(ox+54,oy+16,4,29,'#c99778');
- for(let x of [16,44]){rect(ox+x-3,oy+23,11,2,'#a9b5a8');rect(ox+x-2,oy+26,10,5,'#f0dfc1');
- rect(ox+x+1,oy+26,4,5,'#548c85');rect(ox+x+2,oy+27,2,4,'#243d3b');rect(ox+x+2,oy+26,1,1,'#d5ffed');
- rect(ox+x-3,oy+33,10,1,'#bd9073');rect(ox+x-5,oy+38,13,2,'#d0a181');}
- rect(ox+27,oy+43,10,2,'#ba7c6c');rect(ox+29,oy+36,6,3,'#e5bd99');}
-if(i===11){rect(ox+6,oy+4,2,56,'#c49c52');rect(ox+56,oy+4,2,56,'#c49c52');
-for(let y=10;y<55;y+=12){rect(ox+28,oy+y,8,2,'#a48446');rect(ox+31,oy+y-3,2,8,'#a48446');
-rect(ox+29,oy+y-1,6,4,'#407e77');}}
-if(i===12){rect(ox+5,oy+5,54,2,'#d3ac55');rect(ox+5,oy+57,54,2,'#d3ac55');
-rect(ox+5,oy+7,2,50,'#a68543');rect(ox+57,oy+7,2,50,'#a68543');
-rect(ox+12,oy+12,40,1,'#376569');rect(ox+12,oy+51,40,1,'#376569');
-for(let y of [18,23,42,47]){rect(ox+20,oy+y,24,1,'#a99559');rect(ox+29,oy+y-2,6,1,'#819a78');}}
-if(i===13){for(let y=3;y<62;y+=3){rect(ox+2,oy+y,60,1,'#b4ab8e');rect(ox+2,oy+y+1,60,1,'#ece3c6');}}
-if(i===14){rect(ox+8,oy+8,48,48,'#c69540');rect(ox+12,oy+12,40,40,'#efd074');
-rect(ox+27,oy+20,6,25,'#a27035');rect(ox+22,oy+23,5,5,'#a27035');rect(ox+22,oy+38,17,5,'#a27035');}
-if(i===15){rect(ox+4,oy+4,56,2,'#bc9c52');rect(ox+4,oy+58,56,2,'#bc9c52');
-rect(ox+4,oy+4,2,56,'#bc9c52');rect(ox+58,oy+4,2,56,'#bc9c52');
-rect(ox+22,oy+9,20,18,'#c3a45b');rect(ox+26,oy+13,12,10,'#11373f');rect(ox+30,oy+16,4,4,'#67c8b9');
-rect(ox+30,oy+27,4,26,'#c3a45b');rect(ox+34,oy+43,7,3,'#c3a45b');rect(ox+34,oy+48,5,3,'#c3a45b');
-rect(ox+23,oy+9,18,1,'#e3c77c');rect(ox+31,oy+27,1,26,'#e3c77c');}
-});},{edit_name:'Banker tailored cloth gold face ledger 256 atlas'});return {texture:t.name,size:[t.width,t.height]};})()"""
+# Baked materials per colour index (see COLORS), plus face-sized art.
+MATS=["teal","teal_deep","cloth_ivory","gold","bronze","skin_mid","hair_white","leather","dark","gem",
+      "portrait","embroidery","ledger_cover","paper","coin_face","key_panel"]
+# head_skin is authored with the skin index; its front face carries the portrait.
+OVERRIDES={"head_skin":"portrait"}
+ARTS={"portrait":portrait("skin_mid",(.39,.48),(.25,.75),.09,[(96,150,140),(60,104,98),(22,40,40),(220,255,245)],old=True),
+      "embroidery":panel("teal",embroidery),"ledger_cover":panel("teal_leather",ledger_cover),
+      "coin_face":panel("gold",coin_face),"key_panel":panel("teal_deep",key_emblem)}
+
 
 def main():
     parser=argparse.ArgumentParser()
@@ -256,30 +223,18 @@ def main():
     def call(name,arguments): guard(); return client.call(name,arguments)
     if any(guard()["counts"].get(key,0) for key in ["cubes","meshes","groups","textures"]): raise RuntimeError("Project must be empty")
     call("set_mode",{"mode_id":"edit"})
-    call("create_texture",{"name":NAME+".png","width":256,"height":256,"uv_width":256,"uv_height":256,"fill_color":COLORS[0]})
-    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=256;Project.texture_height=256;Undo.finishEdit('Banker UV resolution');return true})()"})
-    call("risky_eval",{"code":PAINT.replace("COLORS",json.dumps(COLORS))})
+    atlas,face_uv=bake_npc(ROWS,MATS,ARTS,OVERRIDES,seed=sum(map(ord,NAME)))
+    size=atlas.size[0]
+    call("create_texture",{"name":NAME+".png","width":size,"height":size,"uv_width":size,"uv_height":size,"fill_color":"#000000"})
+    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=%d;Project.texture_height=%d;Undo.finishEdit('NPC baked UV size');return true})()"%(size,size)})
+    load_atlas(call,atlas)
     for name,pivot,parent in BONES: call("add_group",{"name":name,"origin":pivot,"parent":parent})
-    batches=defaultdict(list)
-    for bone,color,row in ROWS: batches[(bone,color)].append(row)
-    for (bone,color),rows in batches.items():
-        ox=(color%4)*64;oy=(color//4)*64
+    by_bone=defaultdict(list)
+    for bone,_,row in ROWS: by_bone[bone].append(row)
+    for bone,rows in by_bone.items():
         call("place_cube",{"elements":rows,"group":bone,"texture":NAME+".png",
-                          "faces":[{"face":face,"uv":[ox+4,oy+4,ox+60,oy+60]} for face in ["north","south","east","west","up","down"]]})
-    materials={row["name"]:color for _,color,row in ROWS}
-    uv="""(()=>{const materials=MATERIALS,elements=Cube.all.slice();Undo.initEdit({elements,uv_only:true,outliner:true});
-for(const cube of elements){const i=materials[cube.name],ox=(i%4)*64,oy=Math.floor(i/4)*64;
-const d=cube.to.map((v,k)=>v-cube.from[k]);
-for(const [face,axis] of Object.entries({north:[0,1],south:[0,1],east:[2,1],west:[2,1],up:[0,2],down:[0,2]})){
-const w=Math.max(1,Math.min(56,Math.round(d[axis[0]]*4))),h=Math.max(1,Math.min(56,Math.round(d[axis[1]]*4)));
-cube.faces[face].uv=[ox+4,oy+4,ox+4+w,oy+4+h];}
-if([11,12,14,15].includes(i))for(const f of ['north','south'])cube.faces[f].uv=[ox+4,oy+4,ox+60,oy+60];
-if(cube.name==='head_skin')cube.faces.north.uv=[132,132,188,188];
-if(cube.name==='collision_proxy')cube.visibility=false;
-cube.preview_controller.updateUV(cube);cube.preview_controller.updateVisibility(cube);}
-const hit=Group.all.find(g=>g.name==='hitbox');hit.visibility=false;hit.preview_controller.updateVisibility(hit);
-Undo.finishEdit('Banker proportional UV and dedicated portrait');return {cubes:elements.length,bones:Group.all.length}})()""".replace("MATERIALS",json.dumps(materials))
-    call("risky_eval",{"code":uv})
+                          "faces":[{"face":f,"uv":[0,0,1,1]} for f in ["north","south","east","west","up","down"]]})
+    call("risky_eval",{"code":uv_js(face_uv)})
     print(json.dumps({"geometry":summary}),flush=True)
     call("set_mode",{"mode_id":"animate"})
     for name,length,loop,bones in ANIMATIONS: call("create_animation",{"name":name,"animation_length":length,"loop":loop,"bones":bones})

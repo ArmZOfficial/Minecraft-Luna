@@ -5,6 +5,8 @@ import json
 from collections import defaultdict
 from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data, embedded, dispose_view
+from build_luma_props import load_atlas
+from npc_bake import bake_npc, uv_js, portrait, panel, embroidery, ledger_cover, coin_face, key_emblem, rune_apron, coat_motif, warden_emblem, tabard, robe_hem, mage_emblem
 
 NAME = "npc_rune_smith_v2"
 # 0 tunic, 1 trousers, 2 skin, 3 gold, 4 bronze, 5 hand skin, 6 hair, 7 leather,
@@ -215,44 +217,13 @@ for _,_,_,bones in ANIMATIONS:
             if "position" in key: key["position"]=[-key["position"][0],*key["position"][1:]]
 
 # Paint the 16-slot atlas: material noise, edge bevels, portrait, rune apron and wood grain.
-PAINT="""(()=>{const t=Texture.all[0];t.edit(canvas=>{
-const c=canvas.getContext('2d'),colors=COLORS;let seed=77011;
-const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
-const rect=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
-colors.forEach((col,i)=>{const ox=(i%4)*64,oy=Math.floor(i/4)*64;
-rect(ox,oy,64,64,col);
-for(let y=2;y<62;y++)for(let x=2;x<62;x++){
- const a=[2,5,10].includes(i)?.025:.07;
- rect(ox+x,oy+y,1,1,rand()>.5?'rgba(255,255,255,'+a+')':'rgba(0,0,0,'+a+')');}
-if(i===0){for(let y=4;y<60;y+=3)for(let x=4;x<60;x+=3)rect(ox+x,oy+y,1,1,'rgba(255,255,255,.05)');
- rect(ox+4,oy+4,1,56,'#3d4048');rect(ox+59,oy+4,1,56,'#1b1c20');}
-if(i===1){for(let x=7;x<60;x+=9)rect(ox+x,oy+4,1,56,'rgba(0,0,0,.22)');}
-if([3,4].includes(i)){const hi=i===3?'#f6dc8a':'#b68b4c',lo=i===3?'#8c6a22':'#5c4220';
- rect(ox+2,oy+2,60,2,hi);rect(ox+2,oy+4,2,57,hi);rect(ox+60,oy+4,2,57,lo);rect(ox+4,oy+60,56,2,lo);
- for(let j=0;j<20;j++)rect(ox+5+Math.floor(rand()*50),oy+5+Math.floor(rand()*50),3,1,'rgba(255,240,190,.22)');}
-if(i===6){for(let x=4;x<60;x+=4){rect(ox+x,oy+3,1,58,'#3f2619');rect(ox+x+1,oy+3,1,58,'#7a5038');}}
-if(i===7){for(let y=5;y<60;y+=3){rect(ox+4,oy+y,1,1,'#a07a52');rect(ox+59,oy+y,1,1,'#a07a52');}
- rect(ox+3,oy+3,58,1,'#7a5236');for(let j=0;j<14;j++)rect(ox+6+Math.floor(rand()*50),oy+6+Math.floor(rand()*50),4,1,'rgba(0,0,0,.18)');}
-if(i===9){rect(ox+3,oy+3,58,4,'#b1fff6');rect(ox+3,oy+7,5,52,'#7af0ff');rect(ox+48,oy+9,12,50,'#1599ad');}
-if(i===10){rect(ox,oy,64,64,'#d39a74');rect(ox+4,oy+10,56,44,'#dba380');
- rect(ox+6,oy+20,4,26,'#c48a66');rect(ox+54,oy+20,4,26,'#c48a66');
- for(let x of [18,44]){rect(ox+x-5,oy+28,11,5,'#f2ece2');rect(ox+x-2,oy+28,5,5,'#2f7fc4');
- rect(ox+x-1,oy+29,3,3,'#16354f');rect(ox+x-1,oy+28,1,1,'#d8f2ff');rect(ox+x-5,oy+33,11,1,'#b67e5c');}
- rect(ox+8,oy+22,48,2,'#c9906c');rect(ox+28,oy+34,8,4,'#e4b08c');
- for(let j=0;j<10;j++)rect(ox+10+Math.floor(rand()*44),oy+42+Math.floor(rand()*10),2,1,'rgba(90,56,38,.35)');}
-if(i===11){rect(ox+4,oy+4,56,2,'#2b7a7c');rect(ox+4,oy+58,56,2,'#123c3e');
- for(let j=0;j<30;j++)rect(ox+5+Math.floor(rand()*52),oy+6+Math.floor(rand()*50),3,1,'rgba(0,0,0,.14)');
- const g='#45e6f2',d='#1fb8c8';
- for(let k=0;k<8;k++){rect(ox+31-k,oy+14+k,2,1,g);rect(ox+31+k,oy+14+k,2,1,g);rect(ox+24+k,oy+22+k,2,1,g);rect(ox+38-k,oy+22+k,2,1,g);}
- rect(ox+31,oy+22,2,20,g);rect(ox+30,oy+23,1,18,d);rect(ox+30,oy+45,4,4,g);rect(ox+31,oy+46,2,2,'#c6fbff');}
-if(i===12){rect(ox+2,oy+2,60,2,'#c3c9cf');rect(ox+2,oy+4,2,57,'#b0b7be');rect(ox+60,oy+4,2,57,'#5b6168');rect(ox+4,oy+60,56,2,'#50565c');
- for(let j=0;j<12;j++)rect(ox+6+Math.floor(rand()*48),oy+6+Math.floor(rand()*48),5,1,'rgba(255,255,255,.18)');}
-if(i===13){rect(ox+2,oy+2,60,3,'#fbf7ec');rect(ox+2,oy+57,60,4,'#b6ad99');
- for(let y=12;y<56;y+=11)rect(ox+4,oy+y,56,1,'rgba(120,108,90,.25)');}
-if(i===14){for(let x=4;x<60;x+=3)rect(ox+x,oy+3,1,58,rand()>.5?'#55351f':'#7d5434');
- for(let j=0;j<6;j++)rect(ox+6+Math.floor(rand()*50),oy+6+Math.floor(rand()*50),2,3,'#4a2d1a');}
-if(i===15){for(let y=5;y<60;y+=3){rect(ox+4,oy+y,1,1,'#3f8f8a');rect(ox+59,oy+y,1,1,'#3f8f8a');}}
-});},{edit_name:'Smith forge leather steel rune apron 256 atlas'});return {texture:t.name,size:[t.width,t.height]};})()"""
+# Baked materials per colour index (see COLORS), plus face-sized art.
+MATS=["cloth_charcoal","cloth_dark","skin_tan","gold","bronze","skin_tan","hair_brown","leather","iron","gem",
+      "portrait","teal_leather","steel","ivory","wood","teal_leather"]
+OVERRIDES={"apron_front":"apron_art"}
+ARTS={"portrait":portrait("skin_tan",(.43,.52),(.25,.71),.09,[(70,140,205),(47,110,180),(18,40,70),(220,240,255)]),
+      "apron_art":panel("teal_leather",rune_apron)}
+
 
 def main():
     parser=argparse.ArgumentParser()
@@ -275,30 +246,18 @@ def main():
     def call(name,arguments): guard(); return client.call(name,arguments)
     if any(guard()["counts"].get(key,0) for key in ["cubes","meshes","groups","textures"]): raise RuntimeError("Project must be empty")
     call("set_mode",{"mode_id":"edit"})
-    call("create_texture",{"name":NAME+".png","width":256,"height":256,"uv_width":256,"uv_height":256,"fill_color":COLORS[0]})
-    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=256;Project.texture_height=256;Undo.finishEdit('Smith UV resolution');return true})()"})
-    call("risky_eval",{"code":PAINT.replace("COLORS",json.dumps(COLORS))})
+    atlas,face_uv=bake_npc(ROWS,MATS,ARTS,OVERRIDES,seed=sum(map(ord,NAME)))
+    size=atlas.size[0]
+    call("create_texture",{"name":NAME+".png","width":size,"height":size,"uv_width":size,"uv_height":size,"fill_color":"#000000"})
+    call("risky_eval",{"code":"(()=>{Undo.initEdit({uv_mode:true});Project.texture_width=%d;Project.texture_height=%d;Undo.finishEdit('NPC baked UV size');return true})()"%(size,size)})
+    load_atlas(call,atlas)
     for name,pivot,parent in BONES: call("add_group",{"name":name,"origin":pivot,"parent":parent})
-    batches=defaultdict(list)
-    for bone,color,row in ROWS: batches[(bone,color)].append(row)
-    for (bone,color),rows in batches.items():
-        ox=(color%4)*64;oy=(color//4)*64
+    by_bone=defaultdict(list)
+    for bone,_,row in ROWS: by_bone[bone].append(row)
+    for bone,rows in by_bone.items():
         call("place_cube",{"elements":rows,"group":bone,"texture":NAME+".png",
-                          "faces":[{"face":face,"uv":[ox+4,oy+4,ox+60,oy+60]} for face in ["north","south","east","west","up","down"]]})
-    materials={row["name"]:color for _,color,row in ROWS}
-    uv="""(()=>{const materials=MATERIALS,elements=Cube.all.slice();Undo.initEdit({elements,uv_only:true,outliner:true});
-for(const cube of elements){const i=materials[cube.name],ox=(i%4)*64,oy=Math.floor(i/4)*64;
-const d=cube.to.map((v,k)=>v-cube.from[k]);
-for(const [face,axis] of Object.entries({north:[0,1],south:[0,1],east:[2,1],west:[2,1],up:[0,2],down:[0,2]})){
-const w=Math.max(1,Math.min(56,Math.round(d[axis[0]]*4))),h=Math.max(1,Math.min(56,Math.round(d[axis[1]]*4)));
-cube.faces[face].uv=i===11?[ox+4,oy+4,ox+4+Math.min(w,18),oy+4+Math.min(h,18)]:[ox+4,oy+4,ox+4+w,oy+4+h];}
-if(cube.name==='apron_front')cube.faces.north.uv=[ox+4,oy+4,ox+60,oy+60];
-if(cube.name==='head_skin')cube.faces.north.uv=[132,132,188,188];
-if(cube.name==='collision_proxy')cube.visibility=false;
-cube.preview_controller.updateUV(cube);cube.preview_controller.updateVisibility(cube);}
-const hit=Group.all.find(g=>g.name==='hitbox');hit.visibility=false;hit.preview_controller.updateVisibility(hit);
-Undo.finishEdit('Smith proportional UV and dedicated portrait');return {cubes:elements.length,bones:Group.all.length}})()""".replace("MATERIALS",json.dumps(materials))
-    call("risky_eval",{"code":uv})
+                          "faces":[{"face":f,"uv":[0,0,1,1]} for f in ["north","south","east","west","up","down"]]})
+    call("risky_eval",{"code":uv_js(face_uv)})
     print(json.dumps({"geometry":summary}),flush=True)
     call("set_mode",{"mode_id":"animate"})
     for name,length,loop,bones in ANIMATIONS: call("create_animation",{"name":name,"animation_length":length,"loop":loop,"bones":bones})

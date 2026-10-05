@@ -225,17 +225,17 @@
     "max_width": 1.9637
   },
   "sha256": {
-    "output/lobby-concept/assets/models/npc_portal_mage_v2.bbmodel": "47e8e4caab0a358a50094dc8fe7733cae32e0acf8721abc70f39bb3ce8765542",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2.png": "4e02e755d130da5c2f1b9502c4eb0dc649bab5c16d34c91fdff0df4074df59ec",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2.bbmodel": "889b5859f25013cb67fb83c00492da75b28249792c46c0698de728f03c1bb420",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2.png": "05a42729eed68144c383b051bd51b34e92b7bf31f1ae283a0f3f85d296fcd91b",
     "output/lobby-concept/assets/models/npc_portal_mage_v2-pose-checks.json": "125e5c33aa8fc6319c809c3e302665d3d66d3a1b2aafa907f9f9e7d5c2c7f216",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-back.png": "ebf28cef8b88957bd3e6268ac37b2cd561053ed0cbbcde5454ba38cb224faf77",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-cast.png": "b33f09ec40add3a949e422b652837e39a6baa90bb79cbdeb28ce7c28f59bb698",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-front.png": "3130f16665b650bf8ec2cf6644a073f3e0f820f74fe10750f23769694974a3f7",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-greet.png": "7493dfbdb120a236fc998159d56f9d9995dd5be58367a9580c3c14dc0ceded4b",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-idle.png": "3871a215a68fed756827fae33e16937079bd08e35e9b1c0e124617f3304625a9",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-open-portal.png": "ec1afe98b63441238704d425dfc71fb741900755f3754ebc09b6957cdc06775c",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-preview.png": "200a295a934c80c84bbebaa5a7da5c71757a4c2e0b4c32291d65f6cde01762f1",
-    "output/lobby-concept/assets/models/npc_portal_mage_v2-right.png": "8cc3257af32edeaae464edf4f41100cb5a2fd5b769225ac5ebe71cde1badbfe3"
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-back.png": "a6c1e3ead7255d0e089f8eed4140ac90291de0de689b7e402c57ec4e38617b01",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-cast.png": "94d8c2053adacd547399c1d021070dd90409af623b4f6041b089e3e576af29cb",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-front.png": "27e4a89789f58cebb44e05e224af3faae2c1b125994d5db025633693d537549e",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-greet.png": "cd2563e645b9aa2d6211b1373ce3487c18d1d1fd19d48f69982fbccd7425da1c",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-idle.png": "5a8aee6376ab6b9d33ef2a1c794b570854274e1bc957558a2a3f97f9f07415ba",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-open-portal.png": "a1e60d5cab37f5501351b0bd2c88bce62ec4f391d4805705fde360c2aaaff538",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-preview.png": "c9952b9dc680c6db6f82f56146c6d109996f528d8d627c22e627754de1a781d7",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-right.png": "4f311671204092d68da5e27a2cbf348df5bb56e58b19162acd95f1ccae8cb0c0"
   },
   "known_limits": [
     "No ModelEngine/Citizens runtime or client evidence yet",
