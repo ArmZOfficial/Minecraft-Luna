@@ -539,5 +539,27 @@
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_portal_mage"
+  },
+  {
+    "id": "npc_market_merchant",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "show_wares",
+      "weigh_goods",
+      "sale_success"
+    ],
+    "cubes": 179,
+    "bones": 20,
+    "height_target": 2.2,
+    "runtime_tested": false,
+    "reference": null,
+    "texture": [
+      512,
+      512
+    ],
+    "native_timeline_frames_checked": 26
   }
 ]

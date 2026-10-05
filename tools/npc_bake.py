@@ -231,3 +231,68 @@ def uv_js(face_uv):
             "if(c.name==='collision_proxy')c.visibility=false;c.preview_controller.updateUV(c);c.preview_controller.updateVisibility(c)}"
             "const hit=Group.all.find(g=>g.name==='hitbox');if(hit){hit.visibility=false;hit.preview_controller.updateVisibility(hit)}"
             "Undo.finishEdit('Baked per-face UV');return Cube.all.length})()")
+
+# Market merchant: wine waistcoat, felt hat, teal plume, rolled carpet and a balance-scale crest.
+RAMPS.update({
+ "wine":ramp("#1f060c","#350b16","#4e1222","#691a2e","#84263c","#a0384e","#bd5466"),
+ "plume":ramp("#0c3d44","#13606a","#1d8790","#36aab0","#62c8c9","#9fe2dd","#e8fbf6"),
+ "felt":ramp("#160d09","#24160f","#352116","#472d1e","#5a3a27","#704a33","#8a5e42"),
+})
+KIND.update({"wine":"cloth","plume":"hair","felt":"leather"})
+
+def vest_damask(c,face,rng):
+    """Waistcoat front: tonal diamond lattice with gold pips and a gold hem rule."""
+    r=RAMPS["wine"]; g=RAMPS["gold"]
+    for y in range(2,c.h-3):
+        for x in range(1,c.w-1):
+            if (x+y)%6==0 or (x-y)%6==0: c.set(x,y,r[2])
+    for y in range(3,c.h-4):
+        for x in range(1,c.w-1):
+            if (x+y)%6==3 and (x-y)%6==3 and ((x+y)//6)%2==0: c.set(x,y,g[4])   # pip at alternate diamond centres
+    for x in range(c.w): c.set(x,c.h-3,g[4]); c.set(x,c.h-2,g[2])
+
+def carpet_roll(c,face,rng):
+    """Rolled rug: wine weave with gold/teal bands around the roll and a spiral on the ends."""
+    fill(c,"wine",face,rng)
+    g=RAMPS["gold"]; t=RAMPS["teal_light"]; r=RAMPS["wine"]
+    if face in ("east","west"):
+        cx,cy=(c.w-1)/2,(c.h-1)/2
+        for y in range(c.h):
+            for x in range(c.w):
+                d=((x-cx)**2+(y-cy)**2)**.5
+                c.set(x,y,(r[4],r[2],g[3],r[3])[int(d)%4])
+        c.set(int(cx),int(cy),r[1]); return
+    for x in range(c.w):
+        k=x%14
+        if k in (0,1): col=g[4] if k==0 else g[2]
+        elif k in (5,9): col=t[4]
+        elif k==7: col=g[5]
+        else: continue
+        for y in range(c.h): c.set(x,y,col)
+
+def scarf_tail(c,face,rng):
+    fill(c,"teal",face,rng)
+    g=RAMPS["gold"]
+    if face in ("up","down"): return
+    for y in range(max(0,c.h-3),c.h):
+        for x in range(c.w): c.set(x,y,g[4] if x%2==0 else RAMPS["teal"][1])
+    for x in range(c.w): c.set(x,max(0,c.h-4),g[3])
+
+def merchant_crest(c,face,rng):
+    """Pack flap: gold ring around a balance scale, stitched on the outward (south) face."""
+    fill(c,"leather",face,rng)
+    if face!="south" or min(c.w,c.h)<12: return
+    g=RAMPS["gold"]; gem=RAMPS["gem"]
+    cx,cy=(c.w-1)/2,(c.h-1)/2; R=min(c.w,c.h)*.42
+    for y in range(c.h):
+        for x in range(c.w):
+            d=((x-cx)**2+(y-cy)**2)**.5
+            if R-1.2<=d<=R: c.set(x,y,g[4] if y<cy else g[3])
+    ix,iy=int(cx),int(cy); s=int(R*.6)
+    for y in range(iy-s,iy+s+1): c.set(ix,y,g[5])
+    for x in range(ix-s,ix+s+1): c.set(x,iy-s+1,g[5])
+    for px in (ix-s,ix+s):
+        for k in range(3):
+            for x in range(px-k,px+k+1): c.set(x,iy+k,g[4])
+    for x in range(ix-2,ix+3): c.set(x,iy+s,g[4])
+    c.set(ix,iy-s-1,gem[5])

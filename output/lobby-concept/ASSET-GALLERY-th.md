@@ -178,6 +178,24 @@ texture อ้าง `luma:item/runeblade_v2`; `python tools/verify_luma_items_v
 texture แบบ bake ทีละหน้า 2 texel/หน่วย (32px ต่อบล็อก ไม่ยืด) ไล่เฉดอุ่น/เย็น ลายไม้/อิฐหิน/หนังเย็บ/เพชรเจียระไน/เหรียญปั๊ม/แผนที่/ป้าย/รูนวาดตามขนาดหน้า อ้าง `luma:item/prop_<ชื่อ>`; GUI/กรอบไอเทมคำนวณขนาดจากรูปทรงจริงให้พอดีช่อง (ทุกชิ้น ≤±7.4) วางบนหัวแล้วนั่งบนหัวพอดี
 ไม่มีภาพ reference เฉพาะ props จึงใช้โทนสีชุด NPC v2; `python tools/build_luma_props.py [ชื่อ...]` สร้างใหม่, `python tools/verify_luma_items_v2.py` ตรวจรวมกับไอเทม; ยังไม่โหลดใน resource pack จริง
 
+## 09 — พ่อค้าตลาด (NPC บริการตัวที่ 5, 6 ต.ค.2026)
+
+![พ่อค้าตลาด](assets/models/npc_market_merchant-preview.png)
+![ด้านหน้า](assets/models/npc_market_merchant-front.png)
+![ด้านหลัง](assets/models/npc_market_merchant-back.png)
+![ยกหมวกทักทาย](assets/models/npc_market_merchant-greet-hat-tip.png)
+![ชั่งของ](assets/models/npc_market_merchant-weigh-goods.png)
+
+[ไฟล์](assets/models/npc_market_merchant.bbmodel) · [texture512×512](assets/models/npc_market_merchant.png) · [manifest](assets/models/npc_market_merchant-manifest.json)
+179cubes/20bones/5animations/156keys: idle, greet (ยกหมวก), show_wares (ยื่นมือเสนอสินค้า), weigh_goods (ยกตาชั่งมาหมุนขวางตัว คานโยกแล้วนิ่ง), sale_success (กระโดดดีใจ กางแขน หมวกเด้ง); สูงพร้อมหมวก 2.2บล็อก
+พ่อค้าเร่: เสื้อกั๊กแดงไวน์ลายดามัสก์ ขอบทอง กระดุมทอง เสื้อเชิ้ตพับแขนพร้อมสายรัดแขน ปลอกแขนหนังหมุดทอง ผ้าพันคอเขียวหยกชายพู่ทอง
+หมวกสักหลาดปีกกว้าง แถบแดงไวน์ หัวเข็มขัดทอง ขนนกเขียวหยกปัดไปด้านหลัง; หนวดงอนปลาย เคราแพะ คิ้วหนา ตาสีอำพัน
+ด้านหลังเป็นเป้โครงไม้ ฝาเป้ปักตราตาชั่งในวงทอง พรมม้วนลายแถบทอง/เขียวหยก ตะเกียงแก้วเรืองแสง กระทะทองแดง กระบอกม้วนกระดาษ
+เอวมีถุงเงิน (สะโพกขวา) และขวดยา3ขวด (สะโพกซ้าย); มือซ้ายถือตาชั่งแบบแขวนที่มีกระดูกแยก ทำให้จานแกว่งสวนคานได้
+ตรวจ26เฟรม: ตาชั่งติดกำปั้นซ้ายทุกเฟรม (gap 0) จานไม่เอียงเกินกำหนด มือขวาแตะหมวกตอนทักทายจริง; ท่ายกหมวกหามุมแขนด้วยการค้นในBlockbenchให้แขนไม่บังหน้า
+`python tools/verify_market_merchant.py` ผ่าน, สร้างใหม่ทั้งชุดได้ด้วย `python tools/rebuild_npc.py merchant`
+ใช้ได้กับร้าน A–D โซน06 (หันหน้าตาม station yaw); ยังไม่มีภาพอ้างอิงจาก ChatGPT และยังไม่ทดสอบในเกม; เกินbudgetNPCเมืองจึงเหมาะร้านละหนึ่งตัว
+
 ## การส่งต่อและตรวจงาน
 
 - [คำสั่งส่งต่อ Antigravity/Blockbench](ANTIGRAVITY-BLOCKBENCH-HANDOFF-th.md) — ลำดับ polish, output v2 และเงื่อนไขตรวจ

@@ -96,6 +96,7 @@ base material ของ legacy hat ต้องเลือกและทดส
 | npc_rune_smith | assets/models/npc_rune_smith.bbmodel | idle/greet/hammer | v2 ทำแล้ว: npc_rune_smith_v2.bbmodel 171cubes/16bones + craft_success; เหลือruntime QA |
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | v2 ทำแล้ว: npc_quest_warden_v2.bbmodel 123cubes/17bones + point_direction; เหลือruntime QA |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | v2 ทำแล้ว: npc_portal_mage_v2.bbmodel 124cubes/18bones + open_portal, สูงสุด2.66บล็อก; เหลือruntime QA |
+| npc_market_merchant | assets/models/npc_market_merchant.bbmodel | idle/greet/show_wares/weigh_goods/sale_success | ใหม่6ต.ค.: 179cubes/20bones texture512 ตาชั่งมีbone จานแกว่ง; เหลือภาพอ้างอิงและruntime QA |
 | item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; v3 แบบมงกุฎ 92 elements; เหลือ modern/legacy mapping ใน pack จริง |
 | item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_runeblade_v2 25 elements + display8context + `luma:` texture; เหลือทดสอบใน pack จริง |
 
@@ -120,7 +121,7 @@ preview PNG เป็น render จากโมเดลจริง แยก�
 | **รวม** | | | **140 assets/variants ตามแผน ไม่ใช่สร้างเสร็จแล้ว** |
 
 Tier ที่ geometry เหมือนกันให้ใช้ texture variant และ data template ถ้ารันไทม์รองรับ ไม่สร้าง rigซ้ำ 4 ตัวเพื่อเปลี่ยนสี
-เริ่ม launch slice 6 pilot → 14 NPCหลัก/~~12props~~(เสร็จ6ต.ค.) → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
+เริ่ม launch slice 6 pilot → 14 NPCหลัก(ทำแล้ว5: banker/smith/warden/mage/merchant)/~~12props~~(เสร็จ6ต.ค.) → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
 item gameplay ต้องมีแหล่งหาในเกม สูตรคราฟต์และ balance ก่อนผลิตรูป ไม่ทำ asset มากโดยไม่มีหน้าที่
 
 ## เพิ่มเติมจากภาพระบบ Survival/casual roleplay
