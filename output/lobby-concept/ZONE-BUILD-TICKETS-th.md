@@ -59,6 +59,7 @@ origin/กรอบนี้เป็นplacementproposal ไม่ใช่พ�
 | jobs_master | jobmaster variant | 59.5,-77.5 | 55.5,-77.5 | 90 | jobs.main |
 | portal_keeper | portal_mage | 55.5,-12.5 | 55.5,-17.5 | 180 | travel.main |
 | market_artist | artist merchant variant (ยังไม่มีโมเดล) | -91.5,57.5 | -91.5,54.5 | 180 | canvas.main |
+| market_alchemist_d (proposal) | npc_lyra_alchemist | -69.5,68.5 | -69.5,72.5 | 0 | market.main (ยังไม่เชื่อม) |
 | pet_keeper | petkeeper variant | 78.5,78.5 | 78.5,75.5 | 180 | pets.main |
 | fisher | fisher variant | 94.5,100.5 | 94.5,103.5 | 0 | fishing.catalog |
 | afk_caretaker | healer variant | -125.5,10.5 | -125.5,7.5 | 180 | afk.info |
@@ -138,6 +139,7 @@ NPCหนึ่งตัวเรียกเมนูรวมได้เพ�
 - วางบอร์ดordersหลังcounter ตู้รับของข้างร้าน และป้ายค่าธรรมเนียมก่อนsubmit
 - **Model:** merchant, alchemist, shop_sign4symbols, herbjar/fishcrate/scale; ใช้vanillabarrels/cratesส่วนใหญ่
 - Animationmerchantgreet, alchemiststirone-shot; jarไม่ใช้physicsที่เก็บpickupผิด
+- นักปรุงยา [ไลรา](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) ผลิตแล้ว: 206cubes/21bones/atlas512/5ท่า; หม้อและเตาติด root อยู่ข้างขวา ไม่ซ้อน cauldron block และเว้นพื้นที่3×3/สูง3สำหรับทุกท่า; renderer/ตลาดยังไม่เปิด
 - แผงเดิมที่ X-91/Z57 ใช้ artist/easel/palette สำหรับ Canvas ตาม station registry; วาง counter ไม่บัง target และถนน ไม่เพิ่มอาคารใหญ่
 - ตรวจ: buy/sellราคาserver, orderescrowpartialfill/refund, itemserialboundpolicy, webไม่เปิดorderคนอื่น
 

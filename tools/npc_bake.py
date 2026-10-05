@@ -227,7 +227,7 @@ def uv_js(face_uv):
     """JS that writes pixel UVs per cube face and hides the collision proxy and hitbox group."""
     import json
     return ("(()=>{const m="+json.dumps(face_uv)+";Undo.initEdit({elements:Cube.all.slice(),uv_only:true,outliner:true});"
-            "for(const c of Cube.all){const f=m[c.name];if(f)for(const k in f)c.faces[k].uv=f[k];"
+            "for(const c of Cube.all){const f=m[c.name];if(f){c.autouv=0;for(const k in f)c.faces[k].uv=f[k]}"
             "if(c.name==='collision_proxy')c.visibility=false;c.preview_controller.updateUV(c);c.preview_controller.updateVisibility(c)}"
             "const hit=Group.all.find(g=>g.name==='hitbox');if(hit){hit.visibility=false;hit.preview_controller.updateVisibility(hit)}"
             "Undo.finishEdit('Baked per-face UV');return Cube.all.length})()")

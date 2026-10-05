@@ -97,6 +97,7 @@ base material ของ legacy hat ต้องเลือกและทดส
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | v2 ทำแล้ว: npc_quest_warden_v2.bbmodel 123cubes/17bones + point_direction; เหลือruntime QA |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | v2 ทำแล้ว: npc_portal_mage_v2.bbmodel 124cubes/18bones + open_portal, สูงสุด2.66บล็อก; เหลือruntime QA |
 | npc_market_merchant | assets/models/npc_market_merchant.bbmodel | idle/greet/show_wares/weigh_goods/sale_success | ใหม่6ต.ค.: 179cubes/20bones texture512 ตาชั่งมีbone จานแกว่ง; เหลือภาพอ้างอิงและruntime QA |
+| npc_lyra_alchemist | assets/models/npc_lyra_alchemist.bbmodel | idle/greet/stir/offer_potion/brew_success | 6ต.ค.: 206cubes/21bones texture512 ภาพอ้างอิง3มุม, UV1236หน้า, ตรวจ265เฟรม; renderer/ตลาดยังรอ |
 | item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; v3 แบบมงกุฎ 92 elements; เหลือ modern/legacy mapping ใน pack จริง |
 | item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_runeblade_v2 25 elements + display8context + `luma:` texture; เหลือทดสอบใน pack จริง |
 
@@ -121,7 +122,7 @@ preview PNG เป็น render จากโมเดลจริง แยก�
 | **รวม** | | | **140 assets/variants ตามแผน ไม่ใช่สร้างเสร็จแล้ว** |
 
 Tier ที่ geometry เหมือนกันให้ใช้ texture variant และ data template ถ้ารันไทม์รองรับ ไม่สร้าง rigซ้ำ 4 ตัวเพื่อเปลี่ยนสี
-เริ่ม launch slice 6 pilot → 14 NPCหลัก(ทำแล้ว5: banker/smith/warden/mage/merchant)/~~12props~~(เสร็จ6ต.ค.) → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
+เริ่ม launch slice 6 pilot → 14 NPCหลัก(ทำแล้ว6: banker/smith/warden/mage/merchant/alchemist)/~~12props~~(เสร็จ6ต.ค.) → 20 gameplay items → เพิ่มตาม playtest; 140คือ backlog ไม่โหลดทั้งหมดตั้งแต่ spawn
 item gameplay ต้องมีแหล่งหาในเกม สูตรคราฟต์และ balance ก่อนผลิตรูป ไม่ทำ asset มากโดยไม่มีหน้าที่
 
 ## เพิ่มเติมจากภาพระบบ Survival/casual roleplay
@@ -170,7 +171,7 @@ artist idle/greet/paint ใช้ brief และ QA pipeline เดิม; ไ�
 
 ## งานบอสที่ผลิตแล้วและมาตรฐานรายละเอียดเพิ่ม (5 ต.ค.2026)
 
-[ผู้พิทักษ์จันทร์แตก](../../server/content/dungeons/moonfall/README-th.md) มี146cubes/19bones/atlas128×128/8animationsจริง
+[ผู้พิทักษ์จันทร์แตก](../../server/content/dungeons/moonfall/README-th.md) มี146cubes/19bones/atlas1024×1024หลังbake6ต.ค./8animationsจริง
 AIturnaround → nativeBlockbenchgeometry/paint/rig/keys → export → viewportreview → UUID/UV/rotation/loop/hash gate ทำแล้ว
 native .bbmodel5.0แยกgroups/outliner; รูปแบบsourceยังต้องทดสอบimporterModelEngineที่จะใช้งานจริง
 Corev0.8ไม่ได้ใช้modelนี้ในเกม มี [renderercontractdisabled](../../server/content/dungeons/moonfall/model-contract.json) และHuskfallback
@@ -180,9 +181,12 @@ Corev0.8ไม่ได้ใช้modelนี้ในเกม มี [rendere
 - ไม่ใช้แถบสีpaletteเดียวป้ายทั้งหน้า; UVเสื้อ/มือ/ผม/ใบหน้า/propsแยกบริเวณ มีpadding ไม่ยืดลายจนอ่านไม่ออก
 - gold/cyan/violetใช้เป็นจุดนำสายตา จำกัดรูนที่จุดทำงาน ไม่ปิดตา/มือหรือป้ายบริการด้วยeffect
 - เปรียบเทียบหน้า/ข้าง/หลัง/three-quarterกับreference เห็นเท้าครบและแอนิเมชันไม่ทำpropsหลุดจากมือ
-- บอสใช้รายละเอียดระดับชิ้นนี้เป็นbenchmarkภาพ; NPCบริการคงbudget40–70cubes/9–14bonesก่อนเพิ่ม เพราะต้องแสดงหลายตัวในเมือง
+- บอสใช้รายละเอียดระดับชิ้นนี้เป็นbenchmarkภาพ; ผู้ใช้ขอ NPC ลงรายละเอียดมากที่สุด จึงทำรุ่นละเอียดเกินbudgetเดิม40–70cubes/9–14bonesได้ตามองค์ประกอบจริง เริ่มทีละตัวต่อสถานีและวัดประสิทธิภาพก่อนใช้หลายสำเนา
 - ไม่เพิ่มboneเพื่อทุกหมุด/รอยแตกหรือsubdivision; รายละเอียดเล็กทำในtexture ภาพสวยไม่แทนbenchmarkMSPT/clientframepacing
 
 ลำดับpolishNPCv2: ~~banker(แว่น/สมุด/เหรียญ/ชุดคลัง)~~ เสร็จ6ต.ค. → ~~smith(เกราะหนัง/ค้อน/ผ้ากันเปื้อน)~~ เสร็จ6ต.ค. → ~~warden(ผ้าคลุม/scroll/pouch)~~ เสร็จ6ต.ค. → ~~mage(hood/crystal/staff)~~ เสร็จ6ต.ค. (NPC v2 ครบ4ตัว)
 itemv2 ~~รูนดาบและhalo~~ เสร็จ6ต.ค. displayครบ8context; ไม่เปลี่ยนPDC/serial/ราคา/enchantเพื่อแค่เปลี่ยนรูป
 ทั้งหมดexportrevisionใหม่พร้อมtexture/preview/manifest และตรวจruntimeก่อนเปลี่ยนรูปสินค้าหรือประกาศproduction
+
+นักปรุงยา [ไลรา](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) เป็นงานผลิตใหม่ถัดจากพ่อค้า: AI reference → native MCP → per-face atlas → 5 clips → 265 native frames → offline gate
+เพิ่มรายละเอียดด้วย geometry เฉพาะขอบ/ข้อต่อ/ของที่ถือ และ UV สำหรับลายผ้า/พฤกษา/ผิว ห้ามเพิ่ม bone ให้ทุกกระดุม

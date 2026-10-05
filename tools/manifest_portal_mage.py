@@ -25,7 +25,7 @@ def main():
     entry={"id":NAME,"format":"free","status":"model-exported-awaiting-runtime-qa",
            "animations":[a["name"] for a in model["animations"]],"cubes":len(model["elements"]),
            "bones":len(bones),"height_target":2.3,"runtime_tested":False,
-           "reference":"assets/references/npc-portal-mage.png","texture":[256,256],
+           "reference":"assets/references/npc-portal-mage.png","texture":[model["resolution"]["width"],model["resolution"]["height"]],
            "native_timeline_frames_checked":sum(len(f) for f in poses.values()),"supersedes":"npc_portal_mage"}
     path=MODELS/"manifest.json"
     manifest=[e for e in json.loads(path.read_text(encoding="utf-8")) if e["id"]!=NAME]

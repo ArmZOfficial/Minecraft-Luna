@@ -35,6 +35,7 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 | mage ✅ | assets/references/npc-portal-mage.png | npc_portal_mage_v2.bbmodel | ทำแล้ว: hood ใต้hi_head, staff_socket, ทุกท่า≤2.66บล็อก; `tools/build_portal_mage.py` → `preview_portal_mage.py` → `manifest_portal_mage.py` → `verify_portal_mage.py` |
 | halo ✅ | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | ทำแล้ว: display8context; legacy 1.16.5 ยังต้องทดสอบ; `tools/build_luma_items_v2.py halo` → `preview_luma_items_v2.py` → `verify_luma_items_v2.py --write-manifest` |
 | sword ✅ | assets/references/item-runeblade.png | item_runeblade_v2.bbmodel/JSON | ทำแล้ว: ปลายขั้น/ร่องรูน/การ์ด, display8context รวมมือซ้าย(mirror); `tools/build_luma_items_v2.py runeblade` |
+| alchemist ✅ | assets/references/npc-lyra-alchemist-turnaround.png | npc_lyra_alchemist.bbmodel | ทำแล้ว: 206ชิ้น/21bones/5ท่า, คอขวดซ้าย/ด้ามไม้ขวาติดมือ, เตา root ไม่เคลื่อน,265เฟรม; `build_alchemist.py` → `preview_alchemist.py` → `manifest_alchemist.py` → `verify_alchemist.py` |
 
 ## ข้อกำหนดไฟล์
 
@@ -43,6 +44,13 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 - ไฟล์ใหม่ไม่ทับ v1; texture namesอยู่ namespace luma, ไม่มีเลขCustomModelDataชน
 - อนุญาต idle loop; greet/work one-shot; ไม่มี locomotion สำหรับ stationaryserviceNPC
 - การซ่อม/รับเงิน/ส่งของเรียก Core transaction ไม่ทำจาก scriptในanimation
+- รุ่นละเอียดตามคำขอผู้ใช้: ตรวจภาพหน้า/ข้าง/หลังและจุดต่อผม/นิ้ว/อุปกรณ์จริง ไม่จำกัด geometry ไว้เท่า pilot; UV แยกหน้าและปิด Auto UV หลัง bake การเพิ่มจำนวนชิ้นยังต้องผ่าน runtime performance
+
+## ไลรา — ใบงานส่งต่อ
+
+[คู่มือร้านยาและภาพทุกมุม](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) · [contract disabled](../../server/content/npc-models/lyra-model-contract.json)
+
+> เปิดต้นฉบับไลราใน project ใหม่และทำ revision ใหม่เมื่อ polish เพิ่ม รักษา anatomicalright=+X, North/−Z, เท้าY0, 16units:block; แว่น/ผมถักตามhi_head, flaskตามleft_hand, rodตามright_hand, เตาแยกrootไม่เคลื่อน ตรวจทุกเฟรม20FPSว่าคอขวด/ด้ามไม้ติดมือและปลายไม้อยู่ในน้ำยา UVแยก1236หน้า/atlas512ต้องคมและมีgutter ไม่ปล่อยAutoUVเขียนทับ วางShopDหน้าลูกค้าSouthyaw0และcalibrateoffsetจริง ห้ามให้ animation ทำเงิน/ยา/วัตถุดิบ ทดสอบ ModelEngineformat5/packlegacy-modern/counter/region/performance ก่อนenable; market.mainยังเป็นplanned action
 
 ## คำสั่งตรวจที่มีใน workspace
 

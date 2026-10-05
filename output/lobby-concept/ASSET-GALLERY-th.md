@@ -8,6 +8,8 @@
 
 ![NPC v2 ทั้ง 4 ตัว](assets/models/npcs-v2-overview.png)
 
+NPC เพิ่มจากชุดนี้: [ไลรา นักปรุงยา](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) — ภาพอ้างอิง/โมเดลลงสี/5ท่า และตรวจ timeline ทุกเฟรม
+
 texture ทุกตัว bake ทีละหน้า 4 texel/หน่วย (64px ต่อบล็อก ไม่ยืด) ด้วย `tools/npc_bake.py` + `tools/texture_bake.py`:
 ผ้าทอมีรอยพับบนชายเสื้อยาว ผม/เครามีเส้น ขนสัตว์เป็นปุย ผิว4โทนพร้อมเงาแขนกลม ใบหน้าวาดตามขนาดหัว(ตา ม่านตา ประกายตา ริ้วรอย/แก้มแดง)
 ลายปัก/ปกสมุด/เหรียญปั๊ม/ตรากุญแจ/รูนผ้ากันเปื้อน/ลายเสื้อโค้ท/ผ้าห้อยและตราหลังของจอมเวทวาดตามขนาดหน้าจริง; แสงไล่ตามความสูงทั้งตัว
@@ -28,7 +30,7 @@ texture ทุกตัว bake ทีละหน้า 4 texel/หน่วย
 ![v2ด้านหน้า](assets/models/npc_arcane_banker_v2-front.png)
 ![v2เปิดสมุด](assets/models/npc_arcane_banker_v2-inspect-ledger.png)
 
-[ไฟล์v2](assets/models/npc_arcane_banker_v2.bbmodel) · [texture256×256](assets/models/npc_arcane_banker_v2.png) · [manifest](assets/models/npc_arcane_banker_v2-manifest.json)
+[ไฟล์v2](assets/models/npc_arcane_banker_v2.bbmodel) · [texture512×512](assets/models/npc_arcane_banker_v2.png) · [manifest](assets/models/npc_arcane_banker_v2-manifest.json)
 182cubes/17bones/4animations/87keys: idle, greet, count_coins, inspect_ledger
 แว่นกรอบโปร่งเห็นตา หูยื่นแยกผม เคราแก้ม/กราม/ปลายพร้อมหัวเข็มขัด ปกเสื้องาช้าง สายสร้อยและเหรียญตรา
 บ่าทองฝังคริสตัล ข้อมือขอบทอง นิ้วแยก แหวน ชายเสื้อแยกซ้ายขวาพร้อมแถบงาช้าง กุญแจนิรภัยและกระเป๋าเหรียญที่เอว รองเท้ามีหัวเข็มขัด
@@ -52,7 +54,7 @@ texture ทุกตัว bake ทีละหน้า 4 texel/หน่วย
 ![v2ด้านหน้า](assets/models/npc_rune_smith_v2-front.png)
 ![v2ง้างค้อน](assets/models/npc_rune_smith_v2-hammer-windup.png)
 
-[ไฟล์v2](assets/models/npc_rune_smith_v2.bbmodel) · [texture256×256](assets/models/npc_rune_smith_v2.png) · [manifest](assets/models/npc_rune_smith_v2-manifest.json)
+[ไฟล์v2](assets/models/npc_rune_smith_v2.bbmodel) · [texture512×512](assets/models/npc_rune_smith_v2.png) · [manifest](assets/models/npc_rune_smith_v2-manifest.json)
 171cubes/16bones/4animations/103keys: idle, greet, hammer, craft_success; สูง2.2บล็อก
 แว่นช่างกรอบทองเลนส์ฟ้าพร้อมสายรัดและหัวเข็มขัดหลังหัว เคราเต็ม หนวด คิ้ว หูยื่น ผมแยกหน้า/หลังหู
 ผ้ากันเปื้อนหนังเขียวขอบทอง ลายรูนฟ้า ชายเว้าตามreference สายสะพายไขว้Xด้านหลังพร้อมหัวเข็มขัด เข็มขัดใหญ่ กระเป๋าฝังคริสตัล
@@ -76,7 +78,7 @@ texture ทุกตัว bake ทีละหน้า 4 texel/หน่วย
 ![v2ด้านหน้า](assets/models/npc_quest_warden_v2-front.png)
 ![v2ยื่นม้วนเควส](assets/models/npc_quest_warden_v2-offer-scroll.png)
 
-[ไฟล์v2](assets/models/npc_quest_warden_v2.bbmodel) · [texture256×256](assets/models/npc_quest_warden_v2.png) · [manifest](assets/models/npc_quest_warden_v2-manifest.json)
+[ไฟล์v2](assets/models/npc_quest_warden_v2.bbmodel) · [texture512×512](assets/models/npc_quest_warden_v2.png) · [manifest](assets/models/npc_quest_warden_v2-manifest.json)
 123cubes/17bones/4animations/74keys: idle, greet, offer_scroll, point_direction; สูง2.1บล็อก
 เอลฟ์หูแหลมทะลุผมที่แยกหน้า/หลังหู ผมงาช้างไล่ชั้นหน้าม้า ปอยข้างแก้ม มงกุฎผมไม่เท่ากัน ตาฟ้าโตพร้อมไฮไลต์และแก้มชมพู
 เสื้อโค้ทยาวสีน้ำเงินเขียว ขนสัตว์งาช้างที่ปก/ไหล่/ชายเสื้อ เข็มกลัดทองฝังคริสตัล เสื้อชั้นในเข้ม ลายทองที่ชายหน้า/หลัง ตราทองกลางหลัง
@@ -99,7 +101,7 @@ texture ทุกตัว bake ทีละหน้า 4 texel/หน่วย
 ![v2ด้านหน้า](assets/models/npc_portal_mage_v2-front.png)
 ![v2ร่ายเวท](assets/models/npc_portal_mage_v2-cast.png)
 
-[ไฟล์v2](assets/models/npc_portal_mage_v2.bbmodel) · [texture256×256](assets/models/npc_portal_mage_v2.png) · [manifest](assets/models/npc_portal_mage_v2-manifest.json)
+[ไฟล์v2](assets/models/npc_portal_mage_v2.bbmodel) · [texture512×512](assets/models/npc_portal_mage_v2.png) · [manifest](assets/models/npc_portal_mage_v2-manifest.json)
 124cubes/18bones/4animations/96keys: idle, greet, cast, open_portal; สูง2.3บล็อก (ยอดฮู้ด)
 ฮู้ดแหลมเป็นbone `hood` ลูกของ `hi_head` ขอบทองรอบหน้า อัญมณีหน้าผาก แถบทองหลังฮู้ดถึงยอด; เคราขาวยาว3ชั้น หนวด คิ้วดก ผมขาวข้างขมับ
 เสื้อคลุมชั้นนอกน้ำเงินเขียวขอบทองเปิดหน้าเห็นชุดชั้นในงาช้าง ผ้าคลุมไหล่ขอบทอง อัญมณีบนไหล่ แขนเสื้อบานงาช้างพร้อมข้อมือน้ำเงินคาดทอง
@@ -131,7 +133,7 @@ gate คำนวณขนาดไอคอน GUI จริงหลังแ�
 ![Halo v3 มงกุฎ](assets/models/item_aether_halo_v3-preview.png)
 ![Halo v3 ทุก display context](assets/models/item_aether_halo_v3-display.png)
 
-[ไฟล์v3](assets/models/item_aether_halo_v3.bbmodel) · [Java JSON](assets/models/item_aether_halo_v3.json) · [texture128×128](assets/models/item_aether_halo_v3.png) · [manifest](assets/models/item_aether_halo_v3-manifest.json)
+[ไฟล์v3](assets/models/item_aether_halo_v3.bbmodel) · [Java JSON](assets/models/item_aether_halo_v3.json) · [texture256×256](assets/models/item_aether_halo_v3.png) · [manifest](assets/models/item_aether_halo_v3-manifest.json)
 92 elements: แถบมงกุฎทอง3ชั้น(ขอบล่างเข้ม/แถบหลักมีเส้นไฮไลต์/ขอบบนอ่อน) ยอดแหลมแบบขั้นต่อกันเป็นฟันเลื่อยรอบวง
 ยอดมุมสูงสุด ยอดกลางด้านสูงรอง ยอดเล็กคั่น; ทับทิมใหญ่กลางแถบทุกด้าน ทับทิมเล็กที่ฐานยอดเล็ก อัญมณีฟ้าใกล้ปลายยอดมุม/ยอดกลาง
 texture bake ทีละหน้า 2 texel/หน่วย ไล่แสงตามความสูงทั้งชิ้น; สวมแล้วนั่งพอดีบนหัว(head) ไอคอน GUI ±7.84 ไม่ล้นช่อง กรอบไอเทม/มือ/พื้นตั้งค่าแล้ว; texture `luma:item/aether_halo_v3`
@@ -212,9 +214,20 @@ SQL/ระบบบริการอยู่ที่ FantasyCore ไม่ผ
 ![ภาพอ้างอิงบอส4มุม](assets/references/boss-moonfall-guardian-turnaround.png)
 ![โมเดลบอสจริงจากBlockbench](assets/models/boss_moonfall_guardian_v1-preview.png)
 
-[ไฟล์ .bbmodel](assets/models/boss_moonfall_guardian_v1.bbmodel) · [texture128×128](assets/models/boss_moonfall_guardian_v1.png) · [คู่มือและanimation](../../server/content/dungeons/moonfall/README-th.md)
+[ไฟล์ .bbmodel](assets/models/boss_moonfall_guardian_v1.bbmodel) · [texture1024×1024](assets/models/boss_moonfall_guardian_v1.png) · [คู่มือและanimation](../../server/content/dungeons/moonfall/README-th.md)
 146cubes/19bones/8animations/150keys: idle, walk, spawn, attack, slam, enrage, hurt, death
 มีหินแตกร้าว ขอบทองแดงหลายเฉด หมุด นิ้ว/ข้อต่อ รูนฟ้า แกนม่วงซ้อนชั้น และตราจันทร์ด้านหลัง
 texture bake ใหม่ 6 ต.ค. (4 texel/หน่วย, atlas 1024): หินก้อนใหญ่สลักมีรอยร้าว เกราะทองแดงเงามันเส้นเดียว รูนฟ้าเรืองแสง คริสตัลม่วงเจียระไน แผ่นหลังรูปจันทร์เสี้ยว แสงไล่ตามความสูงทั้งตัว
 ภาพviewport29เฟรม/UUID/UV/loop/hashตรวจผ่าน; ยังไม่มีModelEnginepackหรือผลMinecraftจริง CoreยังHuskfallback
 บอสชิ้นนี้สร้างเพิ่ม ไม่ทับNPC/itempilot6ตัวเดิม; มาตรฐานสีและรายละเอียดสำหรับrevisionNPCv2อยู่ใน [แผนโมเดล](MODEL-AND-CONTENT-PLAN-th.md)
+
+## 08 — ไลรา นักปรุงยา (6 ต.ค.2026)
+
+![ภาพอ้างอิงไลรา](assets/references/npc-lyra-alchemist-turnaround.png)
+![โมเดลไลราจาก Blockbench](assets/models/npc_lyra_alchemist-preview.png)
+
+[ต้นฉบับ](assets/models/npc_lyra_alchemist.bbmodel) · [texture512](assets/models/npc_lyra_alchemist.png) · [คู่มือร้านยา/ทุกท่า](../../server/content/npc-models/LYRA-ALCHEMIST-th.md)
+206cubes/21bones/5animations/75keys: idle, greet, stir, offer_potion, brew_success
+มีเสื้อเขียวลายพฤกษาทอง ผ้ากันเปื้อนม่วง ผมถัก แว่นกรอบซ้อน นิ้วจับคอขวด ขวด3สี และหม้อกลวงพร้อมเตา
+UVแยก1,236หน้าไม่ซ้อน ตรวจnativeครบ265เฟรมที่20FPS: gripติดมือ ปลายไม้อยู่ในน้ำยา เตานิ่ง เท้าอยู่พื้น
+วางShopDหน้าSouthตามyaw0; sourceและmanifestผ่าน แต่ยังไม่มีrenderer/packหรือระบบซื้อ-ปรุงยาจริง

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "enabled": false,
+  "status": "specification-only; no model renderer or alchemy transaction implementation",
+  "asset_id": "npc_lyra_alchemist",
+  "blueprint": "output/lobby-concept/assets/models/npc_lyra_alchemist.bbmodel",
+  "runtime_target": "ModelEngine 4 / Citizens or Core stationary fallback; exact JAR and source format 5 import pending",
+  "core_version": "0.8.0",
+  "placement": {
+    "zone": "06 / Shop D",
+    "station_id_proposal": "market_alchemist_d",
+    "xz": [-69.5, 68.5],
+    "feet_y": "Y0 + 1 on a full floor block",
+    "player_target_xz": [-69.5, 72.5],
+    "yaw": 0,
+    "visual_forward": "north (-Z), rotate by 180 degrees from authored front to face south",
+    "native_base_yaw": 180,
+    "scale": 1,
+    "clearance": {"width_blocks": 3, "depth_blocks": 3, "height_blocks": 3},
+    "brew_station_local_center_units": [6.2, 0, -1.8],
+    "brew_station_world_xz_at_yaw_0_proposal": [-69.8875, 68.6125],
+    "must_not_walk_or_follow": true,
+    "look_tracking": "head only; bounded and disabled during authored clips until renderer blend is tested"
+  },
+  "interaction": {
+    "label": "ร้านยา · ไลรา นักปรุงยา",
+    "planned_action": "market.main",
+    "action_implemented": false,
+    "alchemy_recipe_ui_implemented": false,
+    "additional_alchemy_action": null
+  },
+  "ownership": {
+    "inventory_wallet_recipe_and_receipt": "future FantasyCore transaction",
+    "animation_keyframes_may_give_items_or_debit_money": false,
+    "brew_station_is_decoration": true,
+    "real_fire_or_item_pickup_entities": false
+  },
+  "events": {
+    "idle": {"animation": "idle", "loop": true, "priority": 0},
+    "interaction_preview": {"animation": "greet", "priority": 1, "then": "idle", "cooldown_seconds_proposal": 4},
+    "recipe_preview_visual_only": {"animation": "stir", "priority": 2, "then": "idle"},
+    "product_preview_visual_only": {"animation": "offer_potion", "priority": 1, "then": "idle"},
+    "committed_transaction_visual_only": {"animation": "brew_success", "priority": 3, "then": "idle", "requires_transaction_receipt": true},
+    "unload_reload_disable": {"stop_all_animations": true, "remove_owned_visuals": true, "one_instance_per_station_id": true}
+  },
+  "hitbox_proposal": {
+    "from_units": [-4.7, 0, -4.7],
+    "to_units": [4.7, 33.2, 4.7],
+    "eye_y_units": 28.4,
+    "animated": false,
+    "includes_burner": false,
+    "burner_region_protection_required": true,
+    "runtime_verified": false
+  },
+  "pack": {
+    "namespace": "luma",
+    "minimum_client_target": "1.16.5",
+    "profiles": ["legacy", "modern"],
+    "compiled": false,
+    "runtime_tested": false,
+    "required_evidence": ["exact importer and pack hash", "client matrix and pack-decline fallback", "spawn/chunk/restart deduplication", "counter clearance and NPC click bounds", "client frame pacing and server profile"]
+  }
+}

@@ -468,8 +468,8 @@
     "runtime_tested": false,
     "reference": "assets/references/npc-arcane-banker.png",
     "texture": [
-      256,
-      256
+      512,
+      512
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_arcane_banker"
@@ -490,8 +490,8 @@
     "runtime_tested": false,
     "reference": "assets/references/npc-rune-smith.png",
     "texture": [
-      256,
-      256
+      512,
+      512
     ],
     "native_timeline_frames_checked": 19,
     "supersedes": "npc_rune_smith"
@@ -512,8 +512,8 @@
     "runtime_tested": false,
     "reference": "assets/references/npc-quest-warden.png",
     "texture": [
-      256,
-      256
+      512,
+      512
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_quest_warden"
@@ -534,8 +534,8 @@
     "runtime_tested": false,
     "reference": "assets/references/npc-portal-mage.png",
     "texture": [
-      256,
-      256
+      512,
+      512
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_portal_mage"
@@ -561,5 +561,27 @@
       512
     ],
     "native_timeline_frames_checked": 26
+  },
+  {
+    "id": "npc_lyra_alchemist",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "stir",
+      "offer_potion",
+      "brew_success"
+    ],
+    "cubes": 206,
+    "bones": 21,
+    "height_target": 2.1,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-lyra-alchemist-turnaround.png",
+    "texture": [
+      512,
+      512
+    ],
+    "native_timeline_frames_checked": 265
   }
 ]

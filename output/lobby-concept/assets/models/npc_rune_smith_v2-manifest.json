@@ -14,8 +14,8 @@
   "runtime_tested": false,
   "reference": "assets/references/npc-rune-smith.png",
   "texture": [
-    256,
-    256
+    512,
+    512
   ],
   "native_timeline_frames_checked": 19,
   "supersedes": "npc_rune_smith",

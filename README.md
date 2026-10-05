@@ -11,6 +11,7 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
+- [ไลรา นักปรุงยาและการวางร้านยา](server/content/npc-models/LYRA-ALCHEMIST-th.md) — โมเดลละเอียด/5ท่า/ตรวจ265เฟรม; ระบบตลาดและ renderer ยังรอ
 - [ปลั๊กอิน FantasyCore v0.8](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/mail/daily/exchange/repair/craft/depth/ดันฝึก
 - [Moonfall ปาร์ตี้ v0.8](fantasycore/PARTY-DUNGEONS-th.md) — เดี่ยว+2ห้องปาร์ตี้/บาลานซ์/reconnect/recovery และ checklist S
 - [Moonfall ดันฝึกเดี่ยว](fantasycore/DUNGEONS-th.md) — สร้างโครงแมพ/3ห้อง/บอส/ส่งรางวัลวันละครั้ง, ปิดรับเริ่มต้นและรอ staging
@@ -24,7 +25,8 @@
 
 มีเว็บต้นแบบที่ทดลองเมนู ค้นหาโซน คู่มือ ข่าว และศูนย์บัญชีได้ พร้อมภาพและเอกสารออกแบบ
 เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
-มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
+มี NPC pilot 4 ตัวและ item pilot 2 ชิ้น พร้อม NPC รุ่นละเอียด 6 ตัว (banker/smith/warden/mage/merchant/alchemist), บอสและ props 12 ชิ้น export จาก Blockbench MCP
+ไลรามีภาพ AI อ้างอิง, 206 cubes/21 bones/texture512/5ท่า และผลตรวจทุกเฟรมที่20FPS; ยังเป็น source asset รอ pack และทดสอบในเกม
 
 **ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.8 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
 item template, บ้าน, RTP, claim adapter, กล่องจดหมาย, รับของรายวัน และ `/exchange` (3 สูตร vanilla + preview + journal recovery)
