@@ -101,6 +101,28 @@ rtp:
       min-radius: 200
       max-radius: 2800
 
+rewards:
+  daily:
+    enabled: true
+    # รอบสะสม: รับวันละครั้ง ไม่ต้องต่อเนื่อง วันใหม่ 00:00 เวลาไทย ไม่ไล่รับย้อนหลังวันที่ไม่ได้เข้า (CASUAL-SURVIVAL §4)
+    # ค่าเป็นตัวเลขทดลองจากเอกสาร ไม่ใช่ balance ที่ยืนยันแล้ว
+    # items: ใช้ material vanilla (ไม่เกิน max stack); ของที่ส่งเข้ากระเป๋าไม่ได้จะรอใน /mail
+    days:
+      - gold: 100
+      - gold: 150
+        items:
+          - {material: BREAD, amount: 8, label: "ขนมปัง"}
+      - gold: 200
+        # + ใบซ่อม credit 100 — เปิดเมื่อมีระบบซ่อมและแม่แบบไอเทมจริง (ห้ามแจกไอเทม lore เปล่าแทนสิทธิ์)
+      - gold: 250
+      - gold: 300
+        items:
+          - {material: IRON_INGOT, amount: 4, label: "แท่งเหล็ก (วัตถุดิบคราฟต์)"}
+      - gold: 350
+      - gold: 500
+        red: 1
+        # + คูปองสีวาดภาพ — เปิดเมื่อมีระบบ Canvas
+
 stations:
   # ระยะจาก NPC/anchor ที่ถือว่า "อยู่ที่จุดบริการ" (เช่น /bank deposit ต้องอยู่ใกล้ธนาคาร)
   remote-radius: 6

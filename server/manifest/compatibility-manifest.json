@@ -114,16 +114,17 @@
       "file_prefix": "Citizens",
       "url": "https://ci.citizensnpcs.co/job/Citizens2/",
       "required": false,
-      "role": "ไม่บังคับใน PoC — FantasyCore มี NPC สถานีของตัวเอง; ถ้าใช้ Citizens ให้ผูกด้วย /fa npc anchor + /npc command add -p fc action <id>"
+      "role": "ไม่บังคับ — ถ้าใช้ ให้ Citizens ดูแลหน้าตา/ท่าทาง แล้วผูกกับบริการของ FantasyCore ด้วย /fa npc bind <action> (FantasyCore เรียก Citizens API ผ่าน reflection ไม่ต้องมีตอน build)",
+      "note": "ต้องใช้ build ที่รองรับ Paper 26.2 จาก CI ทางการ — ยังไม่ได้ยืนยันบน staging"
     },
     {
       "id": "fantasycore",
       "name": "FantasyCore",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "local",
-      "path": "fantasycore/build/libs/FantasyCore-0.1.0.jar",
+      "path": "fantasycore/build/libs/FantasyCore-0.2.0.jar",
       "required": true,
-      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP)"
+      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP/กล่องจดหมาย/รางวัลรายวัน)"
     }
   ],
   "deferred": [

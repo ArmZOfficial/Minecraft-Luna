@@ -41,7 +41,8 @@ menu:
     rewards:
       name: '<#DDA54A>รางวัลของฉัน'
       lore: |-
-        <gray>รับของรายวันและรางวัลสะสม
+        <gray>รับของรายวัน รอบสะสม 7 ครั้ง (/rewards)
+        <gray>วันใหม่ 00:00 เวลาไทย
     land:
       name: '<#DDA54A>ที่ดินและบ้าน'
       lore: |-
@@ -68,6 +69,11 @@ menu:
       lore: |-
         <gray>ฝาก/ถอนทอง เงินฝากไม่หายเมื่อเสียชีวิต
         <gray>ใช้ได้ที่ธนาคารโซน 05 หรือเมื่อแรงค์ปลดล็อก
+    mail:
+      name: '<#DDA54A>กล่องจดหมาย'
+      lore: |-
+        <gray>ของรางวัล/ของที่ส่งเข้ากระเป๋าไม่ได้
+        <gray>รอรับที่นี่ ไม่ตกพื้น (/mail)
     spawn:
       name: '<#47C8D3>กลับจุดเกิด'
       lore: |-
@@ -208,6 +214,76 @@ home:
       lore: |-
         <gray>วางหินกันบ้านในโลกบ้าน แล้ว /sethome
 
+reward:
+  disabled: '<yellow>ระบบรางวัลรายวันยังไม่เปิด'
+  already: '<yellow>วันนี้รับไปแล้ว</yellow> — รอบใหม่ในอีก <#47C8D3><time></#47C8D3> (00:00 เวลาไทย)'
+  claimed: '<green>รับรางวัลครั้งที่ <index>/<cycle> แล้ว:</green> <#DDA54A><reward></#DDA54A> <gray>(ทองที่พก <wallet>)'
+  items-in-mail: '<yellow>ของ <count> ชิ้นใส่กระเป๋าไม่ได้ — รอใน <#DDA54A>/mail</#DDA54A> ไม่หาย'
+  join-notice: 'วันนี้ยังไม่ได้รับของรายวัน — พิมพ์ <#DDA54A>/rewards</#DDA54A>'
+  menu:
+    title: '<#194D39>รางวัลของฉัน'
+    info:
+      name: '<#DDA54A>รับของรายวัน'
+      lore: |-
+        <gray>รับแล้วทั้งหมด: <#47C8D3><total></#47C8D3> ครั้ง
+        <gray>รอบละ <cycle> ครั้ง สะสม ไม่ต้องต่อเนื่อง
+        <gray>รอบใหม่ในอีก <#47C8D3><time></#47C8D3> (00:00 เวลาไทย)
+    day:
+      name: '<#DDA54A>ครั้งที่ <index>'
+      loading: |-
+        <gray><reward>
+      done: |-
+        <gray><reward>
+        <green>✔ รับแล้วในรอบนี้
+      today: |-
+        <white><reward>
+        <yellow>★ รับได้วันนี้
+      later: |-
+        <gray><reward>
+        <dark_gray>ครั้งถัดไป
+    claim:
+      name: '<green><bold>รับรางวัลวันนี้'
+      lore: |-
+        <gray>เงินเข้าทันที ของเข้ากระเป๋า
+        <gray>(ถ้าเต็มจะรอใน /mail)
+    claimed:
+      name: '<gray>วันนี้รับแล้ว'
+      lore: |-
+        <gray>รอบใหม่ในอีก <time>
+
+mail:
+  join-notice: 'คุณมีของรอในกล่องจดหมาย <#47C8D3><count></#47C8D3> ชิ้น — พิมพ์ <#DDA54A>/mail</#DDA54A>'
+  claimed-one: '<green>รับ <item> แล้ว'
+  claimed-all: '<green>รับของจากกล่องแล้ว <count> ชิ้น'
+  claimed-partial: '<yellow>รับได้ <count> ชิ้น แล้วกระเป๋าเต็ม</yellow> — เหลือ <left> ชิ้นในกล่อง ไม่หาย'
+  full: '<yellow>กระเป๋าเต็ม — เคลียร์ช่องแล้วลองใหม่ ของยังอยู่ในกล่อง'
+  corrupt: '<red>อ่านของในจดหมาย #<id> ไม่ได้ — แจ้งทีมงาน (ของยังไม่ถูกใช้)'
+  menu:
+    title: '<#194D39>กล่องจดหมาย'
+    info:
+      name: '<#DDA54A>ของรอรับ <count> ชิ้น'
+      lore: |-
+        <gray>คลิกที่ของเพื่อรับทีละชิ้น
+        <gray>ของไม่หายถ้ากระเป๋าเต็ม — รอจนกว่าจะรับ
+    entry:
+      lore: |-
+        <dark_gray>จาก <source> · <time>
+        <gray>กระเป๋า: <fits> — <green>คลิกเพื่อรับ
+    empty:
+      name: '<gray>กล่องว่าง'
+      lore: |-
+        <gray>ของรางวัลที่ใส่กระเป๋าไม่ได้จะมารอที่นี่
+    claim-all:
+      name: '<green>รับทั้งหมด'
+      lore: |-
+        <gray>รับตามลำดับจนกว่ากระเป๋าจะเต็ม
+    open:
+      name: '<#DDA54A>กล่องจดหมาย'
+      lore: |-
+        <gray>เปิด /mail
+    corrupt:
+      name: '<red>จดหมาย #<id> อ่านไม่ได้'
+
 land:
   provider-missing: '<red>ระบบที่ดิน (WorldGuard) ยังไม่เชื่อม'
   none-here: '<gray>ตรงนี้ใน <world> ยังไม่มีแปลงของผู้เล่น'
@@ -224,7 +300,8 @@ admin:
     <gray>/fa doctor <dark_gray>— ตรวจสถานะระบบและ adapter
     <gray>/fa bank <ผู้เล่น> <dark_gray>— ดูยอดและประวัติ
     <gray>/fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผล> <dark_gray>— preview แล้ว /fa confirm
-    <gray>/fa npc spawn|anchor <action> [ชื่อ] · remove · unanchor · list
+    <gray>/fa npc spawn <action> [ชื่อ] · bind <action> (Citizens) · unbind · remove · anchor · unanchor · list
+    <gray>/fa mail review · release|void <id> <เหตุผล> · give <ผู้เล่น> <เหตุผล> (ของในมือ)
     <gray>/fa item list · give <ผู้เล่น> <template> · inspect
     <gray>/fa audit [ผู้เล่น]
   doctor:
@@ -240,7 +317,8 @@ admin:
     bank: '<gray>ใช้: /fa bank <ผู้เล่น>'
     eco: '<gray>ใช้: /fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผลอย่างน้อย 3 ตัวอักษร>'
     confirm: '<gray>ใช้: /fa confirm <รหัส>'
-    npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc anchor <action> · /fa npc remove (มอง NPC) · /fa npc unanchor · /fa npc list'
+    npc: '<gray>ใช้: /fa npc spawn <action> [ชื่อที่แสดง] · /fa npc bind <action> (มอง NPC ของ Citizens) · /fa npc unbind · /fa npc remove (มอง NPC) · /fa npc anchor <action> · /fa npc unanchor · /fa npc list'
+    mail: '<gray>ใช้: /fa mail review · /fa mail release|void <id> <เหตุผล> · /fa mail give <ผู้เล่น> <เหตุผล>'
     item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
   bank:
     summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
@@ -262,8 +340,13 @@ admin:
     list-line: '<gray><kind></gray> <white><action></white> <dark_gray><world></dark_gray> <gray><coords></gray> <dark_gray>#<id>'
     unknown-action: '<red>ไม่รู้จัก action <action></red> <gray>— ที่รู้จัก: <known>'
     spawned: '<green>วาง NPC <action> แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>)'
-    anchored: '<green>ผูก anchor <action> ที่ตำแหน่งนี้แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>) — ตั้ง Citizens: /npc command add -p fc action <action>'
+    anchored: '<green>ผูก anchor <action> ที่ตำแหน่งนี้แล้ว</green> <dark_gray>#<id></dark_gray> <gray>(<connected>) — ใช้กับคำสั่ง /fc action <action> ใกล้จุดนี้ (NPC ของ Citizens ใช้ /fa npc bind ง่ายกว่า)'
     spawn-blocked: '<red>วาง NPC ไม่สำเร็จ: <detail>'
+    no-citizens: '<red>ไม่พบ Citizens (หรือรุ่นไม่รองรับ) — ใช้ /fa npc spawn แทนได้'
+    not-citizens: '<red>มองไปที่ NPC ของ Citizens ในระยะ 6 บล็อกก่อน'
+    bound: '<green>ผูก NPC <npc> (Citizens #<npcid>) กับ <action> แล้ว</green> <gray>(<connected>) — คลิกขวาที่ NPC เพื่อใช้บริการ ไม่ต้องตั้ง /npc command'
+    unbound: '<green>ยกเลิกการผูก NPC <npc> แล้ว'
+    not-bound: '<yellow>NPC <npc> ยังไม่ได้ผูกกับบริการ'
     no-target: '<red>มองไปที่ NPC ของ Core ในระยะ 6 บล็อกก่อน'
     removed: '<green>ลบ NPC แล้ว'
     unanchored: '<green>ลบ anchor ที่ใกล้ที่สุดแล้ว'
@@ -274,9 +357,18 @@ admin:
     not-core: '<yellow>ไอเทมในมือไม่ใช่ของ Core (ไม่มี template ใน PDC) — ชื่อ/lore ไม่นับเป็นหลักฐาน'
     identity: 'template <#DDA54A><template></#DDA54A> v<version> · serial <#47C8D3><serial></#47C8D3> · สถานะ <state>'
     unknown: '<red>ไม่พบ template <id> — ดู /fa item list'
-    inventory-full: '<red>ช่องเก็บของของ <player> เต็ม — ยังไม่ออกไอเทม (ระบบกล่องจดหมายอยู่ phase ถัดไป)'
     given: '<green>ส่ง <id> ให้ <player> แล้ว</green> <dark_gray>#<serial>'
+    mailed: '<yellow>กระเป๋าของ <player> เต็ม — <id> เข้ากล่องจดหมายแทน</yellow> <dark_gray>#<serial>'
     delivery-failed: '<red>บันทึก serial แล้วแต่ส่งของไม่สำเร็จ</red> <dark_gray>#<serial></dark_gray> <gray>— สถานะ DELIVERY_FAILED ตรวจด้วย /fa audit'
+  mail:
+    review-header: '<#DDA54A>จดหมายรอตัดสิน <count> รายการ</#DDA54A> <gray>(ค้างกลางการส่งตอนเซิร์ฟดับ — ตรวจ inventory ผู้เล่นก่อน)'
+    review-line: '<white>#<id></white> <gray><player></gray> <#47C8D3><item></#47C8D3> <dark_gray><source> · <time>'
+    released: '<green>คืนจดหมาย #<id> ให้ผู้เล่นรับใหม่แล้ว'
+    voided: '<green>ปิดจดหมาย #<id> แล้ว (ถือว่าผู้เล่นได้ของไปแล้ว)'
+    not-review: '<red>จดหมาย #<id> ไม่ได้อยู่ในสถานะรอตัดสิน'
+    empty-hand: '<red>ถือของที่จะส่งไว้ในมือหลักก่อน'
+    serialized: '<red>ของในมือมี serial — ส่งผ่าน /fa item give เพื่อไม่ให้ serial ซ้ำ'
+    sent: '<green>ส่งสำเนาของในมือเข้ากล่องของ <player> แล้ว'
   player-offline: '<red><player> ไม่ได้ออนไลน์'
   player-unknown: '<red>ไม่พบผู้เล่น <player> ในทะเบียน (ต้องเคยเข้าเซิร์ฟนี้)'
   audit:

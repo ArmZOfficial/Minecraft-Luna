@@ -22,14 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessageKeysTest {
 
     private static final Pattern LITERAL = Pattern.compile(
-            "\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin)\\.[a-z0-9._-]+)\"");
+            "\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail)\\.[a-z0-9._-]+)\"");
 
     /** string ที่หน้าตาเหมือน key แต่เป็น action ID / ชนิด operation / audit action */
     private static final Set<String> NOT_MESSAGES = Set.of(
             "menu.main", "bank.main", "home.main", "land.main", "travel.rtp", "travel.spawn",
             "bank.deposit", "bank.withdraw", "death.loss", "economy.adjust", "admin.adjust",
+            "reward.daily", "reward.progress", "reward.online", "mail.main", "mail.give", "mail.release", "mail.void",
             // path ใน config.yml
-            "economy.currency.gold");
+            "economy.currency.gold", "rewards.daily");
 
     /** key ที่ประกอบขึ้นตอนรัน */
     private static final List<String> DYNAMIC = List.of(
@@ -38,7 +39,8 @@ class MessageKeysTest {
             "menu.main.land.name", "menu.main.land.lore", "menu.main.skins.name", "menu.main.skins.lore",
             "menu.main.exchange.name", "menu.main.exchange.lore", "menu.main.paint.name", "menu.main.paint.lore",
             "menu.main.upgrade.name", "menu.main.upgrade.lore", "menu.main.bank.name", "menu.main.bank.lore",
-            "menu.main.spawn.name", "menu.main.spawn.lore", "prefix");
+            "menu.main.spawn.name", "menu.main.spawn.lore", "menu.main.mail.name", "menu.main.mail.lore",
+            "reward.menu.day.loading", "reward.menu.day.done", "reward.menu.day.today", "reward.menu.day.later", "prefix");
 
     @Test
     void everyUsedKeyExists() throws IOException {

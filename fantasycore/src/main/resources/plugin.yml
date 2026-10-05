@@ -45,6 +45,15 @@ commands:
   land:
     description: ดูแปลงตรงที่ยืน
     permission: fantasy.land.use
+  rewards:
+    description: รับของรายวัน (รอบ 7 ครั้ง เวลาไทย)
+    usage: /rewards [claim]
+    aliases: [daily]
+    permission: fantasy.rewards
+  mail:
+    description: กล่องจดหมาย — ของที่ส่งเข้า inventory ไม่ได้
+    usage: /mail [all]
+    permission: fantasy.mail
   fantasycore:
     description: ข้อมูลปลั๊กอิน / ทางเข้าบริการสำหรับ NPC ของ Citizens
     usage: /fantasycore action <id>
@@ -65,6 +74,8 @@ permissions:
       fantasy.rtp.use: true
       fantasy.spawn: true
       fantasy.land.use: true
+      fantasy.rewards: true
+      fantasy.mail: true
   fantasy.bank.remote:
     description: ใช้ธนาคารได้จากทุกที่ (ปลดล็อกตามแรงค์)
     default: false

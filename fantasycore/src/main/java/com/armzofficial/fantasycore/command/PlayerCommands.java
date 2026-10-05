@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.OptionalLong;
 
 /**
- * คำสั่งผู้เล่น: /menu /bank /balance /sethome /home /delhome /homes /rtp /spawn /land
+ * คำสั่งผู้เล่น: /menu /bank /balance /sethome /home /delhome /homes /rtp /spawn /land /rewards /mail
  * ทุกคำสั่งเรียกบริการเดียวกับเมนู/NPC — ไม่มีเส้นทางข้ามกติกา
  */
 public final class PlayerCommands implements TabExecutor {
@@ -76,6 +76,23 @@ public final class PlayerCommands implements TabExecutor {
             }
             case "spawn" -> services.actions().open(player, "travel.spawn", ActionRegistry.Source.COMMAND);
             case "land" -> services.actions().open(player, "land.main", ActionRegistry.Source.COMMAND);
+            case "rewards" -> {
+                if (args.length >= 1 && args[0].equalsIgnoreCase("claim")) {
+                    services.rewards().claim(player, () -> {
+                    });
+                } else {
+                    services.actions().open(player, "reward.daily", ActionRegistry.Source.COMMAND);
+                }
+            }
+            case "mail" -> {
+                if (args.length >= 1 && args[0].equalsIgnoreCase("all")) {
+                    services.mail().claimAll(player, summary -> services.messages().send(player,
+                            summary.stoppedByFullInventory() ? "mail.claimed-partial" : "mail.claimed-all",
+                            Messages.p("count", summary.claimed()), Messages.p("left", summary.remaining())));
+                } else {
+                    services.actions().open(player, "mail.main", ActionRegistry.Source.COMMAND);
+                }
+            }
             default -> {
                 return false;
             }
@@ -150,6 +167,10 @@ public final class PlayerCommands implements TabExecutor {
         } else if (name.equals("bank") && args.length == 2) {
             options.add("all");
             services.settings().bankQuickAmounts().forEach(v -> options.add(String.valueOf(v)));
+        } else if (name.equals("rewards") && args.length == 1) {
+            options.add("claim");
+        } else if (name.equals("mail") && args.length == 1) {
+            options.add("all");
         } else if (name.equals("rtp") && args.length == 1) {
             options.addAll(services.settings().rtpProfiles().keySet());
         } else if (name.equals("sethome") && args.length == 2) {

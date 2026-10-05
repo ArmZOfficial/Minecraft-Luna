@@ -87,39 +87,51 @@ public final class EconomyStore {
      */
     public TxResult adjust(UUID player, Bucket bucket, long delta, Long expectedBefore, OpMeta meta, AuditEntry audit)
             throws SQLException {
+        return database.transaction(connection -> adjustIn(connection, player, bucket, delta, expectedBefore, meta, audit));
+    }
+
+    /**
+     * เหมือน {@link #adjust} แต่ทำใน transaction ที่ผู้เรียกเปิดอยู่แล้ว (เช่น รับรางวัลรายวัน: บันทึกสิทธิ์ + เงิน + จดหมาย พร้อมกัน)
+     * ผลที่ไม่ใช่ OK ไม่เขียนอะไรนอกจากสร้างบัญชีว่าง ผู้เรียกตัดสินใจเองว่าจะ rollback ทั้งชุดหรือไม่
+     */
+    public TxResult adjustIn(Connection connection, UUID player, Bucket bucket, long delta, Long expectedBefore,
+                             OpMeta meta, AuditEntry audit) throws SQLException {
         if (delta == 0 || delta == Long.MIN_VALUE) {
-            return new TxResult(TxResult.Status.INVALID_AMOUNT, 0, balances(player), meta.opId());
+            return new TxResult(TxResult.Status.INVALID_AMOUNT, 0, readBalances(connection, player), meta.opId());
         }
         if (Math.abs(delta) > maxTransaction) {
-            return new TxResult(TxResult.Status.LIMIT_EXCEEDED, 0, balances(player), meta.opId());
+            return new TxResult(TxResult.Status.LIMIT_EXCEEDED, 0, readBalances(connection, player), meta.opId());
         }
-        return database.transaction(connection -> {
-            if (operationExists(connection, meta.opId())) {
-                return new TxResult(TxResult.Status.DUPLICATE, 0, readBalances(connection, player), meta.opId());
-            }
-            long now = clock.getAsLong();
-            ensureAccount(connection, player, bucket, now);
-            long before = balance(connection, player, bucket);
-            if (expectedBefore != null && before != expectedBefore) {
-                return new TxResult(TxResult.Status.BALANCE_CHANGED, 0, readBalances(connection, player), meta.opId());
-            }
-            long after;
-            try {
-                after = Math.addExact(before, delta);
-            } catch (ArithmeticException overflow) {
-                return new TxResult(TxResult.Status.LIMIT_EXCEEDED, 0, readBalances(connection, player), meta.opId());
-            }
-            if (after < 0) {
-                return new TxResult(TxResult.Status.INSUFFICIENT_FUNDS, 0, readBalances(connection, player), meta.opId());
-            }
-            setBalance(connection, player, bucket, after, now);
-            insertOperation(connection, meta, player, now);
-            insertLedger(connection, meta, player, bucket, delta, after, now);
-            if (audit != null) {
-                AuditStore.insert(connection, audit, meta.opId(), now);
-            }
-            return new TxResult(TxResult.Status.OK, Math.abs(delta), readBalances(connection, player), meta.opId());
-        });
+        if (operationExists(connection, meta.opId())) {
+            return new TxResult(TxResult.Status.DUPLICATE, 0, readBalances(connection, player), meta.opId());
+        }
+        long now = clock.getAsLong();
+        ensureAccount(connection, player, bucket, now);
+        long before = balance(connection, player, bucket);
+        if (expectedBefore != null && before != expectedBefore) {
+            return new TxResult(TxResult.Status.BALANCE_CHANGED, 0, readBalances(connection, player), meta.opId());
+        }
+        long after;
+        try {
+            after = Math.addExact(before, delta);
+        } catch (ArithmeticException overflow) {
+            return new TxResult(TxResult.Status.LIMIT_EXCEEDED, 0, readBalances(connection, player), meta.opId());
+        }
+        if (after < 0) {
+            return new TxResult(TxResult.Status.INSUFFICIENT_FUNDS, 0, readBalances(connection, player), meta.opId());
+        }
+        setBalance(connection, player, bucket, after, now);
+        insertOperation(connection, meta, player, now);
+        insertLedger(connection, meta, player, bucket, delta, after, now);
+        if (audit != null) {
+            AuditStore.insert(connection, audit, meta.opId(), now);
+        }
+        return new TxResult(TxResult.Status.OK, Math.abs(delta), readBalances(connection, player), meta.opId());
+    }
+
+    /** อ่านยอดภายใน transaction ที่เปิดอยู่ */
+    public Balances balancesIn(Connection connection, UUID player) throws SQLException {
+        return readBalances(connection, player);
     }
 
     /** หักทองที่พกตามเปอร์เซ็นต์เมื่อตาย; เงินฝากและเงินแดงไม่ถูกแตะ */

@@ -6,8 +6,11 @@ import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.home.HomeService;
+import com.armzofficial.fantasycore.hook.CitizensBridge;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.mail.MailService;
+import com.armzofficial.fantasycore.reward.RewardService;
 import com.armzofficial.fantasycore.station.ActionRegistry;
 import com.armzofficial.fantasycore.station.StationService;
 import com.armzofficial.fantasycore.storage.Database;
@@ -17,6 +20,8 @@ import com.armzofficial.fantasycore.travel.RtpService;
 import com.armzofficial.fantasycore.travel.TeleportService;
 import com.armzofficial.fantasycore.util.Tasks;
 import com.armzofficial.fantasycore.world.WorldService;
+
+import java.util.Optional;
 
 /** บริการทั้งหมดที่สร้างตอน onEnable — ส่งต่อให้คำสั่ง/เมนูแทนการใช้ static */
 public record Services(
@@ -37,5 +42,8 @@ public record Services(
         ItemTemplateService items,
         ItemInstanceStore itemInstances,
         StationService stations,
-        ActionRegistry actions) {
+        ActionRegistry actions,
+        MailService mail,
+        RewardService rewards,
+        Optional<CitizensBridge> citizens) {
 }

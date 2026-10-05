@@ -113,6 +113,33 @@ public final class Migrations {
                         created_at  INTEGER NOT NULL
                     )""",
                     "CREATE INDEX travel_player ON travel_receipts(player_uuid, kind, created_at DESC)"
+            },
+            // version 2 — กล่องจดหมาย + สิทธิ์รับรางวัล (CASUAL-SURVIVAL §4, SERVER-SYSTEMS §8 Mailbox)
+            new String[]{
+                    """
+                    CREATE TABLE mail (
+                        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                        player_uuid TEXT NOT NULL,
+                        source      TEXT NOT NULL,
+                        source_ref  TEXT,
+                        label       TEXT NOT NULL,
+                        item_data   BLOB NOT NULL,
+                        state       TEXT NOT NULL CHECK (state IN ('PENDING','CLAIMING','CLAIMED','REVIEW','VOID')),
+                        claim_op    TEXT,
+                        created_at  INTEGER NOT NULL,
+                        updated_at  INTEGER NOT NULL
+                    )""",
+                    "CREATE INDEX mail_player ON mail(player_uuid, state, id)",
+                    """
+                    CREATE TABLE reward_claims (
+                        player_uuid TEXT NOT NULL,
+                        program     TEXT NOT NULL,
+                        period      TEXT NOT NULL,
+                        cycle_index INTEGER NOT NULL,
+                        op_id       TEXT NOT NULL UNIQUE,
+                        created_at  INTEGER NOT NULL,
+                        PRIMARY KEY (player_uuid, program, period)
+                    )"""
             }
     );
 

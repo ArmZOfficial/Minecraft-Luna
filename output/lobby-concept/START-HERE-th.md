@@ -23,7 +23,7 @@
 16. [Next.js / React / Node / PostgreSQL](NEXT-POSTGRES-IMPLEMENTATION-th.md) — source เว็บปัจจุบัน animation ฐานข้อมูลและผลทดสอบ
 17. [ชุดระบบตามภาพเพิ่มเติม](CASUAL-SURVIVAL-SYSTEMS-th.md) — RTP, daily, หินกันบ้าน, สกินไอเทม, เควสแลกของ, วาดรูป, อัปเกรดและตั้งบ้าน
 18. [ProtectionStones 5 ระดับ](PROTECTIONSTONES-TIERS-th.md) — ขนาดจริง 11 × 11 ถึง 81 × 81 ความสูง ราคา สมาชิกและ recovery
-19. [FantasyCore v0.1](../../fantasycore/README-th.md) — ปลั๊กอินแกนที่เขียนแล้ว: เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP
+19. [FantasyCore v0.2](../../fantasycore/README-th.md) — ปลั๊กอินแกนที่เขียนแล้ว: เงิน/ธนาคาร/ตาย/เมนู/NPC (+Citizens)/บ้าน/RTP/กล่องจดหมาย/รางวัลรายวัน
 20. [เซิร์ฟ staging + checklist](../../server/README-th.md) — Paper 26.2, Java 25, ปลั๊กอินที่ล็อกเวอร์ชัน และรายการทดสอบในเกม
 
 ## ข้อเลือกสำคัญ
@@ -45,7 +45,7 @@
 เชื่อม Blockbench MCP ในเครื่องและเพิ่ม config สำหรับ Antigravity แล้ว แต่ Antigravity ต้อง refresh server เพื่อโหลด config ใหม่
 
 ฝั่งเซิร์ฟเริ่มลงมือแล้ว (5 ต.ค. 2026): backend ล็อกเป็น **Paper 26.2 build 129 + Java 25** (26.3 ยังเป็น experimental)
-และเขียน FantasyCore v0.1 ตามลำดับพัฒนาข้อ 1–3 + บ้าน/RTP — compile และ unit test ผ่าน แต่ **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง**
+และเขียน FantasyCore ตามลำดับพัฒนาข้อ 1–3 + บ้าน/RTP (v0.1) แล้วเพิ่มกล่องจดหมาย/รับของรายวัน/ผูก Citizens (v0.2) — compile และ unit test ผ่าน แต่ **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง**
 ProtectionStones 2.10.6 ยังไม่ประกาศรองรับ 26.x ต้องยืนยันบน staging ก่อน
 ยังไม่ได้แก้โลกเมืองจริง
 เว็บยังไม่เชื่อมแผนที่สด ผู้ให้บริการชำระเงิน หรือคิวส่งของเข้าเกม

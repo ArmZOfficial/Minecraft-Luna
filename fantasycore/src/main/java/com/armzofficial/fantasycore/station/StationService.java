@@ -148,6 +148,45 @@ public final class StationService {
         });
     }
 
+    /** action ที่ผูกกับ NPC ของ Citizens (ตาม UUID ของ NPC ไม่ใช่ entity) */
+    public Optional<String> actionOfCitizens(UUID npcUuid) {
+        for (StationRecord record : records) {
+            if (record.kind() == StationRecord.Kind.CITIZENS && npcUuid.equals(record.entityId())) {
+                return Optional.of(record.actionId());
+            }
+        }
+        return Optional.empty();
+    }
+
+    /** ผูก NPC ของ Citizens ที่แอดมินมองอยู่กับ action — ตำแหน่ง ณ ตอนผูกใช้ตรวจระยะของบริการที่ต้องอยู่ที่สถานี */
+    public CompletableFuture<StationRecord> bindCitizens(Player admin, Entity entity, UUID npcUuid, String npcName,
+                                                         String actionId) {
+        Location location = entity.getLocation();
+        World world = location.getWorld();
+        StationRecord record = new StationRecord(UUID.randomUUID(), actionId, StationRecord.Kind.CITIZENS, world.getUID(),
+                world.getName(), location.getX(), location.getY(), location.getZ(), location.getYaw(), npcUuid, npcName,
+                admin.getUniqueId().toString(), System.currentTimeMillis());
+        AuditEntry audit = new AuditEntry(admin.getUniqueId().toString(), admin.getName(), "station.bind", actionId,
+                "Citizens " + npcName + " (" + npcUuid + ") @ " + world.getName() + " " + location.getBlockX() + ","
+                        + location.getBlockY() + "," + location.getBlockZ(), null);
+        return database.async(() -> {
+            store.replaceCitizensBinding(record, audit);
+            records.removeIf(r -> r.kind() == StationRecord.Kind.CITIZENS && npcUuid.equals(r.entityId()));
+            records.add(record);
+            return record;
+        });
+    }
+
+    public CompletableFuture<Boolean> unbindCitizens(Player admin, UUID npcUuid) {
+        AuditEntry audit = new AuditEntry(admin.getUniqueId().toString(), admin.getName(), "station.unbind",
+                npcUuid.toString(), null, null);
+        return database.async(() -> {
+            int removed = store.deleteCitizensBinding(npcUuid, audit, System.currentTimeMillis());
+            records.removeIf(r -> r.kind() == StationRecord.Kind.CITIZENS && npcUuid.equals(r.entityId()));
+            return removed > 0;
+        });
+    }
+
     /** ลบ NPC ที่แอดมินมองอยู่ */
     public CompletableFuture<Boolean> removeNpc(Player admin, Entity entity) {
         Optional<UUID> stationId = stationIdOf(entity);

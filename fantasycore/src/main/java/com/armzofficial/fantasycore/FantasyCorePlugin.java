@@ -12,13 +12,18 @@ import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.economy.DeathListener;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.economy.EconomyStore;
+import com.armzofficial.fantasycore.hook.CitizensBridge;
 import com.armzofficial.fantasycore.hook.PlaceholderHook;
 import com.armzofficial.fantasycore.hook.VaultHook;
 import com.armzofficial.fantasycore.home.HomeService;
 import com.armzofficial.fantasycore.home.HomeStore;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.mail.MailService;
+import com.armzofficial.fantasycore.mail.MailStore;
 import com.armzofficial.fantasycore.menu.MenuListener;
+import com.armzofficial.fantasycore.reward.RewardService;
+import com.armzofficial.fantasycore.reward.RewardStore;
 import com.armzofficial.fantasycore.station.ActionRegistry;
 import com.armzofficial.fantasycore.station.StationListener;
 import com.armzofficial.fantasycore.station.StationService;
@@ -41,6 +46,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.logging.Level;
 
 /**
@@ -78,8 +84,25 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
         PlayerStore players = new PlayerStore(database);
         AuditStore audit = new AuditStore(database, System::currentTimeMillis);
-        EconomyService economy = new EconomyService(database,
-                new EconomyStore(database, System::currentTimeMillis, settings.maxTransaction()));
+        EconomyStore economyStore = new EconomyStore(database, System::currentTimeMillis, settings.maxTransaction());
+        EconomyService economy = new EconomyService(database, economyStore);
+        MailStore mailStore = new MailStore(database, System::currentTimeMillis);
+        try {
+            int interrupted = mailStore.quarantineInterrupted();
+            if (interrupted > 0) {
+                getLogger().warning("จดหมาย " + interrupted + " รายการค้างกลางการส่งจากรอบก่อน → ย้ายไป REVIEW (ตรวจด้วย /fa mail review)");
+            }
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "ตรวจกล่องจดหมายค้างไม่ได้ — ปิด FantasyCore", e);
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        MailService mail = new MailService(getLogger(), messages, mailStore, database, tasks);
+        RewardService rewards = new RewardService(getConfig().getConfigurationSection("rewards.daily"), messages,
+                new RewardStore(database, economyStore, mailStore, System::currentTimeMillis), mail, database, tasks);
+        for (String problem : rewards.problems()) {
+            getLogger().warning("rewards.daily: " + problem);
+        }
 
         ClaimAdapter claims = detectClaims(settings);
         getLogger().info("ระบบที่ดิน: " + claims.name());
@@ -95,9 +118,11 @@ public final class FantasyCorePlugin extends JavaPlugin {
         ItemTemplateService items = new ItemTemplateService(this);
         StationService stations = new StationService(this, database, new StationStore(database), settings.stationRadius());
         ActionRegistry actions = new ActionRegistry(() -> services);
+        Optional<CitizensBridge> citizens = CitizensBridge.detect(getLogger());
+        citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, citizens);
 
         tasks.then(stations.load(), (count, error) -> {
             if (count != null) {
@@ -105,11 +130,12 @@ public final class FantasyCorePlugin extends JavaPlugin {
             }
         });
 
-        register(combat, teleports, new MenuListener(this), new StationListener(stations, actions),
+        register(combat, teleports, new MenuListener(this), new StationListener(stations, actions, citizens.orElse(null)),
                 new DeathListener(settings, messages, economy, tasks), new SessionListener(services));
 
         PlayerCommands playerCommands = new PlayerCommands(services);
-        for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land"}) {
+        for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
+                "rewards", "mail"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));

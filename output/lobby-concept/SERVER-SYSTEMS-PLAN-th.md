@@ -2,7 +2,7 @@
 
 ตรวจเอกสารทางการ: 5 ตุลาคม 2026
 ขอบเขตงานฉบับนี้: แผนระบบและสเปกพัฒนา
-ความคืบหน้า 5 ต.ค. 2026: ข้อ 1–3 ของ §9 มีโค้ดแล้วใน [FantasyCore v0.1](../../fantasycore/README-th.md) และชุด [staging](../../server/README-th.md)
+ความคืบหน้า 5 ต.ค. 2026: ข้อ 1–3 ของ §9 และ mailbox ของข้อ 4 มีโค้ดแล้วใน [FantasyCore](../../fantasycore/README-th.md) และชุด [staging](../../server/README-th.md)
 backend ที่ล็อกแบบ candidate คือ Paper 26.2 #129 + Java 25 — ยังไม่ผ่านการทดสอบในเกม จึงยังไม่นับเป็น release-ready
 
 ## 1. ข้อสรุปที่ใช้สร้างเซิร์ฟเวอร์

@@ -30,7 +30,6 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -69,6 +68,7 @@ public final class AdminCommand implements TabExecutor {
             case "confirm" -> confirm(sender, args);
             case "npc" -> npc(sender, args);
             case "item" -> item(sender, args);
+            case "mail" -> mail(sender, args);
             case "audit" -> audit(sender, args);
             default -> m.send(sender, "admin.help");
         }
@@ -111,8 +111,19 @@ public final class AdminCommand implements TabExecutor {
                 "PlaceholderAPI", "%fantasycore_gold% / _bank / _red");
         line(sender, Bukkit.getPluginManager().isPluginEnabled("ViaVersion") ? "ready" : "missing",
                 "ViaVersion", Bukkit.getPluginManager().isPluginEnabled("ViaBackwards") ? "+ ViaBackwards" : "ไม่มี ViaBackwards (client เก่าเข้าไม่ได้)");
-        line(sender, Bukkit.getPluginManager().isPluginEnabled("Citizens") ? "ready" : "off",
-                "Citizens", "ไม่บังคับใน v0.1 — ใช้ NPC ของ Core ได้");
+        if (services.citizens().isPresent()) {
+            line(sender, "ready", "Citizens", "ผูก NPC กับบริการได้ด้วย /fa npc bind <action>");
+        } else if (Bukkit.getPluginManager().isPluginEnabled("Citizens")) {
+            line(sender, "fix", "Citizens", "เปิดอยู่แต่ API ไม่ตรงรุ่นที่รองรับ — ดู log ตอนเปิดเซิร์ฟ");
+        } else {
+            line(sender, "off", "Citizens", "ไม่บังคับ — ใช้ NPC ของ Core ได้");
+        }
+        line(sender, services.rewards().enabled() && services.rewards().problems().isEmpty() ? "ready" : "fix",
+                "รางวัลรายวัน", services.rewards().cycle().size() + " ครั้ง/รอบ · วันนี้ " + com.armzofficial.fantasycore.reward.RewardService.period()
+                        + " (เวลาไทย)");
+        for (String problem : services.rewards().problems()) {
+            line(sender, "fix", "rewards.daily", problem);
+        }
         for (var spec : services.settings().worlds().values()) {
             World world = Bukkit.getWorld(spec.name());
             line(sender, world != null ? "ready" : "broken", "โลก " + spec.name(), world == null ? "ไม่ได้โหลด"
@@ -129,6 +140,12 @@ public final class AdminCommand implements TabExecutor {
         }
         line(sender, "ready", "จุดบริการ", services.stations().records().size() + " จุด (radius "
                 + services.stations().radius() + ")");
+        services.tasks().then(services.database().async(() -> services.mail().store().countReview()), (count, error) -> {
+            if (error == null) {
+                line(sender, count == 0 ? "ready" : "fix", "กล่องจดหมาย",
+                        count == 0 ? "ไม่มีรายการค้างตรวจ" : count + " รายการรอทีมงานตัดสิน — /fa mail review");
+            }
+        });
     }
 
     private void line(CommandSender sender, String status, String name, String detail) {
@@ -309,6 +326,53 @@ public final class AdminCommand implements TabExecutor {
                 services.tasks().then(services.stations().removeNpc(player, target), (ok, error) ->
                         m.send(sender, error == null && Boolean.TRUE.equals(ok) ? "admin.npc.removed" : "common.storage-error"));
             }
+            case "bind" -> {
+                if (args.length < 3) {
+                    m.send(sender, "admin.usage.npc");
+                    return;
+                }
+                String action = args[2].toLowerCase(Locale.ROOT);
+                if (!ActionRegistry.ID_FORMAT.matcher(action).matches() || !services.actions().isKnown(action)) {
+                    m.send(sender, "admin.npc.unknown-action", Messages.p("action", action),
+                            Messages.p("known", String.join(", ", services.actions().knownIds())));
+                    return;
+                }
+                if (services.citizens().isEmpty()) {
+                    m.send(sender, "admin.npc.no-citizens");
+                    return;
+                }
+                Entity target = player.getTargetEntity(6);
+                var npc = services.citizens().get().npcOf(target);
+                if (npc.isEmpty()) {
+                    m.send(sender, "admin.npc.not-citizens");
+                    return;
+                }
+                services.tasks().then(services.stations().bindCitizens(player, target, npc.get().uuid(), npc.get().name(), action),
+                        (record, error) -> {
+                            if (error != null) {
+                                m.send(sender, "common.storage-error");
+                                return;
+                            }
+                            m.send(sender, "admin.npc.bound", Messages.p("npc", npc.get().name()),
+                                    Messages.p("npcid", npc.get().id()), Messages.p("action", action),
+                                    Messages.p("connected", services.actions().isImplemented(action) ? "พร้อมใช้" : "ยังไม่เชื่อมระบบ"));
+                        });
+            }
+            case "unbind" -> {
+                if (services.citizens().isEmpty()) {
+                    m.send(sender, "admin.npc.no-citizens");
+                    return;
+                }
+                var npc = services.citizens().get().npcOf(player.getTargetEntity(6));
+                if (npc.isEmpty()) {
+                    m.send(sender, "admin.npc.not-citizens");
+                    return;
+                }
+                services.tasks().then(services.stations().unbindCitizens(player, npc.get().uuid()), (ok, error) ->
+                        m.send(sender, error != null ? "common.storage-error"
+                                : Boolean.TRUE.equals(ok) ? "admin.npc.unbound" : "admin.npc.not-bound",
+                                Messages.p("npc", npc.get().name())));
+            }
             case "unanchor" -> services.tasks().then(services.stations().removeNearestAnchor(player), (ok, error) ->
                     m.send(sender, error != null ? "common.storage-error"
                             : Boolean.TRUE.equals(ok) ? "admin.npc.unanchored" : "admin.npc.no-anchor"));
@@ -378,13 +442,9 @@ public final class AdminCommand implements TabExecutor {
         }
     }
 
-    /** ออกไอเทม: ตรวจช่องว่าง → บันทึก serial → ใส่ inventory → อัปเดตสถานะ (ไม่โยนของลงพื้น) */
+    /** ออกไอเทม: บันทึก serial → ใส่ inventory หรือกล่องจดหมายถ้าเต็ม → อัปเดตสถานะ (ไม่โยนของลงพื้น) */
     private void give(CommandSender sender, Player target, ItemTemplate template) {
         Messages m = services.messages();
-        if (target.getInventory().firstEmpty() == -1) {
-            m.send(sender, "admin.item.inventory-full", Messages.p("player", target.getName()));
-            return;
-        }
         UUID serial = template.serialized() ? UUID.randomUUID() : null;
         String opId = OpMeta.newOpId();
         UUID targetId = target.getUniqueId();
@@ -407,22 +467,123 @@ public final class AdminCommand implements TabExecutor {
                 m.send(sender, "common.storage-error");
                 return;
             }
+            ItemStack stack = services.items().create(template, serial);
             Player online = Bukkit.getPlayer(targetId);
-            HashMap<Integer, ItemStack> leftover = online == null ? null
-                    : online.getInventory().addItem(services.items().create(template, serial));
-            boolean delivered = online != null && leftover.isEmpty();
-            if (serial != null) {
-                String state = delivered ? "DELIVERED" : "DELIVERY_FAILED";
-                services.tasks().then(services.database().async(() -> {
-                    services.itemInstances().setState(serial, state, System.currentTimeMillis());
-                    return null;
-                }), (x, e) -> {
+            java.util.function.Consumer<Integer> finish = mailed -> {
+                String state = mailed == null || mailed < 0 ? "DELIVERY_FAILED" : mailed > 0 ? "MAILED" : "DELIVERED";
+                if (serial != null) {
+                    services.tasks().then(services.database().async(() -> {
+                        services.itemInstances().setState(serial, state, System.currentTimeMillis());
+                        return null;
+                    }), (x, e) -> {
+                    });
+                }
+                String key = switch (state) {
+                    case "DELIVERED" -> "admin.item.given";
+                    case "MAILED" -> "admin.item.mailed";
+                    default -> "admin.item.delivery-failed";
+                };
+                m.send(sender, key, Messages.p("player", target.getName()), Messages.p("id", template.id()),
+                        Messages.p("serial", serial == null ? "-" : serial.toString().substring(0, 8)));
+            };
+            if (online == null) {
+                services.mail().mailToPlayer(targetId, List.of(stack), "admin.item", opId, null, null, finish);
+            } else {
+                services.mail().deliverOrMail(online, List.of(stack), "admin.item", opId, null, null, finish);
+            }
+        });
+    }
+
+    // ------------------------------------------------------------ mail
+
+    private void mail(CommandSender sender, String[] args) {
+        Messages m = services.messages();
+        String sub = args.length < 2 ? "review" : args[1].toLowerCase(Locale.ROOT);
+        switch (sub) {
+            case "review" -> services.tasks().then(services.database().async(() -> services.mail().store().review(20)),
+                    (rows, error) -> {
+                        if (error != null) {
+                            m.send(sender, "common.storage-error");
+                            return;
+                        }
+                        m.send(sender, "admin.mail.review-header", Messages.p("count", rows.size()));
+                        for (var row : rows) {
+                            sender.sendMessage(m.plain("admin.mail.review-line", Messages.p("id", row.id()),
+                                    Messages.p("player", row.player()), Messages.p("item", row.label()),
+                                    Messages.p("source", row.source()),
+                                    Messages.p("time", TIME.format(Instant.ofEpochMilli(row.createdAt())))));
+                        }
+                    });
+            case "release", "void" -> {
+                if (!sender.hasPermission("fantasyadmin.economy.adjust")) {
+                    m.send(sender, "common.no-permission");
+                    return;
+                }
+                if (args.length < 4) {
+                    m.send(sender, "admin.usage.mail");
+                    return;
+                }
+                long id;
+                try {
+                    id = Long.parseLong(args[2]);
+                } catch (NumberFormatException e) {
+                    m.send(sender, "admin.usage.mail");
+                    return;
+                }
+                String reason = String.join(" ", Arrays.copyOfRange(args, 3, args.length)).trim();
+                if (reason.length() < 3) {
+                    m.send(sender, "admin.reason-required");
+                    return;
+                }
+                boolean release = sub.equals("release");
+                UUID actor = sender instanceof Player p ? p.getUniqueId() : null;
+                AuditEntry audit = new AuditEntry(actor == null ? null : actor.toString(), sender.getName(),
+                        release ? "mail.release" : "mail.void", "mail#" + id, null, reason);
+                services.tasks().then(services.database().async(() -> services.mail().store().resolveReview(id, release, audit)),
+                        (ok, error) -> m.send(sender, error != null ? "common.storage-error"
+                                : Boolean.TRUE.equals(ok) ? (release ? "admin.mail.released" : "admin.mail.voided")
+                                : "admin.mail.not-review", Messages.p("id", id)));
+            }
+            case "give" -> {
+                if (!sender.hasPermission("fantasyadmin.content.edit")) {
+                    m.send(sender, "common.no-permission");
+                    return;
+                }
+                if (!(sender instanceof Player player)) {
+                    m.send(sender, "common.players-only");
+                    return;
+                }
+                if (args.length < 4) {
+                    m.send(sender, "admin.usage.mail");
+                    return;
+                }
+                ItemStack held = player.getInventory().getItemInMainHand();
+                if (held.isEmpty()) {
+                    m.send(sender, "admin.mail.empty-hand");
+                    return;
+                }
+                if (services.items().identify(held).map(i -> i.serial() != null).orElse(false)) {
+                    // ของที่มี serial ต้องออกผ่าน /fa item give เพื่อไม่ให้ serial ซ้ำ
+                    m.send(sender, "admin.mail.serialized");
+                    return;
+                }
+                String reason = String.join(" ", Arrays.copyOfRange(args, 3, args.length)).trim();
+                if (reason.length() < 3) {
+                    m.send(sender, "admin.reason-required");
+                    return;
+                }
+                ItemStack copy = held.clone();
+                resolve(sender, args[2], known -> {
+                    String opId = OpMeta.newOpId();
+                    AuditEntry audit = new AuditEntry(player.getUniqueId().toString(), player.getName(), "mail.give",
+                            known.uuid().toString(), com.armzofficial.fantasycore.mail.MailService.describe(copy), reason);
+                    services.mail().mailToPlayer(known.uuid(), List.of(copy), "admin.mail", opId, null, audit, count ->
+                            m.send(sender, count != null && count > 0 ? "admin.mail.sent" : "common.storage-error",
+                                    Messages.p("player", known.name())));
                 });
             }
-            m.send(sender, delivered ? "admin.item.given" : "admin.item.delivery-failed",
-                    Messages.p("player", target.getName()), Messages.p("id", template.id()),
-                    Messages.p("serial", serial == null ? "-" : serial.toString().substring(0, 8)));
-        });
+            default -> m.send(sender, "admin.usage.mail");
+        }
     }
 
     // ------------------------------------------------------------ audit
@@ -482,11 +643,12 @@ public final class AdminCommand implements TabExecutor {
                                       String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "audit"));
+            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "audit"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
-                case "npc" -> options.addAll(List.of("spawn", "anchor", "remove", "unanchor", "list"));
+                case "npc" -> options.addAll(List.of("spawn", "bind", "unbind", "anchor", "remove", "unanchor", "list"));
+                case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {
@@ -495,8 +657,14 @@ public final class AdminCommand implements TabExecutor {
         } else if (args.length == 3) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco", "item" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
+                case "mail" -> {
+                    if (args[1].equalsIgnoreCase("give")) {
+                        Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
+                    }
+                }
                 case "npc" -> {
-                    if (args[1].equalsIgnoreCase("spawn") || args[1].equalsIgnoreCase("anchor")) {
+                    if (args[1].equalsIgnoreCase("spawn") || args[1].equalsIgnoreCase("anchor")
+                            || args[1].equalsIgnoreCase("bind")) {
                         options.addAll(services.actions().knownIds());
                     }
                 }

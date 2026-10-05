@@ -1,5 +1,6 @@
 package com.armzofficial.fantasycore;
 
+import com.armzofficial.fantasycore.config.Messages;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -36,6 +37,19 @@ public final class SessionListener implements Listener {
         });
         services.tasks().then(services.homes().list(id), (ignored, error) -> {
         });
+        // แจ้งของค้างในกล่องและรางวัลที่รับได้วันนี้ (ไม่แจกอัตโนมัติ — ผู้เล่นกดรับเอง)
+        services.tasks().then(services.mail().countPending(id), (count, error) -> {
+            if (error == null && count != null && count > 0 && player.isOnline()) {
+                services.messages().send(player, "mail.join-notice", Messages.p("count", count));
+            }
+        });
+        if (services.rewards().enabled() && player.hasPermission("fantasy.rewards")) {
+            services.tasks().then(services.rewards().status(id), (status, error) -> {
+                if (error == null && status != null && !status.claimedThisPeriod() && player.isOnline()) {
+                    services.messages().send(player, "reward.join-notice");
+                }
+            });
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
