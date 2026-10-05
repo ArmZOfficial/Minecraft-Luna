@@ -1,0 +1,51 @@
+{
+  "id": "item_aether_halo_v2",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 35,
+  "runtime_tested": false,
+  "reference": "assets/references/item-aether-halo.png",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": "item_aether_halo",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_items_v2.py",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/aether_halo_v2",
+  "gui_extent_units": [
+    -7.94,
+    7.94,
+    -5.32,
+    5.52
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/item_aether_halo_v2.json": "6ff5c6181ba91396031f52f22f297b1dec173c0bc9ee91257a6a7f0c9ac74ca0",
+    "output/lobby-concept/assets/models/item_aether_halo_v2.bbmodel": "d2db982c25e5115686857e9f75ebe58c7d9c759541a15977ef5751a2a8f6154c",
+    "output/lobby-concept/assets/models/item_aether_halo_v2.png": "8b0634131379cfb1ff8db44db083ed035e9359457054862627938ba1382da577",
+    "output/lobby-concept/assets/models/item_aether_halo_v2-display.png": "f5957edc4c62855737d76ff7003999e7fcc67527e3483ff9e66075553e27e917",
+    "output/lobby-concept/assets/models/item_aether_halo_v2-preview.png": "583bb16cf47000210946de02b57234a355b19b7cb9567529f5bd2b4074965739",
+    "output/lobby-concept/assets/models/item_aether_halo_v2-front.png": "4e190990037f8568e17bc80b3a1f0adde21cb566099e1321f76d36b3aa3ac80d",
+    "output/lobby-concept/assets/models/item_aether_halo_v2-right.png": "ca21561499ae78ae54f40faf5301079a7c6f5f7c8fe3f2dc5e19685c5d8ed44e",
+    "output/lobby-concept/assets/models/item_aether_halo_v2-top.png": "b3cc73e583d1fbea3c250a9ef1a36526dcc9bfa38bd35daa0657329dc3575f1a"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "v1 is kept unchanged for comparison"
+  ]
+}

@@ -33,8 +33,8 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 | smith ✅ | assets/references/npc-rune-smith.png | npc_rune_smith_v2.bbmodel | ทำแล้ว: `tools/build_rune_smith.py` → `preview_rune_smith.py` → `manifest_rune_smith.py` → `verify_rune_smith.py`; ขวามือ=+X (โมเดลหันทิศเหนือ/−Z) |
 | quest ✅ | assets/references/npc-quest-warden.png | npc_quest_warden_v2.bbmodel | ทำแล้ว: `tools/build_quest_warden.py` → `preview_quest_warden.py` → `manifest_quest_warden.py` → `verify_quest_warden.py` |
 | mage ✅ | assets/references/npc-portal-mage.png | npc_portal_mage_v2.bbmodel | ทำแล้ว: hood ใต้hi_head, staff_socket, ทุกท่า≤2.66บล็อก; `tools/build_portal_mage.py` → `preview_portal_mage.py` → `manifest_portal_mage.py` → `verify_portal_mage.py` |
-| halo | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | horizontal square ring, all display contexts, legacy headpreview |
-| sword | assets/references/item-runeblade.png | item_runeblade_v2.bbmodel/JSON | stepped pointedtip, groove, modestguard, hand/GUI/ground/mirror |
+| halo ✅ | assets/references/item-aether-halo.png | item_aether_halo_v2.bbmodel/JSON | ทำแล้ว: display8context; legacy 1.16.5 ยังต้องทดสอบ; `tools/build_luma_items_v2.py halo` → `preview_luma_items_v2.py` → `verify_luma_items_v2.py --write-manifest` |
+| sword ✅ | assets/references/item-runeblade.png | item_runeblade_v2.bbmodel/JSON | ทำแล้ว: ปลายขั้น/ร่องรูน/การ์ด, display8context รวมมือซ้าย(mirror); `tools/build_luma_items_v2.py runeblade` |
 
 ## ข้อกำหนดไฟล์
 

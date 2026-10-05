@@ -179,5 +179,53 @@
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_portal_mage"
+  },
+  {
+    "id": "item_runeblade_v2",
+    "format": "java_block",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [],
+    "cubes": 25,
+    "runtime_tested": false,
+    "reference": "assets/references/item-runeblade.png",
+    "texture": [
+      128,
+      128
+    ],
+    "display_contexts": [
+      "firstperson_lefthand",
+      "firstperson_righthand",
+      "fixed",
+      "ground",
+      "gui",
+      "head",
+      "thirdperson_lefthand",
+      "thirdperson_righthand"
+    ],
+    "supersedes": "item_runeblade"
+  },
+  {
+    "id": "item_aether_halo_v2",
+    "format": "java_block",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [],
+    "cubes": 35,
+    "runtime_tested": false,
+    "reference": "assets/references/item-aether-halo.png",
+    "texture": [
+      128,
+      128
+    ],
+    "display_contexts": [
+      "firstperson_lefthand",
+      "firstperson_righthand",
+      "fixed",
+      "ground",
+      "gui",
+      "head",
+      "thirdperson_lefthand",
+      "thirdperson_righthand"
+    ],
+    "supersedes": "item_aether_halo"
   }
 ]

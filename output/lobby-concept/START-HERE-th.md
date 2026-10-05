@@ -82,3 +82,4 @@ GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร�
 32. [ช่างตีเหล็กv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 171cubes/16bones/4animations, ตีค้อนtick11/25, offlinegateผ่าน; เกมจริงยังรอ
 33. [ผู้ดูแลเควสv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 123cubes/17bones/4animations, ม้วนเควสติดมือทุกเฟรม, offlinegateผ่าน; เกมจริงยังรอ
 34. [ผู้ดูแลประตูv2ลงรายละเอียดเต็ม](ASSET-GALLERY-th.md) — 124cubes/18bones/4animations, คทาไม่ชนหัว, ทุกท่า≤2.66บล็อก, offlinegateผ่าน; เกมจริงยังรอ
+35. [ไอเทมv2 รูนดาบ+Halo](ASSET-GALLERY-th.md) — Java JSON `luma:` texture, display8context, ไอคอนGUIไม่ล้นช่อง, offlinegateผ่าน; packจริงยังรอ

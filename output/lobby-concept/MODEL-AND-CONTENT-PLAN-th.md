@@ -96,8 +96,8 @@ base material ของ legacy hat ต้องเลือกและทดส
 | npc_rune_smith | assets/models/npc_rune_smith.bbmodel | idle/greet/hammer | v2 ทำแล้ว: npc_rune_smith_v2.bbmodel 171cubes/16bones + craft_success; เหลือruntime QA |
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | v2 ทำแล้ว: npc_quest_warden_v2.bbmodel 123cubes/17bones + point_direction; เหลือruntime QA |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | v2 ทำแล้ว: npc_portal_mage_v2.bbmodel 124cubes/18bones + open_portal, สูงสุด2.66บล็อก; เหลือruntime QA |
-| item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | modern/legacy mapping, head/GUI transforms, UVละเอียด |
-| item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | ปรับปลายดาบ/guard, GUI/มือซ้ายขวา, namespace texture |
+| item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; เหลือ modern/legacy mapping ใน pack จริง |
+| item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_runeblade_v2 25 elements + display8context + `luma:` texture; เหลือทดสอบใน pack จริง |
 
 JSON จาก Blockbench 5.2.1 default Java 26.3 เป็น source export เท่านั้น ก่อนใช้ pack legacy ต้อง compile profile ให้ไม่มี field ที่ client เก่าไม่รับ เปลี่ยน texture path เป็น `luma:item/<id>` และทดสอบ อย่าโยน JSON เดียวใส่ทุก pack
 preview PNG เป็น render จากโมเดลจริง แยกจากภาพ reference; `manifest.json` บันทึก runtime_tested=false
@@ -183,5 +183,5 @@ Corev0.8ไม่ได้ใช้modelนี้ในเกม มี [rendere
 - ไม่เพิ่มboneเพื่อทุกหมุด/รอยแตกหรือsubdivision; รายละเอียดเล็กทำในtexture ภาพสวยไม่แทนbenchmarkMSPT/clientframepacing
 
 ลำดับpolishNPCv2: ~~banker(แว่น/สมุด/เหรียญ/ชุดคลัง)~~ เสร็จ6ต.ค. → ~~smith(เกราะหนัง/ค้อน/ผ้ากันเปื้อน)~~ เสร็จ6ต.ค. → ~~warden(ผ้าคลุม/scroll/pouch)~~ เสร็จ6ต.ค. → ~~mage(hood/crystal/staff)~~ เสร็จ6ต.ค. (NPC v2 ครบ4ตัว)
-itemv2ตามด้วยรูนดาบและhaloที่displayทุกcontextถูก; ไม่เปลี่ยนPDC/serial/ราคา/enchantเพื่อแค่เปลี่ยนรูป
+itemv2 ~~รูนดาบและhalo~~ เสร็จ6ต.ค. displayครบ8context; ไม่เปลี่ยนPDC/serial/ราคา/enchantเพื่อแค่เปลี่ยนรูป
 ทั้งหมดexportrevisionใหม่พร้อมtexture/preview/manifest และตรวจruntimeก่อนเปลี่ยนรูปสินค้าหรือประกาศproduction

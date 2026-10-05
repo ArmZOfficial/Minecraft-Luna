@@ -107,6 +107,16 @@
 12 cubes ไม่มี bone animation ของ NPC ใน Java item JSON
 รุ่นตกแต่งบนเว็บไม่มีโบนัส combat; หมุน/เรืองแสงต้องกำหนดวิธีแสดงและ animated texture แยกตาม runtime
 
+### v2 ลงรายละเอียดเต็ม (6 ต.ค.2026)
+
+![Halo v2](assets/models/item_aether_halo_v2-preview.png)
+![Halo v2 ทุก display context](assets/models/item_aether_halo_v2-display.png)
+
+[ไฟล์v2](assets/models/item_aether_halo_v2.bbmodel) · [Java JSON](assets/models/item_aether_halo_v2.json) · [texture128×128](assets/models/item_aether_halo_v2.png) · [manifest](assets/models/item_aether_halo_v2-manifest.json)
+35 elements: แท่งงาช้าง4ด้านคาดแถบน้ำเงินเขียวทั้งด้านนอก/ใน มุมทองมีขั้นบน อัญมณีบนยอดและด้านนอก2ด้าน แผ่นทองฝังอัญมณีด้านหน้า แผ่นเรียบด้านหลัง
+ตั้งค่าครบ8 context: ลอยเหนือหัว(head) มือซ้าย/ขวาทั้งบุคคลที่1และ3, GUI, พื้น, กรอบไอเทม; texture อ้าง `luma:item/aether_halo_v2`
+gate คำนวณขนาดไอคอน GUI จริงหลังแปลง (±7.94 หน่วย) ว่าไม่ล้นช่อง16×16; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
+
 ## 06 — Runeblade
 
 ![ภาพอ้างอิง Runeblade](assets/references/item-runeblade.png)
@@ -114,6 +124,17 @@
 
 ไฟล์ [item_runeblade.bbmodel](assets/models/item_runeblade.bbmodel) และ [Java model draft](assets/models/item_runeblade.json)
 6 cubes ต้องเพิ่มรูปทรงใบดาบ/ปลาย/guard และ UV เทียบ reference รุ่นร้านค้าเป็น skin ไม่มีค่าโจมตีเพิ่ม
+
+### v2 ลงรายละเอียดเต็ม (6 ต.ค.2026)
+
+![Runeblade v2](assets/models/item_runeblade_v2-preview.png)
+![Runeblade v2 ทุก display context](assets/models/item_runeblade_v2-display.png)
+
+[ไฟล์v2](assets/models/item_runeblade_v2.bbmodel) · [Java JSON](assets/models/item_runeblade_v2.json) · [texture128×128](assets/models/item_runeblade_v2.png) · [manifest](assets/models/item_runeblade_v2-manifest.json)
+25 elements: ใบดาบขั้นฐานกว้าง-ลำยาว-ปลายแหลม4ขั้น ร่องรูนฟ้ามีลายทั้งสองหน้า คอใบดาบทองแดง
+การ์ดทองฝังอัญมณีหน้า/หลัง ปีกมีปลายยกและขั้นล่าง ด้ามพันหนังลายเฉียงคั่นแหวนทอง ปุ่มท้ายทองฝังอัญมณี
+display ครบ8 context: มือ3rd เอียงขึ้นแบบดาบvanilla ทั้งซ้าย/ขวา, 1st เห็นใบดาบ, GUI/กรอบไอเทมแนวทแยง (±7.86 ในช่อง), พื้นตั้งตรง
+texture อ้าง `luma:item/runeblade_v2`; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
 
 ## การส่งต่อและตรวจงาน
 

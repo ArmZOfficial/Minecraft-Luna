@@ -1,0 +1,51 @@
+{
+  "id": "item_runeblade_v2",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 25,
+  "runtime_tested": false,
+  "reference": "assets/references/item-runeblade.png",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": "item_runeblade",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_items_v2.py",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/runeblade_v2",
+  "gui_extent_units": [
+    -7.86,
+    7.31,
+    -7.86,
+    7.31
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/item_runeblade_v2.json": "1ceaef0dafa5dddce73191c692ed67fe3d43a6355c65edbffeb20f5f741be34d",
+    "output/lobby-concept/assets/models/item_runeblade_v2.bbmodel": "9903dd1eac732ab3674efb672536d166a67eeab34825939f1eb1c8b38698a31c",
+    "output/lobby-concept/assets/models/item_runeblade_v2.png": "8b0634131379cfb1ff8db44db083ed035e9359457054862627938ba1382da577",
+    "output/lobby-concept/assets/models/item_runeblade_v2-display.png": "a57d340fc2064dd8ef2db536178b88bde363f312789090f6f034a6622ad531e3",
+    "output/lobby-concept/assets/models/item_runeblade_v2-preview.png": "1a48e65deae719efa5d2be951ac5df9b1d78452ef8932531c752e191f416898d",
+    "output/lobby-concept/assets/models/item_runeblade_v2-front.png": "ec718e3c9ca4419423022108417c5833144747f9be01a7c8ab175b4074f1115a",
+    "output/lobby-concept/assets/models/item_runeblade_v2-right.png": "ba2676a550d7753b3db84ba368e52fa2eb46ad01929d8fc052507149e73ae301",
+    "output/lobby-concept/assets/models/item_runeblade_v2-top.png": "d4de664c6613dc2de5759380025bfe74920ba57b328e9aa1dfeb15d98892c715"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "v1 is kept unchanged for comparison"
+  ]
+}
