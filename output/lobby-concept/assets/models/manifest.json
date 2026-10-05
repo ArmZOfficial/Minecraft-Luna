@@ -227,5 +227,29 @@
       "thirdperson_righthand"
     ],
     "supersedes": "item_aether_halo"
+  },
+  {
+    "id": "item_aether_halo_v3",
+    "format": "java_block",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [],
+    "cubes": 92,
+    "runtime_tested": false,
+    "reference": "user-supplied crown photo (not stored)",
+    "texture": [
+      128,
+      128
+    ],
+    "display_contexts": [
+      "firstperson_lefthand",
+      "firstperson_righthand",
+      "fixed",
+      "ground",
+      "gui",
+      "head",
+      "thirdperson_lefthand",
+      "thirdperson_righthand"
+    ],
+    "supersedes": "item_aether_halo_v2"
   }
 ]

@@ -117,6 +117,17 @@
 ตั้งค่าครบ8 context: ลอยเหนือหัว(head) มือซ้าย/ขวาทั้งบุคคลที่1และ3, GUI, พื้น, กรอบไอเทม; texture อ้าง `luma:item/aether_halo_v2`
 gate คำนวณขนาดไอคอน GUI จริงหลังแปลง (±7.94 หน่วย) ว่าไม่ล้นช่อง16×16; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
 
+### v3 แบบมงกุฎ (6 ต.ค.2026, ตามภาพตัวอย่างจากผู้ใช้)
+
+![Halo v3 มงกุฎ](assets/models/item_aether_halo_v3-preview.png)
+![Halo v3 ทุก display context](assets/models/item_aether_halo_v3-display.png)
+
+[ไฟล์v3](assets/models/item_aether_halo_v3.bbmodel) · [Java JSON](assets/models/item_aether_halo_v3.json) · [texture128×128](assets/models/item_aether_halo_v3.png) · [manifest](assets/models/item_aether_halo_v3-manifest.json)
+92 elements: แถบมงกุฎทอง3ชั้น(ขอบล่างเข้ม/แถบหลักมีเส้นไฮไลต์/ขอบบนอ่อน) ยอดแหลมแบบขั้นต่อกันเป็นฟันเลื่อยรอบวง
+ยอดมุมสูงสุด ยอดกลางด้านสูงรอง ยอดเล็กคั่น; ทับทิมใหญ่กลางแถบทุกด้าน ทับทิมเล็กที่ฐานยอดเล็ก อัญมณีฟ้าใกล้ปลายยอดมุม/ยอดกลาง
+สวมแล้วนั่งพอดีบนหัว(head) ไอคอน GUI ±7.84 ไม่ล้นช่อง กรอบไอเทม/มือ/พื้นตั้งค่าแล้ว; texture `luma:item/aether_halo_v3`
+v2 (วงแหวนสี่เหลี่ยม) เก็บไว้ เลือกได้ว่าจะ map `luma:aether_halo` กับรุ่นไหนตอนทำ pack; ยังไม่โหลดใน resource pack จริง
+
 ## 06 — Runeblade
 
 ![ภาพอ้างอิง Runeblade](assets/references/item-runeblade.png)

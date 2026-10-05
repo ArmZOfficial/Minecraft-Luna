@@ -1,4 +1,4 @@
-"""Create runeblade v2 and aether halo v2 as Java item models through native Blockbench MCP.
+"""Create runeblade v2, aether halo v2 and the crown-style halo v3 as Java item models through native Blockbench MCP.
 
 Java item rules: elements stay inside -16..32, each element rotates on one axis by 0/22.5/45,
 UVs live in 0..16 space, and every display context carries its own transform.
@@ -10,8 +10,10 @@ from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data, embedded, dispose_view
 
 # 128px atlas, 4x4 slots of 32px; in 0..16 UV space each slot is 4 units wide.
-COLORS = ["#e3e0d6", "#d4a646", "#8f6a33", "#2bd0e0", "#134a55", "#36e2f0", "#ece4d2", "#0e3a44", "#1b1f24"]
-SLOTS = {"steel":0, "gold":1, "bronze":2, "rune":3, "grip":4, "gem":5, "ivory":6, "teal":7, "dark":8}
+# New slots are appended so earlier items repaint identically.
+COLORS = ["#e3e0d6", "#d4a646", "#8f6a33", "#2bd0e0", "#134a55", "#36e2f0", "#ece4d2", "#0e3a44", "#1b1f24", "#d2353c", "#f2cf63", "#f6c93c", "#efbd34", "#ffd84f", "#c98a24"]
+SLOTS = {"steel":0, "gold":1, "bronze":2, "rune":3, "grip":4, "gem":5, "ivory":6, "teal":7, "dark":8, "ruby":9, "gold_light":10,
+         "crown_gold":11, "crown_band":12, "crown_tip":13, "crown_shade":14}
 
 def build_runeblade():
     rows=[]
@@ -77,6 +79,51 @@ def build_halo():
     box("plaque_back",[6.6,7.0,14.7],[9.4,9.2,15.2],"gold")
     return rows
 
+def build_crown():
+    """Crown form of the halo: layered gold band, stepped points, rubies on the band, cyan gems near the tips."""
+    rows=[]
+    def box(name,a,b,mat): rows.append({"name":name,"from":a,"to":b,"mat":mat})
+    def ring(name,y0,y1,lo,hi,wall,mat):
+        box(name+"_north",[lo,y0,lo],[hi,y1,lo+wall],mat)
+        box(name+"_south",[lo,y0,hi-wall],[hi,y1,hi],mat)
+        box(name+"_west",[lo,y0,lo+wall],[lo+wall,y1,hi-wall],mat)
+        box(name+"_east",[hi-wall,y0,lo+wall],[hi,y1,hi-wall],mat)
+    ring("rim_bottom",12,12.8,.3,15.7,1.4,"crown_shade")
+    ring("band",12.8,15.4,.5,15.5,1.2,"crown_band")
+    ring("lip",15.4,16.2,.7,15.3,1.1,"crown_tip")
+    # Each side is described along its own axis t (0.7..15.3); the wall spans d0..d1 across it.
+    # Points are thin plates flush with the outer face so the top edge reads as one zigzag.
+    sides={"north":(.75,1.55,-1),"south":(14.45,15.25,1),"west":(.75,1.55,-1),"east":(14.45,15.25,1)}
+    def place(side,name,t0,t1,y0,y1,mat,out=0):
+        d0,d1,sign=sides[side]
+        if out:
+            d0,d1=(d0-out,d0) if sign<0 else (d1,d1+out)
+        if side in ("north","south"): box(side+"_"+name,[t0,y0,d0],[t1,y1,d1],mat)
+        else: box(side+"_"+name,[d0,y0,t0],[d1,y1,t1],mat)
+    def spike(side,name,center,steps,top_mat="crown_tip"):
+        y=16.2
+        for i,(width,height) in enumerate(steps):
+            place(side,name+"_"+str(i),center-width/2,center+width/2,y,y+height,top_mat if i==len(steps)-1 else "crown_gold")
+            y+=height
+    for side in sides:
+        spike(side,"mid",8,[(3.4,1.4),(2.2,1.4),(1.2,1.4),(.5,.9)])
+        place(side,"mid_gem",7.45,8.55,17.75,18.85,"gem",out=.25)
+        place(side,"ruby",7.2,8.8,13.2,14.9,"ruby",out=.35)
+        for k,c in enumerate([4.7,11.3]):
+            spike(side,"small_"+str(k),c,[(3.0,1.0),(1.8,1.0),(.8,.8)])
+            place(side,"small_ruby_"+str(k),c-.45,c+.45,16.35,17.15,"ruby",out=.2)
+    # Tall corner spikes stand on the four corners with cyan gems on both outer faces.
+    for cname,(cx,cz) in {"nw":(1.6,1.6),"ne":(14.4,1.6),"sw":(1.6,14.4),"se":(14.4,14.4)}.items():
+        y=16.2
+        for i,(width,height) in enumerate([(1.8,1.8),(1.2,1.8),(.8,1.6),(.4,1.0)]):
+            box("corner_"+cname+"_"+str(i),[cx-width/2,y,cz-width/2],[cx+width/2,y+height,cz+width/2],"crown_tip" if i==3 else "crown_gold")
+            y+=height
+        gz=(cz-.8,cz-.55) if cz<8 else (cz+.55,cz+.8)
+        gx=(cx-.8,cx-.55) if cx<8 else (cx+.55,cx+.8)
+        box("corner_gem_z_"+cname,[cx-.4,18.5,gz[0]],[cx+.4,19.6,gz[1]],"gem")
+        box("corner_gem_x_"+cname,[gx[0],18.5,cz-.4],[gx[1],19.6,cz+.4],"gem")
+    return rows
+
 # Transforms per display context (rotation, translation, scale), tuned against Blockbench's display previews.
 DISPLAY={
  "runeblade":{
@@ -88,6 +135,15 @@ DISPLAY={
   "ground":{"rotation":[0,0,0],"translation":[0,2,0],"scale":[.3,.3,.3]},
   "fixed":{"rotation":[0,0,-45],"translation":[-2.6,-2.6,0],"scale":[.62,.62,.62]},
   "head":{"rotation":[0,0,-45],"translation":[0,0,0],"scale":[.6,.6,.6]}},
+ "crown":{
+  "head":{"rotation":[0,0,0],"translation":[0,0,0],"scale":[1,1,1]},
+  "gui":{"rotation":[30,45,0],"translation":[0,-5.45,0],"scale":[.72,.72,.72]},
+  "ground":{"rotation":[0,0,0],"translation":[0,-2,0],"scale":[.4,.4,.4]},
+  "fixed":{"rotation":[0,0,0],"translation":[0,-5.5,0],"scale":[.75,.75,.75]},
+  "thirdperson_righthand":{"rotation":[75,45,0],"translation":[0,0,0],"scale":[.375,.375,.375]},
+  "thirdperson_lefthand":{"rotation":[75,45,0],"translation":[0,0,0],"scale":[.375,.375,.375]},
+  "firstperson_righthand":{"rotation":[10,45,0],"translation":[0,3,0],"scale":[.3,.3,.3]},
+  "firstperson_lefthand":{"rotation":[10,225,0],"translation":[0,3,0],"scale":[.3,.3,.3]}},
  "halo":{
   "head":{"rotation":[0,0,0],"translation":[0,10,0],"scale":[1.15,1.15,1.15]},
   "gui":{"rotation":[35,45,0],"translation":[0,0,0],"scale":[.78,.78,.78]},
@@ -99,7 +155,8 @@ DISPLAY={
   "firstperson_lefthand":{"rotation":[10,225,0],"translation":[0,4,0],"scale":[.35,.35,.35]}}}
 
 ITEMS={"runeblade":("item_runeblade_v2","runeblade_v2",build_runeblade),
-       "halo":("item_aether_halo_v2","aether_halo_v2",build_halo)}
+       "halo":("item_aether_halo_v2","aether_halo_v2",build_halo),
+       "crown":("item_aether_halo_v3","aether_halo_v3",build_crown)}
 
 PAINT="""(()=>{const t=Texture.all[0];t.edit(canvas=>{
 const c=canvas.getContext('2d'),colors=COLORS;let seed=33071;
@@ -119,6 +176,13 @@ if(i===5){rect(ox,oy,32,32,'#1ec3d6');rect(ox+3,oy+3,26,26,'#4cecf8');rect(ox+8,
  rect(ox,oy+29,32,3,'#0e8796');rect(ox+29,oy,3,32,'#0e8796');}
 if(i===6){rect(ox,oy,32,3,'#fffaf0');rect(ox,oy+29,32,3,'#c3b89f');}
 if(i===7){rect(ox,oy,32,2,'#2f7380');rect(ox,oy+30,32,2,'#071f25');}
+if(i===9){rect(ox+3,oy+3,26,26,'#e85a5f');rect(ox+8,oy+8,16,16,'#ff9a9c');rect(ox+8,oy+8,6,6,'#ffe2e2');
+ rect(ox,oy+29,32,3,'#8c1c24');rect(ox+29,oy,3,32,'#8c1c24');}
+if(i===11||i===13){for(let j=0;j<14;j++)rect(ox+2+Math.floor(rand()*28),oy+2+Math.floor(rand()*28),2,2,i===11?'rgba(255,240,170,.35)':'rgba(255,255,230,.5)');}
+if(i===12){rect(ox,oy,32,3,'#ffe48a');rect(ox,oy+13,32,4,'#fbe07a');rect(ox,oy+27,32,5,'#c98a24');
+ for(let j=0;j<10;j++)rect(ox+2+Math.floor(rand()*28),oy+4+Math.floor(rand()*20),3,1,'rgba(255,250,210,.5)');}
+if(i===10){rect(ox,oy,32,2,'#fff1b0');rect(ox,oy,2,32,'#fff1b0');rect(ox+30,oy,2,32,'#b08a2c');rect(ox,oy+30,32,2,'#b08a2c');
+ for(let j=0;j<8;j++)rect(ox+3+Math.floor(rand()*25),oy+3+Math.floor(rand()*25),3,1,'rgba(255,255,230,.45)');}
 });},{edit_name:'Luma item v2 atlas'});return true})()"""
 
 def uv_for(mat):
@@ -172,8 +236,8 @@ def main():
     call("create_offscreen_view",{"id":"item_qa","width":1200,"height":1200,"copy_view":"none"})
     try:
         # Blockbench draws Java models shifted by -8 on X and Z.
-        center=[0,14,0] if args.item=="runeblade" else [0,8,0]
-        zoom=.8 if args.item=="runeblade" else 1.2
+        center={"runeblade":[0,14,0],"halo":[0,8,0],"crown":[0,16,0]}[args.item]
+        zoom={"runeblade":.8,"halo":1.2,"crown":1.1}[args.item]
         for view,offset in {"preview":[50,35,-60],"front":[0,0,-100],"right":[-100,0,0],"top":[0,100,.01]}.items():
             camera=[center[i]+offset[i] for i in range(3)]
             result=call("set_camera_angle",{"view":"item_qa","position":camera,"target":center,"projection":"orthographic","zoom":zoom})

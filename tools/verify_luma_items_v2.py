@@ -6,11 +6,14 @@ import json
 import math
 import struct
 from pathlib import Path
+from build_luma_items_v2 import DISPLAY, ITEMS as BUILDER_ITEMS
 
 ROOT=Path(__file__).resolve().parents[1]
 DIR=ROOT/"output/lobby-concept/assets/models"
 ITEMS={"item_runeblade_v2":{"texture":"luma:item/runeblade_v2","supersedes":"item_runeblade","reference":"assets/references/item-runeblade.png"},
-       "item_aether_halo_v2":{"texture":"luma:item/aether_halo_v2","supersedes":"item_aether_halo","reference":"assets/references/item-aether-halo.png"}}
+       "item_aether_halo_v2":{"texture":"luma:item/aether_halo_v2","supersedes":"item_aether_halo","reference":"assets/references/item-aether-halo.png"},
+       # Crown form requested by the user on 2026-10-06; v2 stays as the square-ring variant.
+       "item_aether_halo_v3":{"texture":"luma:item/aether_halo_v3","supersedes":"item_aether_halo_v2","reference":"user-supplied crown photo (not stored)"}}
 CONTEXTS={"thirdperson_righthand","thirdperson_lefthand","firstperson_righthand","firstperson_lefthand","gui","head","ground","fixed"}
 
 def rotate(v,angles):
@@ -48,7 +51,17 @@ def check(name,spec):
         for face in e["faces"].values():
             assert face["texture"]=="#0" and all(0<=u<=16 for u in face["uv"])
     display=java["display"]
-    assert set(display)==CONTEXTS
+    # Every context matches the builder's tuned value; Blockbench omits a context whose value is the
+    # identity transform, which Minecraft also treats as identity, so absence is allowed only then.
+    identity={"rotation":[0,0,0],"translation":[0,0,0],"scale":[1,1,1]}
+    intended=DISPLAY[next(key for key,(asset,_,_) in BUILDER_ITEMS.items() if asset==name)]
+    assert set(intended)==CONTEXTS and set(display)<=CONTEXTS
+    for context,want in intended.items():
+        got={**identity,**display.get(context,{})}
+        # Blockbench writes angles in -180..180 (225 becomes -135), so rotations compare modulo 360.
+        assert all(abs((a-b+180)%360-180)<1e-6 for a,b in zip(got["rotation"],want["rotation"])),(name,context)
+        assert all(abs(a-b)<1e-6 for k in ("translation","scale") for a,b in zip(got[k],want[k])),(name,context)
+    display={context:{**identity,**display.get(context,{})} for context in CONTEXTS}
     for slot in display.values():
         assert all(-80<=t<=80 for t in slot.get("translation",[0,0,0]))
         assert all(0<s<=4 for s in slot.get("scale",[1,1,1]))
@@ -75,7 +88,7 @@ def write_manifest(name,spec,result):
             "display_capture":"tools/preview_luma_items_v2.py","pack_texture":spec["texture"],"gui_extent_units":result["gui_extent"],
             "sha256":{str(f.relative_to(ROOT)).replace("\\","/"):hashlib.sha256(f.read_bytes()).hexdigest() for f in files(name)},
             "known_limits":["Not loaded in a real client/resource pack yet","Legacy 1.16.5 CustomModelData mapping still untested",
-                            "No animated/emissive texture; glow needs a pack-side solution","v1 is kept unchanged for comparison"]}
+                            "No animated/emissive texture; glow needs a pack-side solution","Earlier revisions are kept unchanged for comparison"]}
     (DIR/(name+"-manifest.json")).write_text(json.dumps(detail,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
 
 def main():

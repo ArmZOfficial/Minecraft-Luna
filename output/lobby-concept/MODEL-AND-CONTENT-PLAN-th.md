@@ -96,7 +96,7 @@ base material ของ legacy hat ต้องเลือกและทดส
 | npc_rune_smith | assets/models/npc_rune_smith.bbmodel | idle/greet/hammer | v2 ทำแล้ว: npc_rune_smith_v2.bbmodel 171cubes/16bones + craft_success; เหลือruntime QA |
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | v2 ทำแล้ว: npc_quest_warden_v2.bbmodel 123cubes/17bones + point_direction; เหลือruntime QA |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | v2 ทำแล้ว: npc_portal_mage_v2.bbmodel 124cubes/18bones + open_portal, สูงสุด2.66บล็อก; เหลือruntime QA |
-| item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; เหลือ modern/legacy mapping ใน pack จริง |
+| item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; v3 แบบมงกุฎ 92 elements; เหลือ modern/legacy mapping ใน pack จริง |
 | item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_runeblade_v2 25 elements + display8context + `luma:` texture; เหลือทดสอบใน pack จริง |
 
 JSON จาก Blockbench 5.2.1 default Java 26.3 เป็น source export เท่านั้น ก่อนใช้ pack legacy ต้อง compile profile ให้ไม่มี field ที่ client เก่าไม่รับ เปลี่ยน texture path เป็น `luma:item/<id>` และทดสอบ อย่าโยน JSON เดียวใส่ทุก pack

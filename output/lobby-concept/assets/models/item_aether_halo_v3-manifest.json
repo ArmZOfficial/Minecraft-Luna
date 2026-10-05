@@ -1,0 +1,51 @@
+{
+  "id": "item_aether_halo_v3",
+  "format": "java_block",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [],
+  "cubes": 92,
+  "runtime_tested": false,
+  "reference": "user-supplied crown photo (not stored)",
+  "texture": [
+    128,
+    128
+  ],
+  "display_contexts": [
+    "firstperson_lefthand",
+    "firstperson_righthand",
+    "fixed",
+    "ground",
+    "gui",
+    "head",
+    "thirdperson_lefthand",
+    "thirdperson_righthand"
+  ],
+  "supersedes": "item_aether_halo_v2",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "builder": "tools/build_luma_items_v2.py",
+  "display_capture": "tools/preview_luma_items_v2.py",
+  "pack_texture": "luma:item/aether_halo_v3",
+  "gui_extent_units": [
+    -7.84,
+    7.84,
+    -6.88,
+    6.89
+  ],
+  "sha256": {
+    "output/lobby-concept/assets/models/item_aether_halo_v3.json": "558c9f4b7196a231c2aded3177c08b4cbeb0c9230e683628853e1ee8b8199284",
+    "output/lobby-concept/assets/models/item_aether_halo_v3.bbmodel": "01a2db706f70357b8be00274b293252de7fa987f837b72308e2ae2000acaeb81",
+    "output/lobby-concept/assets/models/item_aether_halo_v3.png": "a08fd58ff9c0713dd6313139aec4e8b46d894a6ef40bd6448beb6293f7cfde61",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-display.png": "494292452110fb8d20b1bf328800f6722d1ff96f7834651f6383cfddbc2d39bf",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-preview.png": "fe3e7e00c6c786dcf482dfeb5add788b89144f7c40c83485b550e50454de8d1d",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-front.png": "8d4d441df8b24ce7e9f2f84a764af69def43de15256e6e0b2019273524ac258f",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-right.png": "9ea040f514d68a5eaaf25c8bce5be4ee2ef10f7ffad72ddedd4fca01ff2f9903",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-top.png": "5bc447db1e4c84815a08c94d3d81baeee575ec50cd8ae6fb54b1feab8118d6ca"
+  },
+  "known_limits": [
+    "Not loaded in a real client/resource pack yet",
+    "Legacy 1.16.5 CustomModelData mapping still untested",
+    "No animated/emissive texture; glow needs a pack-side solution",
+    "Earlier revisions are kept unchanged for comparison"
+  ]
+}

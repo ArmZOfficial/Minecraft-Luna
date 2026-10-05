@@ -46,6 +46,6 @@
     "Not loaded in a real client/resource pack yet",
     "Legacy 1.16.5 CustomModelData mapping still untested",
     "No animated/emissive texture; glow needs a pack-side solution",
-    "v1 is kept unchanged for comparison"
+    "Earlier revisions are kept unchanged for comparison"
   ]
 }
