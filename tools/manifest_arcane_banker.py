@@ -30,7 +30,7 @@ def main():
     path=MODELS/"manifest.json"
     manifest=[e for e in json.loads(path.read_text(encoding="utf-8")) if e["id"]!=NAME]
     manifest.append(entry)
-    path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
     files=[MODELS/(NAME+".bbmodel"),MODELS/(NAME+".png"),MODELS/(NAME+"-pose-checks.json"),
            *sorted(p for p in MODELS.glob(NAME+"-*.png"))]
     frames=[f for states in poses.values() for f in states]
@@ -48,7 +48,7 @@ def main():
             "known_limits":["No ModelEngine/Citizens runtime or client evidence yet",
                             "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
                             "v1 (npc_arcane_banker, 36 cubes) is kept unchanged for comparison"]}
-    (MODELS/(NAME+"-manifest.json")).write_text(json.dumps(detail,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    (MODELS/(NAME+"-manifest.json")).write_text(json.dumps(detail,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
     print(json.dumps({"asset":entry,"keyframes":keyframes,"bounds":detail["rendered_bounds_blocks"]}))
 
 if __name__=="__main__": main()

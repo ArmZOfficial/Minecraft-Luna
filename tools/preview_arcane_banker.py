@@ -47,7 +47,7 @@ def main():
             print(json.dumps({"animation":name,"max_ledger_gap":max(s["ledger_gap"] for s in report[name]),
                               "max_coin_gap":max(s["coin_gap"] for s in report[name])}),flush=True)
         call("animation_timeline",{"animation_id":"idle","action":"stop"})
-        (OUT/(NAME+"-pose-checks.json")).write_text(json.dumps(report,indent=2),encoding="utf-8")
+        (OUT/(NAME+"-pose-checks.json")).write_text(json.dumps(report,indent=2),encoding="utf-8",newline="\n")
         call("set_mode",{"mode_id":"edit"})
     finally:
         dispose_view(client,"banker_pose")

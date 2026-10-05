@@ -42,7 +42,7 @@ def main():
                     (OUT/(NAME+"-"+selected[(name,time)]+".png")).write_bytes(base64.b64decode(image["data"]))
             print(json.dumps({"animation":name,"frames_checked":len(times)}),flush=True)
         call("animation_timeline",{"animation_id":"idle","action":"stop"})
-        (OUT/(NAME+"-pose-checks.json")).write_text(json.dumps(report,indent=2),encoding="utf-8")
+        (OUT/(NAME+"-pose-checks.json")).write_text(json.dumps(report,indent=2),encoding="utf-8",newline="\n")
         call("set_mode",{"mode_id":"edit"})
     finally:
         dispose_view(client,"moonfall_review")
