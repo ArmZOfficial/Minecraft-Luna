@@ -237,8 +237,8 @@
     "runtime_tested": false,
     "reference": "user-supplied crown photo (not stored)",
     "texture": [
-      128,
-      128
+      256,
+      256
     ],
     "display_contexts": [
       "firstperson_lefthand",

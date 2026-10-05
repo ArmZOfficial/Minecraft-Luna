@@ -26,11 +26,16 @@ RAMPS={
  "gem":ramp("#063c47","#0b6676","#1495a6","#24c3d3","#5ee6f2","#a8f6fb","#ffffff"),
  "ruby":ramp("#3a070d","#621019","#8f1b26","#bd2d38","#e2525b","#f78c90","#ffe0e0"),
 }
+RAMPS["blade"]=ramp("#3b4450","#5d6875","#8792a0","#b2bcc6","#d3dae1","#eef2f5","#ffffff")
+RAMPS["ivory"]=ramp("#7b6a4c","#9e8c69","#bfae8a","#d8cba9","#ebe2c8","#f6f0de","#fffdf4")
+RAMPS["gold_bright"]=ramp("#6b4314","#9a661d","#c48a28","#e6b23a","#f8d256","#fff09a","#fffde0")
+RAMPS["gold_dark"]=ramp("#3a200b","#5e3712","#84511a","#a96c22","#c98a2c","#e2aa45","#f3cd77")
 RAMPS["teal_metal"]=RAMPS["teal"]; RAMPS["teal_leather"]=RAMPS["teal"]
 # Which pattern each material uses.
 KIND={"gold":"metal","bronze":"metal","steel":"metal","wood":"wood","wood_dark":"wood","stone":"stone",
       "paper":"paper","teal":"cloth","leather":"leather","dark":"plain","ice":"ice","gem":"gem","ruby":"gem",
-      "teal_metal":"metal","teal_leather":"leather"}
+      "teal_metal":"metal","teal_leather":"leather",
+      "blade":"metal","ivory":"metal","gold_bright":"metal","gold_dark":"metal"}
 
 def face_size(row,face,density):
     d=[b-a for a,b in zip(row["from"],row["to"])]
@@ -56,10 +61,7 @@ def paint_face(mat,face,w,h,rng,art=None):
     base=3+(1 if face=="up" else 0)-(1 if face=="down" else 0)
     for y in range(h):
         for x in range(w):
-            v=base
-            if face not in ("up","down") and h>=4:
-                v+= 1 if y<h*.2 else (-1 if y>h*.8 else 0)   # soft top light / bottom occlusion
-            c.set(x,y,shade(r,v))
+            c.set(x,y,shade(r,base))
     if min(w,h)<=2 and kind not in ("gem",):
         # Trim-sized faces: patterns turn into noise at 1-2px, so keep a clean tone with a lit edge.
         for x in range(w): c.set(x,0,shade(r,base+1))
@@ -68,10 +70,10 @@ def paint_face(mat,face,w,h,rng,art=None):
         for y in range(h):
             for x in range(w):
                 if abs((x+y)-(w+h)*.3)<max(1,(w+h)*.07): c.set(x,y,shade(r,base+1))   # one soft specular band
-        for _ in range(max(1,w*h//40)):
-            c.set(rng.randrange(w),rng.randrange(h),shade(r,base-1))                  # wear specks
+        for _ in range(w*h//90):
+            c.set(rng.randrange(w),rng.randrange(h),shade(r,base-1))                  # sparse wear specks
         bevel(c,r,base,hard=True)
-        if w>=3 and h>=3: c.set(1,1,shade(r,6))                                       # glint
+        if w>=8 and h>=8: c.set(2,2,shade(r,6))                                       # glint on large faces only
     elif kind=="wood":
         along=w>=h
         n=h if along else w; L=w if along else h
@@ -132,7 +134,8 @@ def paint_face(mat,face,w,h,rng,art=None):
     return c
 
 def bevel(c,r,base,hard):
-    if c.w<3 or c.h<3: return
+    # Edges on 3-4px faces read as seams between stacked cubes; only larger faces get a bevel.
+    if c.w<5 or c.h<5: return
     up,dn=(2,-2) if hard else (1,-1)
     for x in range(c.w): c.set(x,0,shade(r,base+up)); c.set(x,c.h-1,shade(r,base+dn))
     for y in range(1,c.h-1): c.set(0,y,shade(r,base+up-1)); c.set(c.w-1,y,shade(r,base+dn))
@@ -153,17 +156,37 @@ def gem(c,r):
         c.set(int(w*.32),int(h*.32),shade(r,6)); c.set(int(w*.32)+1,int(h*.32),shade(r,6))
         c.set(int(w*.7),int(h*.68),shade(r,6))
     else:
-        c.set(0,0,shade(r,6))
+        for y in range(h):
+            for x in range(w): c.set(x,y,shade(r,4))
+        c.set(0,0,shade(r,6)); c.set(w-1,h-1,shade(r,1))
+
+GLOWING={"gem","ruby","rune"}
+
+def light(canvas,row,face,density,ymin,ymax):
+    """World-height light: one continuous gradient over the whole model, so stacked
+    cubes blend instead of each face restarting its own top-light/bottom-shadow."""
+    span=max(ymax-ymin,1e-6)
+    for py in range(canvas.h):
+        if face=="up": wy=row["to"][1]
+        elif face=="down": wy=row["from"][1]
+        else: wy=row["to"][1]-(py+.5)/density
+        t=(wy-ymin)/span                      # 0 at the lowest point, 1 at the top
+        f=.88+.18*t                           # smooth per-row ramp; dithering read as speckle
+        for px in range(canvas.w):
+            canvas.px[py][px]=tuple(max(0,min(255,round(ch*f))) for ch in canvas.px[py][px])
 
 def bake(rows,density,arts=None,seed=7):
     """rows: [{name,from,to,mat}] -> (Image, {name:{face:[x0,y0,x1,y1] px}}). arts: {mat: fn(canvas,face,rng)}."""
     arts=arts or {}
     rng=random.Random(seed)
     tiles=[]
+    ymin=min(r["from"][1] for r in rows); ymax=max(r["to"][1] for r in rows)
     for row in rows:
         for face in ("north","south","east","west","up","down"):
             w,h=face_size(row,face,density)
-            tiles.append((row["name"],face,w,h,paint_face(row["mat"],face,w,h,rng,arts.get(row["mat"]))))
+            canvas=paint_face(row["mat"],face,w,h,rng,arts.get(row["mat"]))
+            if row["mat"] not in GLOWING: light(canvas,row,face,density,ymin,ymax)
+            tiles.append((row["name"],face,w,h,canvas))
     # Shelf-pack tallest first with a 1px gutter, growing the square power-of-two atlas until it fits.
     order=sorted(tiles,key=lambda t:(-t[3],-t[2]))
     size=32

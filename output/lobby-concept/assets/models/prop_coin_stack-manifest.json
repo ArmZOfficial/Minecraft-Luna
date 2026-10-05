@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_coin_stack.json": "e92126d110d8fed219b6739a166e651ebb549a3f881423c06a3a3eaff45c78a5",
-    "output/lobby-concept/assets/models/prop_coin_stack.bbmodel": "393e8a0d6398b0f7965a40ae16d9ff224830e3b5e424257c4d91b236b740ec04",
-    "output/lobby-concept/assets/models/prop_coin_stack.png": "7cd21a663ad382fad1b562527de833b5bb0f62f879f974bc74a8b3f0b24b1fb4",
-    "output/lobby-concept/assets/models/prop_coin_stack-display.png": "675b651e984b163e23b4b3ceb39409d66c30ea0cdb888b01ae2d32ab3ea98bdb",
-    "output/lobby-concept/assets/models/prop_coin_stack-preview.png": "fa8cedf07afaac012289589b54091509a466f008b7b8192001e9bc9374c2c80f",
-    "output/lobby-concept/assets/models/prop_coin_stack-front.png": "688a86410b2311dbf137582834843df67d49e17eb67eed3c69857ed09ae39396"
+    "output/lobby-concept/assets/models/prop_coin_stack.bbmodel": "6d7ef75bf9e0b55d293a18dbf99af4f74ffb4b65ff53d83d76fcddf25bccf269",
+    "output/lobby-concept/assets/models/prop_coin_stack.png": "4038c6a7f1218f0cf9ec0c9f92a8ef8c0a9e5688b9f13f85168931cf845cf586",
+    "output/lobby-concept/assets/models/prop_coin_stack-display.png": "92a887a13c4d0e27e3ecf64c5a6b0fc6a51ae94802d70403a2f69fc9e07f4577",
+    "output/lobby-concept/assets/models/prop_coin_stack-preview.png": "4769573dd0bbf7e48c35742f986e9ad3d9bd36663e0098ddb8d8836557a39595",
+    "output/lobby-concept/assets/models/prop_coin_stack-front.png": "1ff8d8a64971de2f2ff21eb148106774fdc1027af6377f0248e829cd7b4579f1"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

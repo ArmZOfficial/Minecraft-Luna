@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_rune_plinth.json": "23a5321df5bd3934007d24ad9d5bb4bc2b7227864e7dc27f200821b37679e13d",
-    "output/lobby-concept/assets/models/prop_rune_plinth.bbmodel": "de8a72e1581d197e670870bb4f0dcb44f2c8d2f1521d8436af664a313e79f410",
-    "output/lobby-concept/assets/models/prop_rune_plinth.png": "b7fa209b12571779046fa3d79bf0e0cec045da2f35bd462e8b017f4981b3578a",
-    "output/lobby-concept/assets/models/prop_rune_plinth-display.png": "6f7ad63b2a7486ae44244809fc33bbb80795053c4112bcb60d8a60c96cfdb08e",
-    "output/lobby-concept/assets/models/prop_rune_plinth-preview.png": "38c7230ed7e0e6edfa12a5ba5ed3167e3e9ee83cd6c34635aa56e326e5efd3ab",
-    "output/lobby-concept/assets/models/prop_rune_plinth-front.png": "afcb30bd6d29910b13c1211557b3beb4a671d9ddb5fd9f203a0fb547c925569c"
+    "output/lobby-concept/assets/models/prop_rune_plinth.bbmodel": "0875450f567f028dcc4dc66699a983616537be75904544c9fa71b127d35c21a6",
+    "output/lobby-concept/assets/models/prop_rune_plinth.png": "a5e6c89353c70b95b3b145ebbfd33b50b26089b519dcb3f33f6b45f8e7d23f8b",
+    "output/lobby-concept/assets/models/prop_rune_plinth-display.png": "db711c2688d8aa6e09499193d309b6f8560494d9083a1f985e806cb0ae4902dd",
+    "output/lobby-concept/assets/models/prop_rune_plinth-preview.png": "5a9e075713001aad20b59f485c0b2fdfc2c6f455772e5993d5699315d8b1296f",
+    "output/lobby-concept/assets/models/prop_rune_plinth-front.png": "4525db878fd904ad03459d7ad558f3d791ec8ba5966cc81bd2373344eb5d0641"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

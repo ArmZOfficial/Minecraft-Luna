@@ -2,18 +2,17 @@
 
 Java item rules: elements stay inside -16..32, each element rotates on one axis by 0/22.5/45,
 UVs live in 0..16 space, and every display context carries its own transform.
+Textures are baked per face by texture_bake.py at 2 texels per unit.
 """
 import argparse
 import base64
 import json
 from blockbench_mcp import Client
 from build_moonfall_boss import OUT, data, embedded, dispose_view
+from texture_bake import RAMPS, bake
+from build_luma_props import load_atlas
 
-# 128px atlas, 4x4 slots of 32px; in 0..16 UV space each slot is 4 units wide.
-# New slots are appended so earlier items repaint identically.
-COLORS = ["#e3e0d6", "#d4a646", "#8f6a33", "#2bd0e0", "#134a55", "#36e2f0", "#ece4d2", "#0e3a44", "#1b1f24", "#d2353c", "#f2cf63", "#f6c93c", "#efbd34", "#ffd84f", "#c98a24"]
-SLOTS = {"steel":0, "gold":1, "bronze":2, "rune":3, "grip":4, "gem":5, "ivory":6, "teal":7, "dark":8, "ruby":9, "gold_light":10,
-         "crown_gold":11, "crown_band":12, "crown_tip":13, "crown_shade":14}
+DENSITY = 2   # texels per model unit = 32px per block, uniform on every face
 
 def build_runeblade():
     rows=[]
@@ -43,7 +42,7 @@ def build_runeblade():
     for name,(x0,x1),(y0,y1),(z0,z1) in [("blade_base",(5.9,10.1),(10.8,13.5),(7.4,8.6)),("blade_mid",(6.2,9.8),(13.5,24),(7.4,8.6)),
                                          ("blade_upper",(6.5,9.5),(24,26.5),(7.4,8.6)),("blade_tip_1",(6.9,9.1),(26.5,28.3),(7.45,8.55)),
                                          ("blade_tip_2",(7.4,8.6),(28.3,29.6),(7.5,8.5)),("blade_point",(7.8,8.2),(29.6,30.4),(7.55,8.45))]:
-        box(name,[x0,y0,z0],[x1,y1,z1],"steel")
+        box(name,[x0,y0,z0],[x1,y1,z1],"blade")
     box("rune_groove_front",[7.55,11.2,7.25],[8.45,25.6,7.4],"rune")
     box("rune_groove_back",[7.55,11.2,8.6],[8.45,25.6,8.75],"rune")
     return rows
@@ -59,11 +58,11 @@ def build_halo():
         if name in ("north","south"):
             for face,(z0,z1) in {"outer":(a[2]-.2,a[2]+.05) if name=="north" else (b[2]-.05,b[2]+.2),
                                  "inner":(b[2]-.05,b[2]+.2) if name=="north" else (a[2]-.2,a[2]+.05)}.items():
-                box("band_"+name+"_"+face,[a[0],7.8,z0],[b[0],8.4,z1],"teal")
+                box("band_"+name+"_"+face,[a[0],7.8,z0],[b[0],8.4,z1],"teal_metal")
         else:
             for face,(x0,x1) in {"outer":(a[0]-.2,a[0]+.05) if name=="west" else (b[0]-.05,b[0]+.2),
                                  "inner":(b[0]-.05,b[0]+.2) if name=="west" else (a[0]-.2,a[0]+.05)}.items():
-                box("band_"+name+"_"+face,[x0,7.8,a[2]],[x1,8.4,b[2]],"teal")
+                box("band_"+name+"_"+face,[x0,7.8,a[2]],[x1,8.4,b[2]],"teal_metal")
     # Gold corner housings with a raised step, a top gem and gems on both outer faces.
     for cname,(x,z) in {"nw":(.8,.8),"ne":(12.4,.8),"sw":(.8,12.4),"se":(12.4,12.4)}.items():
         box("corner_"+cname,[x,6.8,z],[x+2.8,9.4,z+2.8],"gold")
@@ -88,9 +87,9 @@ def build_crown():
         box(name+"_south",[lo,y0,hi-wall],[hi,y1,hi],mat)
         box(name+"_west",[lo,y0,lo+wall],[lo+wall,y1,hi-wall],mat)
         box(name+"_east",[hi-wall,y0,lo+wall],[hi,y1,hi-wall],mat)
-    ring("rim_bottom",12,12.8,.3,15.7,1.4,"crown_shade")
+    ring("rim_bottom",12,12.8,.3,15.7,1.4,"gold_dark")
     ring("band",12.8,15.4,.5,15.5,1.2,"crown_band")
-    ring("lip",15.4,16.2,.7,15.3,1.1,"crown_tip")
+    ring("lip",15.4,16.2,.7,15.3,1.1,"gold_bright")
     # Each side is described along its own axis t (0.7..15.3); the wall spans d0..d1 across it.
     # Points are thin plates flush with the outer face so the top edge reads as one zigzag.
     sides={"north":(.75,1.55,-1),"south":(14.45,15.25,1),"west":(.75,1.55,-1),"east":(14.45,15.25,1)}
@@ -100,10 +99,10 @@ def build_crown():
             d0,d1=(d0-out,d0) if sign<0 else (d1,d1+out)
         if side in ("north","south"): box(side+"_"+name,[t0,y0,d0],[t1,y1,d1],mat)
         else: box(side+"_"+name,[d0,y0,t0],[d1,y1,t1],mat)
-    def spike(side,name,center,steps,top_mat="crown_tip"):
+    def spike(side,name,center,steps,top_mat="gold_bright"):
         y=16.2
         for i,(width,height) in enumerate(steps):
-            place(side,name+"_"+str(i),center-width/2,center+width/2,y,y+height,top_mat if i==len(steps)-1 else "crown_gold")
+            place(side,name+"_"+str(i),center-width/2,center+width/2,y,y+height,top_mat if i==len(steps)-1 else "gold")
             y+=height
     for side in sides:
         spike(side,"mid",8,[(3.4,1.4),(2.2,1.4),(1.2,1.4),(.5,.9)])
@@ -116,7 +115,7 @@ def build_crown():
     for cname,(cx,cz) in {"nw":(1.6,1.6),"ne":(14.4,1.6),"sw":(1.6,14.4),"se":(14.4,14.4)}.items():
         y=16.2
         for i,(width,height) in enumerate([(1.8,1.8),(1.2,1.8),(.8,1.6),(.4,1.0)]):
-            box("corner_"+cname+"_"+str(i),[cx-width/2,y,cz-width/2],[cx+width/2,y+height,cz+width/2],"crown_tip" if i==3 else "crown_gold")
+            box("corner_"+cname+"_"+str(i),[cx-width/2,y,cz-width/2],[cx+width/2,y+height,cz+width/2],"gold_bright" if i==3 else "gold")
             y+=height
         gz=(cz-.8,cz-.55) if cz<8 else (cz+.55,cz+.8)
         gx=(cx-.8,cx-.55) if cx<8 else (cx+.55,cx+.8)
@@ -158,36 +157,40 @@ ITEMS={"runeblade":("item_runeblade_v2","runeblade_v2",build_runeblade),
        "halo":("item_aether_halo_v2","aether_halo_v2",build_halo),
        "crown":("item_aether_halo_v3","aether_halo_v3",build_crown)}
 
-PAINT="""(()=>{const t=Texture.all[0];t.edit(canvas=>{
-const c=canvas.getContext('2d'),colors=COLORS;let seed=33071;
-const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
-const rect=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
-colors.forEach((col,i)=>{const ox=(i%4)*32,oy=Math.floor(i/4)*32;rect(ox,oy,32,32,col);
-for(let y=0;y<32;y++)for(let x=0;x<32;x++){rect(ox+x,oy+y,1,1,rand()>.5?'rgba(255,255,255,.06)':'rgba(0,0,0,.06)')}
-if(i===0){rect(ox,oy,3,32,'#fbfaf4');rect(ox+29,oy,3,32,'#b9b6ab');
- for(let j=0;j<8;j++)rect(ox+4+Math.floor(rand()*24),oy+3+Math.floor(rand()*26),4,1,'rgba(255,255,255,.35)');}
-if([1,2].includes(i)){const hi=i===1?'#f7dc8f':'#b98d4e',lo=i===1?'#8c6720':'#5a3f1d';
- rect(ox,oy,32,2,hi);rect(ox,oy,2,32,hi);rect(ox+30,oy,2,32,lo);rect(ox,oy+30,32,2,lo);
- for(let j=0;j<10;j++)rect(ox+3+Math.floor(rand()*25),oy+3+Math.floor(rand()*25),3,1,'rgba(255,240,190,.3)');}
-if(i===3){rect(ox,oy,32,32,'#1fb9cc');rect(ox+10,oy,12,32,'#45e8f6');rect(ox+14,oy,4,32,'#c6fdff');
- for(let y=2;y<32;y+=6){rect(ox+6,oy+y,20,2,'#0d8a9c');rect(ox+14,oy+y-2,4,6,'#0d8a9c');rect(ox+15,oy+y,2,2,'#e8ffff');}}
-if(i===4){for(let k=-32;k<32;k+=6)for(let y=0;y<32;y++){const x=k+y;if(x>=0&&x<32){rect(ox+x,oy+y,2,1,'#0a2e36');rect(ox+(x+2)%32,oy+y,1,1,'#2a7584');}}}
-if(i===5){rect(ox,oy,32,32,'#1ec3d6');rect(ox+3,oy+3,26,26,'#4cecf8');rect(ox+8,oy+8,16,16,'#a5f9ff');rect(ox+8,oy+8,6,6,'#ffffff');
- rect(ox,oy+29,32,3,'#0e8796');rect(ox+29,oy,3,32,'#0e8796');}
-if(i===6){rect(ox,oy,32,3,'#fffaf0');rect(ox,oy+29,32,3,'#c3b89f');}
-if(i===7){rect(ox,oy,32,2,'#2f7380');rect(ox,oy+30,32,2,'#071f25');}
-if(i===9){rect(ox+3,oy+3,26,26,'#e85a5f');rect(ox+8,oy+8,16,16,'#ff9a9c');rect(ox+8,oy+8,6,6,'#ffe2e2');
- rect(ox,oy+29,32,3,'#8c1c24');rect(ox+29,oy,3,32,'#8c1c24');}
-if(i===11||i===13){for(let j=0;j<14;j++)rect(ox+2+Math.floor(rand()*28),oy+2+Math.floor(rand()*28),2,2,i===11?'rgba(255,240,170,.35)':'rgba(255,255,230,.5)');}
-if(i===12){rect(ox,oy,32,3,'#ffe48a');rect(ox,oy+13,32,4,'#fbe07a');rect(ox,oy+27,32,5,'#c98a24');
- for(let j=0;j<10;j++)rect(ox+2+Math.floor(rand()*28),oy+4+Math.floor(rand()*20),3,1,'rgba(255,250,210,.5)');}
-if(i===10){rect(ox,oy,32,2,'#fff1b0');rect(ox,oy,2,32,'#fff1b0');rect(ox+30,oy,2,32,'#b08a2c');rect(ox,oy+30,32,2,'#b08a2c');
- for(let j=0;j<8;j++)rect(ox+3+Math.floor(rand()*25),oy+3+Math.floor(rand()*25),3,1,'rgba(255,255,230,.45)');}
-});},{edit_name:'Luma item v2 atlas'});return true})()"""
+def rune_art(c,face,rng):
+    """Rune groove: dark channel with a glowing line and evenly spaced brighter glyph nodes."""
+    glow=RAMPS["gem"]; dark=RAMPS["teal"]
+    for y in range(c.h):
+        for x in range(c.w): c.set(x,y,dark[1])
+    mid=c.w//2
+    for y in range(c.h):
+        c.set(mid,y,glow[4] if y%6 else glow[6])
+        if c.w>2 and y%6==0:
+            for dx in (-1,1): c.set(mid+dx,y,glow[3])
+    if c.w>=3:
+        for y in range(c.h): c.set(0,y,dark[0]); c.set(c.w-1,y,dark[2])
 
-def uv_for(mat):
-    i=SLOTS[mat]; u=(i%4)*4; v=(i//4)*4
-    return [u+.05,v+.05,u+3.95,v+3.95]
+def grip_art(c,face,rng):
+    """Leather wrap wound diagonally, with a darker overlap edge on every turn."""
+    r=RAMPS["teal_leather"]
+    for y in range(c.h):
+        for x in range(c.w):
+            k=(x+y)%5
+            c.set(x,y,r[2] if k==0 else (r[4] if k==1 else r[3]))
+
+def crown_band_art(c,face,rng):
+    """Crown band: gold with a bright engraved stripe through the middle and a shaded lower edge."""
+    g=RAMPS["gold"]
+    for y in range(c.h):
+        for x in range(c.w):
+            t=3
+            if c.h>=4:
+                if y==0: t=5
+                elif y==c.h-1: t=1
+                elif abs(y-(c.h-1)/2)<.8: t=5
+            c.set(x,y,g[t])
+
+ARTS={"rune":rune_art,"grip":grip_art,"crown_band":crown_band_art}
 
 def main():
     parser=argparse.ArgumentParser()
@@ -213,16 +216,19 @@ def main():
     def call(tool,arguments): guard(); return client.call(tool,arguments)
     if any(guard()["counts"].get(key,0) for key in ["cubes","meshes","groups","textures"]): raise RuntimeError("Project must be empty")
     call("set_mode",{"mode_id":"edit"})
-    call("create_texture",{"name":texture+".png","width":128,"height":128,"fill_color":COLORS[0]})
-    call("risky_eval",{"code":PAINT.replace("COLORS",json.dumps(COLORS))})
+    atlas,face_uv=bake(rows,DENSITY,ARTS,seed=sum(map(ord,args.item)))
+    size=atlas.size[0]
+    call("create_texture",{"name":texture+".png","width":size,"height":size,"fill_color":"#000000"})
+    load_atlas(call,atlas)
     # Pack path luma:item/<texture>, so the exported JSON references the namespaced texture.
     call("risky_eval",{"code":"(()=>{const t=Texture.all[0];t.namespace='luma';t.folder='item';return t.name})()"})
     call("add_group",{"name":"item","origin":[8,8,8],"parent":"root"})
-    for mat in SLOTS:
-        batch=[{k:v for k,v in r.items() if k!="mat"} for r in rows if r["mat"]==mat]
-        if batch:
-            call("place_cube",{"elements":batch,"group":"item","texture":texture+".png",
-                              "faces":[{"face":f,"uv":uv_for(mat)} for f in ["north","south","east","west","up","down"]]})
+    call("place_cube",{"elements":[{k:v for k,v in r.items() if k!="mat"} for r in rows],"group":"item","texture":texture+".png",
+                      "faces":[{"face":f,"uv":[0,0,1,1]} for f in ["north","south","east","west","up","down"]]})
+    # Java UVs are 0..16 regardless of atlas resolution.
+    java_uv={n:{f:[round(v*16/size,4) for v in box] for f,box in faces.items()} for n,faces in face_uv.items()}
+    call("risky_eval",{"code":"(()=>{const m="+json.dumps(java_uv)+";for(const c of Cube.all){const f=m[c.name];if(!f)continue;"
+        "for(const k in f)c.faces[k].uv=f[k];c.preview_controller.updateUV(c)}return Cube.all.length})()"})
     display=json.dumps(DISPLAY[args.item])
     call("risky_eval",{"code":"(()=>{const d="+display+";for(const [k,v] of Object.entries(d)){Project.display_settings[k]=new DisplaySlot(k,v)}return Object.keys(Project.display_settings)})()"})
     OUT.mkdir(parents=True,exist_ok=True)

@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_fish_crate.json": "9c24c74b6786c8dda44e8ba185b34a93b8dd034dc7ccef497563ac0c8a199888",
-    "output/lobby-concept/assets/models/prop_fish_crate.bbmodel": "7e662502ab9ffa3ab1e661e7dd5c63daf745b502366ed76ff15d81f5e2dec394",
-    "output/lobby-concept/assets/models/prop_fish_crate.png": "5d66fa464329f9ce6c16bb7f96e2d9576990a22cec3aeec4c947b45c2e872cb7",
-    "output/lobby-concept/assets/models/prop_fish_crate-display.png": "74eec05bbd5f32fa772d9789827d7ff94e61a3362847220e6e98824f99ce9d53",
-    "output/lobby-concept/assets/models/prop_fish_crate-preview.png": "6f1a291556fe56fa503002aadbd4d9077844cdaba2e61dd9dd5f82aad711a612",
-    "output/lobby-concept/assets/models/prop_fish_crate-front.png": "5dc052dbe0f0592f2c598b9add50de04a48e3c9017bd358590233d73014c2657"
+    "output/lobby-concept/assets/models/prop_fish_crate.bbmodel": "fa5fb431afdc4c5879711b0d32742ebbcd0b8b8752d8d2824a3224be6d5f5a44",
+    "output/lobby-concept/assets/models/prop_fish_crate.png": "ab578a0b090346b591f842bfd3a43000fbe6754ba9f48f5e7fa7b9aaaa38b78d",
+    "output/lobby-concept/assets/models/prop_fish_crate-display.png": "362d0478f4a95afc72e7357637afccb65e6bfe0014fe608c447249f9558532fb",
+    "output/lobby-concept/assets/models/prop_fish_crate-preview.png": "860b7639b6f4dfae8949c4bcdc8c63c22001e7471dfd1a010d339b5f9cb5a570",
+    "output/lobby-concept/assets/models/prop_fish_crate-front.png": "9c412c2ec5f7b43787d99786f8a51d4c4df67039b407ed4e68a887d2a5ccc260"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -34,14 +34,14 @@
     7.31
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/item_runeblade_v2.json": "ce504455bae0c0c9224251abb7b2b54cda29aad40e57b6ede9bfb9a4d7a36baf",
-    "output/lobby-concept/assets/models/item_runeblade_v2.bbmodel": "9903dd1eac732ab3674efb672536d166a67eeab34825939f1eb1c8b38698a31c",
-    "output/lobby-concept/assets/models/item_runeblade_v2.png": "8b0634131379cfb1ff8db44db083ed035e9359457054862627938ba1382da577",
-    "output/lobby-concept/assets/models/item_runeblade_v2-display.png": "a57d340fc2064dd8ef2db536178b88bde363f312789090f6f034a6622ad531e3",
-    "output/lobby-concept/assets/models/item_runeblade_v2-preview.png": "1a48e65deae719efa5d2be951ac5df9b1d78452ef8932531c752e191f416898d",
-    "output/lobby-concept/assets/models/item_runeblade_v2-front.png": "ec718e3c9ca4419423022108417c5833144747f9be01a7c8ab175b4074f1115a",
-    "output/lobby-concept/assets/models/item_runeblade_v2-right.png": "ba2676a550d7753b3db84ba368e52fa2eb46ad01929d8fc052507149e73ae301",
-    "output/lobby-concept/assets/models/item_runeblade_v2-top.png": "d4de664c6613dc2de5759380025bfe74920ba57b328e9aa1dfeb15d98892c715"
+    "output/lobby-concept/assets/models/item_runeblade_v2.json": "2774c9a267e7ed066f91f80886d4a991be747b1e4c3f6f4208cc8437a68133c9",
+    "output/lobby-concept/assets/models/item_runeblade_v2.bbmodel": "73a7debdd68ed80dfe628b6d7035d09cc1f95e2013a699872cb039444a3254b0",
+    "output/lobby-concept/assets/models/item_runeblade_v2.png": "f62840a46deeab11511601073480bc4bee66d3ada4d4eafa81b0b690a4425da8",
+    "output/lobby-concept/assets/models/item_runeblade_v2-display.png": "51a4cc4a6ba7a9b1b62d4ea3773fc76acfba871e48ce96b2a7b971e3c5b09b3b",
+    "output/lobby-concept/assets/models/item_runeblade_v2-preview.png": "e1da3e6d55170fd1fe3cea2791f591e20defd251eafb585296f0c7da4f03090e",
+    "output/lobby-concept/assets/models/item_runeblade_v2-front.png": "a6eefc16866b9b357d35412485442549c80b69909e632265ed033c8f28fe4330",
+    "output/lobby-concept/assets/models/item_runeblade_v2-right.png": "0573de72d416093dd848ae025df1a8d87071fb9d9cadead151e54b02d8656f96",
+    "output/lobby-concept/assets/models/item_runeblade_v2-top.png": "d33066d03a6753473294f62bb5ee92b45251ec7fd580ff6c8d290350103ea500"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

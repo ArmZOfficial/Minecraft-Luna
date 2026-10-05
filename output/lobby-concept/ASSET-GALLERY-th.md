@@ -114,7 +114,7 @@
 
 [ไฟล์v2](assets/models/item_aether_halo_v2.bbmodel) · [Java JSON](assets/models/item_aether_halo_v2.json) · [texture128×128](assets/models/item_aether_halo_v2.png) · [manifest](assets/models/item_aether_halo_v2-manifest.json)
 35 elements: แท่งงาช้าง4ด้านคาดแถบน้ำเงินเขียวทั้งด้านนอก/ใน มุมทองมีขั้นบน อัญมณีบนยอดและด้านนอก2ด้าน แผ่นทองฝังอัญมณีด้านหน้า แผ่นเรียบด้านหลัง
-ตั้งค่าครบ8 context: ลอยเหนือหัว(head) มือซ้าย/ขวาทั้งบุคคลที่1และ3, GUI, พื้น, กรอบไอเทม; texture อ้าง `luma:item/aether_halo_v2`
+texture bake ทีละหน้า 2 texel/หน่วย ไล่แสงตามความสูงทั้งชิ้น; ตั้งค่าครบ8 context: ลอยเหนือหัว(head) มือซ้าย/ขวาทั้งบุคคลที่1และ3, GUI, พื้น, กรอบไอเทม; texture อ้าง `luma:item/aether_halo_v2`
 gate คำนวณขนาดไอคอน GUI จริงหลังแปลง (±7.94 หน่วย) ว่าไม่ล้นช่อง16×16; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
 
 ### v3 แบบมงกุฎ (6 ต.ค.2026, ตามภาพตัวอย่างจากผู้ใช้)
@@ -125,7 +125,7 @@ gate คำนวณขนาดไอคอน GUI จริงหลังแ�
 [ไฟล์v3](assets/models/item_aether_halo_v3.bbmodel) · [Java JSON](assets/models/item_aether_halo_v3.json) · [texture128×128](assets/models/item_aether_halo_v3.png) · [manifest](assets/models/item_aether_halo_v3-manifest.json)
 92 elements: แถบมงกุฎทอง3ชั้น(ขอบล่างเข้ม/แถบหลักมีเส้นไฮไลต์/ขอบบนอ่อน) ยอดแหลมแบบขั้นต่อกันเป็นฟันเลื่อยรอบวง
 ยอดมุมสูงสุด ยอดกลางด้านสูงรอง ยอดเล็กคั่น; ทับทิมใหญ่กลางแถบทุกด้าน ทับทิมเล็กที่ฐานยอดเล็ก อัญมณีฟ้าใกล้ปลายยอดมุม/ยอดกลาง
-สวมแล้วนั่งพอดีบนหัว(head) ไอคอน GUI ±7.84 ไม่ล้นช่อง กรอบไอเทม/มือ/พื้นตั้งค่าแล้ว; texture `luma:item/aether_halo_v3`
+texture bake ทีละหน้า 2 texel/หน่วย ไล่แสงตามความสูงทั้งชิ้น; สวมแล้วนั่งพอดีบนหัว(head) ไอคอน GUI ±7.84 ไม่ล้นช่อง กรอบไอเทม/มือ/พื้นตั้งค่าแล้ว; texture `luma:item/aether_halo_v3`
 v2 (วงแหวนสี่เหลี่ยม) เก็บไว้ เลือกได้ว่าจะ map `luma:aether_halo` กับรุ่นไหนตอนทำ pack; ยังไม่โหลดใน resource pack จริง
 
 ## 06 — Runeblade
@@ -144,7 +144,7 @@ v2 (วงแหวนสี่เหลี่ยม) เก็บไว้ เ�
 [ไฟล์v2](assets/models/item_runeblade_v2.bbmodel) · [Java JSON](assets/models/item_runeblade_v2.json) · [texture128×128](assets/models/item_runeblade_v2.png) · [manifest](assets/models/item_runeblade_v2-manifest.json)
 25 elements: ใบดาบขั้นฐานกว้าง-ลำยาว-ปลายแหลม4ขั้น ร่องรูนฟ้ามีลายทั้งสองหน้า คอใบดาบทองแดง
 การ์ดทองฝังอัญมณีหน้า/หลัง ปีกมีปลายยกและขั้นล่าง ด้ามพันหนังลายเฉียงคั่นแหวนทอง ปุ่มท้ายทองฝังอัญมณี
-display ครบ8 context: มือ3rd เอียงขึ้นแบบดาบvanilla ทั้งซ้าย/ขวา, 1st เห็นใบดาบ, GUI/กรอบไอเทมแนวทแยง (±7.86 ในช่อง), พื้นตั้งตรง
+texture bake ทีละหน้า 2 texel/หน่วย ไล่แสงตามความสูงทั้งชิ้น; display ครบ8 context: มือ3rd เอียงขึ้นแบบดาบvanilla ทั้งซ้าย/ขวา, 1st เห็นใบดาบ, GUI/กรอบไอเทมแนวทแยง (±7.86 ในช่อง), พื้นตั้งตรง
 texture อ้าง `luma:item/runeblade_v2`; `python tools/verify_luma_items_v2.py` ผ่าน; ยังไม่โหลดใน resource pack จริง
 
 ## 08 — Props ประจำจุดบริการ 12 ชิ้น (6 ต.ค.2026)

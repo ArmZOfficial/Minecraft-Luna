@@ -7,8 +7,8 @@
   "runtime_tested": false,
   "reference": "user-supplied crown photo (not stored)",
   "texture": [
-    128,
-    128
+    256,
+    256
   ],
   "display_contexts": [
     "firstperson_lefthand",
@@ -34,14 +34,14 @@
     6.89
   ],
   "sha256": {
-    "output/lobby-concept/assets/models/item_aether_halo_v3.json": "558c9f4b7196a231c2aded3177c08b4cbeb0c9230e683628853e1ee8b8199284",
-    "output/lobby-concept/assets/models/item_aether_halo_v3.bbmodel": "01a2db706f70357b8be00274b293252de7fa987f837b72308e2ae2000acaeb81",
-    "output/lobby-concept/assets/models/item_aether_halo_v3.png": "a08fd58ff9c0713dd6313139aec4e8b46d894a6ef40bd6448beb6293f7cfde61",
-    "output/lobby-concept/assets/models/item_aether_halo_v3-display.png": "494292452110fb8d20b1bf328800f6722d1ff96f7834651f6383cfddbc2d39bf",
-    "output/lobby-concept/assets/models/item_aether_halo_v3-preview.png": "fe3e7e00c6c786dcf482dfeb5add788b89144f7c40c83485b550e50454de8d1d",
-    "output/lobby-concept/assets/models/item_aether_halo_v3-front.png": "8d4d441df8b24ce7e9f2f84a764af69def43de15256e6e0b2019273524ac258f",
-    "output/lobby-concept/assets/models/item_aether_halo_v3-right.png": "9ea040f514d68a5eaaf25c8bce5be4ee2ef10f7ffad72ddedd4fca01ff2f9903",
-    "output/lobby-concept/assets/models/item_aether_halo_v3-top.png": "5bc447db1e4c84815a08c94d3d81baeee575ec50cd8ae6fb54b1feab8118d6ca"
+    "output/lobby-concept/assets/models/item_aether_halo_v3.json": "3a5e1787060ae86cdc103bde6e2a7de5601108226b90dd0d221c81c05ae23e59",
+    "output/lobby-concept/assets/models/item_aether_halo_v3.bbmodel": "461bffce8ecbdba4a507ef6abbf6e3758be7dfbb0a18b5fc261c51ebd232f12d",
+    "output/lobby-concept/assets/models/item_aether_halo_v3.png": "70a0dab25ca3e96ab7aa03fea03732496f43a06753a8a298d04ca2ad249e6ad8",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-display.png": "d53b0a49e8698d43cef81fa3b43a58af27021fe7fd4a1c4272f8144240e629cf",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-preview.png": "87b846e6f2f52cae93f48a9add93a781d9e98b1644f1372c6826c1c15d2d189b",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-front.png": "abb60c7a60699f085c8428375c25b75f9b99f671fa88d7a511cb8936aed19b57",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-right.png": "439f35caba03e222d03e9ae34211fa06afcdbbfe765cc6ef154a742cdc315d63",
+    "output/lobby-concept/assets/models/item_aether_halo_v3-top.png": "7315aae54b6f25d35c3876e66922b1c9a3ba0e9507ba25cc4c19849fa131ad7d"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_mailbox.json": "08dfc7b526192aba78de4a1bc54e52cc2dad4dfb790bd54c08ddb86f1cbe6ed3",
-    "output/lobby-concept/assets/models/prop_mailbox.bbmodel": "ae39e188347afc67b6f3f9fb52c6733b518bce396852d6ad0115818096d6b4b1",
-    "output/lobby-concept/assets/models/prop_mailbox.png": "7df371ef6888b247710bd38dab5789f5252bdec0d5872b4241d04036e708669c",
-    "output/lobby-concept/assets/models/prop_mailbox-display.png": "3ed3eaa76a37c8c4e11f577b162a95c8fb036cba35eb59920eb55178807c16fe",
-    "output/lobby-concept/assets/models/prop_mailbox-preview.png": "71e2478d8c501d3730a56cb8de50f9fb055d481b2f84f0f853fedb7b2b515f7e",
-    "output/lobby-concept/assets/models/prop_mailbox-front.png": "78e8131c24f66d9daa8b26ac691a641a36cfc796cd8c2aefa090156e18ab7623"
+    "output/lobby-concept/assets/models/prop_mailbox.bbmodel": "190a7ddd0520495503ce5b26a806ad4ba109016d29021cfbf3f7bb4747020bcf",
+    "output/lobby-concept/assets/models/prop_mailbox.png": "0343bcb9701ef0c4cfbcb468b5d10a176c27b6dacdedcbd9364bc65e68653ee3",
+    "output/lobby-concept/assets/models/prop_mailbox-display.png": "ba37d962327a45e8c9ee0a9c3020c516fc00293c997db9ffee9616498a9cba69",
+    "output/lobby-concept/assets/models/prop_mailbox-preview.png": "692a1a855d9dce54b525a2de5a9130d66bba964e6eba42dac022f6b0825e9c5e",
+    "output/lobby-concept/assets/models/prop_mailbox-front.png": "8b34236765609020294c4775e95907cd44fcfd7522f16ec80e69dfadb0ea2144"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_shop_sign.json": "290688ab47e2dd5fd8219199bbb205c48621678ee53faba07b4489b7d772f425",
-    "output/lobby-concept/assets/models/prop_shop_sign.bbmodel": "4f2172571f9dd5c589b702af9cc4f602fbf4fec1fd1a59c17755dd7895217950",
-    "output/lobby-concept/assets/models/prop_shop_sign.png": "a1f3f5e614e5a756b132f2e3c7bbbc8329465b68541384c59c7affd15192e603",
-    "output/lobby-concept/assets/models/prop_shop_sign-display.png": "132d88b7b73e789affbdf070b385e74047ec901fe47f15dd5fcec5d4e99c37ea",
-    "output/lobby-concept/assets/models/prop_shop_sign-preview.png": "07ab33d95f1a2afda0629653d6899fb497dac2ea657a1bd0516dc09c0828949d",
-    "output/lobby-concept/assets/models/prop_shop_sign-front.png": "3ef46bd292a00c59822803be5e0ec3748c0647b183e0b4df55acd78392e1dce7"
+    "output/lobby-concept/assets/models/prop_shop_sign.bbmodel": "b4a2f24f500c1e50ab684afdea85cbc42bc3ae9e98c5a444b8c658fc71e21611",
+    "output/lobby-concept/assets/models/prop_shop_sign.png": "614b7d52bb6009b6e8e4cb7c62cf4abed36cadad2e42faa1f9547c1453fd61b6",
+    "output/lobby-concept/assets/models/prop_shop_sign-display.png": "d93ad742d692b9ef91b5e364e7d1f679fc688ec11cefb389def39f344e42219b",
+    "output/lobby-concept/assets/models/prop_shop_sign-preview.png": "d36174e055552653c727bc53d6b6ded43ac7452770d5f2ff455ff3ce34146ae0",
+    "output/lobby-concept/assets/models/prop_shop_sign-front.png": "8a3e4f93c538cc38fb8e11fd5bbec2a0ae8ca045ba9a3f398b25016c22b11462"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

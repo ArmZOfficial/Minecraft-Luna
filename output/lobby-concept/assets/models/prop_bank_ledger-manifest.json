@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_bank_ledger.json": "369e9199f4bc19a1804dc601ce31330615e82f28c715054eecb9c35de314cbec",
-    "output/lobby-concept/assets/models/prop_bank_ledger.bbmodel": "a4c086cf17caf46226a28f66aaec6041b7bce44f3eede02a2fdf69f902f2c3b5",
-    "output/lobby-concept/assets/models/prop_bank_ledger.png": "280099bc35da860234220e7550ed09527a5beaea39612f28ce37a451056f1793",
-    "output/lobby-concept/assets/models/prop_bank_ledger-display.png": "f14b845a7466427c8ce90092a6c593aeac8e89e632e64f527d64dac0baac901d",
-    "output/lobby-concept/assets/models/prop_bank_ledger-preview.png": "4bb4d9f0be726a914691cbc216ca3263f19108114b9f4d5f97caf106b2ed68c4",
-    "output/lobby-concept/assets/models/prop_bank_ledger-front.png": "9ee8b355d3a9a8d9476fd122623266252c41baaf827da5000dfeda05394d122e"
+    "output/lobby-concept/assets/models/prop_bank_ledger.bbmodel": "b8504634898966b887d585b82bb43eef93529efd8655e587a024e6804e6b07a1",
+    "output/lobby-concept/assets/models/prop_bank_ledger.png": "e61ea289741bf5934ec66522987ca5b057a776eb8cbf16749ab263f615f596c5",
+    "output/lobby-concept/assets/models/prop_bank_ledger-display.png": "bc942bf980efeebb96f7e1143f08de00ed6608cc9332ace73f80817f3e9cf98a",
+    "output/lobby-concept/assets/models/prop_bank_ledger-preview.png": "d77b800811662b9af3c92260779b94dad3de7942299b593d337797cf9c4a2abd",
+    "output/lobby-concept/assets/models/prop_bank_ledger-front.png": "205dc1febdbbd6c060b3effc688b695dcd5bbdde3843201bb93ddf90f9a38614"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",

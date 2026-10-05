@@ -35,11 +35,11 @@
   ],
   "sha256": {
     "output/lobby-concept/assets/models/prop_quest_scroll.json": "de8a127d74d7292e16f9eb35cb21bc7e24ff921bd62687b7d1b91d10bda6529a",
-    "output/lobby-concept/assets/models/prop_quest_scroll.bbmodel": "c733d59965e9951dd7c764507a72bccf0eb58b83abc6e6fd8c19cd794dbac515",
-    "output/lobby-concept/assets/models/prop_quest_scroll.png": "b2b9148f8c3deb5fae3f3858da3abe269b1a46ddfe641e11e748d315a73d5d54",
-    "output/lobby-concept/assets/models/prop_quest_scroll-display.png": "bf7ae1a67df673b69ae6a8cafb020344be41817f9ae8b441f750f3f18f84a1e6",
-    "output/lobby-concept/assets/models/prop_quest_scroll-preview.png": "a227222d0a38dc65944877f3630545d56101a62c96f820531bfb110e0177a367",
-    "output/lobby-concept/assets/models/prop_quest_scroll-front.png": "683d7838c7e4e93830bee08c2ad17aedcb8378ce5b347668a660340ab44c2b8b"
+    "output/lobby-concept/assets/models/prop_quest_scroll.bbmodel": "5913c663e51b4406dff8f089cfc1aec68cc670b0c83fb132dc75e1452e803f8d",
+    "output/lobby-concept/assets/models/prop_quest_scroll.png": "fcb80a0c3063e0e4521db6169540eabb9942528f1f7b066cf7ca240fc33961fe",
+    "output/lobby-concept/assets/models/prop_quest_scroll-display.png": "bc4e9dfebcd89e20cd7582a9ca73c2bcc9f3a4d63d4960d7299df047ae50f7ac",
+    "output/lobby-concept/assets/models/prop_quest_scroll-preview.png": "316e688ff7aad6d65d0e9a09f3b312f32ef1e454398d3d61c2f87f9038adad01",
+    "output/lobby-concept/assets/models/prop_quest_scroll-front.png": "4ec9a0419cd2832d308f61132a0a847f0bda88895e04b8e2835f2c864753e4a4"
   },
   "known_limits": [
     "Not loaded in a real client/resource pack yet",
