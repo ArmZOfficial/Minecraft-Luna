@@ -84,6 +84,20 @@
 เพิ่มขอบ hood, rune stitching และคทาคริสตัล ท่าร่ายเป็นภาพประกอบ ไม่ใช้ frame animation ตัดสินการวาร์ป
 วางข้างจุดเลือกปลายทาง หันเข้าพื้นที่อ่านระดับและเงื่อนไข ห้ามบังหน้าประตูหรือ warp pad
 
+### v2 ลงรายละเอียดเต็ม (6 ต.ค.2026)
+
+![โมเดลผู้ดูแลประตูv2](assets/models/npc_portal_mage_v2-preview.png)
+![v2ด้านหน้า](assets/models/npc_portal_mage_v2-front.png)
+![v2ร่ายเวท](assets/models/npc_portal_mage_v2-cast.png)
+
+[ไฟล์v2](assets/models/npc_portal_mage_v2.bbmodel) · [texture256×256](assets/models/npc_portal_mage_v2.png) · [manifest](assets/models/npc_portal_mage_v2-manifest.json)
+124cubes/18bones/4animations/96keys: idle, greet, cast, open_portal; สูง2.3บล็อก (ยอดฮู้ด)
+ฮู้ดแหลมเป็นbone `hood` ลูกของ `hi_head` ขอบทองรอบหน้า อัญมณีหน้าผาก แถบทองหลังฮู้ดถึงยอด; เคราขาวยาว3ชั้น หนวด คิ้วดก ผมขาวข้างขมับ
+เสื้อคลุมชั้นนอกน้ำเงินเขียวขอบทองเปิดหน้าเห็นชุดชั้นในงาช้าง ผ้าคลุมไหล่ขอบทอง อัญมณีบนไหล่ แขนเสื้อบานงาช้างพร้อมข้อมือน้ำเงินคาดทอง
+เข็มขัดดำหัวทองฝังคริสตัล ผ้าห้อยหน้าลายทอง ชายเสื้อแยกซ้ายขวามีขอบทองและอัญมณีด้านหลัง รองเท้าดำหัวทอง
+คทาอยู่ใน `staff_socket` ใต้มือขวา ยืนหน้าแขน(ไม่ทะลุแขนเสื้อ) กำปั้นจับด้าม หัวคทากรงเพชรทองกับคริสตัลลอย(`staff_crystal`)ขยับ/หมุน
+ตรวจ17เฟรม: คทาติดมือทุกเฟรม ไม่ชนหัว/ฮู้ด(ตรวจจุดบนชิ้นจริงที่หมุนแล้ว) ทุกท่าสูงสุด2.66บล็อก ต่ำกว่าเพดาน2.8ตามticket; `python tools/verify_portal_mage.py` ผ่าน; ยังไม่ทดสอบในเกม
+
 ## 05 — Aether Halo
 
 ![ภาพอ้างอิง Halo](assets/references/item-aether-halo.png)

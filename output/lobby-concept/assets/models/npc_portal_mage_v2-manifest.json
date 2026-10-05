@@ -1,0 +1,245 @@
+{
+  "id": "npc_portal_mage_v2",
+  "format": "free",
+  "status": "model-exported-awaiting-runtime-qa",
+  "animations": [
+    "idle",
+    "greet",
+    "cast",
+    "open_portal"
+  ],
+  "cubes": 124,
+  "bones": 18,
+  "height_target": 2.3,
+  "runtime_tested": false,
+  "reference": "assets/references/npc-portal-mage.png",
+  "texture": [
+    256,
+    256
+  ],
+  "native_timeline_frames_checked": 17,
+  "supersedes": "npc_portal_mage",
+  "revision": 2,
+  "built_at": "2026-10-06",
+  "build_method": "Blockbench 5.2.1 / local MCP 1.10.0 native geometry, paint and animation tools",
+  "builder": "tools/build_portal_mage.py",
+  "pose_capture": "tools/preview_portal_mage.py",
+  "direction": "north (-Z)",
+  "units_per_block": 16,
+  "skeleton": [
+    {
+      "name": "motion_root",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "motion_root",
+      "origin": [
+        0,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "waist",
+      "parent": "body",
+      "origin": [
+        0,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "right_robe",
+      "parent": "waist",
+      "origin": [
+        2.4,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "left_robe",
+      "parent": "waist",
+      "origin": [
+        -2.4,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "hi_head",
+      "parent": "body",
+      "origin": [
+        0,
+        25.5,
+        0
+      ]
+    },
+    {
+      "name": "hood",
+      "parent": "hi_head",
+      "origin": [
+        0,
+        25.5,
+        0
+      ]
+    },
+    {
+      "name": "right_upper_arm",
+      "parent": "body",
+      "origin": [
+        5.8,
+        24.8,
+        0
+      ]
+    },
+    {
+      "name": "right_forearm",
+      "parent": "right_upper_arm",
+      "origin": [
+        5.8,
+        18.5,
+        0
+      ]
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_forearm",
+      "origin": [
+        5.8,
+        13.4,
+        -0.3
+      ]
+    },
+    {
+      "name": "staff_socket",
+      "parent": "right_hand",
+      "origin": [
+        5.8,
+        12.35,
+        -2.6
+      ]
+    },
+    {
+      "name": "staff_crystal",
+      "parent": "staff_socket",
+      "origin": [
+        5.8,
+        37.6,
+        -2.6
+      ]
+    },
+    {
+      "name": "left_upper_arm",
+      "parent": "body",
+      "origin": [
+        -5.8,
+        24.8,
+        0
+      ]
+    },
+    {
+      "name": "left_forearm",
+      "parent": "left_upper_arm",
+      "origin": [
+        -5.8,
+        18.5,
+        0
+      ]
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_forearm",
+      "origin": [
+        -5.8,
+        13.4,
+        -0.3
+      ]
+    },
+    {
+      "name": "right_leg",
+      "parent": "motion_root",
+      "origin": [
+        2,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "left_leg",
+      "parent": "motion_root",
+      "origin": [
+        -2,
+        12.5,
+        0
+      ]
+    },
+    {
+      "name": "hitbox",
+      "parent": null,
+      "origin": [
+        0,
+        30,
+        0
+      ]
+    }
+  ],
+  "held_props": {
+    "staff_socket": "right_hand",
+    "hood": "hi_head",
+    "max_gap_px": 0,
+    "staff_head_intersections": 0
+  },
+  "handedness": "character right is +X (model faces north/-Z); staff socket under the right hand",
+  "working_clearance": {
+    "limit_blocks": 2.8,
+    "max_pose_top_blocks": 2.6577
+  },
+  "hitbox_proposal": {
+    "bone": "hitbox",
+    "from": [
+      -4.6,
+      0,
+      -4.6
+    ],
+    "to": [
+      4.6,
+      36.8,
+      4.6
+    ],
+    "animated": false,
+    "runtime_verified": false
+  },
+  "timeline": {
+    "fps": 20,
+    "keyframes": 96
+  },
+  "rendered_bounds_blocks": {
+    "max_height": 2.6577,
+    "max_width": 1.9637
+  },
+  "sha256": {
+    "output/lobby-concept/assets/models/npc_portal_mage_v2.bbmodel": "47e8e4caab0a358a50094dc8fe7733cae32e0acf8721abc70f39bb3ce8765542",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2.png": "4e02e755d130da5c2f1b9502c4eb0dc649bab5c16d34c91fdff0df4074df59ec",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-pose-checks.json": "125e5c33aa8fc6319c809c3e302665d3d66d3a1b2aafa907f9f9e7d5c2c7f216",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-back.png": "ebf28cef8b88957bd3e6268ac37b2cd561053ed0cbbcde5454ba38cb224faf77",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-cast.png": "b33f09ec40add3a949e422b652837e39a6baa90bb79cbdeb28ce7c28f59bb698",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-front.png": "3130f16665b650bf8ec2cf6644a073f3e0f820f74fe10750f23769694974a3f7",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-greet.png": "7493dfbdb120a236fc998159d56f9d9995dd5be58367a9580c3c14dc0ceded4b",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-idle.png": "3871a215a68fed756827fae33e16937079bd08e35e9b1c0e124617f3304625a9",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-open-portal.png": "ec1afe98b63441238704d425dfc71fb741900755f3754ebc09b6957cdc06775c",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-preview.png": "200a295a934c80c84bbebaa5a7da5c71757a4c2e0b4c32291d65f6cde01762f1",
+    "output/lobby-concept/assets/models/npc_portal_mage_v2-right.png": "8cc3257af32edeaae464edf4f41100cb5a2fd5b769225ac5ebe71cde1badbfe3"
+  },
+  "known_limits": [
+    "No ModelEngine/Citizens runtime or client evidence yet",
+    "Pose samples are review evidence, not a collision-free proof across every interpolated frame",
+    "v1 (npc_portal_mage) is kept unchanged for comparison"
+  ]
+}

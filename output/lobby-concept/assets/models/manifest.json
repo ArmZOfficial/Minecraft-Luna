@@ -157,5 +157,27 @@
     ],
     "native_timeline_frames_checked": 17,
     "supersedes": "npc_quest_warden"
+  },
+  {
+    "id": "npc_portal_mage_v2",
+    "format": "free",
+    "status": "model-exported-awaiting-runtime-qa",
+    "animations": [
+      "idle",
+      "greet",
+      "cast",
+      "open_portal"
+    ],
+    "cubes": 124,
+    "bones": 18,
+    "height_target": 2.3,
+    "runtime_tested": false,
+    "reference": "assets/references/npc-portal-mage.png",
+    "texture": [
+      256,
+      256
+    ],
+    "native_timeline_frames_checked": 17,
+    "supersedes": "npc_portal_mage"
   }
 ]
