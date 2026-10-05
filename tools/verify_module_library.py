@@ -24,7 +24,7 @@ for t in traits:
 for p in balance['profiles'].values():
     assert p['traitSlots']<=1
     for role in ('sword','axe','bow','crossbow','trident','armor','bootsExtra','tool','fishing'):
-        assert all(k in balance['enchantmentNames'] and 1<=v<=4 for k,v in p[role].items())
+        assert all(k in balance['enchantmentNames'] and 1<=v<=balance["rules"]["nativeEnchantLevelCap"] for k,v in p[role].items())
         assert 'minecraft:mending' not in p[role]
 for o in offers:
     assert o['setId'] in sets and o['draft'] and o['fulfillment']['combatStats'] is False

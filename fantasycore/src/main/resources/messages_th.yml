@@ -348,6 +348,7 @@ craft:
   review: '<yellow>รายการคราฟต์พักให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่ส่งของหรือคืนเงินอัตโนมัติ)'
   menu:
     title: '<#47C8D3>โรงตีเหล็กรูน · คราฟต์'
+    enchant: '<gray>Enchant: <#47C8D3><enchant>'
     previous: '<white>หน้าก่อน'
     next: '<white>หน้าถัดไป'
     less: '<gray>คราฟต์ครั้งละ 1 ชิ้น'
@@ -500,7 +501,7 @@ admin:
     no-anchor: '<yellow>ไม่มี anchor ในระยะ 3 บล็อก'
   item:
     list-header: '<#DDA54A>แม่แบบไอเทม <count> รายการ'
-    list-line: '<white><id></white> <gray>v<version> · <material>'
+    list-line: '<white><id></white> <gray>v<version> · <material> · <enchants>'
     not-core: '<yellow>ไอเทมในมือไม่ใช่ของ Core (ไม่มี template ใน PDC) — ชื่อ/lore ไม่นับเป็นหลักฐาน'
     identity: 'template <#DDA54A><template></#DDA54A> v<version> · serial <#47C8D3><serial></#47C8D3> · สถานะ <state>'
     unknown: '<red>ไม่พบ template <id> — ดู /fa item list'

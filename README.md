@@ -11,7 +11,7 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
-- [ปลั๊กอิน FantasyCore v0.5](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/กล่องจดหมาย/รางวัลรายวัน/แลกของ/ซ่อม/คราฟต์
+- [ปลั๊กอิน FantasyCore v0.6](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/กล่องจดหมาย/รางวัลรายวัน/แลกของ/ซ่อม/คราฟต์
 - [Core Craft และช่างรูน](fantasycore/CRAFT-th.md) — สูตร ราคา serial ใหม่ mail และ recovery
 - [ผสม ItemsCore](fantasycore/ITEMSCORE-INTEGRATION-th.md) — ขอบเขต provider, demo และชุด import ทดลอง 4 ชิ้น
 - [ใช้และกู้คืนระบบแลกของ](fantasycore/EXCHANGE-th.md) — สูตร, โควตา, snapshot และรายการรอแอดมินตรวจ
@@ -24,10 +24,10 @@
 เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
 มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
 
-**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.5 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
+**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.6 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
 item template, บ้าน, RTP, claim adapter, กล่องจดหมาย, รับของรายวัน และ `/exchange` (3 สูตร vanilla + preview + journal recovery)
 และ `/repair` (vanilla/Core serial + preview + ค่าจอง/คืนเงิน + journal), `/craft` (3 สูตร Core gear, วัตถุดิบ/ราคาก่อนยืนยัน, serial ใหม่เข้า mail)
-— build กับ Paper 26.2 API ผ่าน และ unit tests 76 รายการผ่าน; schema v5
+— build กับ Paper 26.2 API ผ่าน และ unit tests 92 รายการผ่าน; schema v5
 พร้อมชุด staging (สคริปต์ดาวน์โหลด Paper + ปลั๊กอินที่ล็อกเวอร์ชันและตรวจ hash, หิน Protect 5 ระดับ, LuckPerms/WorldGuard setup)
 **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง** — ขั้นต่อไปคือทำ checklist ใน [server/README-th.md](server/README-th.md)
 ยังไม่มีโลกเมืองที่สร้างเสร็จ, แผนที่สด, payment backend หรือการส่งของจริง
@@ -65,4 +65,6 @@ remote เชื่อมแล้ว และส่งงานชุดแร
 ## คลังสินค้าและไอคอนที่เพิ่ม
 
 จัดชื่อไทยและแคตตาล็อกจาก `All for module` แล้ว: [โมเดล/ไอคอน/แปลนวาง](server/content/library/README-th.md), [สูตรบาลานซ์ที่เสนอ](server/content/library/BALANCE-th.md), [PromptPay DEV](website/PROMPTPAY-th.md)
-เว็บใช้ไอคอนจริงและทดสอบซื้อจำลองกับ PostgreSQL ได้ ส่วน enchant, provider และการส่งของเข้าเกมจากเว็บยังอยู่ขั้นเตรียมเชื่อมและทดสอบ
+เว็บใช้ไอคอนจริงและทดสอบซื้อจำลองกับ PostgreSQL ได้ Core v0.6 เพิ่ม native enchant ของอุปกรณ์เริ่มต้น 3 ชิ้นและ archive แม่แบบเก่าแล้ว ดู [คู่มือ](fantasycore/ENCHANTS-th.md); provider/ทักษะชุด/ส่งของเข้าเกมจากเว็บยังต้องเชื่อมและทดสอบ
+
+Core v0.6 เพิ่ม [มอนสเตอร์ตามความลึกและแถบเลือด](fantasycore/MONSTERS-th.md); มี [คอนเซปต์ดันเจี้ยนจันทรา 4 ภาพ/ใบงานสร้าง](output/lobby-concept/dungeons/moonfall/README-th.md) แล้ว แต่ดันยังไม่เปิดเล่นจริง

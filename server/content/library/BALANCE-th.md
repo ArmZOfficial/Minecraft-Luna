@@ -1,8 +1,10 @@
 # ชื่อชุด Enchant และบาลานซ์ Luma
 
 สูตรในเอกสารนี้เป็น **แบบออกแบบ v1 ที่ยังไม่เปิดทำงาน** มีข้อมูลเครื่องอ่านใน [balance.json](balance.json)
-FantasyCore 0.5 ยังใช้ไอเทม vanilla ที่มี serial ไม่มี enchant เริ่มต้นตามสูตรนี้ ไม่มี perk ประจำชุด และไม่ควร drop JSON นี้เป็น config ของปลั๊กอินอื่น
-ต้อง implement enchant validation และ stat/ability adapter แล้วทดสอบก่อนเปิดใช้
+Core v0.6 ทำ native enchant ของ starter 3 ชิ้นและ archive v1/v2 แล้ว; starter ขยับเป็น Sharpness II/Sweeping I,
+Efficiency III/Fortune I, Protection II/Thorns I พร้อม Unbreaking II ตามที่ต้องการให้ดูมีพลังขึ้น
+เพิ่ม [มอนสเตอร์ตามความลึก](../../../fantasycore/MONSTERS-th.md) เพื่อรองรับของที่ดีขึ้น; ยังไม่ได้เปิดใน Minecraft runtime
+profile ของแพ็กทุกชุด/ทักษะ 17 ชุด/ขั้น II–III เป็น blueprint; ห้าม drop JSON นี้เป็น provider config หรืออ้างว่าทั้งหมดเปิดแล้ว
 
 ## เป้าหมายความรู้สึกเมื่อเล่น
 
@@ -15,14 +17,14 @@ FantasyCore 0.5 ยังใช้ไอเทม vanilla ที่มี serial
 
 | ระดับ | จุดเริ่มต้นที่เสนอ | ดาบ/ธนู | เกราะ | เครื่องมือ | ราคา Gold ต่อชิ้น | Token เควส |
 |---|---|---|---|---|---:|---:|
-| นักเดินทาง I | เควสเมือง/โรงตีเหล็ก | Sharpness I / Power I + Unbreaking I | Iron Protection I + Unbreaking I | Efficiency II + Unbreaking I | 200–400 | 0–2 |
-| ผู้ชำนาญ II | เควส 6–10 รอบ + วัตถุดิบ | Sharpness II / Power II + Unbreaking II | Diamond Protection II + Unbreaking II | Efficiency III + Unbreaking II | 1,500–2,800 | 6–10 |
-| จ้าวรูน III | เควสกิลด์/บอสกลุ่ม | Sharpness III / Power III + Unbreaking III | Diamond Protection III + Unbreaking III | Efficiency IV + Unbreaking III | 5,000–9,000 | 18–24 |
+| นักเดินทาง I | เควสเมือง/โรงตีเหล็ก | Sharpness II / Power II + Unbreaking II | Iron Protection II/Thorns I + Unbreaking II | Efficiency III/Fortune I + Unbreaking II | 200–400 | 0–2 |
+| ผู้ชำนาญ II | เควส 6–10 รอบ + วัตถุดิบ | Sharpness III / Power III + Unbreaking III | Diamond Protection III/Thorns I + Unbreaking III | Efficiency IV/Fortune II + Unbreaking III | 1,500–2,800 | 6–10 |
+| จ้าวรูน III | เควสกิลด์/บอสกลุ่ม | Sharpness IV / Power IV + Unbreaking III | Diamond Protection IV/Thorns II + Unbreaking III | Efficiency V/Fortune III + Unbreaking III | 5,000–9,000 | 18–24 |
 
-ตารางเป็นเป้าราคา ไม่ใช่ราคาของสูตร craft ใน Core ที่เปลี่ยนแล้ว
+ขั้น II/III และ token เป็นเป้าราคา/ระบบอนาคต; Core มีเฉพาะ starter 3 สูตรราคา 200/300/400 Gold ตามคู่มือ Craft
 token ไม่มีช่องทางซื้อเงินจริง; quest reward ที่มีพลังห้ามแปลงเป็น SKU cash ผ่านคำสั่ง config โดยไม่ตรวจประเภท
 ไม่ใช้ enchant ระดับ 10/100 หรือรวม stat พิเศษหลายระบบจนคูณกัน
-เว้นขั้น Netherite และ enchant vanilla ขั้นสูงสุดเป็นเนื้อหาอนาคต หลังมีข้อมูลเศรษฐกิจ/ความยากจริง
+เว้น Netherite และพลังเพิ่มเติมนอกตารางไว้หลังมีข้อมูลเศรษฐกิจ/ความยากจริง; ค่าระดับสูงใน blueprint ยังไม่ใช่สูตรที่เปิดแล้ว
 
 ตัวอย่างสูตรเสนอ (ยังไม่เป็น recipe ที่เปิดใช้):
 
@@ -33,24 +35,28 @@ token ไม่มีช่องทางซื้อเงินจริง; 
 
 อัปเกรดต้องย้าย identity ของชิ้นเดิมใน operation เดียว: snapshot ก่อน, หัก input/Gold, freeze output, journal, mailbox
 ไม่รับ item จากเทียบชื่อ ไม่หักของแล้ว `give` โดยไม่มีใบรายการ; recovery ที่ไม่แน่ใจส่ง REVIEW
-การอัปเกรด template version ต้องเก็บวิธีอ่าน/ซ่อมของรุ่นเก่า Core 0.5 ยังไม่รองรับหลายเวอร์ชันของแม่แบบเดียวพร้อมกัน จึงต้องแก้จุดนี้ก่อน deploy รุ่นที่เปลี่ยน stats
+Core v0.6 เพิ่ม native enchant ของ starter 3 ชิ้นตามขั้น I และ lookup revision v1/v2 แล้ว; ส่วน profile ทุกชุด/trait ยังเป็น blueprint
+ดู [ENCHANTS-th.md](../../../fantasycore/ENCHANTS-th.md) สำหรับเพดาน factory, snapshot รุ่นเก่า, การอัปเกรดและ runtime QA
 
 ## 2. ชื่อ Enchant ที่แสดงแก่ผู้เล่น
 
-| ID ของ vanilla | ชื่อลูม่าใน lore | ขั้น I / II / III | กติกา |
+| ID ของ vanilla | ชื่อที่แสดงในเมนู | ขั้น I / II / III | กติกา |
 |---|---|---|---|
-| sharpness | คมรูน | 1 / 2 / 3 | เฉพาะดาบ/ขวาน ไม่บวกซ้อน Smite |
-| unbreaking | ผนึกความทนทาน | 1 / 2 / 3 | อุปกรณ์ที่มี durability |
-| power | สายธนูดารา | 1 / 2 / 3 | BOW เท่านั้น |
+| sharpness | คมรูน | 2 / 3 / 4 | เฉพาะดาบ/ขวาน ไม่บวกซ้อน Smite |
+| unbreaking | ผนึกความทนทาน | 1–2 / 2–3 / 3 | อุปกรณ์ที่มี durability |
+| power | สายธนูดารา | 2 / 3 / 4 | BOW เท่านั้น |
 | quick_charge | กลไกเร่งรูน | 1 / 2 / 3 | CROSSBOW เท่านั้น |
 | loyalty | พันธะผู้ถือ | 1 / 2 / 3 | TRIDENT; ไม่รวม Riptide |
-| protection | เกราะผนึกภัย | 1 / 2 / 3 | เกราะ ไม่มี Fire/Blast Protection ซ้อน |
+| protection | เกราะผนึกภัย | 2 / 3 / 4 | เกราะ ไม่มี Fire/Blast Protection ซ้อน |
 | feather_falling | ย่างเท้าขนนก | 2 / 3 / 4 | รองเท้าจริง ไม่ใช่โมเดลรองเท้า PAPER |
-| efficiency | แรงช่างรูน | 2 / 3 / 4 | Pickaxe/Axe/Shovel/Hoe ที่ใช้ขุด |
+| efficiency | แรงช่างรูน | 3 / 4 / 5 | Pickaxe/Axe/Shovel/Hoe ที่ใช้ขุด |
 | luck_of_the_sea | พรแห่งวารี | 1 / 2 / 2 | เบ็ด ไม่เร่ง Rare loot ไม่สิ้นสุด |
 | lure | เสียงเรียกฝูงปลา | 1 / 2 / 2 | เบ็ด ใช้ผลตกปลาที่ server ตรวจ |
+| sweeping_edge | วงคมจันทร์ | 1 / 2 / 3 | ดาบ Java; กวาดแบบ vanilla ไม่ใช่ custom AoE |
+| fortune | พรแร่ดารา | 1 / 2 / 3 | tool; จูนรายได้แร่/ร้านรับซื้อจากของจริง |
+| thorns | หนามผู้พิทักษ์ | 1 / 1 / 2 | เกราะ; retaliation และ durability ตาม vanilla |
 
-ชื่อไทยเป็น lore ของ Luma ไม่ใช่การลงทะเบียน enchant ใหม่ และไม่เปลี่ยนชื่อ enchant vanilla ของผู้เล่นทุกคน
+ชื่อไทยเป็นคำอธิบายของ Luma ไม่ใช่การลงทะเบียน enchant ใหม่ และไม่เปลี่ยนชื่อ enchant vanilla ของผู้เล่นทุกคน
 ค่าจริงเก็บ Enchantment key/level ฝั่ง server; lore ที่แก้ชื่อไม่เพิ่มพลัง
 ให้ factory ตรวจ material, max level และคู่ enchant ขัดกันก่อนออก item; ไม่ใช้ unsafe enchant แบบ allow-all
 จอบ/ขวานสำหรับอาชีพใช้ profile tool และไม่เติม sword profile อีกชุดในชิ้นเดียว

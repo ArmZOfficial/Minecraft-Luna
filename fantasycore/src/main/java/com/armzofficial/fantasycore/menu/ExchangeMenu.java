@@ -3,6 +3,8 @@ package com.armzofficial.fantasycore.menu;
 import com.armzofficial.fantasycore.Services;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.exchange.ExchangeService;
+import com.armzofficial.fantasycore.item.NativeEnchants;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -66,9 +68,9 @@ public final class ExchangeMenu extends Menu {
             for (int i = 0; i < SLOTS.length && page * SLOTS.length + i < recipes.size(); i++) {
                 ExchangeService.Recipe recipe = recipes.get(page * SLOTS.length + i);
                 set(SLOTS[i], Icons.of(recipe.icon(), m.plain(exchange.key("menu.recipe.name"), Messages.p("name", recipe.name())),
-                        m.lines(exchange.key("menu.recipe.lore"), Messages.p("inputs", recipe.describeInputs(1)), Messages.p("price", recipe.price()),
+                        enchantedLore(recipe, m.lines(exchange.key("menu.recipe.lore"), Messages.p("inputs", recipe.describeInputs(1)), Messages.p("price", recipe.price()),
                                 Messages.p("outputs", recipe.describeOutputs(1)), Messages.p("used", used(recipe)),
-                                Messages.p("limit", recipe.dailyLimit()))), (p, c) -> {
+                                Messages.p("limit", recipe.dailyLimit())))), (p, c) -> {
                     selected = recipe;
                     batch = 1;
                     render();
@@ -88,10 +90,10 @@ public final class ExchangeMenu extends Menu {
             }
         } else {
             set(13, Icons.of(selected.icon(), m.plain(exchange.key("menu.recipe.name"), Messages.p("name", selected.name())),
-                    m.lines(exchange.key("menu.preview"), Messages.p("inputs", selected.describeInputs(batch)), Messages.p("price", selected.price()),
+                    enchantedLore(selected, m.lines(exchange.key("menu.preview"), Messages.p("inputs", selected.describeInputs(batch)), Messages.p("price", selected.price()),
                             Messages.p("available", exchange.crafting() ? exchange.describeAvailable(Bukkit.getPlayer(viewer), selected) : ""),
                             Messages.p("outputs", selected.describeOutputs(batch)), Messages.p("batch", batch),
-                            Messages.p("used", used(selected)), Messages.p("limit", selected.dailyLimit()))));
+                            Messages.p("used", used(selected)), Messages.p("limit", selected.dailyLimit())))));
             if (!exchange.crafting()) {
                 set(20, Icons.of(Material.RED_DYE, m.plain(exchange.key("menu.less")), List.of()), (p, c) -> {
                     batch = Math.max(1, batch - 1);
@@ -141,5 +143,18 @@ public final class ExchangeMenu extends Menu {
 
     private Object used(ExchangeService.Recipe recipe) {
         return usage == null ? "…" : usage.getOrDefault(recipe.id(), 0);
+    }
+
+    private List<Component> enchantedLore(ExchangeService.Recipe recipe, List<Component> lore) {
+        if (recipe.template() != null) {
+            var enchants = recipe.template().enchantments();
+            if (enchants.isEmpty()) {
+                lore.add(services.messages().plain("craft.menu.enchant", Messages.p("enchant", recipe.describeEnchantments())));
+            } else for (var entry : enchants.entrySet()) {
+                lore.add(services.messages().plain("craft.menu.enchant", Messages.p("enchant",
+                        NativeEnchants.describe(Map.of(entry.getKey(), entry.getValue())))));
+            }
+        }
+        return lore;
     }
 }

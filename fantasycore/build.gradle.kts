@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.armzofficial"
-version = "0.5.0"
+version = "0.6.0"
 
 repositories {
     mavenCentral()
@@ -28,6 +28,8 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    // ใช้ parser YAML/Material ตัวเดียวกับ runtime; ไม่จำลอง server/ItemStack factory
+    testImplementation("io.papermc.paper:paper-api:26.2.build.129-stable")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     // Paper มี sqlite-jdbc ติดมาใน server อยู่แล้ว ใช้ตัวนี้เฉพาะตอนรัน unit test
     testRuntimeOnly("org.xerial:sqlite-jdbc:3.49.1.0")

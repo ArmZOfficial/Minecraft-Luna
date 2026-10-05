@@ -173,6 +173,8 @@ public final class AdminCommand implements TabExecutor {
         for (String problem : services.items().problems()) {
             line(sender, "fix", "items.yml", problem);
         }
+        line(sender, services.monsters().enabled() ? "ready" : "fix", "Depth monsters", services.monsters().status());
+        services.monsters().problems().forEach(problem -> line(sender, "fix", "monsters.yml", problem));
         for (String key : services.messages().missingKeys()) {
             line(sender, "fix", "messages_th.yml", "ขาด key " + key);
         }
@@ -429,7 +431,8 @@ public final class AdminCommand implements TabExecutor {
                 m.send(sender, "admin.item.list-header", Messages.p("count", items.templates().size()));
                 for (ItemTemplate t : items.templates().values()) {
                     sender.sendMessage(m.plain("admin.item.list-line", Messages.p("id", t.id()),
-                            Messages.p("version", t.version()), Messages.p("material", t.material().name())));
+                            Messages.p("version", t.version()), Messages.p("material", t.material().name()),
+                            Messages.p("enchants", t.describeEnchantments())));
                 }
             }
             case "inspect" -> {

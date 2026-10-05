@@ -44,8 +44,12 @@ public final class ExchangeService {
         }
 
         public String describeOutputs(int batch) {
-            if (template != null) { return name + " ×1 · " + template.material() + " · template v" + template.version(); }
+            if (template != null) { return name + " ×1 · อุปกรณ์รูน"; }
             return String.join(" + ", outputs.stream().map(i -> i.material().name() + " ×" + i.amount() * batch).toList());
+        }
+
+        public String describeEnchantments() {
+            return template == null ? "" : template.describeEnchantments();
         }
     }
 

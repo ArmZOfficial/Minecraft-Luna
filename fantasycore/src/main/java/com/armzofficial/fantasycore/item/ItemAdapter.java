@@ -45,7 +45,8 @@ public final class ItemAdapter {
         ItemStack baseline;
         if (templates.hasIdentityFields(before)) {
             var marker = templates.identify(before).orElseThrow(() -> new IllegalArgumentException("ข้อมูล Core เสียรูป"));
-            var template = templates.template(marker.templateId()).orElseThrow(() -> new IllegalArgumentException("ไม่พบแม่แบบ Core"));
+            var template = templates.template(marker.templateId(), marker.version()).orElseThrow(
+                    () -> new IllegalArgumentException("ไม่พบแม่แบบ Core เวอร์ชันนี้ — ให้ทีมงานคืน revision จาก backup"));
             if (!template.serialized() || marker.serial() == null || marker.version() != template.version()
                     || before.getType() != template.material()) {
                 throw new IllegalArgumentException("แม่แบบ/เวอร์ชัน/material/serial ของ Core ไม่ตรง");

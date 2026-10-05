@@ -15,7 +15,8 @@
     "maxAreaTargets": 3,
     "minimumCombatCooldownSeconds": 18,
     "mendingAvailable": false,
-    "unbreakableAvailable": false
+    "unbreakableAvailable": false,
+    "nativeEnchantLevelCap": 5
   },
   "profiles": {
     "adventurer": {
@@ -23,14 +24,14 @@
       "gearBase": "iron",
       "craftGoldRange": [200, 400],
       "questTokenRange": [0, 2],
-      "sword": {"minecraft:sharpness": 1, "minecraft:unbreaking": 1},
-      "axe": {"minecraft:sharpness": 1, "minecraft:unbreaking": 1},
-      "bow": {"minecraft:power": 1, "minecraft:unbreaking": 1},
+      "sword": {"minecraft:sharpness": 2, "minecraft:unbreaking": 2, "minecraft:sweeping_edge": 1},
+      "axe": {"minecraft:sharpness": 2, "minecraft:unbreaking": 2},
+      "bow": {"minecraft:power": 2, "minecraft:unbreaking": 2},
       "crossbow": {"minecraft:quick_charge": 1, "minecraft:unbreaking": 1},
       "trident": {"minecraft:loyalty": 1, "minecraft:unbreaking": 1},
-      "armor": {"minecraft:protection": 1, "minecraft:unbreaking": 1},
+      "armor": {"minecraft:protection": 2, "minecraft:unbreaking": 2, "minecraft:thorns": 1},
       "bootsExtra": {"minecraft:feather_falling": 2},
-      "tool": {"minecraft:efficiency": 2, "minecraft:unbreaking": 1},
+      "tool": {"minecraft:efficiency": 3, "minecraft:unbreaking": 2, "minecraft:fortune": 1},
       "fishing": {"minecraft:luck_of_the_sea": 1, "minecraft:lure": 1, "minecraft:unbreaking": 1},
       "traitSlots": 0
     },
@@ -39,14 +40,14 @@
       "gearBase": "diamond",
       "craftGoldRange": [1500, 2800],
       "questTokenRange": [6, 10],
-      "sword": {"minecraft:sharpness": 2, "minecraft:unbreaking": 2},
-      "axe": {"minecraft:sharpness": 2, "minecraft:unbreaking": 2},
-      "bow": {"minecraft:power": 2, "minecraft:unbreaking": 2},
+      "sword": {"minecraft:sharpness": 3, "minecraft:unbreaking": 3, "minecraft:sweeping_edge": 2},
+      "axe": {"minecraft:sharpness": 3, "minecraft:unbreaking": 3},
+      "bow": {"minecraft:power": 3, "minecraft:unbreaking": 3},
       "crossbow": {"minecraft:quick_charge": 2, "minecraft:unbreaking": 2},
       "trident": {"minecraft:loyalty": 2, "minecraft:unbreaking": 2},
-      "armor": {"minecraft:protection": 2, "minecraft:unbreaking": 2},
+      "armor": {"minecraft:protection": 3, "minecraft:unbreaking": 3, "minecraft:thorns": 1},
       "bootsExtra": {"minecraft:feather_falling": 3},
-      "tool": {"minecraft:efficiency": 3, "minecraft:unbreaking": 2},
+      "tool": {"minecraft:efficiency": 4, "minecraft:unbreaking": 3, "minecraft:fortune": 2},
       "fishing": {"minecraft:luck_of_the_sea": 2, "minecraft:lure": 2, "minecraft:unbreaking": 2},
       "traitSlots": 1
     },
@@ -55,14 +56,14 @@
       "gearBase": "diamond",
       "craftGoldRange": [5000, 9000],
       "questTokenRange": [18, 24],
-      "sword": {"minecraft:sharpness": 3, "minecraft:unbreaking": 3},
-      "axe": {"minecraft:sharpness": 3, "minecraft:unbreaking": 3},
-      "bow": {"minecraft:power": 3, "minecraft:unbreaking": 3},
+      "sword": {"minecraft:sharpness": 4, "minecraft:unbreaking": 3, "minecraft:sweeping_edge": 3},
+      "axe": {"minecraft:sharpness": 4, "minecraft:unbreaking": 3},
+      "bow": {"minecraft:power": 4, "minecraft:unbreaking": 3},
       "crossbow": {"minecraft:quick_charge": 3, "minecraft:unbreaking": 3},
       "trident": {"minecraft:loyalty": 3, "minecraft:unbreaking": 3},
-      "armor": {"minecraft:protection": 3, "minecraft:unbreaking": 3},
+      "armor": {"minecraft:protection": 4, "minecraft:unbreaking": 3, "minecraft:thorns": 2},
       "bootsExtra": {"minecraft:feather_falling": 4},
-      "tool": {"minecraft:efficiency": 4, "minecraft:unbreaking": 3},
+      "tool": {"minecraft:efficiency": 5, "minecraft:unbreaking": 3, "minecraft:fortune": 3},
       "fishing": {"minecraft:luck_of_the_sea": 2, "minecraft:lure": 2, "minecraft:unbreaking": 3},
       "traitSlots": 1
     }
@@ -77,7 +78,10 @@
     "minecraft:feather_falling": "ย่างเท้าขนนก",
     "minecraft:efficiency": "แรงช่างรูน",
     "minecraft:luck_of_the_sea": "พรแห่งวารี",
-    "minecraft:lure": "เสียงเรียกฝูงปลา"
+    "minecraft:lure": "เสียงเรียกฝูงปลา",
+    "minecraft:sweeping_edge": "วงคมจันทร์",
+    "minecraft:fortune": "พรแร่ดารา",
+    "minecraft:thorns": "หนามผู้พิทักษ์"
   },
   "setTraits": [
     {"setId":"azure","name":"พรธาราฟ้า","effect":"self-heal","healHp":3,"cooldownSeconds":24},

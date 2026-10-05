@@ -9,6 +9,7 @@ import com.armzofficial.fantasycore.command.CoreCommand;
 import com.armzofficial.fantasycore.command.PlayerCommands;
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.config.Settings;
+import com.armzofficial.fantasycore.combat.DepthMonsterService;
 import com.armzofficial.fantasycore.economy.DeathListener;
 import com.armzofficial.fantasycore.economy.EconomyService;
 import com.armzofficial.fantasycore.economy.EconomyStore;
@@ -76,6 +77,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         saveIfMissing("exchanges.yml");
         saveIfMissing("repair.yml");
         saveIfMissing("crafting.yml");
+        saveIfMissing("monsters.yml");
 
         Settings settings = Settings.load(getConfig(), getLogger());
         Messages messages = Messages.load(this);
@@ -147,6 +149,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         HomeService homes = new HomeService(settings, messages, new HomeStore(database), database, claims, landing, teleports, tasks);
         RtpService rtp = new RtpService(this, settings, messages, landing, claims, teleports, new TravelStore(database), database, tasks);
         ItemTemplateService items = new ItemTemplateService(this);
+        items.problems().forEach(p -> getLogger().warning("items.yml: " + p));
         StationService stations = new StationService(this, database, new StationStore(database), settings.stationRadius());
         ExchangeService craft = new ExchangeService(this, messages, craftStore, database, tasks, items, economy, stations, settings.maxTransaction());
         craft.problems().forEach(p -> getLogger().warning("crafting.yml: " + p));
@@ -154,12 +157,16 @@ public final class FantasyCorePlugin extends JavaPlugin {
         RepairService repair = new RepairService(this, messages, database, tasks, itemAdapter, repairStore, economy,
                 stations, settings.maxTransaction());
         repair.problems().forEach(p -> getLogger().warning("repair.yml: " + p));
+        DepthMonsterService monsters = new DepthMonsterService(this);
+        monsters.problems().forEach(getLogger()::warning);
         ActionRegistry actions = new ActionRegistry(() -> services);
         Optional<CitizensBridge> citizens = CitizensBridge.detect(getLogger());
         citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, itemAdapter, repair, citizens);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, itemAdapter, repair, monsters, citizens);
+        register(monsters);
+        monsters.start();
 
         tasks.then(stations.load(), (count, error) -> {
             if (count != null) {
@@ -194,6 +201,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (services != null) { services.monsters().close(); }
         if (teleports != null) {
             teleports.cancelAll();
         }

@@ -120,9 +120,9 @@
     {
       "id": "fantasycore",
       "name": "FantasyCore",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "source": "local",
-      "path": "fantasycore/build/libs/FantasyCore-0.5.0.jar",
+      "path": "fantasycore/build/libs/FantasyCore-0.6.0.jar",
       "required": true,
       "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP/mail/daily/exchange/repair/craft)"
     },

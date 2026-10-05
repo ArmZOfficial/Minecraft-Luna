@@ -1,4 +1,4 @@
-# FantasyCore — แกนระบบของ Luma (v0.5)
+# FantasyCore — แกนระบบของ Luma (v0.6)
 
 ปลั๊กอิน Paper ตาม [SERVER-SYSTEMS-PLAN §6](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 - v0.1: **ลำดับพัฒนาข้อ 1–3** และ **CASUAL-SURVIVAL §12 ข้อ 2 (บ้าน + RTP)**
@@ -6,6 +6,7 @@
 - v0.3: **QuestExchange** (CASUAL §7) — เลือกสูตร → preview → ยืนยัน → ตัดวัตถุดิบ → รางวัลเข้า `/mail`; 3 สูตร vanilla พร้อมโควตาและ recovery
 - v0.4: **ItemAdapter + Repair** — vanilla/Core registry validation, เมนูก่อน/หลัง, ค่าจองทอง + journal, native result guard และ staff recovery
 - v0.5: **Core Craft** — วัตถุดิบ + ค่าทอง → Core gear ครั้งละหนึ่งชิ้น, preview จำนวนที่มี/ขาด, serial ใหม่และทะเบียน + mail atomic; 3 สูตรเริ่มต้นและ staff recovery
+- v0.6: **Native Enchants + Template Revisions** — อุปกรณ์เริ่มต้น v2 มี enchant จริง, preview แยกชนิด และเก็บ snapshot v1 สำหรับซ่อม, มอนสเตอร์โลกทรัพยากรยิ่งลึกยิ่งโหด + Target HP BossBar; ดู [คู่มือ Enchants/อัปเกรด](ENCHANTS-th.md)
 Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่าน ViaVersion/ViaBackwards
 เพิ่ม [แผนผสม ItemsCore และ trial imports](ITEMSCORE-INTEGRATION-th.md); Java provider bridge ยังไม่เปิดจนมี JAR/APIจริงที่ผ่านทดสอบ
 
@@ -26,6 +27,7 @@ Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่�
 | ไอเทม | แม่แบบใน `items.yml` (ตัวอย่าง `starter_runeblade`), ตัวตนอยู่ใน PDC + serial ลงทะเบียนใน DB, ไม่ทิ้งของลงพื้น | §6 ItemAdapter |
 | ซ่อม | `/repair` ที่สถานี `repair.main`, main hand 1 ชิ้น, preview 60 วิ, จองทองและซ่อมเฉพาะ DAMAGE; Core ตรวจเจ้าของ/serial/เวอร์ชันและ pending mail; ค้างหลังเริ่มซ่อมไป REVIEW แอดมินตัดสิน | §7 / [คู่มือ Repair](REPAIR-th.md) |
 | คราฟต์ | `/craft` ที่ `craft.main`, 3 สูตร gear จากวัตถุดิบธรรมดาและทอง, preview → confirm → serial ใหม่เข้า mail; แยก quota รายวันจาก exchange, คืนค่าจองเมื่อยกเลิกก่อนตัด และค้าง REVIEW ให้ทีมงานตรวจ | §7 / [คู่มือ Craft](CRAFT-th.md) |
+| มอนสเตอร์ | natural vanilla ใน luma_resource: 4 ชั้นตาม Y, HP/ตี/ยิงเพิ่ม, ระดับตรึงตอนเกิดและ Target HP BossBar | [คู่มือมอนสเตอร์](MONSTERS-th.md) |
 | บ้าน | `/sethome [ชื่อ] [confirm]`, `/home [ชื่อ]`, `/delhome`, `/homes`; เฉพาะ `luma_housing` + ต้องเป็นเจ้าของ/สมาชิกแปลง PS, ตรวจซ้ำทุกครั้งก่อนวาร์ป, โควตา 1/3/5 | CASUAL §9 |
 | RTP | `/rtp [housing|resource]` วงแหวนกระจายตามพื้นที่, footprint 2×2 + ช่องหัว 3, ไม่ลงพื้นอันตราย/border/region, โหลด chunk async ≤2 งาน/โลก, 24 จุด/10 วิ, cooldown จาก receipt ในฐานข้อมูล | CASUAL §3 |
 | วาร์ป | อุ่นเครื่อง 3 วิ ยกเลิกเมื่อขยับ/โดนตี, ล็อกหลังต่อสู้ 15 วิ, บันทึกผลเมื่อ teleport สำเร็จจริงเท่านั้น; `/spawn` | §3, §9 |
@@ -42,7 +44,7 @@ Paper API ที่ใช้ compile ถูกตรึงเป็น `26.2.bui
 
 ```powershell
 cd fantasycore
-.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.5.0.jar
+.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.6.0.jar
 ```
 
 หรือใช้ `server\build-plugin.cmd` ซึ่ง build แล้วคัดลอกเข้าเซิร์ฟ staging ให้
@@ -80,8 +82,9 @@ Set-Location fantasycore
 ## ข้อมูลและการกู้คืน
 
 - ฐานข้อมูล `plugins/FantasyCore/fantasycore.db` (SQLite WAL, schema v5) — ตาราง `accounts`, `operations`, `ledger`, `audit_log`, `players`, `homes`, `item_instances`, `stations`, `travel_receipts`, `mail`, `reward_claims`, `exchange_operations`, `exchange_outputs`, `repair_operations`
-- อัปจาก v0.1/v0.2/v0.3/v0.4 → v0.5: สำรองก่อน migrate schema v5 อัตโนมัติ สร้าง `exchanges.yml`/`repair.yml`/`crafting.yml` เมื่อยังไม่มี โดยไม่เขียนทับ config ที่แก้แล้ว
-- items.yml เดิมที่มีเพียง starter_runeblade ต้อง merge สอง template ใหม่หรือปิดสองสูตรใน crafting.yml เอง ดู [ขั้นตอนอัปเกรด](CRAFT-th.md)
+- อัปจาก v0.1/v0.2/v0.3/v0.4 → v0.6: สำรองก่อน migrate schema v5 อัตโนมัติ สร้าง `exchanges.yml`/`repair.yml`/`crafting.yml` เมื่อยังไม่มี โดยไม่เขียนทับ config ที่แก้แล้ว
+- อัปจาก v0.5 → v0.6 ใช้ schema v5 เดิม; ไม่เขียนทับ config/อัปพลังของเก่าอัตโนมัติ เก็บแม่แบบ v1 จริงใน revisions ก่อนเพิ่ม current/output version ดู [ขั้นตอนอัปเกรด](ENCHANTS-th.md)
+- เซิร์ฟที่ยังไม่มีสอง template ใหม่ให้ merge อย่างระวังหรือปิดสูตรนั้น ดู [Craft](CRAFT-th.md)
 - SQLite นี้เป็นข้อมูล Core ฝั่งเกม ส่วน PostgreSQL เป็นข้อมูลเว็บ; ยังไม่มี bridge payment/ส่งคำสั่งจากเว็บในรุ่นนี้
 - หยุดเซิร์ฟก่อนสำรอง `.db` (+ `-wal`/`-shm` ถ้ายังมี) **พร้อมกับ** playerdata/โฟลเดอร์โลกและ `plugins/WorldGuard/worlds/*/regions.yml` เป็นชุดเดียว
 - เปิดฐานข้อมูลไม่ได้ → ปลั๊กอินปิดตัวเอง (fail closed) ไม่ให้บริการเงินครึ่ง ๆ กลาง ๆ
@@ -130,3 +133,8 @@ registry + mail + audit rollback พร้อมกัน, frozen payload/serial
 ใช้ร่วมกัน: **Citizens ดูแลหน้าตา/ท่าทาง** (สกินผู้เล่น ชุด หันมอง เดินตามเส้นทาง) ส่วน **FantasyCore ดูแลว่าคลิกแล้วเกิดอะไร** (สิทธิ์ ระยะ เงิน audit)
 NPC ของ Core (Villager) เหมาะกับ staging, วางด่วน และเป็น fallback เมื่อ Citizens ยังไม่ผ่านการทดสอบบน 26.2
 NPC อนิเมชันจาก Blockbench เป็นอีกเส้นทาง (MythicMobs + ModelEngine ตาม MODEL-AND-CONTENT-PLAN) — ห้ามให้ Citizens กับ MythicMobs สร้างตัวละครซ้อนในสถานีเดียว
+
+รอบ v0.6: build ไม่มี compiler warning, unit tests **92 รายการผ่าน** (76 เดิม + 11 Enchants/revisions/balance + 5 Depth difficulty tests)
+ไม่มีการเริ่ม Minecraft registry ใน unit tests; ให้ทำ runtime checklist O และอ่าน [ข้อจำกัด/rollback](ENCHANTS-th.md) ก่อน deploy
+
+เพิ่ม [ภาพ/แปลนดันเจี้ยนจันทรา](../output/lobby-concept/dungeons/moonfall/README-th.md); dungeon runtime/party/instance/boss skill/reward ยังเป็นแผน

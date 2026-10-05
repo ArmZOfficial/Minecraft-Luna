@@ -1,33 +1,76 @@
 # แม่แบบไอเทมของ FantasyCore
 # ตัวตนของไอเทมอยู่ใน PersistentDataContainer (template + version + serial) — ชื่อ/lore เป็นแค่การแสดงผล
 # ใช้ material ที่มีใน 1.16.5 เพื่อให้ client เก่าเห็นได้โดยไม่ต้องใช้ resource pack
-# ค่าพลังเป็น vanilla ของ material ไปก่อน — สูตร stat จริงยังไม่ได้กำหนด (SERVER-SYSTEMS-PLAN §11)
+# v0.6: native enchant เริ่มต้นจริงตาม BALANCE-th (ไม่มี RPG trait/custom stat)
+# ห้ามแก้แม่แบบที่ออกไปแล้วใน version เดิม: เก็บ snapshot เต็มใน revisions ก่อนเพิ่ม version
 
 templates:
   starter_runeblade:
-    version: 1
+    version: 2
     material: IRON_SWORD
     name: "<gradient:#47C8D3:#DDA54A>ดาบรูนผู้เริ่มต้น</gradient>"
     lore:
       - "<gray>อาวุธฝึกหัดของนักผจญภัยเมืองลูม่า"
-      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
     serialized: true
     glint: false
+    enchantments:
+      sharpness: 2
+      sweeping_edge: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_SWORD
+        name: "<gradient:#47C8D3:#DDA54A>ดาบรูนผู้เริ่มต้น</gradient>"
+        lore:
+          - "<gray>อาวุธฝึกหัดของนักผจญภัยเมืองลูม่า"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false
   moonstone_pickaxe:
-    version: 1
+    version: 2
     material: IRON_PICKAXE
     name: "<#47C8D3>อีเต้อจันทร์นักสำรวจ"
     lore:
       - "<gray>ตีขึ้นจากเศษแร่ในโรงตีเหล็กเมืองลูม่า"
-      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
     serialized: true
     glint: false
+    enchantments:
+      efficiency: 3
+      fortune: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_PICKAXE
+        name: "<#47C8D3>อีเต้อจันทร์นักสำรวจ"
+        lore:
+          - "<gray>ตีขึ้นจากเศษแร่ในโรงตีเหล็กเมืองลูม่า"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false
   sentinel_chestplate:
-    version: 1
+    version: 2
     material: IRON_CHESTPLATE
     name: "<#DDA54A>เกราะผู้พิทักษ์ลูม่า"
     lore:
       - "<gray>ชุดเกราะสำหรับผู้ดูแลทางเข้าเมือง"
-      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+      - "<gold>✦ <#47C8D3>รูนประจำเมืองลูม่า · <gray>นักเดินทาง I"
     serialized: true
     glint: false
+    enchantments:
+      protection: 2
+      thorns: 1
+      unbreaking: 2
+    revisions:
+      '1':
+        version: 1
+        material: IRON_CHESTPLATE
+        name: "<#DDA54A>เกราะผู้พิทักษ์ลูม่า"
+        lore:
+          - "<gray>ชุดเกราะสำหรับผู้ดูแลทางเข้าเมือง"
+          - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+        serialized: true
+        glint: false

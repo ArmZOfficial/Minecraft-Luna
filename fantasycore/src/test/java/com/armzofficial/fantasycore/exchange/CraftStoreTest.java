@@ -252,6 +252,29 @@ class CraftStoreTest {
         assertArrayEquals(new byte[]{2}, mail.pending(player, 10).getFirst().data());
     }
 
+    @Test void frozenOldAndNewTemplateVersionsKeepDistinctSerialsAndShareRecipeQuota() throws Exception {
+        var registry = new ItemInstanceStore(db);
+        for (int version = 1; version <= 2; version++) {
+            UUID serial = UUID.randomUUID();
+            var r = new ExchangeStore.Request("revision_" + version, player, "starter_runeblade", version, 1,
+                    "2026-10-05", 2, "IRON_INGOT ×12", new byte[]{1},
+                    List.of(new ExchangeStore.Output("blade v" + version, new byte[]{(byte) version}, serial, "starter_runeblade", version)), 200);
+            assertEquals(ExchangeStore.PrepareResult.PREPARED, craft.prepare(r));
+            assertTrue(craft.beginConsume(r.opId()));
+            assertTrue(craft.complete(r.opId()).changed());
+            var registered = registry.find(serial).orElseThrow();
+            assertEquals(version, registered.version());
+            assertEquals(serial, registered.serial());
+            assertEquals(player, registered.owner());
+        }
+        assertEquals(2, mail.countPending(player));
+        var versions = mail.pending(player, 10).stream().map(row -> (int) row.data()[0]).sorted().toList();
+        assertEquals(List.of(1, 2), versions);
+        assertEquals(2, craft.usage(player, "2026-10-05").get("starter_runeblade"));
+        assertEquals(ExchangeStore.PrepareResult.QUOTA, craft.prepare(request("third_revision", UUID.randomUUID(), 200, 2)));
+        assertEquals(600, money.balances(player).gold());
+    }
+
     @Test void refundOverflowKeepsReservationAndFailsClosed() throws Exception {
         craft.prepare(request("overflow"));
         adjust(Long.MAX_VALUE - 800);

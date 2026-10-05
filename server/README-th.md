@@ -192,6 +192,43 @@ server/
 - [ ] N11 เก็บMSPT/packet/particleเมื่อหลายผู้เล่นใช้พร้อมกัน; ลดFXก่อนขยายcatalog; ห้ามเปิดhealer/AoEในpublicจนมีregion/combat/statpolicy
 - [ ] N12 ก่อนเปิดproviderbridgeต้องผ่านfactoryfreeze/UUIDคู่/registry+mailatomic/recovery/duplicateclaim/livePDC preservation; `/ic give`ยังไม่เป็นpaymentfulfillment
 
+### O. Enchant จริงและการอัปเกรดแม่แบบ (v0.6)
+
+คู่มือ [ENCHANTS-th.md](../fantasycore/ENCHANTS-th.md); ทุกช่องยังรอ Minecraft runtime proof
+
+- [ ] O1 clean install: doctor ไม่มี template/recipe error, `/fa item list` current v2 ทั้ง 3 ชิ้น; preview แสดง enchant คนละบรรทัดและระดับตรงค่าจริง
+- [ ] O2 คราฟต์/รับ mail แต่ละชิ้น: ตรวจ native Enchantment key/level, material, PDC/version/serial ใน ItemStack จริง ไม่ตัดสินจาก lore หรือ glint
+- [ ] O3 ทดลองเทียบ iron ธรรมดากับ v2: ดาบ/ขุด/เกราะ/ความทนทาน, PvP หากเปิด; ไม่มี Mending/unbreakable/custom attributes/ทักษะที่ไม่ได้ตั้ง
+- [ ] O4 สำเนาเซิร์ฟ v0.5: เก็บ item v1 ในมือและ pending mail ก่อนอัป, archive config จริงแล้วอัป v2 → รับ/ซ่อมทั้งสองรุ่นคงชื่อ/lore/enchant/version/serial/owner
+- [ ] O5 ซ่อม v1 ต้องไม่เติม enchant ของ v2; ซ่อม v2 เปลี่ยน DAMAGE เท่านั้น; restart แล้ว registry/เงิน/mail ถูกต้อง
+- [ ] O6 ลบ revision/แก้ lore/material ของ archive บนสำเนาทดสอบ → ปฏิเสธของเก่าก่อนจองเงิน; คืน snapshot จริงแล้วซ่อมได้
+- [ ] O7 ใส่ level เกินเพดาน/ทศนิยม/key ไม่รู้จัก/alias ซ้ำ/Sharpness บน pickaxe → แม่แบบนั้นปิดและ doctor แจ้ง; archive ที่ถูกต้องกับแม่แบบอื่นยังใช้ได้
+- [ ] O8 YAML syntax ผิด → Core เปิดไม่ได้; คืน config backup แล้วเปิดได้; current/output version ไม่ตรง → สูตรปิดก่อนตัดของ
+- [ ] O9 ไม่แก้ config เดิมตอนเปลี่ยน JAR → v1 ยังเหมือนเดิม; เพิ่ม recipe version ระหว่างวัน → quota ของ ID เดิมไม่เพิ่มใหม่
+- [ ] O10 pending/REVIEW ของ craft และ mail ก่อน restart ใช้ frozen bytes/serial เดิม; เงินไม่หักซ้ำและไม่ออกผลรุ่นใหม่แทนรายการเก่า
+- [ ] O11 native anvil/grindstone/crafting และปลั๊กอินแต่ง enchant อื่นไม่ทำลาย identity; ทดสอบ downgrade/rollback ด้วย backup ชุดเดียวกัน
+- [ ] O12 Java 1.16.5 และรุ่นใหม่: enchant/tooltip/preview/ประกาย/ซ่อมตรงกัน, provider conflicts และ MSPT ผ่านก่อนเปิดสาธารณะ
+
+### P. มอนสเตอร์ตามความลึก/Target HP (v0.6)
+
+คู่มือ [MONSTERS-th.md](../fantasycore/MONSTERS-th.md); checklist ยังรอเล่นจริง
+
+- [ ] P1 natural spawn ที่ Y64/63/32/31/16/15/1 ได้ tier/HP/damage ถูก; worldบ้าน/hubไม่ถูกปรับ
+- [ ] P2 เดินข้าม Y/โหลดchunk/restart ไม่ฮีล/คูณHPซ้ำ; ตัวเกิดก่อนอัปคงเดิม; health/marker snapshotอยู่ครบ
+- [ ] P3 spawner/command/egg/raid/CUSTOM/Mythic/NPC/สัตว์/leader healthmodifiersไม่ถูกปรับ; ไม่มีdepthซ้อนบอสดัน
+- [ ] P4 melee/arrow ไปPlayerคูณครั้งเดียวก่อนarmor และcapเฉพาะส่วนเพิ่ม; WorldGuard cancelยังไม่ทำdamage
+- [ ] P5 Creeperแรงระเบิด/poison/fire/XP/loot/spawncountคงเดิม; เพื่อน/PvPไม่มีmultiplierของmonster
+- [ ] P6 เล็ง≤8บล็อกแสดงชื่อชั้น/HPจริง; กำแพง/ผู้เล่นบัง, เลิกเล็ง/ตาย/spectator/quit/เปลี่ยนโลกแล้วซ่อน
+- [ ] P7 BossBarไม่ซ้อนท้องฟ้า/เพลง/ชื่อNPC, client1.16.5และรุ่นใหม่อ่านตรง; วัดMSPTเมื่อหลายคนเล็งพร้อมกัน
+- [ ] P8 ปิดenabled/restartแล้ว loaded+later-loaded Core mobsคืนoriginalhealthเป็นสัดส่วนและลบownmarker; ค่าproviderที่แก้ต่างออกไปไม่ถูกเขียนทับ
+- [ ] P9 scale/Y/order/ID/NaN/booleanผิด → ปิดระบบมอนสเตอร์/doctorแจ้ง, เงินและบริการCoreอื่นไม่ถูกปิด; แก้configแล้วเปิดใหม่
+- [ ] P10 ทดสอบชุดเริ่มต้นแรงขึ้นกับมอนสเตอร์4ชั้นจริง จูนkilltime/ความตาย/รายได้Fortuneและค่าซ่อมก่อนเปิด
+
+### Q. ภาพ/แปลนดันเจี้ยน (ยังไม่ใช่ runtime)
+
+- [ ] อ่าน [ใบงาน4ภาพ](../output/lobby-concept/dungeons/moonfall/README-th.md), สร้างtemplate/walkthrough/protect/NPCyawก่อนเปิดปุ่มเข้าดัน
+- [ ] dungeon party/instance/checkpoint/boss model+animation/skill/รางวัลatomic/cleanup/compatibilityต้องผ่านใบงานก่อนประกาศเล่นได้
+
 คู่มือราคา/provider/ผัง NPC/recovery: [REPAIR-th.md](../fantasycore/REPAIR-th.md)
 
 เมื่อผ่านครบ: เปลี่ยน `status` ใน manifest เป็น locked, commit `plugins.lock.json` และบันทึกผลในเอกสารสถานะ

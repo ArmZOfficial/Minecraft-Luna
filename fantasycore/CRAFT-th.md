@@ -1,4 +1,4 @@
-# Core Craft v0.5 — อุปกรณ์รูนและเคาน์เตอร์โรงตีเหล็ก
+# Core Craft v0.6 — อุปกรณ์รูนและเคาน์เตอร์โรงตีเหล็ก
 
 ฉบับ 5 ตุลาคม 2026: source/JAR build ได้และ unit tests ผ่าน แต่ **ยังไม่ได้ทดสอบใน Minecraft runtime จริง**
 ใช้แผน [SERVER-SYSTEMS §7](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md) และ
@@ -19,12 +19,14 @@
 
 | สูตรเริ่มต้น | วัตถุดิบธรรมดา | ค่าทองในกระเป๋า | โควตาต่อวันไทย | ผลลัพธ์หนึ่งชิ้น |
 |---|---|---:|---:|---|
-| `starter_runeblade` | IRON_INGOT 12 + LAPIS_LAZULI 4 + STICK 2 | 200 | 3 | Core `starter_runeblade` v1 / IRON_SWORD |
-| `moonstone_pickaxe` | IRON_INGOT 16 + LAPIS_LAZULI 8 + STICK 4 | 300 | 2 | Core `moonstone_pickaxe` v1 / IRON_PICKAXE |
-| `sentinel_chestplate` | IRON_INGOT 24 + LAPIS_LAZULI 12 + LEATHER 8 | 400 | 2 | Core `sentinel_chestplate` v1 / IRON_CHESTPLATE |
+| `starter_runeblade` | IRON_INGOT 12 + LAPIS_LAZULI 4 + STICK 2 | 200 | 3 | Core `starter_runeblade` v2 / IRON_SWORD |
+| `moonstone_pickaxe` | IRON_INGOT 16 + LAPIS_LAZULI 8 + STICK 4 | 300 | 2 | Core `moonstone_pickaxe` v2 / IRON_PICKAXE |
+| `sentinel_chestplate` | IRON_INGOT 24 + LAPIS_LAZULI 12 + LEATHER 8 | 400 | 2 | Core `sentinel_chestplate` v2 / IRON_CHESTPLATE |
 
 ตัวเลขเหล่านี้เป็นค่าเริ่มต้นสำหรับทดลองเศรษฐกิจของลูม่า ไม่ได้อ้างว่าเป็นค่าต้นฉบับในคลิป
-ชื่อ/lore เป็นแฟนตาซี แต่ค่าพลัง/ความทนทานยังเป็น vanilla ของ material; ไม่มี stat RPG, bonus, ตีบวก หรือ animation item ใหม่จากระบบคราฟต์นี้
+ผลลัพธ์ v2 มี native enchant จริง: ดาบ Sharpness II/Sweeping Edge I/Unbreaking II, อีเต้อ Efficiency III/Fortune I/Unbreaking II, เกราะ Protection II/Thorns I/Unbreaking II
+preview แสดงค่าแยกบรรทัดก่อนตัดเงิน; material/durability เป็น vanilla ไม่มี custom stat/trait/ตีบวก/animation ใหม่
+ดู [ENCHANTS-th.md](ENCHANTS-th.md) สำหรับเพดานและแม่แบบ v1 ที่เก็บไว้ซ่อม
 หลังรับ mail และใช้จนเสีย durability สามารถซ่อมผ่าน `/repair` เมื่อผ่าน identity/owner/version policy เดิม
 ดู [คู่มือซ่อม](REPAIR-th.md); รุ่นนี้ยังไม่มีบริการโอน owner สำหรับการขายหรือส่งต่อ Core gear
 
@@ -83,7 +85,7 @@ enabled: true
 recipes:
   starter_runeblade:
     enabled: true
-    version: 1
+    version: 2
     name: ดาบรูนผู้เริ่มต้น
     icon: IRON_SWORD
     daily-limit: 3
@@ -94,7 +96,7 @@ recipes:
       STICK: 2
     output:
       template: starter_runeblade
-      version: 1
+      version: 2
 ```
 
 - Recipe ID เป็น a–z/0–9/_ ยาว 1–48; name ธรรมดา 1–80 ตัว; version เป็นจำนวนเต็ม 1–1,000,000
@@ -166,22 +168,20 @@ Confirm ตรวจสิทธิ์อีกครั้งและเปล
 หากคืนเงินล้นยอดหรือเกินเพดานที่ลดลงภายหลัง DB transaction จะ rollback; startup recovery ผิดพลาดจะปิด Core
 ห้ามลบ receipt หรือแก้ state ตรง ๆ เพื่อบังคับผ่าน ให้สำรองและตรวจ ledger ก่อนแก้สาเหตุ
 
-## 6. อัปเกรดจาก v0.4 และเซิร์ฟเดิม
+## 6. อัปเกรดจากเซิร์ฟเดิม
 
-1. หยุดเซิร์ฟและสำรอง DB/WAL/SHM, playerdata, โลก, config และข้อมูล region เป็นชุดเดียว
-2. เปลี่ยน JAR เป็น v0.5; ตรวจ Java 25/Paper candidate เดิมตาม [staging](../server/README-th.md)
-3. Schema v4 → v5 migrate อัตโนมัติ; ไม่เปลี่ยน wallet/mail/repair/exchange rows เดิม
-4. สร้าง crafting.yml เมื่อไม่มี แต่ **ไม่เขียนทับ items.yml/config ที่เคยแก้เอง**
-5. สำหรับเซิร์ฟเดิมที่มีเพียง starter_runeblade: ดาบเปิดได้; อีกสองสูตรจะปิดและแจ้ง doctor จนเพิ่ม moonstone_pickaxe/sentinel_chestplate จากไฟล์ตัวอย่างใต้ `templates` ใน items.yml
-6. Merge เฉพาะสอง template ใหม่หลังตรวจ ID ชนกับของเดิม; อย่าคัดลอกทับทั้งไฟล์ หากเลือกไม่ใช้ให้ตั้ง `enabled: false` ของสองสูตรนั้น
-7. เปิดใหม่หลังแก้ไฟล์ ตรวจ doctor + ผูก NPC + ทำ checklist M ใน staging; ให้ staff_economy ได้ `fantasyadmin.craft.resolve` ตามชุด LuckPerms
-8. การย้อน JAR v0.4 ต้องกู้ **backup schema v4 พร้อม playerdata/โลกชุดเดียวกัน**; รุ่นเก่าจะปฏิเสธ schema v5
+อ่าน [ENCHANTS-th.md §4](ENCHANTS-th.md) ก่อนเปลี่ยน config: v0.6 ไม่เขียนทับ items.yml/crafting.yml เดิม
+จาก v0.5 ใช้ schema v5 เดิม; ถ้าคงไฟล์เดิม v1 จะยังไม่มี enchant ใหม่
+ถ้าเปิด v2 ต้อง archive snapshot v1 ของเซิร์ฟจริง แล้วเพิ่ม current template/recipe/output version พร้อมกัน
+รุ่น v0.1–v0.4 migrate schema v5 อัตโนมัติหลังสำรองครบชุด; เพิ่ม template ที่ยังไม่มีหรือปิดสูตรนั้นอย่างชัดเจน
+ให้ staff_economy ได้ `fantasyadmin.craft.resolve` ตามชุด LuckPerms; restart แล้วตรวจ doctor + checklist M/O บน staging
+ย้อน JAR ต้องกู้ backup ชุดเดียวกัน; ไม่ลดเลข version ของไอเทม/ทะเบียนเพื่อบังคับให้ซ่อมผ่าน
 
 SQLite เป็นทะเบียนเกม ส่วนเว็บยังใช้ PostgreSQL; รุ่นนี้ยังไม่มี payment queue หรือ API ส่งคำสั่งจากเว็บ
 
 ## 7. หลักฐานและข้อจำกัด
 
-Build Java 25/Paper API ที่ล็อกไว้ผ่าน; unit tests Core ทั้งหมด **76 กรณีผ่าน** (58 เดิม + 18 Craft เพิ่ม)
+Build Java 25/Paper API ที่ล็อกไว้ผ่าน; unit tests Core ทั้งหมด **92 กรณีผ่าน** (76 เดิม + 11 Enchants/revisions/balance + 5 Depth difficulty เพิ่ม)
 Craft tests ครอบคลุม charge/commit once, funds/limit, refund รักษายอดปัจจุบัน, concurrent 20 confirmations ได้หนึ่ง reservation,
 quota/namespace, startup quarantine, review recovery, serial conflict, registry/audit failure rollback, immutable payload และ synthetic migration v4→v5
 YAML/ข้อความตรวจ parse ได้ และตรวจลิงก์เอกสาร/asset แยกจาก tests ของธุรกรรม
