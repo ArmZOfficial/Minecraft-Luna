@@ -1,0 +1,13 @@
+{
+  "name": "luma_sentinel_coat",
+  "fancyName": "<#47C8D3>เสื้อคลุมผู้พิทักษ์ลูม่า",
+  "material": "LEATHER_CHESTPLATE",
+  "color": "#47C8D3",
+  "type": "armor",
+  "stackable": false,
+  "lore": ["&7ชุดทดลองสีและชนิดเกราะของเมืองลูม่า", "&7ค่าป้องกันพื้นฐานของเกราะหนัง", "&8ยังไม่มี stat RPG หรือ Core serial"],
+  "requirements": [{"type": "permission", "input": "luma.itemscore.trial"}],
+  "requirementMessage": "&eไอเทมทดลองสำหรับทีมทดสอบลูม่า",
+  "actions": [],
+  "customEvents": []
+}

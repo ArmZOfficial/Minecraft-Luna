@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessageKeysTest {
 
     private static final Pattern LITERAL = Pattern.compile(
-            "\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair)\\.[a-z0-9._-]+)\"");
+            "(?<!key\\()\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair|craft)\\.[a-z0-9._-]+)\"");
 
     /** string ที่หน้าตาเหมือน key แต่เป็น action ID / ชนิด operation / audit action */
     private static final Set<String> NOT_MESSAGES = Set.of(
@@ -30,7 +30,7 @@ class MessageKeysTest {
             "bank.deposit", "bank.withdraw", "death.loss", "economy.adjust", "admin.adjust",
             "reward.daily", "reward.progress", "reward.online", "mail.main", "mail.give", "mail.release", "mail.void",
             // path ใน config.yml
-            "economy.currency.gold", "rewards.daily", "repair.main", "repair.yml");
+            "economy.currency.gold", "rewards.daily", "repair.main", "repair.yml", "craft.main", "craft.charge", "craft.refund");
 
     /** key ที่ประกอบขึ้นตอนรัน */
     private static final List<String> DYNAMIC = List.of(
@@ -46,6 +46,18 @@ class MessageKeysTest {
     void everyUsedKeyExists() throws IOException {
         Set<String> defined = yamlKeys(Path.of("src/main/resources/messages_th.yml"));
         Set<String> used = new TreeSet<>(DYNAMIC);
+        for (String group : List.of("exchange", "craft")) {
+            for (String suffix : List.of("disabled", "busy", "missing", "quota", "changed", "success", "review",
+                    "menu.title", "menu.previous", "menu.next", "menu.less", "menu.more", "menu.list.name", "menu.list.lore",
+                    "menu.recipe.name", "menu.recipe.lore", "menu.preview", "menu.confirm.name", "menu.confirm.lore")) {
+                used.add(group + "." + suffix);
+            }
+            for (String suffix : List.of("header", "line", "not-review", "preview", "complete-effect", "cancel-effect", "resolved")) {
+                used.add("admin." + group + "." + suffix);
+            }
+            used.add("admin.usage." + group);
+        }
+        used.add("craft.funds");
         try (Stream<Path> files = Files.walk(Path.of("src/main/java"))) {
             for (Path file : files.filter(p -> p.toString().endsWith(".java")).toList()) {
                 if (file.getFileName().toString().equals("Settings.java")) {

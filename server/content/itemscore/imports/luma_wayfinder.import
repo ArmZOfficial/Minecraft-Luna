@@ -1,0 +1,19 @@
+{
+  "name": "luma_wayfinder",
+  "fancyName": "<#47C8D3>เข็มทิศเมืองลูม่า",
+  "material": "COMPASS",
+  "type": "normal",
+  "stackable": false,
+  "needBlock": "AIR",
+  "lore": ["&7คลิกขวาในอากาศ: เปิดเมนูเมือง /menu", "&7ใช้คำสั่งด้วยสิทธิ์ของผู้เล่นเอง", "&8ต้องมี FantasyCore บนเซิร์ฟที่ทดสอบ"],
+  "requirements": [{"type": "permission", "input": "luma.itemscore.trial"}],
+  "requirementMessage": "&eไอเทมทดลองสำหรับทีมทดสอบลูม่า",
+  "actions": [{
+    "trigger": "rightAction",
+    "needBlock": "AIR",
+    "cooldown": "2s",
+    "cooldownMessage": "&7รอเมนูเปิดสักครู่",
+    "steps": [{"call": "core.executeCommand", "args": [{"var": "player"}, "menu"], "operatorToNext": "END"}]
+  }],
+  "customEvents": []
+}

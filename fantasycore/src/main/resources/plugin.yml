@@ -6,8 +6,13 @@ description: 'Luma core: economy, bank, ledger, death rules, menus, stations, ho
 authors: [ArmZOfficial]
 website: https://github.com/ArmZOfficial/Minecraft-Luna
 softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, PlaceholderAPI, Citizens]
+loadbefore: [ItemsCore]
 
 commands:
+  craft:
+    description: ดูสูตรและยืนยันคราฟต์อุปกรณ์รูนที่โรงตีเหล็ก
+    usage: /craft
+    permission: fantasy.craft.use
   menu:
     description: เปิดเมนูหลัก
     aliases: [luma]
@@ -86,6 +91,13 @@ permissions:
       fantasy.mail: true
       fantasy.exchange: true
       fantasy.repair.use: true
+      fantasy.craft.use: true
+  fantasy.craft.remote:
+    description: คราฟต์จากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
+    default: false
+  fantasyadmin.craft.resolve:
+    description: ตัดสินคราฟต์ที่ค้าง (ต้องมีเหตุผลและยืนยัน)
+    default: op
   fantasy.repair.remote:
     description: ซ่อมของจากทุกที่ (ต้องจ่ายค่าซ่อมเหมือนเดิม)
     default: false

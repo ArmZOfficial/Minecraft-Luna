@@ -43,7 +43,7 @@ public final class ActionRegistry {
     /** action ที่มีในแผนแต่ยังไม่มีระบบ — วาง NPC ได้ แต่คลิกแล้วบอกว่า "ยังไม่เชื่อม" */
     private static final Set<String> PLANNED = Set.of(
             "reward.progress", "reward.online", "quest.gold", "quest.red",
-            "cosmetic.item_skin", "cosmetic.title", "equipment.upgrade", "craft.main", "canvas.main",
+            "cosmetic.item_skin", "cosmetic.title", "equipment.upgrade", "canvas.main",
             "market.main", "market.orders", "guild.main", "jobs.main", "pet.main", "afk.main",
             "dungeon.main", "boss.main", "pvp.main");
 
@@ -72,6 +72,8 @@ public final class ActionRegistry {
                 (p, s) -> new ExchangeMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("repair.main", "fantasy.repair.use", true, "fantasy.repair.remote",
                 (p, s) -> new RepairMenu(p.getUniqueId(), services.get()).open(p)));
+        register(new ActionDef("craft.main", "fantasy.craft.use", true, "fantasy.craft.remote",
+                (p, s) -> new ExchangeMenu(p.getUniqueId(), services.get(), services.get().craft()).open(p)));
         register(new ActionDef("land.main", "fantasy.land.use", false, null,
                 (p, s) -> {
                     p.closeInventory();

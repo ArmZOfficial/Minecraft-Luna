@@ -2,6 +2,10 @@ package com.armzofficial.fantasycore.exchange;
 
 import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.mail.MailService;
+import com.armzofficial.fantasycore.economy.EconomyService;
+import com.armzofficial.fantasycore.item.ItemTemplate;
+import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.station.StationService;
 import com.armzofficial.fantasycore.reward.RewardService;
 import com.armzofficial.fantasycore.storage.Database;
 import com.armzofficial.fantasycore.util.Tasks;
@@ -34,12 +38,13 @@ public final class ExchangeService {
     }
 
     public record Recipe(String id, int version, String name, Material icon, int dailyLimit,
-                         List<ExchangePlanner.Input> inputs, List<ResultItem> outputs) {
+                         List<ExchangePlanner.Input> inputs, List<ResultItem> outputs, long price, ItemTemplate template) {
         public String describeInputs(int batch) {
             return String.join(" + ", inputs.stream().map(i -> i.material() + " ×" + i.amount() * batch).toList());
         }
 
         public String describeOutputs(int batch) {
+            if (template != null) { return name + " ×1 · " + template.material() + " · template v" + template.version(); }
             return String.join(" + ", outputs.stream().map(i -> i.material().name() + " ×" + i.amount() * batch).toList());
         }
     }
@@ -56,14 +61,38 @@ public final class ExchangeService {
     private final List<String> problems = new ArrayList<>();
     private final Set<UUID> pending = new HashSet<>(); // main thread เท่านั้น
     private boolean enabled;
+    private final ItemTemplateService items;
+    private final EconomyService economy;
+    private final StationService stations;
+    private final long maxTransaction;
 
     public ExchangeService(Plugin plugin, Messages messages, ExchangeStore store, Database database, Tasks tasks) {
+        this(plugin, messages, store, database, tasks, null, null, null, 0);
+    }
+
+    public ExchangeService(Plugin plugin, Messages messages, ExchangeStore store, Database database, Tasks tasks,
+                           ItemTemplateService items, EconomyService economy, StationService stations, long maxTransaction) {
         this.plugin = plugin;
         this.messages = messages;
         this.store = store;
         this.database = database;
         this.tasks = tasks;
-        load(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "exchanges.yml")));
+        this.items = items;
+        this.economy = economy;
+        this.stations = stations;
+        this.maxTransaction = maxTransaction;
+        load(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), crafting() ? "crafting.yml" : "exchanges.yml")));
+    }
+
+    public boolean crafting() { return store.kind() == ExchangeStore.Kind.CRAFT; }
+
+    public String key(String suffix) { return store.kind().key() + "." + suffix; }
+
+    private String permission() { return crafting() ? "fantasy.craft.use" : "fantasy.exchange"; }
+
+    private boolean canUse(Player player) {
+        return player.hasPermission(permission()) && (!crafting() || player.hasPermission("fantasy.craft.remote")
+                || stations.isNear(player, "craft.main"));
     }
 
     public ExchangeStore store() {
@@ -87,25 +116,45 @@ public final class ExchangeService {
         return database.async(() -> store.usage(player, period));
     }
 
+    /** ตัวเลขใน preview เท่านั้น; ยืนยันจริงยังใช้ planner + snapshot ตรวจซ้ำ */
+    public String describeAvailable(Player player, Recipe recipe) {
+        if (player == null) { return "…"; }
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        for (ItemStack item : player.getInventory().getStorageContents()) {
+            if (item != null && !item.isEmpty() && !item.hasItemMeta()) {
+                counts.merge(item.getType().name(), item.getAmount(), Integer::sum);
+            }
+        }
+        return String.join(" · ", recipe.inputs().stream().map(i -> i.material() + " "
+                + counts.getOrDefault(i.material(), 0) + "/" + i.amount()
+                + " (ขาด " + Math.max(0, i.amount() - counts.getOrDefault(i.material(), 0)) + ")").toList());
+    }
+
     public void exchange(Player player, Recipe recipe, int batch, BooleanSupplier stillConfirmed, Runnable done) {
-        if (!player.hasPermission("fantasy.exchange")) {
+        if (!player.hasPermission(permission())) {
             messages.send(player, "common.no-permission");
             done.run();
             return;
         }
-        if (!enabled() || recipe == null || recipes.get(recipe.id()) != recipe || batch < 1 || batch > 16) {
-            messages.send(player, "exchange.disabled");
+        if (!canUse(player)) {
+            messages.send(player, "service.go-to-station", Messages.p("action", "craft.main"));
+            done.run();
+            return;
+        }
+        if (!enabled() || recipe == null || recipes.get(recipe.id()) != recipe || batch < 1 || batch > (crafting() ? 1 : 16)) {
+            messages.send(player, key("disabled"));
             done.run();
             return;
         }
         UUID owner = player.getUniqueId();
         if (!pending.add(owner)) {
-            messages.send(player, "exchange.busy");
+            messages.send(player, key("busy"));
             done.run();
             return;
         }
         Runnable finish = () -> {
             pending.remove(owner);
+            if (crafting()) { economy.load(owner); }
             done.run();
         };
         String opId = UUID.randomUUID().toString();
@@ -114,12 +163,12 @@ public final class ExchangeService {
         try {
             changes = plan(player, recipe, batch);
             if (changes.isEmpty()) {
-                messages.send(player, "exchange.missing", Messages.p("inputs", recipe.describeInputs(batch)));
+                messages.send(player, key("missing"), Messages.p("inputs", recipe.describeInputs(batch)));
                 finish.run();
                 return;
             }
             request = new ExchangeStore.Request(opId, owner, recipe.id(), recipe.version(), batch, RewardService.period(),
-                    recipe.dailyLimit(), recipe.describeInputs(batch), snapshot(changes), outputs(recipe, batch));
+                    recipe.dailyLimit(), recipe.describeInputs(batch), snapshot(changes), outputs(recipe, batch), recipe.price());
         } catch (RuntimeException e) {
             plugin.getLogger().log(Level.SEVERE, "สร้าง exchange snapshot ไม่สำเร็จ", e);
             messages.send(player, "common.storage-error");
@@ -131,7 +180,11 @@ public final class ExchangeService {
                 // ยังไม่ตัดของ; หาก prepare commit ไปแล้วก็ยกเลิกได้อย่างปลอดภัย
                 cancelUntouched(player, opId, finish);
             } else if (result != ExchangeStore.PrepareResult.PREPARED) {
-                messages.send(player, result == ExchangeStore.PrepareResult.QUOTA ? "exchange.quota" : "exchange.busy");
+                messages.send(player, key(switch (result) {
+                    case QUOTA -> "quota";
+                    case FUNDS, LIMIT -> "funds";
+                    default -> "busy";
+                }));
                 finish.run();
             } else if (!valid(player, changes, stillConfirmed)) {
                 cancelUntouched(player, opId, finish);
@@ -157,7 +210,7 @@ public final class ExchangeService {
                             review(player, opId, finish);
                             return;
                         }
-                        messages.send(player, "exchange.success", Messages.p("name", recipe.name()),
+                        messages.send(player, key("success"), Messages.p("name", recipe.name()),
                                 Messages.p("batch", batch), Messages.p("op", opId));
                         // รางวัลรอใน /mail ให้ผู้เล่นรับเอง; ไม่ใส่ของหรือทิ้งลงพื้นจาก exchange
                         finish.run();
@@ -169,21 +222,21 @@ public final class ExchangeService {
 
     private void cancelUntouched(Player player, String opId, Runnable finish) {
         tasks.then(database.async(() -> store.cancelUntouched(opId)), (cancelled, error) -> {
-            messages.send(player, error == null ? "exchange.changed" : "common.storage-error");
+            messages.send(player, error == null ? key("changed") : "common.storage-error");
             finish.run();
         });
     }
 
     private void review(Player player, String opId, Runnable finish) {
         tasks.then(database.async(() -> store.markReview(opId)), (marked, error) -> {
-            messages.send(player, "exchange.review", Messages.p("op", opId));
+            messages.send(player, key("review"), Messages.p("op", opId));
             finish.run();
         });
     }
 
-    private static boolean valid(Player player, List<SlotChange> changes, BooleanSupplier stillConfirmed) {
+    private boolean valid(Player player, List<SlotChange> changes, BooleanSupplier stillConfirmed) {
         return PlayerDataSaving.enabled()
-                && player.isOnline() && !player.isDead() && player.hasPermission("fantasy.exchange") && stillConfirmed.getAsBoolean()
+                && player.isOnline() && !player.isDead() && canUse(player) && stillConfirmed.getAsBoolean()
                 && changes.stream().allMatch(c -> c.before().equals(player.getInventory().getItem(c.slot())));
     }
 
@@ -226,7 +279,13 @@ public final class ExchangeService {
         }
     }
 
-    private static List<ExchangeStore.Output> outputs(Recipe recipe, int batch) {
+    private List<ExchangeStore.Output> outputs(Recipe recipe, int batch) {
+        if (crafting()) {
+            UUID serial = UUID.randomUUID();
+            ItemStack item = items.create(recipe.template(), serial);
+            return List.of(new ExchangeStore.Output(MailService.describe(item), item.serializeAsBytes(), serial,
+                    recipe.template().id(), recipe.template().version()));
+        }
         List<ExchangeStore.Output> outputs = new ArrayList<>();
         for (ResultItem result : recipe.outputs()) {
             int remaining = result.amount() * batch;
@@ -265,8 +324,8 @@ public final class ExchangeService {
                 Material icon = material(section.getString("icon", "BOOK"));
                 ConfigurationSection in = section.getConfigurationSection("inputs");
                 ConfigurationSection out = section.getConfigurationSection("outputs");
-                if (in == null || out == null || in.getKeys(false).isEmpty() || out.getKeys(false).isEmpty()
-                        || in.getKeys(false).size() > 8 || out.getKeys(false).size() > 8) {
+                if (in == null || in.getKeys(false).isEmpty() || in.getKeys(false).size() > 8
+                        || (!crafting() && (out == null || out.getKeys(false).isEmpty() || out.getKeys(false).size() > 8))) {
                     throw new IllegalArgumentException("inputs/outputs ต้องมีอย่างละ 1–8 material");
                 }
                 List<ExchangePlanner.Input> inputs = new ArrayList<>();
@@ -280,14 +339,30 @@ public final class ExchangeService {
                 }
                 List<ResultItem> results = new ArrayList<>();
                 unique.clear();
-                for (String key : out.getKeys(false)) {
+                ItemTemplate template = null;
+                long price = 0;
+                if (crafting()) {
+                    if (!"core".equals(section.getString("output.provider", "core"))) {
+                        throw new IllegalArgumentException("รุ่นนี้รองรับ output.provider: core เท่านั้น — ItemsCore รอ bridge ที่ผ่านทดสอบ");
+                    }
+                    if ((!section.isInt("gold-cost") && !section.isLong("gold-cost"))
+                            || section.getLong("gold-cost") < 0 || section.getLong("gold-cost") > maxTransaction) {
+                        throw new IllegalArgumentException("gold-cost ต้องเป็นจำนวนเต็ม 0–" + maxTransaction);
+                    }
+                    price = section.getLong("gold-cost");
+                    template = items.template(section.getString("output.template")).orElseThrow(
+                            () -> new IllegalArgumentException("ไม่พบ output.template ใน items.yml"));
+                    if (!template.serialized() || integer(section, "output.version", 1, 1_000_000) != template.version()) {
+                        throw new IllegalArgumentException("output ต้องเป็น template แบบ serialized และ version ตรง items.yml");
+                    }
+                } else for (String key : out.getKeys(false)) {
                     Material type = material(key);
                     if (!unique.add(type)) {
                         throw new IllegalArgumentException("output material ซ้ำ");
                     }
                     results.add(new ResultItem(type, integer(out, key, 1, type.getMaxStackSize())));
                 }
-                recipes.put(id, new Recipe(id, version, name, icon, limit, List.copyOf(inputs), List.copyOf(results)));
+                recipes.put(id, new Recipe(id, version, name, icon, limit, List.copyOf(inputs), List.copyOf(results), price, template));
             } catch (IllegalArgumentException e) {
                 problems.add(id + ": " + e.getMessage() + " — ปิดเฉพาะสูตรนี้");
             }

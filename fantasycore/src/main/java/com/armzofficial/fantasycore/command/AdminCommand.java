@@ -7,6 +7,7 @@ import com.armzofficial.fantasycore.config.Messages;
 import com.armzofficial.fantasycore.economy.Bucket;
 import com.armzofficial.fantasycore.economy.OpMeta;
 import com.armzofficial.fantasycore.economy.TxResult;
+import com.armzofficial.fantasycore.exchange.ExchangeService;
 import com.armzofficial.fantasycore.hook.VaultHook;
 import com.armzofficial.fantasycore.item.ItemTemplate;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
@@ -70,7 +71,7 @@ public final class AdminCommand implements TabExecutor {
             case "npc" -> npc(sender, args);
             case "item" -> item(sender, args);
             case "mail" -> mail(sender, args);
-            case "exchange" -> exchange(sender, args);
+            case "exchange", "craft" -> exchange(sender, args);
             case "repair" -> repair(sender, args);
             case "audit" -> audit(sender, args);
             default -> m.send(sender, "admin.help");
@@ -97,6 +98,17 @@ public final class AdminCommand implements TabExecutor {
     }
 
     private void doctorRest(CommandSender sender) {
+        var itemsCore = Bukkit.getPluginManager().getPlugin("ItemsCore");
+        line(sender, itemsCore == null ? "missing" : itemsCore.isEnabled() ? "fix" : "off", "ItemsCore (ทดลองเสริม)",
+                itemsCore == null ? "ยังไม่มี JAR — ชุด import และแผนทดสอบอยู่ใน server/content/itemscore"
+                        : "v" + itemsCore.getPluginMeta().getVersion() + " · ยังไม่เปิด provider ของ craft/repair; ตรวจคู่มือ ITEMSCORE-INTEGRATION");
+        line(sender, services.craft().enabled() ? "ready" : "off", "คราฟต์อุปกรณ์รูน",
+                services.craft().recipes().size() + " สูตร · crafting.yml · /craft");
+        services.craft().problems().forEach(p -> line(sender, "fix", "crafting.yml", p));
+        services.tasks().then(services.database().async(() -> services.craft().store().countReview()), (count, error) -> {
+            if (error != null) { line(sender, "broken", "คราฟต์ค้างตรวจ", error.getMessage()); }
+            else { line(sender, count == 0 ? "ready" : "fix", "คราฟต์ค้างตรวจ", count + " รายการ · /fa craft review"); }
+        });
         boolean vaultPlugin = Bukkit.getPluginManager().isPluginEnabled("Vault")
                 || Bukkit.getPluginManager().isPluginEnabled("VaultUnlocked");
         if (!vaultPlugin || !services.plugin().isVaultHooked()) {
@@ -616,16 +628,21 @@ public final class AdminCommand implements TabExecutor {
 
     private void exchange(CommandSender sender, String[] args) {
         Messages m = services.messages();
+        String group = args[0].equalsIgnoreCase("craft") ? "craft" : "exchange";
+        String prefix = "admin." + group + ".";
+        String permission = "fantasyadmin." + group + ".resolve";
+        ExchangeService exchange = group.equals("craft") ? services.craft() : services.exchange();
         String sub = args.length < 2 ? "review" : args[1].toLowerCase(Locale.ROOT);
         if (sub.equals("review")) {
-            services.tasks().then(services.database().async(() -> services.exchange().store().review(20)), (rows, error) -> {
+            services.tasks().then(services.database().async(() -> exchange.store().review(20)), (rows, error) -> {
                 if (error != null) {
                     m.send(sender, "common.storage-error");
                     return;
                 }
-                m.send(sender, "admin.exchange.header", Messages.p("count", rows.size()));
+                m.send(sender, prefix + "header", Messages.p("count", rows.size()));
                 for (var row : rows) {
-                    m.send(sender, "admin.exchange.line", Messages.p("op", row.opId()), Messages.p("player", row.player()),
+                    m.send(sender, prefix + "line", Messages.p("op", row.opId()), Messages.p("player", row.player()), Messages.p("price", row.goldCost()),
+                            Messages.p("outputs", row.outputs()),
                             Messages.p("recipe", row.recipe()), Messages.p("version", row.version()), Messages.p("batch", row.batch()),
                             Messages.p("inputs", row.inputs()), Messages.p("period", row.period()));
                 }
@@ -633,15 +650,15 @@ public final class AdminCommand implements TabExecutor {
             return;
         }
         if (!sub.equals("complete") && !sub.equals("cancel")) {
-            m.send(sender, "admin.usage.exchange");
+            m.send(sender, "admin.usage." + group);
             return;
         }
-        if (!sender.hasPermission("fantasyadmin.exchange.resolve")) {
+        if (!sender.hasPermission(permission)) {
             m.send(sender, "common.no-permission");
             return;
         }
         if (args.length < 4) {
-            m.send(sender, "admin.usage.exchange");
+            m.send(sender, "admin.usage." + group);
             return;
         }
         String opId = args[2];
@@ -652,30 +669,34 @@ public final class AdminCommand implements TabExecutor {
         }
         boolean complete = sub.equals("complete");
         UUID actor = sender instanceof Player p ? p.getUniqueId() : null;
-        services.tasks().then(services.database().async(() -> services.exchange().store().findReview(opId)), (row, error) -> {
+        services.tasks().then(services.database().async(() -> exchange.store().findReview(opId)), (row, error) -> {
             if (error != null) {
                 m.send(sender, "common.storage-error");
             } else if (row.isEmpty()) {
-                m.send(sender, "admin.exchange.not-review", Messages.p("op", opId));
+                m.send(sender, prefix + "not-review", Messages.p("op", opId));
             } else {
                 var review = row.get();
                 AuditEntry audit = new AuditEntry(actor == null ? null : actor.toString(), sender.getName(),
-                        complete ? "quest.exchange.resolve_complete" : "quest.exchange.resolve_cancel", review.player().toString(),
-                        review.recipe() + " v" + review.version() + " ×" + review.batch() + " · " + review.inputs(), reason);
+                        (group.equals("craft") ? "craft." : "quest.exchange.") + (complete ? "resolve_complete" : "resolve_cancel"), review.player().toString(),
+                        review.recipe() + " v" + review.version() + " ×" + review.batch() + " · " + review.inputs() + " · gold " + review.goldCost(), reason);
                 String token = confirmations.create(actor, () -> {
-                    if (!sender.hasPermission("fantasyadmin.exchange.resolve")) {
+                    if (!sender.hasPermission(permission)) {
                         m.send(sender, "common.no-permission");
                         return;
                     }
-                    services.tasks().then(services.database().async(() -> services.exchange().store().resolveReview(opId, complete, audit)),
-                            (result, resolveError) -> m.send(sender, resolveError != null ? "common.storage-error"
-                                    : result.changed() ? "admin.exchange.resolved" : "admin.exchange.not-review", Messages.p("op", opId)));
+                    services.tasks().then(services.database().async(() -> exchange.store().resolveReview(opId, complete, audit)),
+                            (result, resolveError) -> {
+                                services.economy().load(review.player());
+                                m.send(sender, resolveError != null ? "common.storage-error"
+                                    : prefix + (result.changed() ? "resolved" : "not-review"), Messages.p("op", opId));
+                            });
                 });
-                m.send(sender, "admin.exchange.line", Messages.p("op", opId), Messages.p("player", review.player()),
+                m.send(sender, prefix + "line", Messages.p("op", opId), Messages.p("player", review.player()), Messages.p("price", review.goldCost()),
+                        Messages.p("outputs", review.outputs()),
                         Messages.p("recipe", review.recipe()), Messages.p("version", review.version()), Messages.p("batch", review.batch()),
                         Messages.p("inputs", review.inputs()), Messages.p("period", review.period()));
-                m.send(sender, "admin.exchange.preview", Messages.p("op", opId), Messages.p("reason", reason), Messages.p("token", token),
-                        Messages.c("effect", m.plain(complete ? "admin.exchange.complete-effect" : "admin.exchange.cancel-effect")));
+                m.send(sender, prefix + "preview", Messages.p("op", opId), Messages.p("reason", reason), Messages.p("token", token),
+                        Messages.c("effect", m.plain(prefix + (complete ? "complete-effect" : "cancel-effect"))));
             }
         });
     }
@@ -788,14 +809,13 @@ public final class AdminCommand implements TabExecutor {
                                       String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "audit"));
+            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "craft", "audit"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
                 case "npc" -> options.addAll(List.of("spawn", "bind", "unbind", "anchor", "remove", "unanchor", "list"));
                 case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
-                case "exchange" -> options.addAll(List.of("review", "complete", "cancel"));
-                case "repair" -> options.addAll(List.of("review", "complete", "cancel"));
+                case "exchange", "repair", "craft" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {

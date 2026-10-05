@@ -205,13 +205,14 @@ class RepairStoreTest {
         exchange.beginConsume("old");
         exchange.complete("old");
         db.transaction(c -> {
+            TestDatabases.removeCraftColumns(c);
             try (var st = c.createStatement()) {
                 st.execute("DROP TABLE repair_operations");
                 st.execute("UPDATE schema_version SET version = 3");
             }
             return null;
         });
-        assertEquals(4, Migrations.apply(db));
+        assertEquals(Migrations.latestVersion(), Migrations.apply(db));
         assertEquals(1000, money.balances(player).gold());
         assertEquals(1, mail.countPending(player));
         assertEquals(1, exchange.usage(player, "2026-10-05").get("food_bundle"));

@@ -49,6 +49,7 @@ public record Services(
         MailService mail,
         RewardService rewards,
         ExchangeService exchange,
+        ExchangeService craft,
         ItemAdapter itemAdapter,
         RepairService repair,
         Optional<CitizensBridge> citizens) {

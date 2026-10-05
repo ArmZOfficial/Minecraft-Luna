@@ -3,7 +3,7 @@
 ฉบับออกแบบ 5 ตุลาคม 2026 เพิ่มจากภาพรายการระบบ: สุ่มพื้นที่โลก, รับของรายวัน, หินกันบ้าน, สกินไอเทม,
 เควสแลกของ, วาดรูป, อัปเกรดและตั้งบ้าน
 ภาพเป็น brief ของผู้ใช้ ไม่ได้ยืนยันชื่อปลั๊กอินหรือ config ของเซิร์ฟต้นฉบับ
-เอกสารนี้เป็นสเปกเป้าหมาย; มี JAR FantasyCore v0.4 สำหรับบ้าน/RTP/daily/mail/เควสแลกของ vanilla และซ่อม vanilla/Core แล้ว
+เอกสารนี้เป็นสเปกเป้าหมาย; มี JAR FantasyCore v0.5 สำหรับบ้าน/RTP/daily/mail/เควสแลกของ vanilla, ซ่อม vanilla/Core และ [คราฟต์ Core gear](../../fantasycore/CRAFT-th.md) แล้ว
 รายละเอียดที่ทำจริงอยู่ใน [คู่มือ Core](../../fantasycore/README-th.md) และ [คู่มือ Exchange](../../fantasycore/EXCHANGE-th.md)
 ส่วน ItemAdapter/ซ่อมอยู่ใน [คู่มือ Repair](../../fantasycore/REPAIR-th.md); ยังไม่เปิดสูตร coupon/provider ภายนอก
 ยังไม่มีโลกเมืองที่สร้างเสร็จหรือผลทดสอบ Minecraft runtime; สกิน/Canvas/อัปเกรดและสูตร coupon ยังเป็นแผน

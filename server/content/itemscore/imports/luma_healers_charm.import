@@ -1,0 +1,24 @@
+{
+  "name": "luma_healers_charm",
+  "fancyName": "<#DDA54A>เครื่องรางเยียวยาผู้เดินทาง",
+  "material": "FEATHER",
+  "type": "normal",
+  "stackable": false,
+  "needBlock": "AIR",
+  "lore": ["&7คลิกขวาในอากาศ: ฟื้นเลือดตนเอง 2 หัวใจ", "&7คูลดาวน์ 20 วินาที · ไม่ใช้เงิน/แจกสิ่งของ", "&8ชุดทดลอง ItemsCore · ทดสอบสมดุลก่อนเปิดจริง"],
+  "requirements": [{"type": "permission", "input": "luma.itemscore.trial"}],
+  "requirementMessage": "&eไอเทมทดลองสำหรับทีมทดสอบลูม่า",
+  "actions": [{
+    "trigger": "rightAction",
+    "needBlock": "AIR",
+    "cooldown": "20s",
+    "cooldownMessage": "&7เครื่องรางกำลังฟื้นพลัง",
+    "steps": [
+      {"call": "core.setItemCooldown", "args": [{"var": "player"}, 20], "operatorToNext": "END"},
+      {"call": "core.heal", "args": [{"var": "player"}, 4], "operatorToNext": "END"},
+      {"call": "core.createParticleByLocation", "args": [{"call": "core.addToLocation", "args": [{"call": "player.getLocation", "args": []}, 0, 1.2, 0]}, {"call": "particles.colored", "args": [111, 210, 162, 1]}, 0, 3, 5], "operatorToNext": "END"},
+      {"call": "core.sendColorMessage", "args": [{"var": "player"}, "&aเครื่องรางเยียวยาทำงานแล้ว"], "operatorToNext": "END"}
+    ]
+  }],
+  "customEvents": []
+}

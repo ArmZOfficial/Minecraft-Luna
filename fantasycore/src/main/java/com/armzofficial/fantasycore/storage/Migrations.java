@@ -192,6 +192,15 @@ public final class Migrations {
                     )""",
                     "CREATE UNIQUE INDEX repair_active_player ON repair_operations(player_uuid) WHERE state IN ('RESERVED','APPLYING','REVIEW')",
                     "CREATE UNIQUE INDEX repair_active_serial ON repair_operations(serial) WHERE serial IS NOT NULL AND state IN ('RESERVED','APPLYING','REVIEW')"
+            },
+            // version 5 — crafting ใช้ journal การตัดวัตถุดิบเดิม; สูตร/ราคา/serial ถูกตรึงก่อนเริ่ม
+            new String[]{
+                    "ALTER TABLE exchange_operations ADD COLUMN kind TEXT NOT NULL DEFAULT 'exchange' CHECK (kind IN ('exchange','craft'))",
+                    "ALTER TABLE exchange_operations ADD COLUMN gold_cost INTEGER NOT NULL DEFAULT 0 CHECK (gold_cost >= 0)",
+                    "ALTER TABLE exchange_outputs ADD COLUMN serial TEXT",
+                    "ALTER TABLE exchange_outputs ADD COLUMN template_id TEXT",
+                    "ALTER TABLE exchange_outputs ADD COLUMN template_version INTEGER",
+                    "CREATE UNIQUE INDEX exchange_output_serial ON exchange_outputs(serial) WHERE serial IS NOT NULL"
             }
     );
 

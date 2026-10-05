@@ -14,7 +14,7 @@
     "minecraft": "26.2",
     "build": 129,
     "channel_at_check": "stable — papermc.io/downloads แสดง 26.2 #129 เป็นตัวหลัก, 26.3 อยู่ใต้ experimental",
-    "api_dependency": "io.papermc.paper:paper-api:26.2.build.+",
+    "api_dependency": "io.papermc.paper:paper-api:26.2.build.129-stable",
     "plugin_api_version": "26.2",
     "not_chosen": "26.3 ยังเป็น experimental ณ วันที่ตรวจ และอัปโลกเป็น 26.3 แล้วย้อนกลับไม่ได้ (papermc.io/news/26-3)"
   },
@@ -120,11 +120,22 @@
     {
       "id": "fantasycore",
       "name": "FantasyCore",
-      "version": "0.2.0",
+      "version": "0.5.0",
       "source": "local",
-      "path": "fantasycore/build/libs/FantasyCore-0.2.0.jar",
+      "path": "fantasycore/build/libs/FantasyCore-0.5.0.jar",
       "required": true,
-      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP/กล่องจดหมาย/รางวัลรายวัน)"
+      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP/mail/daily/exchange/repair/craft)"
+    },
+    {
+      "id": "itemscore",
+      "name": "ItemsCore",
+      "source": "manual",
+      "file_prefix": "ItemsCore",
+      "url": "https://www.coredevelopment.shop/plugins/itemscore",
+      "required": false,
+      "role": "ตัวเลือกทดลองไอเทม/abilities/stats/model; FantasyCore ยังเป็นเจ้าของเงินและธุรกรรมหลัก",
+      "note": "ผู้ใช้เลือกพิจารณารุ่นเต็มหลังทดสอบ demo; ไม่มี JAR ใน workspace ยังไม่ติดตั้ง/ไม่มี Java provider bridge",
+      "risk": "Spigot free 109713 ระบุเลิกอัปเดตและย้าย trial ไป hosted demo; ต้องตรวจรุ่น JAR/API จริง + PDC live update + resource pack สำหรับ client 1.16.5 ก่อนเปิด"
     }
   ],
   "deferred": [

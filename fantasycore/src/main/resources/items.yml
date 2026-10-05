@@ -13,3 +13,21 @@ templates:
       - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
     serialized: true
     glint: false
+  moonstone_pickaxe:
+    version: 1
+    material: IRON_PICKAXE
+    name: "<#47C8D3>อีเต้อจันทร์นักสำรวจ"
+    lore:
+      - "<gray>ตีขึ้นจากเศษแร่ในโรงตีเหล็กเมืองลูม่า"
+      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+    serialized: true
+    glint: false
+  sentinel_chestplate:
+    version: 1
+    material: IRON_CHESTPLATE
+    name: "<#DDA54A>เกราะผู้พิทักษ์ลูม่า"
+    lore:
+      - "<gray>ชุดเกราะสำหรับผู้ดูแลทางเข้าเมือง"
+      - "<dark_gray>ระดับ: เริ่มต้น · แม่แบบ v1"
+    serialized: true
+    glint: false

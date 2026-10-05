@@ -25,3 +25,7 @@ fantasycore/.gradle/
 server/runtime/
 .tools/
 .cache/
+
+# User-supplied source packs and plugin binaries stay in the local asset library
+/All for module/
+/*.tmp

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "status": "trial content — validated against official helper; not imported or tested in Minecraft",
+  "checked_at": "2026-10-05",
+  "provider": "ItemsCore",
+  "runtime_plugin_installed": false,
+  "core_provider_bridge_enabled": false,
+  "trial_permission": "luma.itemscore.trial",
+  "helper": {
+    "package": "itemscore-helper",
+    "version": "1.31.0",
+    "integrity": "sha512-WqFJo0asSrDIqqOfwtpfKPQ8hFDKDAGRhXUWQLJRjMEtRFfpNspGrXRNYT+RB/Q1tcCj6z0j2vEQLo9CDz7TbQ==",
+    "api_snapshot": "bundled standard ItemsCore 5.0 manifest; exact runtime export still required",
+    "source": "https://github.com/Core-Pluginss/ItemsCore-Helper",
+    "validation_command": "node tools/verify_itemscore_trials.cjs .tools/itemscore-helper-1.31.0"
+  },
+  "items": [
+    {"id": "luma_moon_wand", "file": "imports/luma_moon_wand.import", "material": "BLAZE_ROD", "purpose": "bounded cosmetic particle + sound; 8s cooldown"},
+    {"id": "luma_healers_charm", "file": "imports/luma_healers_charm.import", "material": "FEATHER", "purpose": "self heal 4 HP capped by provider; 20s cooldown"},
+    {"id": "luma_wayfinder", "file": "imports/luma_wayfinder.import", "material": "COMPASS", "purpose": "execute /menu as the player; needs FantasyCore"},
+    {"id": "luma_sentinel_coat", "file": "imports/luma_sentinel_coat.import", "material": "LEATHER_CHESTPLATE", "purpose": "teal dyed vanilla armor; no additional RPG stats"}
+  ]
+}

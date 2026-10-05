@@ -69,6 +69,12 @@ menu:
       lore: |-
         <gray>ฝาก/ถอนทอง เงินฝากไม่หายเมื่อเสียชีวิต
         <gray>ใช้ได้ที่ธนาคารโซน 05 หรือเมื่อแรงค์ปลดล็อก
+    craft:
+      name: '<#47C8D3>ช่างคราฟต์อุปกรณ์รูน'
+      lore: |-
+        <gray>เลือกสูตร ดูวัตถุดิบและค่าทองก่อนยืนยัน
+        <gray>คราฟต์ครั้งละ 1 ชิ้น รับของใน /mail
+        <gray>ใช้ที่โรงตีเหล็กโซน 07 (/craft)
     repair:
       name: '<#DDA54A>ช่างซ่อมอุปกรณ์'
       lore: |-
@@ -331,6 +337,51 @@ exchange:
         <gray>หากปิดหน้าต่างก่อนเริ่มตัดจะยกเลิก
         <yellow>รางวัลเข้า /mail ไม่มีของตกพื้น
 
+craft:
+  disabled: '<yellow>คราฟต์ยังไม่เปิด — ดูสถานะ /fa doctor'
+  busy: '<yellow>มีรายการคราฟต์/แลกกำลังทำงานหรือรอทีมงานตรวจ กรุณารอก่อน'
+  missing: '<red>วัตถุดิบธรรมดาไม่ครบ:</red> <gray><inputs> (ไม่ใช้ของที่มีชื่อ/ข้อมูลพิเศษ)'
+  funds: '<red>ทองในกระเป๋าไม่พอ หรือราคาเกินเพดานธุรกรรม — ยังไม่ตัดวัตถุดิบ'
+  quota: '<yellow>ครบโควตาคราฟต์วันนี้แล้ว — เริ่มรอบใหม่ 00:00 เวลาไทย'
+  changed: '<yellow>ยกเลิกก่อนตัดของเพราะหน้าต่าง กระเป๋า สิทธิ์ หรือระยะจากช่างเปลี่ยน — คืนค่าจองแล้วถ้ามี'
+  success: '<green>คราฟต์ <name> สำเร็จ — รับอุปกรณ์ serial ใหม่ใน /mail</green> <dark_gray>op <op>'
+  review: '<yellow>รายการคราฟต์พักให้ทีมงานตรวจ โปรดแจ้งรหัส <op> (ยังไม่ส่งของหรือคืนเงินอัตโนมัติ)'
+  menu:
+    title: '<#47C8D3>โรงตีเหล็กรูน · คราฟต์'
+    previous: '<white>หน้าก่อน'
+    next: '<white>หน้าถัดไป'
+    less: '<gray>คราฟต์ครั้งละ 1 ชิ้น'
+    more: '<gray>คราฟต์ครั้งละ 1 ชิ้น'
+    list:
+      name: '<#47C8D3>เลือกอุปกรณ์รูน'
+      lore: |-
+        <gray>หน้า <page>/<pages> · โควตารีเซ็ต 00:00 เวลาไทย
+        <gray>ใช้วัตถุดิบ vanilla ธรรมดาและทองในกระเป๋า
+        <gray>อุปกรณ์แต่ละชิ้นมี serial เฉพาะ
+    recipe:
+      name: '<#47C8D3><name>'
+      lore: |-
+        <gray>ใช้: <white><inputs>
+        <gray>ค่าคราฟต์: <#DDA54A><price> ทองจากกระเป๋า
+        <gray>ได้รับ: <white><outputs>
+        <gray>ใช้โควตาวันนี้ <used>/<limit> ชิ้น
+        <green>คลิกดูรายละเอียดก่อนยืนยัน
+    preview: |-
+      <gray>คราฟต์อุปกรณ์ <white>1 ชิ้น</white>
+      <gray>ตัด: <white><inputs>
+      <gray>มี/ต้องใช้: <white><available>
+      <gray>ค่าคราฟต์: <#DDA54A><price> ทองจากกระเป๋า
+      <gray>ได้รับ: <white><outputs>
+      <gray>ใช้โควตาวันนี้ <used>/<limit> ชิ้น
+      <gray>serial ออกใหม่ · รอรับใน /mail
+    confirm:
+      name: '<green>ยืนยันคราฟต์ตามรายละเอียด'
+      lore: |-
+        <gray>จองค่าทองและตรวจวัตถุดิบก่อนตัด
+        <gray>เกราะ/มือรอง/ของมีข้อมูลพิเศษไม่ถูกใช้
+        <gray>ต้องอยู่ใกล้ช่างจนเริ่มตัดวัตถุดิบ
+        <yellow>ผลคราฟต์เข้า /mail ไม่มีของตกพื้น
+
 repair:
   disabled: '<yellow>ระบบซ่อมยังไม่พร้อม หรือปิดการบันทึกผู้เล่น — แจ้งทีมงานตรวจ /fa doctor'
   full: '<green>อุปกรณ์เต็มความทนทานแล้ว — ไม่ต้องซ่อมเพิ่มเติม'
@@ -394,6 +445,7 @@ admin:
     <gray>/fa mail review · release|void <id> <เหตุผล> · give <ผู้เล่น> <เหตุผล> (ของในมือ)
     <gray>/fa exchange review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa repair review · complete|cancel <op> <เหตุผล> → /fa confirm
+    <gray>/fa craft review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa item list · give <ผู้เล่น> <template> · inspect
     <gray>/fa audit [ผู้เล่น]
   doctor:
@@ -406,6 +458,7 @@ admin:
     missing: '<yellow>[ไม่ได้เชื่อม]'
     'off': '<gray>[ปิด]'
   usage:
+    craft: '<gray>ใช้: /fa craft review · /fa craft complete|cancel <op> <เหตุผล> → /fa confirm'
     bank: '<gray>ใช้: /fa bank <ผู้เล่น>'
     eco: '<gray>ใช้: /fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผลอย่างน้อย 3 ตัวอักษร>'
     confirm: '<gray>ใช้: /fa confirm <รหัส>'
@@ -471,6 +524,16 @@ admin:
     cancel-effect: '<yellow>ปิดรายการและคืนโควตา โดยไม่คืนวัตถุดิบ (ใช้เมื่อไม่ถูกตัด/ชดเชยแล้ว)'
     resolved: '<green>ตัดสินรายการ <op> แล้ว ดู audit และ /mail'
     not-review: '<yellow>รายการ <op> ไม่อยู่ใน REVIEW — ไม่มีการเปลี่ยนแปลง'
+  craft:
+    header: '<#DDA54A>คราฟต์ที่รอทีมงานตรวจ (<count> รายการล่าสุด)'
+    line: |-
+      <gray><op> · <player> · <recipe> v<version> · <inputs> · ค่าจอง <price> ทอง · <period>
+      <dark_gray>ผลที่บันทึกไว้: <outputs>
+    not-review: '<yellow>ไม่พบคราฟต์ <op> ที่อยู่ใน REVIEW — ไม่เปลี่ยนรายการ'
+    preview: '<yellow>รายการ <op> → <effect> · เหตุผล: <reason> · ยืนยัน /fa confirm <token> ภายใน 60 วินาที'
+    complete-effect: '<green>ส่งผลคราฟต์เดิมเข้า /mail และออกทะเบียน serial; เก็บค่าจอง (ยืนยันว่าตัดวัตถุดิบแล้ว)'
+    cancel-effect: '<yellow>คืนค่าจองทองและปล่อยโควตา; ไม่คืนวัตถุดิบ (ต้องตรวจและชดเชยวัตถุดิบเองถ้าจำเป็น)'
+    resolved: '<green>ตัดสินคราฟต์ <op> แล้ว — บันทึก audit และไม่ทำซ้ำ'
   repair:
     header: '<#DDA54A>รายการซ่อมรอตรวจ <count> รายการแรก (สูงสุด 20)</#DDA54A> <gray>ตรวจ snapshot/playerdata ว่าซ่อมจริงแล้วหรือยัง ก่อนตัดสิน'
     line: '<white>op <op></white> <gray><player> · <material> damage <damage>/<max> · จอง <price> ทอง · serial <serial>'

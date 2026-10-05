@@ -53,7 +53,7 @@ server/
 
 ### A. เปิดเซิร์ฟและเชื่อมต่อ
 - [ ] A1 เซิร์ฟเปิดถึง `Done` ไม่มี error สีแดงจาก FantasyCore, WorldGuard, ProtectionStones, VaultUnlocked
-- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v1)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
+- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v5)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
 - [ ] A3 โลก `luma_housing` และ `luma_resource` ถูกสร้าง (`/fa doctor` แสดง border 10,000 และ 6,000)
 - [ ] A4 ★ client 26.2 และ 1.16.5 เข้าเซิร์ฟได้ทั้งคู่
 
@@ -117,7 +117,7 @@ server/
 ### H. ความทนทาน
 - [ ] H1 ปิดเซิร์ฟด้วย `stop` ระหว่างมีคนเปิดเมนูธนาคาร → เปิดใหม่ ยอดตรงกับ ledger
 - [ ] H2 ลบ/ย้าย VaultUnlocked ออกชั่วคราว → FantasyCore ยังเปิดได้ (แจ้งเตือนเรื่อง Vault) ระบบเงินในเกมยังใช้ได้
-- [ ] H3 อัปจาก v0.1/v0.2/v0.3 → v0.4 บนสำเนาฐานข้อมูลเดิม → log ขึ้น `schema v4` ยอดเงิน/บ้าน/NPC/mail/reward/exchange เดิมอยู่ครบ
+- [ ] H3 อัปจาก v0.1/v0.2/v0.3/v0.4 → v0.5 บนสำเนาฐานข้อมูลเดิม → log ขึ้น `schema v5` ยอดเงิน/บ้าน/NPC/mail/reward/exchange/repair เดิมอยู่ครบ
 
 ### K. เควสแลกของ (v0.3)
 - [ ] K1 ★ `/exchange` และ `/menu` → กระดานแลกของ เปิด 3 สูตร; คลิก NPC `quest.exchange` ได้เมนูเดียวกัน
@@ -130,7 +130,7 @@ server/
 - [ ] K8 บน staging disposable ใช้ debugger/harness หยุดตามจุด: หลัง PREPARED, หลัง CONSUMING ก่อนตัด, หลังตัดก่อน saveData, หลัง saveData ก่อน DB commit, หลัง commit ก่อนข้อความ แล้ว terminate process → เปิดใหม่และตรวจ state/playerdata/mail ทุกจุด (เก็บ backup และ log)
 - [ ] K9 PREPARED ค้าง → CANCELLED; CONSUMING ค้าง → REVIEW บล็อกการแลกทั้งหมดของ UUID; COMMITTED คงเดิมและ mail เดิมไม่เพิ่ม; CLAIMING ของ mail → ใช้หมวด J/review แยกกัน
 - [ ] K10 `/fa exchange complete|cancel <op> เหตุผล` แสดง preview → `/fa confirm`; reason/actor/permission/expiry ผิดไม่ apply; confirm ซ้ำไม่สร้างของเพิ่ม; audit ครบ; cancel ไม่คืนวัตถุดิบเอง
-- [ ] K11 อัปฐานข้อมูล v0.2 จริงบนสำเนาด้วย Core v0.4 → schema v4 เงิน/บ้าน/NPC/mail/daily เดิมอยู่ครบ; สูตรผิดปิดเฉพาะสูตรนั้น; config เดิมไม่ถูกเขียนทับ
+- [ ] K11 อัปฐานข้อมูล v0.2 จริงบนสำเนาด้วย Core v0.5 → schema v5 เงิน/บ้าน/NPC/mail/daily เดิมอยู่ครบ; สูตรผิดปิดเฉพาะสูตรนั้น; config เดิมไม่ถูกเขียนทับ
 - [ ] K12 ตั้ง `players.disable-saving: true` บน staging แล้ว restart → แลกและรับ mail ไม่ได้; คืน false แล้วทดสอบ disk write failure และดู `Failed to save player data` — ถ้าผล inventory/DB ไม่ตรงต้องแก้ก่อนเปิด public
 - [ ] K13 วัด MSPT/เวลาตอบกลับเมื่อหลายคนแลกและรับ mail พร้อมกัน เพราะ saveData เป็น synchronous I/O; บันทึกค่าจริงก่อนตั้งจำนวนผู้เล่นที่รองรับ
 
@@ -148,8 +148,46 @@ server/
 - [ ] L9 ตรวจทุก plugin ที่มีคำสั่ง repair/aliases และ LuckPerms ด้วย non-OP ไม่ให้ซ่อมข้ามราคา Core; remote node ไม่ทำราคาเป็นศูนย์; WorldGuard flags/NPC/model click ไม่ข้ามสิทธิ์หรือระยะ
 - [ ] L10 หยุด process บน staging disposable หลัง RESERVED, หลัง APPLYING ก่อนแก้ item, หลังแก้ก่อน saveData, หลัง saveData ก่อน complete และหลัง complete → เทียบ DB/ledger/playerdata; RESERVED คืน, APPLYING เป็น REVIEW ไม่คืนเอง, COMMITTED ไม่ซ่อมหรือหักซ้ำ
 - [ ] L11 `/fa repair complete|cancel <op> เหตุผล` → อ่าน preview → confirm ผู้สั่งเดิมใน 60 วิ; role/reason/expiry ผิดไม่ apply, confirm ซ้ำไม่ทำซ้ำ; complete ไม่แจก/ซ่อมอีก, cancel คืนจำนวนค่าจอง ไม่แก้ item; audit ครบ
-- [ ] L12 `players.disable-saving=true`/bridge อ่านไม่ได้ → repair ไม่คิดเงิน; จำลอง disk failure ตรวจ log และ state; ทดสอบอัป v0.3 DB จริงบนสำเนา → schema v4 และเงิน/บ้าน/NPC/mail/daily/exchange เดิมครบ
+- [ ] L12 `players.disable-saving=true`/bridge อ่านไม่ได้ → repair ไม่คิดเงิน; จำลอง disk failure ตรวจ log และ state; ทดสอบอัป v0.3 DB จริงบนสำเนา → schema v5 และเงิน/บ้าน/NPC/mail/daily/exchange เดิมครบ
 - [ ] L13 วัด MSPT และเวลาจริงเมื่อผู้เล่นหลายคนยืนยันซ่อมพร้อมกัน; saveData เป็น synchronous I/O จึงยังรับรองจำนวน concurrent users จาก unit tests ไม่ได้
+
+### M. คราฟต์ Core gear (v0.5)
+
+คู่มือสูตร/พิกัด/ทิศ NPC/การ merge config: [CRAFT-th.md](../fantasycore/CRAFT-th.md)
+
+- [ ] M1 ★ `/fa npc spawn craft.main` หรือ bind Citizens ที่เคาน์เตอร์ซ้ายโซน 07; yaw หันเข้าผู้เล่นและ Y พื้นถูกต้อง; `/craft`/NPC/ปุ่ม `/menu` เปิดบริการเดียวกัน
+- [ ] M2 ★ client Java 1.16.5 และ 26.2 เห็นทั้งสามสูตร วัตถุดิบ/จำนวนมี/ขาด ราคาและ output; ชื่อ/lore ไทยไม่ล้นจนอ่านไม่ได้; menu pagination ถ้าเพิ่ม >21 สูตร
+- [ ] M3 ★ ทอง≥200 + IRON_INGOT12/LAPIS4/STICK2 → ยืนยันดาบ ตัดตรงจำนวน ทองกระเป๋าลด200 เงินฝาก/แดงคงเดิม มี mail หนึ่งรายการและทะเบียน MAILED พร้อม owner/template/version/serial ตรงกัน ไม่มีของตกพื้น
+- [ ] M4 ★ กดซ้ำ/shift/drag/hotbar/double collect หยิบไอคอนไม่ได้ ไม่มี batch สำหรับ gear; ยืนยันหนึ่งรายการได้หนึ่ง serial; คราฟต์ใหม่ได้ serial คนละค่า
+- [ ] M5 ★ เงินไม่พอ/เกินเพดาน/ขาดวัตถุดิบ → ไม่ตัดของหรือออกทะเบียน; มีเงินใน bank อย่างเดียวใช้ไม่ได้; ราคา0ที่ตั้งทดสอบยังต้องตัดวัตถุดิบตามสูตร
+- [ ] M6 ชื่อพิเศษ/enchant/PDC/model/Core marker บนวัตถุดิบไม่ถูกนับ/ตัด; storage ธรรมดาหลาย stack รวมได้; เกราะ/มือรองไม่ถูกใช้
+- [ ] M7 ★ ปิดเมนู/ตาย/ย้ายโลกหรือออกระยะ6/เปลี่ยน slot item/ถอนสิทธิ์ก่อนเริ่มตัด → cancel คืนค่าจองครั้งเดียว รักษาธุรกรรมทองที่เกิดระหว่างทาง; remote bypass เฉพาะระยะ ไม่ข้ามเงิน/วัตถุดิบ
+- [ ] M8 ★ โควตา3/2/2ต่อวันไทย ข้าม recipe version ของ ID เดิมยังนับ; craft/exchange ID เดียวกัน quota แยก; active/REVIEW บล็อกทั้งสองบริการของ UUID; CANCELLED คืน quota
+- [ ] M9 ★ ปิด/kill staging ในช่วง PREPARED/CONSUMING/หลัง saveData/หลัง DB COMMITTED — เปิดใหม่ PREPARED คืนทอง, CONSUMING REVIEW ไม่มี auto-item/refund, COMMITTED ไม่ออกชิ้นซ้ำ; เก็บ playerdata+DB+log ประกอบ
+- [ ] M10 `/fa craft review` แสดงค่าจองและ serial/output ที่ตรึงไว้; เปลี่ยน config แล้ว recovery ยังใช้ของเดิม; complete ออกทะเบียน+mailหนึ่งครั้งและคง charge; cancel คืน charge ไม่คืนวัตถุดิบจากการเดา
+- [ ] M11 ตรวจ reason≥3, ผู้ยืนยันเดิม, token60วิ, revoke permission และ confirmซ้ำ; `/fa exchange complete` ตัดสิน craft ไม่ได้; audit/ledger ครบ
+- [ ] M12 ★ กระเป๋าเต็มผลยังรอ /mail; รับแล้ว identityตรงและใช้/ซ่อมได้ตาม policy; pending/claiming/review mail ห้ามซ่อมสำเนา; mail CLAIMINGค้างใช้ `/fa mail review` แทน resolve craft
+- [ ] M13 DB write/mail/registry/audit failure rollback พร้อมกัน; serial conflict ไม่ charge สำเร็จ; refund overflow/ลดmax-transactionระหว่างค้างทำให้ fail closed และตรวจ log แทนลบreceipt
+- [ ] M14 templateไม่พบ/versionไม่ตรง/serializedfalse/จำนวนหรือราคาแบบfloat/สูตรdisabled → doctorแจ้งและปิดเฉพาะสูตร; user configเดิมไม่ถูกเขียนทับ; mergeสองtemplateใหม่ใน items.yml ตามคู่มือ
+- [ ] M15 `players.disable-saving=true` หรืออ่านbridgeไม่ได้ → ไม่ reserve; diskfailure/restoreผิดชุดต้อง REVIEW และตรวจด้วยคน; สำรองDB/world/playerdataด้วยกันและทดสอบกู้จริง
+- [ ] M16 อัปv0.4 DBจริงบนสำเนา→schema5 money/mail/repair/exchangeครบ; Java/Via/NPC/native guard และ MSPTภายใต้ผู้เล่นพร้อมกันผ่านก่อนเปิดบริการ
+
+### N. ItemsCore trial (optional; พิจารณารุ่นเต็มหลังทดสอบ)
+
+ไฟล์ทดลอง: [trial imports](content/itemscore/README-th.md) · [แผน integration](../fantasycore/ITEMSCORE-INTEGRATION-th.md)
+
+- [ ] N1 ทดลองคทา/healer/coat บน demo ทางการก่อน; บันทึกรุ่นที่แสดงและผล GUI/FX/cooldown ไม่สรุป compatibility ของ Core จาก demo
+- [ ] N2 บน staging ของเราเมื่อมี JARถูกต้อง: บันทึก version/SHA256/API export/Java/Paper, backup config; doctorตรวจพบ แต่ไม่อ้างว่า craft/repair bridge เปิดแล้ว
+- [ ] N3 importทั้ง4ชิ้น → `/itemeditor <name>` เป็น visual method tiles; export/import roundtripยังทำงาน, ไม่มี opaque raw-code block
+- [ ] N4 ไม่มี `luma.itemscore.trial` → non-OPใช้ไม่ได้; ให้สิทธิ์เฉพาะบัญชีทดสอบ; userทั่วไปไม่ได้ editor/give/import/admin permissions
+- [ ] N5 คทามีFX5ticks/สีteal/เสียงเบา, cooldown8วิ; healerฟื้น4HPไม่เกินmax, cooldown20วิ; ทดสอบถือมือรองและspamไม่หลบcooldown
+- [ ] N6 เสื้อคลุมสีteal/armor typeและvanillastats; item unique/stackablefalse; หมดdurability/nativeanvil/cosmetics/liveupdateไม่ล้างproviderIDโดยไม่ทราบผล
+- [ ] N7 เข็มทิศเปิด `/menu` เป็นplayercommand; ถอนfantasy.menuแล้วถูกปฏิเสธ; bank/craft/repairยังตรวจstationและเงิน, ไม่มีconsoleหรือOPbypass
+- [ ] N8 command collision `/menu`/`craft`/repair/itemeditor/recipe/aliases; provider recipes/lootไม่มีของสอดแทรก, NativeRepairListenerไม่ข้ามpolicy; craft providerที่ไม่ใช่coreถูกปิดก่อนรับวัตถุดิบ
+- [ ] N9 เมื่อทดลองVault: provider Coreลงทะเบียนก่อนItemsCore, hookตรวจพบและยอดwalletตรงbankUI; สกุลอื่นไม่เปลี่ยน, fractional/insufficient/concurrentbehaviorทดสอบจริง
+- [ ] N10 ติดตั้งpackจริงแล้วทดสอบJava1.16.5/26.2/declinepack/cachehash/fonts/models/animation; ชื่อหน้า1.8–26.2ไม่แทนclientmatrix
+- [ ] N11 เก็บMSPT/packet/particleเมื่อหลายผู้เล่นใช้พร้อมกัน; ลดFXก่อนขยายcatalog; ห้ามเปิดhealer/AoEในpublicจนมีregion/combat/statpolicy
+- [ ] N12 ก่อนเปิดproviderbridgeต้องผ่านfactoryfreeze/UUIDคู่/registry+mailatomic/recovery/duplicateclaim/livePDC preservation; `/ic give`ยังไม่เป็นpaymentfulfillment
 
 คู่มือราคา/provider/ผัง NPC/recovery: [REPAIR-th.md](../fantasycore/REPAIR-th.md)
 
