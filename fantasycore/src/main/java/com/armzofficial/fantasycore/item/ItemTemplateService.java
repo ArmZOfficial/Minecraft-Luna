@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
@@ -147,7 +148,8 @@ public final class ItemTemplateService {
         }
         ItemTemplate template = new ItemTemplate(id, version(t), material, t.getString("name", id), t.getStringList("lore"),
                 t.getBoolean("serialized", true), t.getBoolean("glint", false),
-                NativeEnchants.parse(enchants == null ? Map.of() : enchants.getValues(false)));
+                NativeEnchants.parse(enchants == null ? Map.of() : enchants.getValues(false)),
+                t.contains("potion") ? NativePotion.parse(t.get("potion")) : null);
         validator.accept(template);
         return template;
     }
@@ -196,6 +198,10 @@ public final class ItemTemplateService {
     public ItemStack create(ItemTemplate template, UUID serial) {
         ItemStack item = new ItemStack(template.material());
         ItemMeta meta = item.getItemMeta();
+        if (template.potion() != null) {
+            if (!(meta instanceof PotionMeta potionMeta)) { throw new IllegalStateException("POTION ไม่มี PotionMeta"); }
+            template.potion().apply(potionMeta);
+        }
         meta.displayName(MM.deserialize(template.name()).decoration(TextDecoration.ITALIC, false));
         List<Component> lore = new ArrayList<>();
         for (String line : template.lore()) {

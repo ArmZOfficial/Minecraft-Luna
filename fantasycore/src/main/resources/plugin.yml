@@ -9,6 +9,11 @@ softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, Plac
 loadbefore: [ItemsCore]
 
 commands:
+  alchemy:
+    description: ดูสูตรและยืนยันปรุงยาที่ร้านไลรา
+    usage: /alchemy
+    aliases: [elixir]
+    permission: fantasy.alchemy.use
   party:
     description: จัดปาร์ตี้ Moonfall 2–4 คน
     usage: /party [invite <player>|accept|list|leave|kick <player>|disband]
@@ -101,6 +106,7 @@ permissions:
       fantasy.exchange: true
       fantasy.repair.use: true
       fantasy.craft.use: true
+      fantasy.alchemy.use: true
       fantasy.dungeon: true
       fantasy.party: true
   fantasy.party:
@@ -111,6 +117,12 @@ permissions:
     default: op
   fantasy.craft.remote:
     description: คราฟต์จากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
+    default: false
+  fantasy.alchemy.use:
+    description: เปิดร้านยาที่จุดบริการ alchemy.main
+    default: true
+  fantasy.alchemy.remote:
+    description: ปรุงยาจากทุกที่ (ราคาและวัตถุดิบเหมือนเดิม)
     default: false
   fantasyadmin.craft.resolve:
     description: ตัดสินคราฟต์ที่ค้าง (ต้องมีเหตุผลและยืนยัน)

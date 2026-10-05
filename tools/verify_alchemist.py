@@ -17,7 +17,11 @@ def check():
     assert model["meta"]["model_format"]=="free" and not model["meta"]["box_uv"]
     assert not meta["runtime_tested"] and not contract["enabled"] and not contract["pack"]["compiled"]
     assert not contract["ownership"]["animation_keyframes_may_give_items_or_debit_money"]
-    assert not contract["interaction"]["action_implemented"]
+    assert contract["core_version"]=="0.9.0" and contract["interaction"]["planned_action"]=="alchemy.main"
+    assert contract["interaction"]["action_implemented"] and contract["interaction"]["alchemy_recipe_ui_implemented"]
+    assert not contract["interaction"]["runtime_verified"] and not contract["interaction"]["animation_event_bridge_implemented"]
+    registry=(ROOT/"fantasycore/src/main/java/com/armzofficial/fantasycore/station/ActionRegistry.java").read_text(encoding="utf-8")
+    assert 'new ActionDef("alchemy.main", "fantasy.alchemy.use", true, "fantasy.alchemy.remote"' in registry
     assert contract["placement"]["yaw"]==0 and contract["placement"]["xz"]==[-69.5,68.5]
     cubes={c["uuid"]:c for c in model["elements"]}
     by_name={c["name"]:c for c in cubes.values()}

@@ -5,6 +5,36 @@
 # ห้ามแก้แม่แบบที่ออกไปแล้วใน version เดิม: เก็บ snapshot เต็มใน revisions ก่อนเพิ่ม version
 
 templates:
+  lyra_moondew:
+    version: 1
+    material: POTION
+    potion: HEALING
+    name: "<gradient:#EF6471:#DDA54A>น้ำค้างจันทร์</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · ยาดื่มฟื้นพลัง I"
+      - "<gray>ผลมาตรฐาน Minecraft · ขวดสีแดง"
+    serialized: true
+    glint: true
+  lyra_lifebloom:
+    version: 1
+    material: POTION
+    potion: REGENERATION
+    name: "<gradient:#47C8D3:#DDA54A>น้ำยาดอกชีพจร</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · ฟื้นฟูต่อเนื่อง I"
+      - "<gray>ระยะเวลามาตรฐาน Minecraft · ขวดสีฟ้า"
+    serialized: true
+    glint: true
+  lyra_starlight:
+    version: 1
+    material: POTION
+    potion: NIGHT_VISION
+    name: "<gradient:#AC79FF:#DDA54A>แสงดาวนักสำรวจ</gradient>"
+    lore:
+      - "<gray>ปรุงโดยไลรา · มองกลางคืน"
+      - "<gray>ระยะเวลามาตรฐาน Minecraft · ขวดสีม่วง"
+    serialized: true
+    glint: true
   starter_runeblade:
     version: 2
     material: IRON_SWORD

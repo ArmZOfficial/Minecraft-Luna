@@ -41,7 +41,7 @@ def main():
             "sha256":{str(f.relative_to(ROOT)).replace("\\","/"):hashlib.sha256(f.read_bytes()).hexdigest() for f in files},
             "known_limits":["Native frame bounds are axis-aligned review evidence, not an oriented collision proof or a Minecraft test",
                             "No ModelEngine/Citizens renderer integration or compiled legacy/modern resource pack yet",
-                            "market.main is a planned Core action; buying and brewing services are not implemented by this model",
+                            "Core v0.9 implements alchemy.main using the shared CRAFT journal; Minecraft QA and an animation event bridge are still pending; market.main remains planned",
                             "206 cubes and 21 bones are a high-detail single shopkeeper; crowd and client performance still require staging"]}
     (MODELS/(NAME+"-manifest.json")).write_text(json.dumps(detail,ensure_ascii=False,indent=2)+"\n",encoding="utf-8",newline="\n")
     print(json.dumps({"asset":entry,"keyframes":detail["timeline"]["keyframes"],"bounds":detail["bounds_blocks"]}))

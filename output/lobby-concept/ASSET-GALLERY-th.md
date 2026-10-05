@@ -230,4 +230,4 @@ texture bake ใหม่ 6 ต.ค. (4 texel/หน่วย, atlas 1024): ห�
 206cubes/21bones/5animations/75keys: idle, greet, stir, offer_potion, brew_success
 มีเสื้อเขียวลายพฤกษาทอง ผ้ากันเปื้อนม่วง ผมถัก แว่นกรอบซ้อน นิ้วจับคอขวด ขวด3สี และหม้อกลวงพร้อมเตา
 UVแยก1,236หน้าไม่ซ้อน ตรวจnativeครบ265เฟรมที่20FPS: gripติดมือ ปลายไม้อยู่ในน้ำยา เตานิ่ง เท้าอยู่พื้น
-วางShopDหน้าSouthตามyaw0; sourceและmanifestผ่าน แต่ยังไม่มีrenderer/packหรือระบบซื้อ-ปรุงยาจริง
+วางShopDหน้าSouthตามyaw0; sourceและmanifestผ่าน; ร้านยามี [Core v0.9](../../fantasycore/ALCHEMY-th.md) แล้ว แต่ยังรอเกมจริง/renderer/pack และ animation event bridge

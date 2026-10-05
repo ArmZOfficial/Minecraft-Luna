@@ -77,6 +77,8 @@ public final class ActionRegistry {
                 (p, s) -> new RepairMenu(p.getUniqueId(), services.get()).open(p)));
         register(new ActionDef("craft.main", "fantasy.craft.use", true, "fantasy.craft.remote",
                 (p, s) -> new ExchangeMenu(p.getUniqueId(), services.get(), services.get().craft()).open(p)));
+        register(new ActionDef("alchemy.main", "fantasy.alchemy.use", true, "fantasy.alchemy.remote",
+                (p, s) -> new ExchangeMenu(p.getUniqueId(), services.get(), services.get().alchemy()).open(p)));
         register(new ActionDef("land.main", "fantasy.land.use", false, null,
                 (p, s) -> {
                     p.closeInventory();

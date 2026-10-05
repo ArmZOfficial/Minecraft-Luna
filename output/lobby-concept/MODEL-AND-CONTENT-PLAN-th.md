@@ -97,7 +97,7 @@ base material ของ legacy hat ต้องเลือกและทดส
 | npc_quest_warden | assets/models/npc_quest_warden.bbmodel | idle/greet/offer_scroll | v2 ทำแล้ว: npc_quest_warden_v2.bbmodel 123cubes/17bones + point_direction; เหลือruntime QA |
 | npc_portal_mage | assets/models/npc_portal_mage.bbmodel | idle/greet/cast | v2 ทำแล้ว: npc_portal_mage_v2.bbmodel 124cubes/18bones + open_portal, สูงสุด2.66บล็อก; เหลือruntime QA |
 | npc_market_merchant | assets/models/npc_market_merchant.bbmodel | idle/greet/show_wares/weigh_goods/sale_success | ใหม่6ต.ค.: 179cubes/20bones texture512 ตาชั่งมีbone จานแกว่ง; เหลือภาพอ้างอิงและruntime QA |
-| npc_lyra_alchemist | assets/models/npc_lyra_alchemist.bbmodel | idle/greet/stir/offer_potion/brew_success | 6ต.ค.: 206cubes/21bones texture512 ภาพอ้างอิง3มุม, UV1236หน้า, ตรวจ265เฟรม; renderer/ตลาดยังรอ |
+| npc_lyra_alchemist | assets/models/npc_lyra_alchemist.bbmodel | idle/greet/stir/offer_potion/brew_success | 6ต.ค.: 206cubes/21bones texture512 ภาพอ้างอิง3มุม, UV1236หน้า, ตรวจ265เฟรม; ร้านยาCorev0.9มีsourceแล้ว; renderer/เกมจริงยังรอ |
 | item_aether_halo | assets/models/item_aether_halo.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_aether_halo_v2 35 elements + display8context; v3 แบบมงกุฎ 92 elements; เหลือ modern/legacy mapping ใน pack จริง |
 | item_runeblade | assets/models/item_runeblade.bbmodel + JSON | ไม่มี skeleton animation | v2 ทำแล้ว: item_runeblade_v2 25 elements + display8context + `luma:` texture; เหลือทดสอบใน pack จริง |
 

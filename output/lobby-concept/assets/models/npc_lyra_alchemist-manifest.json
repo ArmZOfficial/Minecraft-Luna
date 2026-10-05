@@ -253,12 +253,12 @@
     "output/lobby-concept/assets/models/npc_lyra_alchemist-right.png": "ee7a3bcf4630e733f056e2d3e92e1d2d98c4a7a81616f69b26f5cb5e718c0c09",
     "output/lobby-concept/assets/models/npc_lyra_alchemist-stir.png": "f3f1bce5c479e4e294c12837b7caa1caa546d6519a64bcbc2ceb0a214794c0cc",
     "output/lobby-concept/assets/references/npc-lyra-alchemist-turnaround.png": "7605f413b8099272ce55f020f52410d988722eee6dbb791df2e8f6a76193a417",
-    "server/content/npc-models/lyra-model-contract.json": "1d1c9a6b43cd262d1438e3ff47e5484e4e3261be1c80e712713d7f818b726bb8"
+    "server/content/npc-models/lyra-model-contract.json": "cc3068dc2d3b6e27ec1322038f2b51cb1415e87ef00eeee0a29efb003c033ed2"
   },
   "known_limits": [
     "Native frame bounds are axis-aligned review evidence, not an oriented collision proof or a Minecraft test",
     "No ModelEngine/Citizens renderer integration or compiled legacy/modern resource pack yet",
-    "market.main is a planned Core action; buying and brewing services are not implemented by this model",
+    "Core v0.9 implements alchemy.main using the shared CRAFT journal; Minecraft QA and an animation event bridge are still pending; market.main remains planned",
     "206 cubes and 21 bones are a high-detail single shopkeeper; crowd and client performance still require staging"
   ]
 }

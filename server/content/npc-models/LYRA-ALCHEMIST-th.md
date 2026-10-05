@@ -2,7 +2,7 @@
 
 ผลิตวันที่ 6 ต.ค. 2026 ผ่าน Blockbench MCP ในเครื่อง: **206 cubes / 21 bones / texture 512×512 / 5 animations / 75 keyframes**
 มีภาพอ้างอิงจาก ChatGPT แล้วขึ้น geometry, rig และ animation จริง; ไฟล์นี้ยังเป็นงานต้นฉบับสำหรับนำเข้า renderer
-**ยังไม่มี ModelEngine pack, ระบบปรุงยา หรือผลทดสอบ Minecraft จริง** รายละเอียดบริการอยู่ใน [contract ที่ปิดไว้](lyra-model-contract.json)
+**ระบบปรุงยามี source/JAR ใน FantasyCore v0.9 แล้ว; ยังไม่มี ModelEngine pack หรือผลทดสอบ Minecraft จริง** รายละเอียดบริการอยู่ใน [contract ที่ปิดไว้](lyra-model-contract.json)
 
 ![ภาพอ้างอิง](../../../output/lobby-concept/assets/references/npc-lyra-alchemist-turnaround.png)
 ![โมเดลจริงจาก Blockbench](../../../output/lobby-concept/assets/models/npc_lyra_alchemist-preview.png)
@@ -59,7 +59,7 @@ NPC local u=5.5/v=9.5 → **X−69.5/Z68.5**, เท้าบนพื้นเ�
 2. เตาอยู่ทางขวาตัวละคร เป็นส่วนของ source เดียวกัน: เมื่อหมุน authored North ให้หน้า South คาดว่า center เตาอยู่ X−69.8875/Z68.6125
 3. ใช้พิกัดนี้เป็นข้อเสนอ; calibrate ด้วย debug arrow และ renderer จริง ห้ามบวก yaw offset 180° ซ้ำหาก provider จัดการให้แล้ว
 4. เว้นบริเวณเตาเป็นพื้นเปล่า ไม่ใส่ cauldron block ซ้อน ไม่วาง counter ผ่านเตา/มือ/ขวด; เคาน์เตอร์ลูกค้าอยู่ด้านหน้า เว้นช่องโชว์มือ
-5. วางชั้นยาและสมุนไพรหลัง NPC/ชิดผนัง ตู้วัตถุดิบเป็นฉาก; กระบวนการซื้อใช้ฐานข้อมูลของ Core
+5. วางชั้นยาและสมุนไพรหลัง NPC/ชิดผนัง ตู้วัตถุดิบเป็นฉาก; กระบวนการปรุงใช้ journal/ฐานข้อมูลของ Core
 6. แยกเครื่องปรุง/ชั้นหนังสือออกจากซอยหลักกว้าง 5 บล็อก และรักษาทางเดินในร้านอย่างน้อย 3 บล็อก
 7. บริการ NPC ไม่เดินหรือเดินตามผู้เล่น เพราะเตาติด root; head tracking จำกัดมุมและพักขณะเล่น clip จน blend ผ่าน QA
 
@@ -69,11 +69,11 @@ WorldGuard/region ของร้านต้องคุ้มครองต�
 
 ## เชื่อมกับระบบเซิร์ฟ
 
-ใน FantasyCore v0.8 `market.main` เป็น action ที่รู้จักแต่ **ยังไม่เชื่อมบริการ**; ไม่มี `alchemy.main` ใน registry
-อย่าใช้ชื่อ action ที่ไม่มีจริงหรืออ้างว่าขวดตัวอย่างเป็นสินค้าที่ซื้อได้แล้ว
-การเพิ่มสูตร/ราคา/ซื้อยาเป็นงาน Core ถัดไป: แสดง preview ก่อนยืนยัน → ตรวจวัตถุดิบ/เงิน → transaction/receipt → ส่งของผ่าน mail → feedback animation
+FantasyCore v0.9 มี `alchemy.main` และ `/alchemy` แล้ว: สามสูตร native potion → preview → ตรวจวัตถุดิบ/เงิน → shared CRAFT journal → ผลเข้า `/mail`
+ดู [คู่มือร้านยา/สูตร/ราคา/วาง NPC/อัปเกรด](../../../fantasycore/ALCHEMY-th.md); `market.main` ยังเป็น action planned และไม่ใช่ร้านยา
+ผูก Core fallback หรือ Citizens กับ `alchemy.main` หนึ่งตัวต่อสถานี; ไม่มี animation event bridge จึงยังไม่เล่นท่าตามธุรกรรมในเกม
 ราคากับ item ID ต้องใช้ catalog/adapter เดิม ไม่สร้าง stat เพิ่มจากสีขวดหรือจากฝั่ง renderer
-กดซ้ำ ปิด GUI กระเป๋าเต็ม หลุดเกม และ restart ต้องไม่ทำให้เงินหรือ item ซ้ำ; สถานะบริการเป็นคนละส่วนกับการเล่น clip
+กดซ้ำ ปิด GUI กระเป๋าเต็ม หลุดเกม และ restart ต้องตรวจตาม checklist T; สถานะบริการเป็นคนละส่วนกับการเล่น clip
 renderer โหลดไม่ได้หรือผู้เล่นปฏิเสธ pack ให้ใช้ NPC/ป้าย vanilla และเปิดบริการที่ผ่าน QA แล้วต่อได้
 contract ชุดนี้ยัง `enabled:false` และไม่ได้เปลี่ยนค่าใน FantasyCore หรือ spawn NPC ลงโลกจริง
 
@@ -99,7 +99,7 @@ source revision ต่อไปใช้ชื่อใหม่ ไม่ทั
 - [ ] body South, จ้องผู้เล่น, หม้อไม่ฝังพื้น, มือไม่ชน counter/ขวดไม่ทะลุข้อมือใน renderer จริง
 - [ ] click bounds, region เตา, animation cooldown/priority/cancel และ dedup หลัง unload/reload/restart
 - [ ] profile client frame pacing และ server MSPT; เริ่มเพียงหนึ่งตัวใน Shop D ก่อนเพิ่มสำเนา
-- [ ] implement และทดสอบตลาด/สูตรยา/ธุรกรรม ก่อนเปิดการซื้อหรือ animation สำเร็จจากเงินจริง
+- [ ] ทดสอบร้านยา source v0.9 ตาม checklist T และทำ animation event bridge หลัง receipt; ตลาด/การซื้อด้วยเงินจริงยังเป็นงานแยก
 
 หลัก Generic/North/16units/มุม cube/parenting อ้างอิง [ModelEngine Creating a Model](https://wiki.mythiccraft.io/modelengine/Modeling/Creating-a-Model)
 และข้อกำหนด loop/timeline อ้างอิง [Animating a Model](https://wiki.mythiccraft.io/modelengine/Modeling/Animating-a-Model); exact runtime ยังต้องทดสอบตาม checklist

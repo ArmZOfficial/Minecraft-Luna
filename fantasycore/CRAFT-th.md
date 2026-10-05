@@ -194,3 +194,6 @@ YAML/ข้อความตรวจ parse ได้ และตรวจล�
 เมื่อผลไม่แน่ชัดให้ REVIEW; ห้ามแจกซ้ำหรือคืนวัตถุดิบจากการเดา
 การเชื่อม provider/model, GUI จริง, native crafting guard, การคลิก NPC, client ViaVersion และ MSPT ต้องพิสูจน์บนเกมจริง
 ตรวจตาม [server/README-th.md หมวด M](../server/README-th.md) ก่อนเปิดให้ผู้เล่น
+
+v0.9 เพิ่ม [ร้านยาไลรา](ALCHEMY-th.md) ใช้ CRAFT journal/recovery เดียวกัน สูตร `alchemy_*` สงวนสำหรับร้านยา; gear recipes ห้ามใช้ prefix นี้
+quota ยา/gear แยก recipe ID แต่รายการ pending/REVIEW กั้นผู้เล่นข้ามบริการ; `/fa craft review/complete/cancel` แสดงทั้ง gear และยา

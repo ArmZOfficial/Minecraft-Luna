@@ -26,6 +26,7 @@ import com.armzofficial.fantasycore.home.HomeService;
 import com.armzofficial.fantasycore.home.HomeStore;
 import com.armzofficial.fantasycore.item.ItemInstanceStore;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
+import com.armzofficial.fantasycore.item.NativePotionListener;
 import com.armzofficial.fantasycore.item.ItemAdapter;
 import com.armzofficial.fantasycore.repair.RepairService;
 import com.armzofficial.fantasycore.repair.RepairStore;
@@ -81,6 +82,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         saveIfMissing("exchanges.yml");
         saveIfMissing("repair.yml");
         saveIfMissing("crafting.yml");
+        saveIfMissing("alchemy.yml");
         saveIfMissing("monsters.yml");
         saveIfMissing("dungeons.yml");
 
@@ -162,6 +164,9 @@ public final class FantasyCorePlugin extends JavaPlugin {
         StationService stations = new StationService(this, database, new StationStore(database), settings.stationRadius());
         ExchangeService craft = new ExchangeService(this, messages, craftStore, database, tasks, items, economy, stations, settings.maxTransaction());
         craft.problems().forEach(p -> getLogger().warning("crafting.yml: " + p));
+        ExchangeService alchemy = new ExchangeService(this, messages, craftStore, database, tasks, items, economy,
+                stations, settings.maxTransaction(), ExchangeService.Profile.ALCHEMY);
+        alchemy.problems().forEach(p -> getLogger().warning("alchemy.yml: " + p));
         ItemAdapter itemAdapter = new ItemAdapter(items);
         RepairService repair = new RepairService(this, messages, database, tasks, itemAdapter, repairStore, economy,
                 stations, settings.maxTransaction());
@@ -175,7 +180,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
         citizens.ifPresent(c -> getLogger().info("พบ Citizens — ผูก NPC กับบริการได้ด้วย /fa npc bind <action>"));
 
         services = new Services(this, settings, messages, tasks, database, players, audit, economy, claims, worlds, landing,
-                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, itemAdapter, repair, monsters, dungeon, citizens);
+                teleports, homes, rtp, items, new ItemInstanceStore(database), stations, actions, mail, rewards, exchange, craft, alchemy, itemAdapter, repair, monsters, dungeon, citizens);
         register(monsters);
         monsters.start();
 
@@ -187,12 +192,13 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
         register(combat, teleports, new MenuListener(this), new StationListener(stations, actions, citizens.orElse(null)),
                 new NativeRepairListener(items, repair, messages),
+                new NativePotionListener(items, messages),
                 new DeathListener(settings, messages, economy, tasks, dungeon::owns), dungeon, new DungeonProtection(dungeon), new SessionListener(services));
         dungeon.start();
 
         PlayerCommands playerCommands = new PlayerCommands(services);
         for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
-                "rewards", "mail", "exchange", "repair", "craft", "dungeon", "party"}) {
+                "rewards", "mail", "exchange", "repair", "craft", "alchemy", "dungeon", "party"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));

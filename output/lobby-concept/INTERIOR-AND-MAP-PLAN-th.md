@@ -207,7 +207,7 @@ guild.main/roster/rankings, progression.rank, catalog.recipe, catalog.monster �
 หัวตัวอย่างจำนวนจำกัดและป้าย preview ไม่เรียงหัวนับร้อยเป็นกำแพง
 
 ### ร้าน D — ร้านยาและอาหาร
-โต๊ะปรุงยา 3 × 2 ข้างเคาน์เตอร์, ขวดตกแต่งด้วย stained glass เล็ก, สมุนไพรและหม้อไม่เกิน 3 จุด เปิด alchemy.shop/recipe เมื่อระบบพร้อม
+โต๊ะปรุงยา 3 × 2 ข้างเคาน์เตอร์, ขวดตกแต่งด้วย stained glass เล็ก, สมุนไพรและหม้อไม่เกิน 3 จุด ผูก `alchemy.main` ของ [Core v0.9](../../fantasycore/ALCHEMY-th.md) เมื่อ checklist T ผ่าน; เมนูสูตร `/alchemy` ไม่ใช้ action alchemy.shop/recipe
 ป้ายร้านเป็นขวดยาทรงเหลี่ยมกว้าง 3 สูง 5 สร้างจากบล็อก
 
 ### แผง 6 จุด

@@ -50,7 +50,7 @@ Refresh MCP servers ใน Antigravity หากยังไม่แสดง t
 
 [คู่มือร้านยาและภาพทุกมุม](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) · [contract disabled](../../server/content/npc-models/lyra-model-contract.json)
 
-> เปิดต้นฉบับไลราใน project ใหม่และทำ revision ใหม่เมื่อ polish เพิ่ม รักษา anatomicalright=+X, North/−Z, เท้าY0, 16units:block; แว่น/ผมถักตามhi_head, flaskตามleft_hand, rodตามright_hand, เตาแยกrootไม่เคลื่อน ตรวจทุกเฟรม20FPSว่าคอขวด/ด้ามไม้ติดมือและปลายไม้อยู่ในน้ำยา UVแยก1236หน้า/atlas512ต้องคมและมีgutter ไม่ปล่อยAutoUVเขียนทับ วางShopDหน้าลูกค้าSouthyaw0และcalibrateoffsetจริง ห้ามให้ animation ทำเงิน/ยา/วัตถุดิบ ทดสอบ ModelEngineformat5/packlegacy-modern/counter/region/performance ก่อนenable; market.mainยังเป็นplanned action
+> เปิดต้นฉบับไลราใน project ใหม่และทำ revision ใหม่เมื่อ polish เพิ่ม รักษา anatomicalright=+X, North/−Z, เท้าY0, 16units:block; แว่น/ผมถักตามhi_head, flaskตามleft_hand, rodตามright_hand, เตาแยกrootไม่เคลื่อน ตรวจทุกเฟรม20FPSว่าคอขวด/ด้ามไม้ติดมือและปลายไม้อยู่ในน้ำยา UVแยก1236หน้า/atlas512ต้องคมและมีgutter ไม่ปล่อยAutoUVเขียนทับ วางShopDหน้าลูกค้าSouthyaw0และcalibrateoffsetจริง ห้ามให้ animation ทำเงิน/ยา/วัตถุดิบ ทดสอบ ModelEngineformat5/packlegacy-modern/counter/region/performance ก่อนenable; ผูกบริการด้วยalchemy.mainในCorev0.9; market.mainยังplanned และanimation event bridgeยังไม่มี
 
 ## คำสั่งตรวจที่มีใน workspace
 

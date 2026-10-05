@@ -8,6 +8,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 
 import java.util.List;
 import java.util.Map;
@@ -67,7 +69,7 @@ public final class ExchangeMenu extends Menu {
                     m.lines(exchange.key("menu.list.lore"), Messages.p("page", page + 1), Messages.p("pages", pages))));
             for (int i = 0; i < SLOTS.length && page * SLOTS.length + i < recipes.size(); i++) {
                 ExchangeService.Recipe recipe = recipes.get(page * SLOTS.length + i);
-                set(SLOTS[i], Icons.of(recipe.icon(), m.plain(exchange.key("menu.recipe.name"), Messages.p("name", recipe.name())),
+                set(SLOTS[i], recipeIcon(recipe, m.plain(exchange.key("menu.recipe.name"), Messages.p("name", recipe.name())),
                         enchantedLore(recipe, m.lines(exchange.key("menu.recipe.lore"), Messages.p("inputs", recipe.describeInputs(1)), Messages.p("price", recipe.price()),
                                 Messages.p("outputs", recipe.describeOutputs(1)), Messages.p("used", used(recipe)),
                                 Messages.p("limit", recipe.dailyLimit())))), (p, c) -> {
@@ -89,7 +91,7 @@ public final class ExchangeMenu extends Menu {
                 });
             }
         } else {
-            set(13, Icons.of(selected.icon(), m.plain(exchange.key("menu.recipe.name"), Messages.p("name", selected.name())),
+            set(13, recipeIcon(selected, m.plain(exchange.key("menu.recipe.name"), Messages.p("name", selected.name())),
                     enchantedLore(selected, m.lines(exchange.key("menu.preview"), Messages.p("inputs", selected.describeInputs(batch)), Messages.p("price", selected.price()),
                             Messages.p("available", exchange.crafting() ? exchange.describeAvailable(Bukkit.getPlayer(viewer), selected) : ""),
                             Messages.p("outputs", selected.describeOutputs(batch)), Messages.p("batch", batch),
@@ -145,8 +147,25 @@ public final class ExchangeMenu extends Menu {
         return usage == null ? "…" : usage.getOrDefault(recipe.id(), 0);
     }
 
+    /** Display-only icon: potion data is real, but it has no Core PDC/serial or delivery path. */
+    private ItemStack recipeIcon(ExchangeService.Recipe recipe, Component name, List<Component> lore) {
+        boolean potion = recipe.template() != null && recipe.template().potion() != null;
+        ItemStack icon = Icons.of(potion ? Material.POTION : recipe.icon(), name, lore);
+        if (potion) {
+            PotionMeta meta = (PotionMeta) icon.getItemMeta();
+            recipe.template().potion().apply(meta);
+            meta.setEnchantmentGlintOverride(recipe.template().glint());
+            icon.setItemMeta(meta);
+        }
+        return icon;
+    }
+
     private List<Component> enchantedLore(ExchangeService.Recipe recipe, List<Component> lore) {
         if (recipe.template() != null) {
+            if (recipe.template().potion() != null) {
+                lore.add(services.messages().plain("alchemy.menu.effect", Messages.p("effect", recipe.template().potion().description())));
+                return lore;
+            }
             var enchants = recipe.template().enchantments();
             if (enchants.isEmpty()) {
                 lore.add(services.messages().plain("craft.menu.enchant", Messages.p("enchant", recipe.describeEnchantments())));

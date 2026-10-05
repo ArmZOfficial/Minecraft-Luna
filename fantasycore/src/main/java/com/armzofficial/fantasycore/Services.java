@@ -52,6 +52,7 @@ public record Services(
         RewardService rewards,
         ExchangeService exchange,
         ExchangeService craft,
+        ExchangeService alchemy,
         ItemAdapter itemAdapter,
         RepairService repair,
         DepthMonsterService monsters,

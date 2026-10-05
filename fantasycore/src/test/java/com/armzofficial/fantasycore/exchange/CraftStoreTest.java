@@ -66,6 +66,41 @@ class CraftStoreTest {
         });
     }
 
+    private ExchangeStore.Request potion(String op) {
+        return new ExchangeStore.Request(op, player, "alchemy_moondew", 1, 1, "2026-10-06", 2,
+                "GLASS_BOTTLE ×1 + NETHER_WART ×2", new byte[]{1, 2},
+                List.of(new ExchangeStore.Output("น้ำค้างจันทร์", new byte[]{9, 8, 7}, UUID.randomUUID(), "lyra_moondew", 1)), 40);
+    }
+
+    @Test void alchemyAndGearCannotBothReserveWhileOneProductionIsPending() throws Exception {
+        var alchemy = new ExchangeStore(db, mail, () -> 1000L, money, ExchangeStore.Kind.CRAFT);
+        assertEquals(ExchangeStore.PrepareResult.PREPARED, alchemy.prepare(potion("potion")));
+        assertEquals(ExchangeStore.PrepareResult.BUSY, craft.prepare(request("gear")));
+        assertEquals(960, money.balances(player).gold());
+        assertTrue(alchemy.cancelUntouched("potion"));
+        assertEquals(1000, money.balances(player).gold());
+        assertEquals(ExchangeStore.PrepareResult.PREPARED, craft.prepare(request("gear")));
+    }
+
+    @Test void potionReceiptsFreezePayloadAndQuotaWithoutDriftingToGear() throws Exception {
+        for (String op : List.of("p1", "p2")) {
+            var r = potion(op);
+            assertEquals(ExchangeStore.PrepareResult.PREPARED, craft.prepare(r));
+            assertTrue(craft.beginConsume(op));
+            assertTrue(craft.complete(op).changed());
+            assertFalse(craft.complete(op).changed());
+            assertEquals("lyra_moondew", new ItemInstanceStore(db).find(r.outputs().getFirst().serial()).orElseThrow().templateId());
+        }
+        assertEquals(ExchangeStore.PrepareResult.QUOTA, craft.prepare(potion("p3")));
+        assertEquals(920, money.balances(player).gold());
+        assertEquals(2, mail.countPending(player));
+        assertArrayEquals(new byte[]{9, 8, 7}, mail.pending(player, 10).getFirst().data());
+        assertEquals(2, craft.usage(player, "2026-10-06").get("alchemy_moondew"));
+        assertFalse(craft.usage(player, "2026-10-06").containsKey("starter_runeblade"));
+        assertTrue(craft.usage(player, "2026-10-07").isEmpty());
+        assertEquals(ExchangeStore.PrepareResult.PREPARED, craft.prepare(request("gear-after-potions")));
+    }
+
     @Test void chargeAndCompletionRegisterOwnerAndMailExactlyOnce() throws Exception {
         var r = request("one");
         UUID serial = r.outputs().getFirst().serial();

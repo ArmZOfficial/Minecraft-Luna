@@ -1,4 +1,4 @@
-# FantasyCore — แกนระบบของ Luma (v0.8)
+# FantasyCore — แกนระบบของ Luma (v0.9)
 
 ปลั๊กอิน Paper ตาม [SERVER-SYSTEMS-PLAN §6](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 - v0.1: **ลำดับพัฒนาข้อ 1–3** และ **CASUAL-SURVIVAL §12 ข้อ 2 (บ้าน + RTP)**
@@ -11,7 +11,9 @@
 Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่าน ViaVersion/ViaBackwards
 เพิ่ม [แผนผสม ItemsCore และ trial imports](ITEMSCORE-INTEGRATION-th.md); Java provider bridge ยังไม่เปิดจนมี JAR/APIจริงที่ผ่านทดสอบ
 
-รุ่นปัจจุบัน v0.8 เพิ่ม [ปาร์ตี้2–4คน/2ห้องส่วนตัว/reconnect60s](PARTY-DUNGEONS-th.md); roster/HP/attack/rewardตรึงต่อรอบ ใช้ dailyquotaร่วมกับ soloเดิม ทุกดันปิดรับเริ่มต้น
+v0.8 เพิ่ม [ปาร์ตี้2–4คน/2ห้องส่วนตัว/reconnect60s](PARTY-DUNGEONS-th.md); roster/HP/attack/rewardตรึงต่อรอบ ใช้ dailyquotaร่วมกับ soloเดิม ทุกดันปิดรับเริ่มต้น
+
+รุ่นปัจจุบัน v0.9 เพิ่ม [ร้านยาไลรา](ALCHEMY-th.md): `/alchemy`, native potion 3 สูตร, preview/สี/วัตถุดิบ/ค่าทอง/โควตา และ shared CRAFT journal; คง schema7 และยังรอ checklist T ในเกม
 
 ## มีอะไรในรุ่นนี้
 
@@ -22,7 +24,7 @@ Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่�
 | ตาย | เสีย `gold.wallet` ตาม % ปัดลงต่อโลก (staging: 30% ใน luma_housing/luma_resource), เงินฝาก/เงินแดงไม่เสีย, keep-inventory ต่อโลก | §7 |
 | Vault | ลงทะเบียน provider เฉพาะทองที่พก (deposit ปัดลง / withdraw ปัดขึ้น) — ห้ามมี economy plugin อื่นซ้อน | §3 |
 | แอดมิน | `/fa doctor`, `/fa bank`, `/fa eco give/take … <เหตุผล>` → preview → `/fa confirm <รหัส>` (ตรวจยอดซ้ำตอน apply), `/fa audit` | ADMIN-PANEL-SPEC |
-| เมนู | `/menu` 54 ช่อง 7 ปุ่มตามภาพ + ธนาคาร/จุดเกิด; ระบบที่ยังไม่มีแสดง "ยังไม่เชื่อม"; กัน shift/drag/hotbar/double-click | CASUAL §2 |
+| เมนู | `/menu` 54 ช่อง ปุ่มตามภาพ + ธนาคาร/จุดเกิด/คราฟต์/ร้านยา; ระบบที่ยังไม่มีแสดง "ยังไม่เชื่อม"; กัน shift/drag/hotbar/double-click | CASUAL §2 |
 | NPC สถานี | `/fa npc spawn <action> [ชื่อ]` วาง Villager อมตะไม่มี AI ผูก action ID; หรือมองไปที่ NPC ของ Citizens แล้ว `/fa npc bind <action>` (คลิกแล้วเปิดบริการทันที ไม่ต้องตั้ง `/npc command`) | INTERIOR §16 |
 | กล่องจดหมาย | `/mail` รับทีละชิ้น/ทั้งหมด; ของที่เข้ากระเป๋าไม่ได้ (รางวัล, `/fa item give`) มารอที่นี่ ไม่ตกพื้น; สถานะ PENDING→CLAIMING→CLAIMED และรายการที่ค้างตอนเซิร์ฟดับถูกย้ายไป REVIEW ให้ทีมงานตัดสิน (`/fa mail review/release/void`) | SERVER-SYSTEMS §6 ข้อ 6–7 |
 | รับของรายวัน | `/rewards` ปฏิทินรอบสะสม 7 ครั้ง วันใหม่ 00:00 เวลาไทย รับวันละครั้ง (ไม่ไล่ย้อนหลัง); สิทธิ์ + เงิน + ของในกล่อง commit ใน transaction เดียว; แจ้งตอนเข้าเกมถ้ายังไม่รับ | CASUAL §4 |
@@ -30,6 +32,7 @@ Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่�
 | ไอเทม | แม่แบบใน `items.yml` (ตัวอย่าง `starter_runeblade`), ตัวตนอยู่ใน PDC + serial ลงทะเบียนใน DB, ไม่ทิ้งของลงพื้น | §6 ItemAdapter |
 | ซ่อม | `/repair` ที่สถานี `repair.main`, main hand 1 ชิ้น, preview 60 วิ, จองทองและซ่อมเฉพาะ DAMAGE; Core ตรวจเจ้าของ/serial/เวอร์ชันและ pending mail; ค้างหลังเริ่มซ่อมไป REVIEW แอดมินตัดสิน | §7 / [คู่มือ Repair](REPAIR-th.md) |
 | คราฟต์ | `/craft` ที่ `craft.main`, 3 สูตร gear จากวัตถุดิบธรรมดาและทอง, preview → confirm → serial ใหม่เข้า mail; แยก quota รายวันจาก exchange, คืนค่าจองเมื่อยกเลิกก่อนตัด และค้าง REVIEW ให้ทีมงานตรวจ | §7 / [คู่มือ Craft](CRAFT-th.md) |
+| ร้านยา | `/alchemy` / `/elixir` ที่ `alchemy.main`, ยาดื่ม 3 สูตรพร้อมผล vanilla จริง/สี/glint, วัตถุดิบ+ทองครั้งละขวดเข้า mail; quota ตามสูตรและ recovery `/fa craft review`; ป้องกัน vanilla brewing เปลี่ยน Core potion | [คู่มือ Alchemy](ALCHEMY-th.md) |
 | มอนสเตอร์ | natural vanilla ใน luma_resource: 4 ชั้นตาม Y, HP/ตี/ยิงเพิ่ม, ระดับตรึงตอนเกิดและ Target HP BossBar | [คู่มือมอนสเตอร์](MONSTERS-th.md) |
 | ดันฝึก | `/dungeon`, เดี่ยว1ห้อง + ปาร์ตี้2–4คน2ห้อง, รูน→ศิลา→บอส, reward `/mail` วันละครั้งร่วมทุกslot; rosterตรึง/reconnect60s; build/abort confirm; ไม่มี custombossmodel | [Party Dungeons](PARTY-DUNGEONS-th.md) |
 | บ้าน | `/sethome [ชื่อ] [confirm]`, `/home [ชื่อ]`, `/delhome`, `/homes`; เฉพาะ `luma_housing` + ต้องเป็นเจ้าของ/สมาชิกแปลง PS, ตรวจซ้ำทุกครั้งก่อนวาร์ป, โควตา 1/3/5 | CASUAL §9 |
@@ -48,7 +51,7 @@ Paper API ที่ใช้ compile ถูกตรึงเป็น `26.2.bui
 
 ```powershell
 cd fantasycore
-.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.8.0.jar
+.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.9.0.jar
 ```
 
 หรือใช้ `server\build-plugin.cmd` ซึ่ง build แล้วคัดลอกเข้าเซิร์ฟ staging ให้
@@ -72,7 +75,7 @@ Set-Location fantasycore
 
 | Node | ค่าเริ่มต้น | ใช้ทำ |
 |---|---|---|
-| `fantasy.player` (menu, balance, bank.use, home.use, rtp.use, spawn, land.use, rewards, mail, exchange, repair.use) | ทุกคน | ใช้งานพื้นฐาน |
+| `fantasy.player` (menu, balance, bank.use, home.use, rtp.use, spawn, land.use, rewards, mail, exchange, repair.use, craft.use, alchemy.use, dungeon, party) | ทุกคน | ใช้งานพื้นฐาน |
 | `fantasy.bank.remote` | ไม่มี | ใช้ธนาคารจากทุกที่ (แรงค์) |
 | `fantasy.home.limit.3` / `.5` | ไม่มี | โควตาบ้าน (เควส housing_workshop / housing_community) |
 | `fantasy.rtp.bypass-cooldown` | OP | ทดสอบ |
@@ -81,7 +84,8 @@ Set-Location fantasycore
 | `fantasy.repair.remote` | ไม่มี | ใช้ซ่อมนอกสถานี (ยังคิดราคาเดิม) |
 | `fantasyadmin.repair.resolve` | OP | ตัดสินรายการซ่อมค้างพร้อม preview + เหตุผล + confirm |
 | `fantasy.craft.use` / `.remote` | use ผ่าน fantasy.player / remote ไม่มี | คราฟต์ที่ช่าง / ใช้จากนอกสถานี |
-| `fantasyadmin.craft.resolve` | OP | ตัดสินคราฟต์ค้างพร้อมเหตุผล preview และ confirm |
+| `fantasy.alchemy.use` / `.remote` | use ทุกคน / remote ไม่มี | ร้านยาที่สถานี / นอกสถานี โดยราคาและโควตาเดิม |
+| `fantasyadmin.craft.resolve` | OP | ตัดสินคราฟต์หรือร้านยาค้างพร้อมเหตุผล preview และ confirm |
 | `fantasy.dungeon` / `fantasyadmin.dungeon.manage` | player / OP | เมนูเดี่ยวหรือปาร์ตี้ / สร้าง-ตรวจ-ยกเลิกทุกรอบพร้อม preview/confirm/audit |
 
 สิทธิ์ `fantasy.party` ผ่าน fantasy.player สำหรับ /party; ไม่มีสิทธิ์เปลี่ยนrosterขณะรอบถูกล็อก
@@ -92,6 +96,7 @@ Set-Location fantasycore
 - อัปจาก v0.1–v0.7 → v0.8: สำรองก่อน migrate schema v7 อัตโนมัติ รักษา solo rowsเดิม สร้าง resource ที่ยังไม่มีรวม `dungeons.yml` โดยไม่เขียนทับ config ที่แก้แล้ว; ย้อน JAR เก่าต้องกู้ backup ชุดเดียวกัน
 - อัปจาก v0.5 → v0.6 ใช้ schema v5 เดิม; ไม่เขียนทับ config/อัปพลังของเก่าอัตโนมัติ เก็บแม่แบบ v1 จริงใน revisions ก่อนเพิ่ม current/output version ดู [ขั้นตอนอัปเกรด](ENCHANTS-th.md)
 - เซิร์ฟที่ยังไม่มีสอง template ใหม่ให้ merge อย่างระวังหรือปิดสูตรนั้น ดู [Craft](CRAFT-th.md)
+- อัป v0.8→v0.9 คง schema7; merge `templates.lyra_*` และข้อความร้านยาโดยรักษา gear/revisions เดิม ดู [Alchemy อัปเกรด/rollback](ALCHEMY-th.md#5-อัปเกรดและย้อนรุ่น); ห้ามย้อน JAR เดี่ยวหลังออกยา
 - SQLite นี้เป็นข้อมูล Core ฝั่งเกม ส่วน PostgreSQL เป็นข้อมูลเว็บ; ยังไม่มี bridge payment/ส่งคำสั่งจากเว็บในรุ่นนี้
 - หยุดเซิร์ฟก่อนสำรอง `.db` (+ `-wal`/`-shm` ถ้ายังมี) **พร้อมกับ** playerdata/โฟลเดอร์โลกและ `plugins/WorldGuard/worlds/*/regions.yml` เป็นชุดเดียว
 - เปิดฐานข้อมูลไม่ได้ → ปลั๊กอินปิดตัวเอง (fail closed) ไม่ให้บริการเงินครึ่ง ๆ กลาง ๆ
@@ -150,3 +155,6 @@ NPC อนิเมชันจาก Blockbench เป็นอีกเส้�
 สถานะ v0.7 ข้างต้นเป็นประวัติ; รุ่นปัจจุบัน v0.8 มี party/2parallelinstances/reconnect60s แล้ว ส่วน [sourceโมเดลบอส/8animations](../server/content/dungeons/moonfall/README-th.md) exportแล้ว รอadapter+runtimeQA
 รอบ v0.8: unit tests **124 รายการผ่าน** (เพิ่ม19), compileไม่มีwarning; YAML9/MiniMessage377 ผ่าน; schema7เป็นexpand-only อ่านlegacyและquotaร่วม
 ยังไม่ได้เริ่ม Minecraft; ต้องผ่าน [checklist R/S](../server/README-th.md) ก่อนเปิด enabled/party-enabled ดู [คู่มือ v0.8](PARTY-DUNGEONS-th.md)
+
+รอบ v0.9: compile ผ่านและ unit tests **131 รายการผ่าน** (เพิ่ม7); native profiles/archive/namespace/shared craft-alchemy quota และ frozen receipt ตรวจผ่าน; YAML10/MiniMessage401 ผ่าน
+[ร้านยาไลรา](ALCHEMY-th.md) ใช้ schema7 เดิม; ต้องผ่าน [checklist T](../server/README-th.md#t-ร้านยาไลรา-v09--ยังรอ-minecraft-จริง) ก่อนเปิดบริการจริง และ renderer/pack ยังปิดไว้

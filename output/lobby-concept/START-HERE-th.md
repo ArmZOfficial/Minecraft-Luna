@@ -3,7 +3,7 @@
 ฉบับล่าสุด 5 ตุลาคม 2026: **Luma / ลูม่า** เมืองขนาด 400 × 400 บล็อกสำหรับ fantasy และ casual roleplay
 มีภาพ 12 โซน แผนภายใน เว็บต้นแบบ โลโก้ และโมเดล pilot ที่ export ผ่าน Blockbench MCP
 
-เพิ่มล่าสุด6ต.ค.: [ไลรา นักปรุงยา](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) พร้อมภาพอ้างอิง/โมเดลละเอียด/5ท่า/ตรวจ265เฟรม; เป็น source ยังรอ renderer และระบบตลาด
+เพิ่มล่าสุด6ต.ค.: [ไลรา นักปรุงยา](../../server/content/npc-models/LYRA-ALCHEMIST-th.md) พร้อมภาพอ้างอิง/โมเดลละเอียด/5ท่า/ตรวจ265เฟรม; เป็น source ยังรอ renderer; [ร้านยา v0.9](../../fantasycore/ALCHEMY-th.md) มีสูตร/preview/ธุรกรรมแล้ว รอ Minecraft QA
 
 ## เอกสารหลัก
 

@@ -3,7 +3,7 @@
 เซิร์ฟนี้ใช้ทดสอบ **ลำดับพัฒนาข้อ 1–3** ใน [SERVER-SYSTEMS-PLAN §9](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 และ **CASUAL-SURVIVAL §12 ข้อ 1–2** (PS tier I/V + บ้าน + RTP) ก่อนเปลี่ยนสถานะ manifest จาก candidate เป็น locked
 FantasyCore v0.2 เพิ่มกล่องจดหมาย, รับของรายวัน และการผูก NPC ของ Citizens (หมวด B6, I, J ด้านล่าง)
-รุ่นปัจจุบัน v0.8/schema7 เพิ่ม [Moonfall ปาร์ตี้2–4คน/2ห้อง/reconnect](../fantasycore/PARTY-DUNGEONS-th.md) (checklist R/S); ไม่เปิดรับผู้เล่นอัตโนมัติ
+รุ่นปัจจุบัน v0.9/schema7 เพิ่ม [ร้านยาไลรา](../fantasycore/ALCHEMY-th.md) (checklist T); Moonfall ปาร์ตี้จาก v0.8 ยังปิดรับเริ่มต้นและรอ checklist R/S
 staging เปิด whitelist ไว้เสมอ และไม่ใช่เซิร์ฟเปิดให้ผู้เล่นทั่วไป
 
 คลังโมเดล/ไอคอนที่เพิ่ม: [26 แพ็กและแปลนวางในเมือง](content/library/README-th.md), [ชื่อชุดและบาลานซ์ enchant](content/library/BALANCE-th.md)
@@ -286,3 +286,24 @@ server/
 - [ ] S18 เจ้าของลงชื่อผลR/Sและgearplaytestก่อนproductionเปิด; CoreยังHuskfallback; sourceบอส8animationsพร้อมในBlockbench แต่ยังไม่เรียกในเกม; ปิดparty/ทุกดัน+restartแล้วprotect/recoveryยังอยู่
 
 ผลรอบพัฒนา 5 ต.ค.2026: compileไม่มีwarning + unit tests124ผ่าน (0fail/error/skip); ยังไม่มีผล S ในเกม
+
+### T. ร้านยาไลรา (v0.9 — ยังรอ Minecraft จริง)
+
+คู่มือ config/สูตร/ราคา/NPC/recovery: [ALCHEMY-th.md](../fantasycore/ALCHEMY-th.md)
+source build และ unit tests 131 ผ่าน (6 ต.ค.2026); ยังไม่มีข้อใดด้านล่างผ่านในเกม
+ทดสอบสำเนาเซิร์ฟ/DB/playerdata ทั้ง fresh defaults และอัป config จาก v0.8; client 1.16.5/รุ่นกลาง/26.2
+
+- [ ] T1 backup/restore ชุดเดียวกันสำเร็จ อัป v0.8→v0.9 คง schema7 เงิน/ledger/gear v1-v2/mail/NPC/ดัน/จุดกลับเดิมครบ ไม่มี key YAML ซ้ำ; doctor ไม่มี missing template/message
+- [ ] T2 `/alchemy`, `/elixir`, `/menu` และ NPC `alchemy.main` เปิดถูกหน้า; `market.main` ยัง planned; use/remote ถูกตรวจจริงทั้ง OP/non-OP ไม่ข้ามราคา/โควตา
+- [ ] T3 Shop D NPC X−69.5/Z68.5 เท้า Y0+1 yaw0 มองลูกค้า South; ระยะ anchor/counter/label/region ถูกต้อง ย้าย Citizens แล้ว bind ใหม่; ใช้ fallback หนึ่งตัวจน pack พร้อม
+- [ ] T4 preview สามสี/ผลยา/ราคา/วัตถุดิบมี-ขาด/โควตาตรง config; เปิดดูไม่หัก, shift/drag/hotbar/doubleclick เอาไอคอนออกไม่ได้, ทั้งหน้ากระดาษและ confirm ใช้งานได้
+- [ ] T5 ขาดเงิน/วัตถุดิบ/มีเฉพาะ named-PDC/มือรอง/เกราะไม่ปรุง; ทองฝาก/เงินแดงไม่เสีย; ยาออกหนึ่งขวดต่อรายการพร้อม serial/template/version และ mail เดียว
+- [ ] T6 กดรัว/เปิด gear และยา/แลกของพร้อมกันไม่หักซ้ำ; pending REVIEW กั้นทุกสูตรจน resolve; potion quota แยก gear/exchange และ version ใหม่ไม่รีเซ็ต quota วันเดิม
+- [ ] T7 ปิดเมนู เปลี่ยนช่อง/ของ ย้ายออกระยะ สิทธิ์หาย ตายหรือหลุดก่อน consume ยกเลิก/คืนค่าจองเมื่อเหมาะสม; หลัง consume ไม่คืนหรือให้ของโดยเดา
+- [ ] T8 crash/fault injection บนสำเนาก่อน/หลัง PREPARED/CONSUMING/COMMITTED: refund หรือ REVIEW ถูกต้อง; `/fa craft review/complete/cancel` + confirm ส่ง payload เดิม/คืนทองครั้งเดียว มี audit; ห้ามใช้ `/fa exchange` resolve ยา
+- [ ] T9 กระเป๋าเต็มรับ mail ไม่ได้ยัง PENDING; claim/claim-all ถูกต้อง serial ไม่ซ้ำ; CLAIMING หลัง crash ไป REVIEW และใช้ mail recovery แยกจาก craft
+- [ ] T10 PotionMeta หลังรับ/รีสตาร์ตมี HEALING/REGENERATION/NIGHT_VISION จริง ดื่มได้ผลมาตรฐานตามชื่อ; สี/glint/lore/PDC ตรง; ขวดเปล่าหลังดื่มไม่มี Core marker/ผลซ้ำ ไม่มี bonus damage หรือเงิน
+- [ ] T11 potion Core ใน brewing stand ยกเลิกการแปลงตาม version; วัด ingredient/fuel และขวดอื่นในแท่นไม่หายหรือถูกแปลงหลบ policy; vanilla-only brewing ยังปกติ ทดสอบ hopper/dispenser และปลั๊กอินที่เกี่ยวข้องด้วย
+- [ ] T12 template profile ผิด/ไม่มี/potion บน material อื่น/strong-long/nonserialized/enchant/archive ขาดปิดเฉพาะที่เสีย doctor แจ้ง; `enabled:false` + restart ปิดปรุงแต่ mail/ยาที่ออกแล้วอ่านได้
+- [ ] T13 โควตาที่ 12/8/6 และข้าม 00:00 ไทยถูกต้อง พร้อมวัดค่าใช้จริงใน resource/Moonfall solo/party gear v1-v2; บันทึกรายได้ทอง/อัตราตาย/จำนวนขวดต่อรอบก่อนปรับบาลานซ์
+- [ ] T14 client 1.16.5/รุ่นกลาง/26.2 และ pack-decline fallback เห็นเมนูไทย/สี/เอฟเฟกต์/รับของถูกต้อง; วัด MSPT/frame pacing ก่อนเพิ่มร้านหลายตัว โมเดลยังไม่อ้างว่าผ่านเพราะ source export ได้

@@ -107,6 +107,9 @@ public final class AdminCommand implements TabExecutor {
         line(sender, services.craft().enabled() ? "ready" : "off", "คราฟต์อุปกรณ์รูน",
                 services.craft().recipes().size() + " สูตร · crafting.yml · /craft");
         services.craft().problems().forEach(p -> line(sender, "fix", "crafting.yml", p));
+        line(sender, services.alchemy().enabled() ? "ready" : "off", "ร้านยาไลรา",
+                services.alchemy().recipes().size() + " สูตร · alchemy.yml · /alchemy · journalร่วม /fa craft review");
+        services.alchemy().problems().forEach(p -> line(sender, "fix", "alchemy.yml", p));
         services.tasks().then(services.database().async(() -> services.craft().store().countReview()), (count, error) -> {
             if (error != null) { line(sender, "broken", "คราฟต์ค้างตรวจ", error.getMessage()); }
             else { line(sender, count == 0 ? "ready" : "fix", "คราฟต์ค้างตรวจ", count + " รายการ · /fa craft review"); }

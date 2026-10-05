@@ -27,8 +27,8 @@ class ItemTemplatesTest {
     @Test void starterProfilesAreRealEnchantDataAndOldVersionsAreStillSelectable() throws Exception {
         var catalog = parse(defaults());
         assertTrue(catalog.problems().isEmpty());
-        assertEquals(3, catalog.templates().size());
-        for (String id : catalog.templates().keySet()) {
+        assertEquals(6, catalog.templates().size());
+        for (String id : new String[]{"starter_runeblade", "moonstone_pickaxe", "sentinel_chestplate"}) {
             var current = catalog.template(id).orElseThrow();
             var old = catalog.template(id, 1).orElseThrow();
             assertEquals(2, current.version());
@@ -53,7 +53,7 @@ class ItemTemplatesTest {
         assertTrue(catalog.template("starter_runeblade").isEmpty());
         assertTrue(catalog.template("starter_runeblade", 2).isEmpty());
         assertTrue(catalog.template("starter_runeblade", 1).isPresent());
-        assertEquals(2, catalog.templates().size());
+        assertEquals(5, catalog.templates().size());
         assertEquals(1, catalog.problems().size());
     }
 
@@ -86,7 +86,7 @@ class ItemTemplatesTest {
         });
         assertTrue(catalog.template("moonstone_pickaxe").isEmpty());
         assertTrue(catalog.template("moonstone_pickaxe", 1).isPresent());
-        assertEquals(2, catalog.templates().size());
+        assertEquals(5, catalog.templates().size());
         assertTrue(catalog.problems().getFirst().contains("unsupported material"));
     }
 

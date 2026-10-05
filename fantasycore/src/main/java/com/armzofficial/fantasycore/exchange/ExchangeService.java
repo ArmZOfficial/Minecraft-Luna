@@ -34,6 +34,21 @@ import java.util.logging.Level;
 
 /** Bukkit inventory ถูกอ่าน/แก้บน main thread; journal และ mailbox อยู่บน DB thread */
 public final class ExchangeService {
+    public enum Profile {
+        EXCHANGE("exchange", "exchanges.yml", "fantasy.exchange", null, null),
+        CRAFT("craft", "crafting.yml", "fantasy.craft.use", "craft.main", "fantasy.craft.remote"),
+        ALCHEMY("alchemy", "alchemy.yml", "fantasy.alchemy.use", "alchemy.main", "fantasy.alchemy.remote");
+
+        private final String key, file, permission, station, remote;
+        Profile(String key, String file, String permission, String station, String remote) {
+            this.key = key; this.file = file; this.permission = permission; this.station = station; this.remote = remote;
+        }
+
+        /** Same CRAFT journal, with a reserved recipe namespace to keep quotas independent. */
+        public boolean acceptsRecipe(String id) {
+            return this == EXCHANGE || id.startsWith("alchemy_") == (this == ALCHEMY);
+        }
+    }
     public record ResultItem(Material material, int amount) {
     }
 
@@ -44,7 +59,7 @@ public final class ExchangeService {
         }
 
         public String describeOutputs(int batch) {
-            if (template != null) { return name + " ×1 · อุปกรณ์รูน"; }
+            if (template != null) { return name + " ×1"; }
             return String.join(" + ", outputs.stream().map(i -> i.material().name() + " ×" + i.amount() * batch).toList());
         }
 
@@ -69,6 +84,7 @@ public final class ExchangeService {
     private final EconomyService economy;
     private final StationService stations;
     private final long maxTransaction;
+    private final Profile profile;
 
     public ExchangeService(Plugin plugin, Messages messages, ExchangeStore store, Database database, Tasks tasks) {
         this(plugin, messages, store, database, tasks, null, null, null, 0);
@@ -76,6 +92,12 @@ public final class ExchangeService {
 
     public ExchangeService(Plugin plugin, Messages messages, ExchangeStore store, Database database, Tasks tasks,
                            ItemTemplateService items, EconomyService economy, StationService stations, long maxTransaction) {
+        this(plugin, messages, store, database, tasks, items, economy, stations, maxTransaction,
+                store.kind() == ExchangeStore.Kind.CRAFT ? Profile.CRAFT : Profile.EXCHANGE);
+    }
+
+    public ExchangeService(Plugin plugin, Messages messages, ExchangeStore store, Database database, Tasks tasks,
+                           ItemTemplateService items, EconomyService economy, StationService stations, long maxTransaction, Profile profile) {
         this.plugin = plugin;
         this.messages = messages;
         this.store = store;
@@ -85,18 +107,22 @@ public final class ExchangeService {
         this.economy = economy;
         this.stations = stations;
         this.maxTransaction = maxTransaction;
-        load(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), crafting() ? "crafting.yml" : "exchanges.yml")));
+        this.profile = profile;
+        if ((profile == Profile.EXCHANGE) != (store.kind() == ExchangeStore.Kind.EXCHANGE)) {
+            throw new IllegalArgumentException("recipe profile ไม่ตรง journal kind");
+        }
+        load(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), profile.file)));
     }
 
     public boolean crafting() { return store.kind() == ExchangeStore.Kind.CRAFT; }
 
-    public String key(String suffix) { return store.kind().key() + "." + suffix; }
+    public String key(String suffix) { return profile.key + "." + suffix; }
 
-    private String permission() { return crafting() ? "fantasy.craft.use" : "fantasy.exchange"; }
+    private String permission() { return profile.permission; }
 
     private boolean canUse(Player player) {
-        return player.hasPermission(permission()) && (!crafting() || player.hasPermission("fantasy.craft.remote")
-                || stations.isNear(player, "craft.main"));
+        return player.hasPermission(permission()) && (profile.station == null || player.hasPermission(profile.remote)
+                || stations.isNear(player, profile.station));
     }
 
     public ExchangeStore store() {
@@ -141,7 +167,7 @@ public final class ExchangeService {
             return;
         }
         if (!canUse(player)) {
-            messages.send(player, "service.go-to-station", Messages.p("action", "craft.main"));
+            messages.send(player, "service.go-to-station", Messages.p("action", profile.station));
             done.run();
             return;
         }
@@ -319,6 +345,7 @@ public final class ExchangeService {
                 if (!id.matches("[a-z0-9_]{1,48}")) {
                     throw new IllegalArgumentException("id ต้องเป็น a-z/0-9/_ ไม่เกิน 48 ตัว");
                 }
+                if (!profile.acceptsRecipe(id)) { throw new IllegalArgumentException("alchemy_ เป็น prefix สงวนสำหรับสูตรใน alchemy.yml"); }
                 int version = integer(section, "version", 1, 1_000_000);
                 int limit = integer(section, "daily-limit", 1, 1000);
                 String name = section.getString("name", id);
@@ -358,6 +385,9 @@ public final class ExchangeService {
                             () -> new IllegalArgumentException("ไม่พบ output.template ใน items.yml"));
                     if (!template.serialized() || integer(section, "output.version", 1, 1_000_000) != template.version()) {
                         throw new IllegalArgumentException("output ต้องเป็น template แบบ serialized และ version ตรง items.yml");
+                    }
+                    if (profile == Profile.ALCHEMY && template.potion() == null) {
+                        throw new IllegalArgumentException("สูตรร้านยาต้องออกแม่แบบ POTION ที่ระบุ potion");
                     }
                 } else for (String key : out.getKeys(false)) {
                     Material type = material(key);

@@ -11,10 +11,11 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
-- [ไลรา นักปรุงยาและการวางร้านยา](server/content/npc-models/LYRA-ALCHEMIST-th.md) — โมเดลละเอียด/5ท่า/ตรวจ265เฟรม; ระบบตลาดและ renderer ยังรอ
-- [ปลั๊กอิน FantasyCore v0.8](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/mail/daily/exchange/repair/craft/depth/ดันฝึก
+- [ไลรา นักปรุงยาและการวางร้านยา](server/content/npc-models/LYRA-ALCHEMIST-th.md) — โมเดลละเอียด/5ท่า/ตรวจ265เฟรม; ร้านยามี source v0.9; renderer ยังรอ
+- [ปลั๊กอิน FantasyCore v0.9](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/mail/daily/exchange/repair/craft/alchemy/depth/ดันฝึก
 - [Moonfall ปาร์ตี้ v0.8](fantasycore/PARTY-DUNGEONS-th.md) — เดี่ยว+2ห้องปาร์ตี้/บาลานซ์/reconnect/recovery และ checklist S
 - [Moonfall ดันฝึกเดี่ยว](fantasycore/DUNGEONS-th.md) — สร้างโครงแมพ/3ห้อง/บอส/ส่งรางวัลวันละครั้ง, ปิดรับเริ่มต้นและรอ staging
+- [ร้านยาไลรา v0.9](fantasycore/ALCHEMY-th.md) — สามสูตร native potion/สีขวด/วัตถุดิบ/ค่าทอง/mail และ checklist T
 - [Core Craft และช่างรูน](fantasycore/CRAFT-th.md) — สูตร ราคา serial ใหม่ mail และ recovery
 - [ผสม ItemsCore](fantasycore/ITEMSCORE-INTEGRATION-th.md) — ขอบเขต provider, demo และชุด import ทดลอง 4 ชิ้น
 - [ใช้และกู้คืนระบบแลกของ](fantasycore/EXCHANGE-th.md) — สูตร, โควตา, snapshot และรายการรอแอดมินตรวจ
@@ -28,11 +29,12 @@
 มี NPC pilot 4 ตัวและ item pilot 2 ชิ้น พร้อม NPC รุ่นละเอียด 6 ตัว (banker/smith/warden/mage/merchant/alchemist), บอสและ props 12 ชิ้น export จาก Blockbench MCP
 ไลรามีภาพ AI อ้างอิง, 206 cubes/21 bones/texture512/5ท่า และผลตรวจทุกเฟรมที่20FPS; ยังเป็น source asset รอ pack และทดสอบในเกม
 
-**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.8 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
+**ฝั่งเซิร์ฟ (6 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.9 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
 item template, บ้าน, RTP, claim adapter, กล่องจดหมาย, รับของรายวัน และ `/exchange` (3 สูตร vanilla + preview + journal recovery)
 และ `/repair` (vanilla/Core serial + preview + ค่าจอง/คืนเงิน + journal), `/craft` (3 สูตร Core gear, วัตถุดิบ/ราคาก่อนยืนยัน, serial ใหม่เข้า mail)
+และ `/alchemy` (ยาสามสูตร native potion, preview/ราคา/โควตา, journal ร่วมกับ craft และผลเข้า mail)
 รวม Moonfall เดี่ยว + ปาร์ตี้2–4คน (2ห้องส่วนตัว/rosterตรึง/HPปรับตามคน/reconnect60s/receipt+mail/protect/กลับออก)
-— build กับ Paper 26.2 API ผ่าน และ unit tests 124 รายการผ่าน; schema v7; ดันปิดรับเริ่มต้น
+— build กับ Paper 26.2 API ผ่าน และ unit tests 131 รายการผ่าน; schema v7; ดันปิดรับเริ่มต้น
 พร้อมชุด staging (สคริปต์ดาวน์โหลด Paper + ปลั๊กอินที่ล็อกเวอร์ชันและตรวจ hash, หิน Protect 5 ระดับ, LuckPerms/WorldGuard setup)
 **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง** — ขั้นต่อไปคือทำ checklist ใน [server/README-th.md](server/README-th.md)
 ยังไม่มีโลกเมืองที่สร้างเสร็จ, แผนที่สด, payment backend หรือการส่งของจริง

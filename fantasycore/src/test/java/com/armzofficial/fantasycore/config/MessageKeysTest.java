@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessageKeysTest {
 
     private static final Pattern LITERAL = Pattern.compile(
-            "(?<!key\\()\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair|craft|dungeon|party)\\.[a-z0-9._-]+)\"");
+            "(?<!key\\()\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair|craft|alchemy|dungeon|party)\\.[a-z0-9._-]+)\"");
 
     /** string ที่หน้าตาเหมือน key แต่เป็น action ID / ชนิด operation / audit action */
     private static final Set<String> NOT_MESSAGES = Set.of(
@@ -31,7 +31,7 @@ class MessageKeysTest {
             "reward.daily", "reward.progress", "reward.online", "mail.main", "mail.give", "mail.release", "mail.void",
             // path ใน config.yml
             "economy.currency.gold", "rewards.daily", "repair.main", "repair.yml", "craft.main", "craft.charge", "craft.refund",
-            "dungeon.main", "dungeon.start", "dungeon.complete", "dungeon.abort", "dungeon.training");
+            "dungeon.main", "dungeon.start", "dungeon.complete", "dungeon.abort", "dungeon.training", "alchemy.main", "alchemy.yml");
 
     /** key ที่ประกอบขึ้นตอนรัน */
     private static final List<String> DYNAMIC = List.of(
@@ -59,6 +59,11 @@ class MessageKeysTest {
             used.add("admin.usage." + group);
         }
         used.add("craft.funds");
+        for (String suffix : List.of("disabled", "busy", "missing", "funds", "quota", "changed", "success", "review",
+                "menu.title", "menu.previous", "menu.next", "menu.less", "menu.more", "menu.list.name", "menu.list.lore",
+                "menu.recipe.name", "menu.recipe.lore", "menu.preview", "menu.effect", "menu.confirm.name", "menu.confirm.lore")) {
+            used.add("alchemy." + suffix);
+        }
         try (Stream<Path> files = Files.walk(Path.of("src/main/java"))) {
             for (Path file : files.filter(p -> p.toString().endsWith(".java")).toList()) {
                 if (file.getFileName().toString().equals("Settings.java")) {

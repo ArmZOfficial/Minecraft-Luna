@@ -46,6 +46,7 @@ public final class PlayerCommands implements TabExecutor {
                 else { services.actions().open(player,"dungeon.main",ActionRegistry.Source.COMMAND); }
             }
             case "craft" -> services.actions().open(player, "craft.main", ActionRegistry.Source.COMMAND);
+            case "alchemy" -> services.actions().open(player, "alchemy.main", ActionRegistry.Source.COMMAND);
             case "menu" -> services.actions().open(player, "menu.main", ActionRegistry.Source.COMMAND);
             case "bank" -> bank(player, args);
             case "balance" -> balance(player);
