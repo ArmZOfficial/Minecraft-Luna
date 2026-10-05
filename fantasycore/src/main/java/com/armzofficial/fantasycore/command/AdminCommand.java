@@ -13,6 +13,7 @@ import com.armzofficial.fantasycore.hook.VaultHook;
 import com.armzofficial.fantasycore.item.ItemTemplate;
 import com.armzofficial.fantasycore.item.ItemTemplateService;
 import com.armzofficial.fantasycore.menu.BankHistory;
+import com.armzofficial.fantasycore.menu.AdminPanelMenu;
 import com.armzofficial.fantasycore.station.ActionRegistry;
 import com.armzofficial.fantasycore.station.StationRecord;
 import com.armzofficial.fantasycore.storage.PlayerStore;
@@ -39,9 +40,10 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
- * /fa — เครื่องมือแอดมินฉบับข้อความของ FantasyAdminPanel (GUI เต็มเป็น phase ถัดไป)
+ * /fa — panel and text commands share the same permission/preview/ledger path.
  * ทุกงานเขียนต้องมีเหตุผล, preview → /fa confirm &lt;รหัส&gt;, และบันทึก audit พร้อม operation ID
  */
 public final class AdminCommand implements TabExecutor {
@@ -50,21 +52,39 @@ public final class AdminCommand implements TabExecutor {
 
     private final Services services;
     private final PendingConfirmations confirmations = new PendingConfirmations();
+    private final AdminChatInput input;
 
     public AdminCommand(Services services) {
         this.services = services;
+        this.input = new AdminChatInput(services);
     }
+
+    public AdminChatInput input() { return input; }
+    public void close() { input.close(); confirmations.clear(); }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label,
                              String[] args) {
+        return execute(sender, args);
+    }
+
+    /** Panel routes typed subcommands here; it has no console dispatch or arbitrary command field. */
+    public boolean execute(CommandSender sender, String[] args) {
         Messages m = services.messages();
         if (!sender.hasPermission("fantasyadmin.view")) {
             m.send(sender, "common.no-permission");
             return true;
         }
-        String sub = args.length == 0 ? "help" : args[0].toLowerCase(Locale.ROOT);
+        String sub = args.length == 0 && sender instanceof Player ? "panel" : args.length == 0 ? "help" : args[0].toLowerCase(Locale.ROOT);
         switch (sub) {
+            case "panel", "player" -> {
+                if (sender instanceof Player player) {
+                    input.cancel(player);
+                    var menu = new AdminPanelMenu(player.getUniqueId(), services, this);
+                    if (sub.equals("player")) { menu.showPlayers(player, args.length > 1 ? args[1] : null); }
+                    else { menu.open(player); }
+                } else { m.send(sender, "admin.help"); }
+            }
             case "doctor" -> doctor(sender);
             case "bank" -> bankLook(sender, args);
             case "eco" -> eco(sender, args);
@@ -263,7 +283,7 @@ public final class AdminCommand implements TabExecutor {
 
     private void eco(CommandSender sender, String[] args) {
         Messages m = services.messages();
-        if (!sender.hasPermission("fantasyadmin.economy.adjust")) {
+        if (!canAdjust(sender)) {
             m.send(sender, "common.no-permission");
             return;
         }
@@ -279,37 +299,72 @@ public final class AdminCommand implements TabExecutor {
             m.send(sender, "admin.usage.eco");
             return;
         }
-        if (reason.length() < 3) {
+        if (reason.length() < 3 || reason.length() > 200 || reason.codePoints().anyMatch(Character::isISOControl)) {
             m.send(sender, "admin.reason-required");
             return;
         }
         long delta = give ? amount.getAsLong() : -amount.getAsLong();
-        resolve(sender, args[2], known -> services.tasks().then(services.economy().balances(known.uuid()), (balances, error) -> {
+        resolve(sender, args[2], known -> previewAdjust(sender, known, bucket.get(), delta, reason, null));
+    }
+
+    public record EconomyPreview(PlayerStore.Known target, Bucket bucket, long delta, long before, long after,
+                                 String reason, String token) { }
+
+    static boolean canAdjust(CommandSender sender) {
+        return sender.hasPermission("fantasyadmin.view") && sender.hasPermission("fantasyadmin.economy.adjust");
+    }
+
+    public void previewEconomy(Player actor, PlayerStore.Known target, Bucket bucket, long delta, String reason,
+                               Consumer<EconomyPreview> ready) {
+        previewAdjust(actor, target, bucket, delta, reason, ready);
+    }
+
+    private void previewAdjust(CommandSender sender, PlayerStore.Known known, Bucket bucket, long delta, String reason,
+                               Consumer<EconomyPreview> ready) {
+        Messages m = services.messages();
+        if (!canAdjust(sender)) { m.send(sender, "common.no-permission"); failPreview(ready); return; }
+        if (delta == 0 || delta == Long.MIN_VALUE || Math.abs(delta) > services.settings().maxTransaction()) {
+            m.send(sender, "admin.eco.limit"); failPreview(ready); return;
+        }
+        if (reason == null || reason.length() < 3 || reason.length() > 200 || reason.codePoints().anyMatch(Character::isISOControl)) {
+            m.send(sender, "admin.reason-required"); failPreview(ready); return;
+        }
+        services.tasks().then(services.economy().balances(known.uuid()), (balances, error) -> {
+            if (!canAdjust(sender)) { m.send(sender, "common.no-permission"); failPreview(ready); return; }
             if (error != null) {
                 m.send(sender, "common.storage-error");
+                failPreview(ready);
                 return;
             }
-            long before = balances.get(bucket.get());
-            long after = before + delta;
+            long before = balances.get(bucket);
+            long after;
+            try { after = Math.addExact(before, delta); }
+            catch (ArithmeticException e) { m.send(sender, "admin.eco.limit"); failPreview(ready); return; }
             if (after < 0) {
                 m.send(sender, "admin.eco.would-be-negative", Messages.p("before", Money.format(before)));
+                failPreview(ready);
                 return;
             }
             String opId = OpMeta.newOpId();
             UUID actor = sender instanceof Player p ? p.getUniqueId() : null;
             AuditEntry audit = new AuditEntry(actor == null ? null : actor.toString(), sender.getName(), "economy.adjust",
-                    known.uuid().toString(), bucket.get().key() + " " + (delta > 0 ? "+" : "") + delta + " (" + before + " → " + after + ")",
+                    known.uuid().toString(), bucket.key() + " " + (delta > 0 ? "+" : "") + delta + " (" + before + " → " + after + ")",
                     reason);
-            String token = confirmations.create(actor, () -> applyAdjust(sender, known, bucket.get(), delta, before, opId, audit));
-            m.send(sender, "admin.eco.preview", Messages.p("player", known.name()), Messages.p("bucket", bucket.get().key()),
+            String token = confirmations.create(actor, () -> canAdjust(sender), () -> applyAdjust(sender, known, bucket, delta, before, opId, audit));
+            if (ready != null) { ready.accept(new EconomyPreview(known, bucket, delta, before, after, reason, token)); return; }
+            m.send(sender, "admin.eco.preview", Messages.p("player", known.name()), Messages.p("bucket", bucket.key()),
                     Messages.p("delta", (delta > 0 ? "+" : "") + Money.format(delta)), Messages.p("before", Money.format(before)),
                     Messages.p("after", Money.format(after)), Messages.p("reason", reason), Messages.p("token", token));
-        }));
+        });
     }
+
+    public void cancelPreview(Player actor, String token) { confirmations.cancel(token, actor.getUniqueId()); }
+    private static void failPreview(Consumer<EconomyPreview> ready) { if (ready != null) { ready.accept(null); } }
 
     private void applyAdjust(CommandSender sender, PlayerStore.Known known, Bucket bucket, long delta, long before,
                              String opId, AuditEntry audit) {
         Messages m = services.messages();
+        if (!canAdjust(sender)) { m.send(sender, "common.no-permission"); return; }
         services.tasks().then(services.economy().adminAdjust(known.uuid(), bucket, delta, before, opId, audit), (result, error) -> {
             if (error != null) {
                 m.send(sender, "common.storage-error");
@@ -343,6 +398,7 @@ public final class AdminCommand implements TabExecutor {
             case EXPIRED -> m.send(sender, "admin.confirm.expired");
             case WRONG_ACTOR -> m.send(sender, "admin.confirm.wrong-actor");
             case UNKNOWN -> m.send(sender, "admin.confirm.unknown");
+            case DENIED -> m.send(sender, "common.no-permission");
         }
     }
 
@@ -837,13 +893,29 @@ public final class AdminCommand implements TabExecutor {
     // ------------------------------------------------------------ helpers
 
     /** หา UUID จากชื่อ: ออนไลน์ก่อน แล้วจึงทะเบียนผู้เล่นของ Core (ไม่สร้างบัญชีจากชื่อที่พิมพ์เฉย ๆ) */
-    private void resolve(CommandSender sender, String name, java.util.function.Consumer<PlayerStore.Known> then) {
+    public void resolve(CommandSender sender, String name, Consumer<PlayerStore.Known> then) {
+        if (!sender.hasPermission("fantasyadmin.view")) { services.messages().send(sender, "common.no-permission"); return; }
+        UUID uuid;
+        try { uuid = UUID.fromString(name); } catch (IllegalArgumentException e) { uuid = null; }
+        final UUID wanted = uuid;
+        if (wanted != null) {
+            Player byId = Bukkit.getPlayer(wanted);
+            if (byId != null) { then.accept(new PlayerStore.Known(byId.getUniqueId(), byId.getName())); return; }
+            services.tasks().then(services.database().async(() -> services.players().findByUuid(wanted)), (known, error) -> {
+                if (!sender.hasPermission("fantasyadmin.view")) { services.messages().send(sender, "common.no-permission"); return; }
+                if (error != null) { services.messages().send(sender, "common.storage-error"); }
+                else if (known.isEmpty()) { services.messages().send(sender, "admin.player-unknown", Messages.p("player", name)); }
+                else { then.accept(known.get()); }
+            });
+            return;
+        }
         Player online = Bukkit.getPlayerExact(name);
         if (online != null) {
             then.accept(new PlayerStore.Known(online.getUniqueId(), online.getName()));
             return;
         }
         services.tasks().then(services.database().async(() -> services.players().findByName(name)), (known, error) -> {
+            if (!sender.hasPermission("fantasyadmin.view")) { services.messages().send(sender, "common.no-permission"); return; }
             if (error != null) {
                 services.messages().send(sender, "common.storage-error");
             } else if (known.isEmpty()) {
@@ -858,8 +930,10 @@ public final class AdminCommand implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias,
                                       String[] args) {
         List<String> options = new ArrayList<>();
+        if (!sender.hasPermission("fantasyadmin.view")) { return List.of(); }
+        if (args.length > 1 && !suggestible(sender, args[0], args.length > 2 ? args[1] : null)) { return List.of(); }
         if (args.length == 1) {
-            options.addAll(List.of("help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "craft", "audit", "dungeon"));
+            options.addAll(List.of("panel", "player", "help", "doctor", "bank", "eco", "confirm", "npc", "item", "mail", "exchange", "repair", "craft", "audit", "dungeon"));
         } else if (args.length == 2) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "eco" -> options.addAll(List.of("give", "take"));
@@ -868,7 +942,7 @@ public final class AdminCommand implements TabExecutor {
                 case "exchange", "repair", "craft" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
                 case "dungeon" -> options.addAll(List.of("status", "build", "buildparty", "visit", "abort"));
-                case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
+                case "bank", "audit", "player" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {
                 }
             }
@@ -901,6 +975,29 @@ public final class AdminCommand implements TabExecutor {
             if(args[1].equalsIgnoreCase("buildparty")) { options.addAll(List.of("1","2")); }
         }
         String prefix = args.length == 0 ? "" : args[args.length - 1].toLowerCase(Locale.ROOT);
-        return options.stream().filter(o -> o.toLowerCase(Locale.ROOT).startsWith(prefix)).toList();
+        return options.stream().filter(o -> o.toLowerCase(Locale.ROOT).startsWith(prefix))
+                .filter(o -> args.length == 1 ? suggestible(sender, o, null) : args.length != 2 || suggestible(sender, args[0], o)).toList();
+    }
+
+    static boolean suggestible(CommandSender sender, String root, String sub) {
+        if (!sender.hasPermission("fantasyadmin.view")) { return false; }
+        root = root.toLowerCase(Locale.ROOT);
+        String permission = switch (root) {
+            case "eco" -> "fantasyadmin.economy.adjust";
+            case "npc" -> "fantasyadmin.npc.edit";
+            case "audit" -> "fantasyadmin.audit";
+            default -> null;
+        };
+        if (permission != null && !sender.hasPermission(permission)) { return false; }
+        if (sub == null) { return true; }
+        sub = sub.toLowerCase(Locale.ROOT);
+        permission = switch (root) {
+            case "item" -> sub.equals("give") ? "fantasyadmin.content.edit" : null;
+            case "mail" -> sub.equals("give") ? "fantasyadmin.content.edit" : List.of("release", "void").contains(sub) ? "fantasyadmin.economy.adjust" : null;
+            case "exchange", "craft", "repair" -> List.of("complete", "cancel").contains(sub) ? "fantasyadmin."+root+".resolve" : null;
+            case "dungeon" -> sub.equals("status") ? null : "fantasyadmin.dungeon.manage";
+            default -> null;
+        };
+        return permission == null || sender.hasPermission(permission);
     }
 }

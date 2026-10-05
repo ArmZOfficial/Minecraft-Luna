@@ -48,4 +48,16 @@ public final class PlayerStore {
 
     public record Known(UUID uuid, String name) {
     }
+
+    /** Lookup stays tied to UUID when a panel remains open across a name change. */
+    public Optional<Known> findByUuid(UUID uuid) throws SQLException {
+        return database.read(connection -> {
+            try (PreparedStatement ps = connection.prepareStatement("SELECT last_name FROM players WHERE player_uuid = ?")) {
+                ps.setString(1, uuid.toString());
+                try (ResultSet rs = ps.executeQuery()) {
+                    return rs.next() ? Optional.of(new Known(uuid, rs.getString(1))) : Optional.empty();
+                }
+            }
+        });
+    }
 }

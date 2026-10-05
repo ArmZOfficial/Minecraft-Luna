@@ -8,8 +8,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
@@ -74,7 +77,23 @@ public final class MenuListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
+        if (event.getPlayer().getOpenInventory().getTopInventory().getHolder(false) instanceof Menu menu) {
+            menu.closed(event.getPlayer());
+        }
         lastClick.remove(event.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        if (event.getPlayer() instanceof Player player && event.getInventory().getHolder(false) instanceof Menu menu) {
+            menu.closed(player);
+        }
+    }
+
+    @EventHandler public void onDeath(PlayerDeathEvent event) { closeAdmin(event.getEntity()); }
+    @EventHandler public void onWorld(PlayerChangedWorldEvent event) { closeAdmin(event.getPlayer()); }
+    private void closeAdmin(Player player) {
+        if (player.getOpenInventory().getTopInventory().getHolder(false) instanceof AdminPanelMenu) { player.closeInventory(); }
     }
 
     /** ปิดเมนูของ Core ทั้งหมดตอนปิดปลั๊กอิน เพื่อไม่ให้หน้าต่างค้างโดยไม่มี listener */

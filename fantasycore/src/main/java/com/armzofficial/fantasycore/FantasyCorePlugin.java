@@ -71,6 +71,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
     private Database database;
     private Services services;
+    private AdminCommand adminCommand;
     private TeleportService teleports;
     private boolean vaultHooked;
 
@@ -202,7 +203,9 @@ public final class FantasyCorePlugin extends JavaPlugin {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));
-        bind("fa", new AdminCommand(services));
+        adminCommand = new AdminCommand(services);
+        register(adminCommand.input());
+        bind("fa", adminCommand);
 
         hookVault(economy);
         hookPlaceholders();
@@ -219,6 +222,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (adminCommand != null) { adminCommand.close(); }
         if (services != null) { services.dungeon().close(); services.monsters().close(); }
         if (teleports != null) {
             teleports.cancelAll();

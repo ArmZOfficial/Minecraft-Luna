@@ -1,6 +1,7 @@
 # FantasyAdminPanel — ใช้ง่าย ควบคุมระบบ Luma และตรวจย้อนหลังได้
 
-เอกสาร implementation spec ยังไม่มี JARที่compileหรือinstall เป้าหมายคือ staffใช้งานประจำได้จาก `/fa` ไม่ต้องจำคำสั่งหลายปลั๊กอิน
+สเปกเต็มของ panel: FantasyCore v0.10 มี `/fa` GUI dashboard/ผู้เล่น/ฟอร์มปรับเงิน/อ่านtemplates–NPCแล้ว ดู [implementation และขอบเขตจริง](../../fantasycore/ADMIN-PANEL-th.md)
+source/JAR compileและ141testsผ่าน; ยังไม่install/playtestMinecraft ส่วน editor/recoveryGUI/externaladapterยังเป็นขั้นถัดไป เป้าหมายคือ staffใช้งานประจำได้จาก `/fa` ไม่ต้องจำคำสั่งหลายปลั๊กอิน
 PanelควบคุมทุกโมดูลของFantasyCoreและexternaladapterที่ลงทะเบียนไว้ ฟีเจอร์ปลั๊กอินที่ไม่มีadapterต้องแสดงว่าไม่รองรับ ไม่อ้างว่าคุมทุกJARได้เอง
 
 ## หน้าตาและการใช้งาน
@@ -107,4 +108,4 @@ Webadminใช้RBAC + MFA/recentreauthงานรับเงิน ควา
 งานประจำเปิดได้ภายใน2–3คลิก, breadcrumbbackไม่หลง, keyboard/tabcompletion, Thaiชื่อยาว, packaccepted/rejected
 ทดสอบprivilege escalation/forgedmenus/shiftclickdupe/concurrentadjustment/retry/crashmidoperation
 Auditค้นเจอทุกwrite; doctorบอกserviceที่เสียและทำอะไรได้ต่อ; ไม่มีปุ่มsuccessที่ยังไม่commitจริง
-ยังไม่มีผลทดสอบในเกม/compileในรอบนี้ นำspecนี้ไปimplementationในserverrepoจริงก่อน
+ยังไม่มีผลทดสอบในเกม; implementationบางส่วนv0.10 buildผ่านแล้ว ส่วนที่เกินขอบเขตในคู่มือปัจจุบันยังเป็นspec ต้องผ่านchecklist Uและเพิ่มทีละworkflowก่อนอ้างว่าคุมครบทุกระบบ

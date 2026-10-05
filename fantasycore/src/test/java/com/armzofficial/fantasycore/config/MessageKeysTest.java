@@ -47,6 +47,10 @@ class MessageKeysTest {
     void everyUsedKeyExists() throws IOException {
         Set<String> defined = yamlKeys(Path.of("src/main/resources/messages_th.yml"));
         Set<String> used = new TreeSet<>(DYNAMIC);
+        for (String button : List.of("back", "close", "players", "economy", "items", "stations", "dungeon", "doctor", "refresh",
+                "audit", "search", "adjust", "history", "preview", "apply", "previous", "next")) {
+            used.add("admin.panel."+button+".name"); used.add("admin.panel."+button+".lore");
+        }
         for (String group : List.of("exchange", "craft")) {
             for (String suffix : List.of("disabled", "busy", "missing", "quota", "changed", "success", "review",
                     "menu.title", "menu.previous", "menu.next", "menu.less", "menu.more", "menu.list.name", "menu.list.lore",

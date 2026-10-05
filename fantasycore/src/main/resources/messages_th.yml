@@ -581,8 +581,139 @@ land:
   next-phase: '<dark_gray>ซื้อหิน/อัปเกรด/สมาชิกผ่านเมนู /land จะเปิดใน phase ถัดไป — ตอนนี้ทีมงานทดสอบด้วยคำสั่ง /ps บน staging'
 
 admin:
+  panel:
+    title: '<#DDA54A>ลูม่า · ทีมงาน'
+    heading: '<#DDA54A><page>'
+    heading-lore: |-
+      <gray>FantasyCore <version> · เลือกงานจากเมนู
+      <gray>งานปรับเงินต้องมีเหตุผลและยืนยัน
+    back:
+      name: '<white>ย้อนกลับ'
+      lore: '<gray>กลับหน้าก่อน · ยกเลิก preview ที่ยังไม่ยืนยัน'
+    close:
+      name: '<red>ปิดเมนู'
+      lore: '<gray>การปิดก่อนยืนยันยังไม่ปรับเงิน'
+    players:
+      name: '<#47C8D3>ผู้เล่น'
+      lore: |-
+        <gray>เลือกคนออนไลน์ หรือค้นหาชื่อ/UUID
+        <gray>ดูยอดและประวัติของบัญชีที่เคยเข้าเซิร์ฟ
+    economy:
+      name: '<#DDA54A>เงินและธนาคาร'
+      lore: |-
+        <gray>เลือกผู้เล่น → จำนวน/เหตุผล → preview
+        <gray>ดูยอดได้; ปรับต้องมีสิทธิ์แยก
+    items:
+      name: '<#47C8D3>แม่แบบไอเทม'
+      lore: '<gray>ดู ID/version/material/enchant/ผลยา · ไม่แจกของจากภาพ'
+    stations:
+      name: '<#47C8D3>จุดบริการ NPC'
+      lore: |-
+        <gray>ดู action/พิกัด/ทิศ yaw/ตัวตนสถานี
+        <gray>หน้านี้อ่านข้อมูล · ไม่ย้าย NPC
+    review-name: '<gold>รายการค้าง · <group>'
+    review-lore: |-
+      <gray>รอตรวจ REVIEW: <count>
+      <gray>คลิกเปิดรายงานข้อความเดิม
+      <gray>craft รวม gear และยา · ตรวจหลักฐานก่อน resolve
+    dungeon:
+      name: '<#B996EF>Moonfall'
+      lore: '<gray>เปิดรายงานสถานะห้องและรอบ · ไม่สร้างแมพจากปุ่มนี้'
+    alchemy-name: '<#B996EF>ร้านยาไลรา'
+    alchemy-lore: |-
+      <gray>สถานะ <state> · <count> สูตร
+      <gray>รายการปรุงยาอยู่ใน CRAFT journal
+      <gray>ต้องผ่าน checklist เกมก่อนเปิดผู้เล่น
+    doctor:
+      name: '<gold>ตรวจระบบ'
+      lore: '<gray>เปิดรายงาน doctor พร้อมปัญหาและสิ่งที่ต้องตรวจ'
+    refresh:
+      name: '<#47C8D3>อ่านข้อมูลใหม่'
+      lore: '<gray>โหลดสถานะจากฐานข้อมูลอีกครั้ง'
+    audit:
+      name: '<gold>ประวัติงานทีมงาน'
+      lore: '<gray>เปิดรายงาน audit · ต้องมีสิทธิ์ fantasyadmin.audit'
+    player-name: '<white><player>'
+    player-lore: |-
+      <dark_gray><uuid>
+      <gray>คลิกดูเงินและงานของผู้เล่นนี้
+    balance-lore: |-
+      <dark_gray>UUID <uuid>
+      <gray>ทองที่พก <#DDA54A><gold>
+      <gray>ทองฝาก <#DDA54A><bank>
+      <gray>เงินแดง <red><redcoin></red>
+      <dark_gray>ข้อมูล ณ ตอนโหลด · กดอ่านใหม่ได้
+    search:
+      name: '<#47C8D3>ค้นหาชื่อหรือ UUID'
+      lore: '<gray>ค้นหาคนที่เคยเข้าเซิร์ฟได้แม้ออฟไลน์'
+    adjust:
+      name: '<#DDA54A>ปรับเงิน'
+      lore: |-
+        <gray>เลือกช่องเงิน เพิ่ม/ลด จำนวนและเหตุผล
+        <gray>ยังไม่บันทึกจนยืนยันหน้า preview
+    history:
+      name: '<white>ยอดและประวัติธนาคาร'
+      lore: '<gray>เปิดรายงานข้อความ ledger ของ UUID นี้'
+    bucket-name: '<#DDA54A><bucket>'
+    bucket-lore: '<gray><selected> · ไม่ย้ายยอดช่องอื่น'
+    direction-name: '<white><direction>เงิน'
+    direction-lore: '<gray>คลิกสลับเพิ่ม/ลด · หน้า preview จะแสดงเครื่องหมายชัดเจน'
+    amount-name: '<#DDA54A>จำนวน · <amount>'
+    amount-lore: '<gray>กรอกผ่านฟอร์มแชต · จำนวนเต็ม 1–<limit>'
+    reason-name: '<white>เหตุผลการปรับเงิน'
+    reason-lore: |-
+      <gray><reason>
+      <gray>คลิกกรอกใหม่ · 3–200 ตัวอักษร · เก็บใน audit
+    preview:
+      name: '<green>ดูยอดก่อน–หลัง'
+      lore: '<gray>ตรวจยอดจริงอีกครั้ง · ยังไม่หักหรือเพิ่มเงิน'
+    incomplete: '<yellow>กรอกจำนวนและเหตุผลให้ครบก่อนดู preview'
+    confirm-name: '<gold>ตรวจรายการปรับเงิน'
+    confirm-lore: |-
+      <white>ผู้เล่น <player>
+      <dark_gray>UUID <uuid>
+      <gray>ช่อง <#DDA54A><bucket>
+      <gray>ปรับ <#47C8D3><delta>
+      <gray>ยอดเดิม <white><before> <gray>→ ยอดใหม่ <green><after>
+      <gray>เหตุผล <white><reason>
+      <yellow>ยืนยันได้ครั้งเดียว ภายใน 60 วินาที
+      <gray>หากยอดหรือสิทธิ์เปลี่ยน จะไม่บันทึก
+    apply:
+      name: '<green>ยืนยันรายการด้านบน'
+      lore: |-
+        <gray>บันทึก ledger และ audit ด้วย operation ID
+        <gray>ผลสำเร็จ/ปฏิเสธจะแสดงหลังฐานข้อมูลตอบ
+    template-name: '<white><id>'
+    template-lore: |-
+      <gray>version <version> · <material>
+      <gray><effect>
+      <dark_gray>ข้อมูลแม่แบบ · ภาพนี้ไม่แจกไอเทม
+    station-name: '<#47C8D3><action>'
+    station-lore: |-
+      <gray><kind> · <state>
+      <gray><world> · X<x> Y<y> Z<z>
+      <gray>yaw <yaw> · 0ใต้ / 90ตะวันตก / 180เหนือ / −90ตะวันออก
+      <dark_gray>ID <id>
+      <dark_gray>ข้อมูลทะเบียน · ยังต้องตรวจตำแหน่งในเกม
+    page: '<white>หน้า <page>/<pages>'
+    empty: '<gray>ยังไม่มีรายการในหมวดนี้'
+    previous:
+      name: '<white>หน้าก่อน'
+      lore: '<gray>ดูรายการชุดก่อน'
+    next:
+      name: '<white>หน้าถัดไป'
+      lore: '<gray>ดูรายการชุดถัดไป'
+    input:
+      player: '<#47C8D3>พิมพ์ชื่อผู้เล่นหรือ UUID ที่ต้องการค้นหา'
+      amount: '<#DDA54A>พิมพ์จำนวนเงินเต็มบวก เช่น 1,000 (ไม่ใส่เครื่องหมายลบ)'
+      reason: '<white>พิมพ์เหตุผล 3–200 ตัวอักษรสำหรับ audit'
+      hint: '<gray>ฟอร์มนี้ไม่ส่งคำตอบออกแชตปกติ · ยกเลิก: cancel / ยกเลิก / /cancel · หมดเวลา 60 วินาที'
+      timeout: '<yellow>ฟอร์มหมดเวลา — เปิด /fa ใหม่เพื่อเริ่มอีกครั้ง'
+      cancelled: '<gray>ยกเลิกฟอร์มแล้ว · ไม่มีการปรับเงิน'
+      invalid: '<yellow>คำตอบต้องยาว 1–200 ตัวอักษร ไม่มีบรรทัดใหม่/control characters — เปิด /fa ใหม่'
+
   help: |-
-    <#DDA54A>FantasyAdmin (ข้อความ) — GUI เต็มอยู่ phase ถัดไป</#DDA54A>
+    <#DDA54A>FantasyAdmin — /fa เปิดเมนู · /fa help แสดงคำสั่ง</#DDA54A>
     <gray>/fa doctor <dark_gray>— ตรวจสถานะระบบและ adapter
     <gray>/fa bank <ผู้เล่น> <dark_gray>— ดูยอดและประวัติ
     <gray>/fa eco give|take <ผู้เล่น> <gold|bank|red> <จำนวน> <เหตุผล> <dark_gray>— preview แล้ว /fa confirm
@@ -615,8 +746,9 @@ admin:
     item: '<gray>ใช้: /fa item list · /fa item give <ผู้เล่นออนไลน์> <template> · /fa item inspect'
   bank:
     summary: '<#DDA54A><player></#DDA54A> <dark_gray>(<uuid>)</dark_gray> — พก <#DDA54A><wallet></#DDA54A> · ฝาก <#DDA54A><bank></#DDA54A> · แดง <red><redcoin></red>'
-  reason-required: '<red>ต้องใส่เหตุผลอย่างน้อย 3 ตัวอักษร (เก็บใน audit)'
+  reason-required: '<red>เหตุผลต้องยาว 3–200 ตัวอักษร ไม่มี control characters (เก็บใน audit)'
   eco:
+    limit: '<yellow>จำนวนต้องเป็นจำนวนเต็มบวก ไม่เกินเพดานธุรกรรม และยอดใหม่ต้องไม่ล้น'
     would-be-negative: '<red>ยอดจะติดลบ (ตอนนี้มี <before>) — ปรับจำนวนแล้ว preview ใหม่'
     preview: '<yellow>ตัวอย่าง:</yellow> <white><player></white> <gray><bucket></gray> <#47C8D3><delta></#47C8D3> (<before> → <after>) เหตุผล "<reason>" — ยืนยันด้วย <#DDA54A>/fa confirm <token></#DDA54A> ภายใน 60 วินาที'
     applied: '<green>ปรับยอดแล้ว</green> <player> <bucket> = <#DDA54A><after></#DDA54A> <dark_gray>op <op>'

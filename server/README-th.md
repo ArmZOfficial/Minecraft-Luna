@@ -3,7 +3,7 @@
 เซิร์ฟนี้ใช้ทดสอบ **ลำดับพัฒนาข้อ 1–3** ใน [SERVER-SYSTEMS-PLAN §9](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 และ **CASUAL-SURVIVAL §12 ข้อ 1–2** (PS tier I/V + บ้าน + RTP) ก่อนเปลี่ยนสถานะ manifest จาก candidate เป็น locked
 FantasyCore v0.2 เพิ่มกล่องจดหมาย, รับของรายวัน และการผูก NPC ของ Citizens (หมวด B6, I, J ด้านล่าง)
-รุ่นปัจจุบัน v0.9/schema7 เพิ่ม [ร้านยาไลรา](../fantasycore/ALCHEMY-th.md) (checklist T); Moonfall ปาร์ตี้จาก v0.8 ยังปิดรับเริ่มต้นและรอ checklist R/S
+รุ่นปัจจุบัน v0.10/schema7 เพิ่ม [AdminPanel](../fantasycore/ADMIN-PANEL-th.md) (checklist U); ร้านยาจากv0.9 รอT และ Moonfall ยังปิดรับเริ่มต้น/รอR-S
 staging เปิด whitelist ไว้เสมอ และไม่ใช่เซิร์ฟเปิดให้ผู้เล่นทั่วไป
 
 คลังโมเดล/ไอคอนที่เพิ่ม: [26 แพ็กและแปลนวางในเมือง](content/library/README-th.md), [ชื่อชุดและบาลานซ์ enchant](content/library/BALANCE-th.md)
@@ -307,3 +307,23 @@ source build และ unit tests 131 ผ่าน (6 ต.ค.2026); ยัง�
 - [ ] T12 template profile ผิด/ไม่มี/potion บน material อื่น/strong-long/nonserialized/enchant/archive ขาดปิดเฉพาะที่เสีย doctor แจ้ง; `enabled:false` + restart ปิดปรุงแต่ mail/ยาที่ออกแล้วอ่านได้
 - [ ] T13 โควตาที่ 12/8/6 และข้าม 00:00 ไทยถูกต้อง พร้อมวัดค่าใช้จริงใน resource/Moonfall solo/party gear v1-v2; บันทึกรายได้ทอง/อัตราตาย/จำนวนขวดต่อรอบก่อนปรับบาลานซ์
 - [ ] T14 client 1.16.5/รุ่นกลาง/26.2 และ pack-decline fallback เห็นเมนูไทย/สี/เอฟเฟกต์/รับของถูกต้อง; วัด MSPT/frame pacing ก่อนเพิ่มร้านหลายตัว โมเดลยังไม่อ้างว่าผ่านเพราะ source export ได้
+
+### U. AdminPanel (v0.10 — ยังรอ Minecraft จริง)
+
+คู่มือหน้าจอ/สิทธิ์/ฟอร์ม/อัปเกรด: [ADMIN-PANEL-th.md](../fantasycore/ADMIN-PANEL-th.md)
+build + Core tests141ผ่าน (6ต.ค.2026); ยังไม่มีผล inventory/chat/client/runtime ของหมวดนี้
+
+- [ ] U1 อัปสำเนาv0.9→v0.10คงschema7 เงิน/ledger/audit/playerdata/mail/gear/ยา/ดัน/NPCครบ restoreชุดเดียวกันได้; ข้อความdefaults/mergeไม่มีkeyซ้ำ
+- [ ] U2 `/fa` / `/fa panel` เปิด54ช่อง, consoleยังhelp; `/fa player` และชื่อ/UUIDเปิดถูกคน; กลุ่มไม่มีviewเปิดไม่ได้; read-onlyไม่ต้องOPแต่ต้องnodeที่ได้รับอนุญาต
+- [ ] U3 ≥29ผู้เล่น/currenttemplates/สถานีทดสอบpagination28ช่อง หน้า/ย้อน/ค้นหา/empty/refreshถูกต้อง; ชื่อไทย/loreยาว/UUIDอ่านได้ในclient1.16.5/รุ่นกลาง/26.2และpack-decline
+- [ ] U4 shift/drag/hotbar/offhand/doubleclick/creative/fake-title/GUIคนอื่นเอาiconออกหรือกดงานแทนownerไม่ได้; คลิกซ้าย/ขวาผลเดียว; reportระบุว่าเปิดข้อความ
+- [ ] U5 ชื่อเปลี่ยน/ใช้ชื่อเดิมซ้ำ/offlineค้นหา UUIDคงเป้าหมาย; ไม่พบชื่อไม่สร้างบัญชี; โปรไฟล์/preview/ledger/auditตรงUUIDเดียวกัน
+- [ ] U6 wallet/bank/red, เพิ่ม/ลด, จำนวน1/เพดาน/0/ลบ/ทศนิยม/เกินเพดาน/overflowและยอดติดลบถูกตรวจ; ฟอร์มผิดล้างช่อง; ยังไม่เปลี่ยนยอดก่อนยืนยัน
+- [ ] U7 actor/view/adjust/audit/recovery permissionถูกตรวจ ไม่ใช่ซ่อนปุ่มอย่างเดียว; ถอดnodeก่อนตอบฟอร์ม/หลังDBอ่าน/ก่อนconfirmไม่write; tabcompleteไม่เสนอwriteที่ไม่มีสิทธิ์
+- [ ] U8 ฟอร์มamount/reason/searchไม่ออกpublicchatหรือDiscordbridge; เคารพcancelled eventกับpluginจริง; rapidmessagesไม่ต่อcallbackสองครั้ง; `cancel` / `ยกเลิก` / `/cancel` / คำสั่งอื่น / 60sจบsessionถูกต้อง
+- [ ] U9 เปิดinventoryอื่น/quit/death/worldchange/disable/restartไม่ให้callbackเก่าเปิดหน้าหรือใช้nonceค้าง; timerเก่าไม่ลบฟอร์มใหม่; ปิด/ย้อนconfirmationแล้วใช้tokenเดิมไม่ได้
+- [ ] U10 previewแสดงชื่อ+UUID/bucket/เครื่องหมายdelta/before→after/เหตุผลชัด; reasonที่มีMiniMessage/slashเป็นplain text ไม่เป็นคำสั่ง; ภายใน60sคนเดียวใช้nonceครั้งเดียว
+- [ ] U11 ปรับช่องเดียวกันจากอีกstaff/Vault/ตายระหว่างpreview→confirmได้BALANCE_CHANGEDไม่overwrite; บันทึกพร้อมกัน/กดรัวไม่grantซ้ำ; ช่องอื่นไม่เสียยอดตามหลัง
+- [ ] U12 จำลองDBช้า/error/commit failureบนสำเนา: mainthreadไม่รอ, ไม่successปลอม, busyปลดเมื่อfail, GUIปิดระหว่างอ่านไม่กลับมาเอง; writeสำเร็จมีledger+audit+op IDครบ
+- [ ] U13 รายงานREVIEW/mail/exchange/craftรวมยา/repairตรงDB, อ่านfailไม่แสดง0; doctor/audit/history/สถานะดันใช้handlerเดิม; ไอเทม/NPCในpanelเป็นread-onlyไม่มีwriteแอบแฝง
+- [ ] U14 UI ใช้2–3คลิกเข้าหมวดหลักและขั้นกรอกเงินอ่านรู้เรื่อง; วัดMSPT/frame pacingกับหลายstaff/DBlagก่อนเปิดlive; ไม่มีผลMinecraftจริงให้ถือsource testsเป็นผลนี้

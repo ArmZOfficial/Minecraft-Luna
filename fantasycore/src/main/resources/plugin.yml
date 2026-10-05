@@ -86,7 +86,8 @@ commands:
     usage: /fantasycore action <id>
     aliases: [fc]
   fa:
-    description: เครื่องมือแอดมิน FantasyCore
+    description: เปิด AdminPanel หรือใช้เครื่องมือแอดมิน FantasyCore
+    usage: /fa [panel|player|help|doctor|bank|eco|confirm|npc|item|mail|exchange|craft|repair|audit|dungeon]
     permission: fantasyadmin.view
 
 permissions:

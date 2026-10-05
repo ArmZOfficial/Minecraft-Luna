@@ -78,6 +78,9 @@ public abstract class Menu implements InventoryHolder {
         return busy;
     }
 
+    /** Cancel uncommitted UI work when this specific holder closes. */
+    public void closed(Player player) { }
+
     void handleClick(Player player, int slot, ClickType click) {
         if (busy || !player.getUniqueId().equals(viewer)) {
             return;

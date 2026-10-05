@@ -120,13 +120,13 @@
     {
       "id": "fantasycore",
       "name": "FantasyCore",
-      "version": "0.9.0",
+      "version": "0.10.0",
       "source": "local",
-      "path": "fantasycore/build/libs/FantasyCore-0.9.0.jar",
+      "path": "fantasycore/build/libs/FantasyCore-0.10.0.jar",
       "required": true,
-      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/NPC/บ้าน/RTP/mail/daily/exchange/repair/craft/alchemy/depth/ดันเดี่ยว+ปาร์ตี้2ห้อง/reconnect60s)",
-      "note": "v0.9: native potion ร้านยาไลรา 3 สูตร/shared CRAFT journal, schema7; build+131tests ผ่าน 6ต.ค. ยังไม่ผ่าน Minecraft checklist T/renderer",
-      "built_sha256": "9cbef2fa11ad41bb262b73f3f28fe2605db068d8720a2de1a6395e83572420ae"
+      "role": "แกนระบบ Luma (เงิน/ธนาคาร/ตาย/เมนู/AdminPanel/NPC/บ้าน/RTP/mail/daily/exchange/repair/craft/alchemy/depth/ดันเดี่ยว+ปาร์ตี้2ห้อง/reconnect60s)",
+      "note": "v0.10: /fa GUI/dashboard/playerUUID/financial form with shared nonce and permission recheck; schema7, build+141testsผ่าน6ต.ค.; ยังรอ Minecraft checklist U",
+      "built_sha256": "6783f7c16ce1ce37ea19ab04def71b64532f1a691f8e0b140e08d69897d69b4a"
     },
     {
       "id": "itemscore",
