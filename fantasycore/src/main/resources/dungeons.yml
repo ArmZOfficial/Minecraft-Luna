@@ -1,9 +1,13 @@
-# FantasyCore v0.7 — Moonfall solo training. เปิดหลัง /fa dungeon build + visit + staging checklist เท่านั้น
-# โลกถูกตรึงชื่อ luma_moonfall_training; ไม่สร้างโลกอัตโนมัติจาก enabled
+# FantasyCore v0.8 — Moonfall solo + private party instances. เปิดหลัง checklist R/S เท่านั้น
+# training + party1/party2 เป็นโลกชื่อคงที่ ไม่ clone/delete โลกต่อรอบ ไม่สร้างโลกจาก enabled
+# party-enabled ไม่อยู่ใน config เดิมจะเท่ากับ false; merge เองหลัง backup
 enabled: false
+party-enabled: false
 timeout-seconds: 1080
 hall-health: 30
 reliquary-health: 50
 boss-health: 180
 # ค่าโจมตีดิบ: hall 4, reliquary 5, boss 6, slam 8 (เกราะลดได้)
+# HP × (1+0.6×(สมาชิก-1)), cap 1000; attack × (1+0.12×(สมาชิก-1)); สมาชิกตรึงตอนเริ่ม
+# หลุดเกมพัก AI/ความเสียหาย 60s; timeout ยังนับเวลาจริง; ตายหรือ /dungeon leave ยกเลิกทั้งรอบ
 # ผ่านแล้วได้ PRISMARINE_SHARD x2 (เศษจันทรา, PDC quest marker) ทาง /mail วันละครั้งเวลาไทย; ไม่มีค่าเข้า/เงินรางวัล/XP/drop mob

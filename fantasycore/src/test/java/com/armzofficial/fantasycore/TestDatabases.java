@@ -33,6 +33,6 @@ public final class TestDatabases {
         }
     }
     public static void removeDungeonTables(Connection c) throws SQLException {
-        try(var st=c.createStatement()) { st.execute("DROP TABLE dungeon_rewards"); st.execute("DROP TABLE dungeon_runs"); }
+        try(var st=c.createStatement()) { st.execute("DROP TABLE dungeon_group_rewards"); st.execute("DROP TABLE dungeon_group_members"); st.execute("DROP TABLE dungeon_group_runs"); st.execute("DROP TABLE dungeon_rewards"); st.execute("DROP TABLE dungeon_runs"); }
     }
 }

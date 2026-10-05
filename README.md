@@ -11,7 +11,8 @@
 - [ระบบตามภาพ: สุ่มวาร์ป/รางวัล/สกิน/วาดรูป/ตั้งบ้าน](output/lobby-concept/CASUAL-SURVIVAL-SYSTEMS-th.md)
 - [หินกันบ้าน ProtectionStones 5 ระดับ](output/lobby-concept/PROTECTIONSTONES-TIERS-th.md)
 - [โมเดลและภาพอ้างอิง](output/lobby-concept/ASSET-GALLERY-th.md)
-- [ปลั๊กอิน FantasyCore v0.7](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/mail/daily/exchange/repair/craft/depth/ดันฝึก
+- [ปลั๊กอิน FantasyCore v0.8](fantasycore/README-th.md) — เงิน/ธนาคาร/บ้าน/RTP/NPC/mail/daily/exchange/repair/craft/depth/ดันฝึก
+- [Moonfall ปาร์ตี้ v0.8](fantasycore/PARTY-DUNGEONS-th.md) — เดี่ยว+2ห้องปาร์ตี้/บาลานซ์/reconnect/recovery และ checklist S
 - [Moonfall ดันฝึกเดี่ยว](fantasycore/DUNGEONS-th.md) — สร้างโครงแมพ/3ห้อง/บอส/ส่งรางวัลวันละครั้ง, ปิดรับเริ่มต้นและรอ staging
 - [Core Craft และช่างรูน](fantasycore/CRAFT-th.md) — สูตร ราคา serial ใหม่ mail และ recovery
 - [ผสม ItemsCore](fantasycore/ITEMSCORE-INTEGRATION-th.md) — ขอบเขต provider, demo และชุด import ทดลอง 4 ชิ้น
@@ -25,11 +26,11 @@
 เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
 มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
 
-**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.7 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
+**ฝั่งเซิร์ฟ (5 ต.ค. 2026):** มีปลั๊กอิน FantasyCore v0.8 — economy/ธนาคาร/ledger/ตายเสียทอง/audit, เมนูไทย, NPC สถานี (+ผูก Citizens),
 item template, บ้าน, RTP, claim adapter, กล่องจดหมาย, รับของรายวัน และ `/exchange` (3 สูตร vanilla + preview + journal recovery)
 และ `/repair` (vanilla/Core serial + preview + ค่าจอง/คืนเงิน + journal), `/craft` (3 สูตร Core gear, วัตถุดิบ/ราคาก่อนยืนยัน, serial ใหม่เข้า mail)
-รวมดันฝึกเดี่ยว Moonfall (โค้ดสร้างโครงโลกแยก/3encounters/บอสมีวงเตือน/receipt+mail/protect/กลับออก)
-— build กับ Paper 26.2 API ผ่าน และ unit tests 105 รายการผ่าน; schema v6; ดันปิดรับเริ่มต้น
+รวม Moonfall เดี่ยว + ปาร์ตี้2–4คน (2ห้องส่วนตัว/rosterตรึง/HPปรับตามคน/reconnect60s/receipt+mail/protect/กลับออก)
+— build กับ Paper 26.2 API ผ่าน และ unit tests 124 รายการผ่าน; schema v7; ดันปิดรับเริ่มต้น
 พร้อมชุด staging (สคริปต์ดาวน์โหลด Paper + ปลั๊กอินที่ล็อกเวอร์ชันและตรวจ hash, หิน Protect 5 ระดับ, LuckPerms/WorldGuard setup)
 **ยังไม่ได้รันบนเซิร์ฟ Minecraft จริง** — ขั้นต่อไปคือทำ checklist ใน [server/README-th.md](server/README-th.md)
 ยังไม่มีโลกเมืองที่สร้างเสร็จ, แผนที่สด, payment backend หรือการส่งของจริง
@@ -69,4 +70,4 @@ remote เชื่อมแล้ว และส่งงานชุดแร
 จัดชื่อไทยและแคตตาล็อกจาก `All for module` แล้ว: [โมเดล/ไอคอน/แปลนวาง](server/content/library/README-th.md), [สูตรบาลานซ์ที่เสนอ](server/content/library/BALANCE-th.md), [PromptPay DEV](website/PROMPTPAY-th.md)
 เว็บใช้ไอคอนจริงและทดสอบซื้อจำลองกับ PostgreSQL ได้ Core v0.6 เพิ่ม native enchant ของอุปกรณ์เริ่มต้น 3 ชิ้นและ archive แม่แบบเก่าแล้ว ดู [คู่มือ](fantasycore/ENCHANTS-th.md); provider/ทักษะชุด/ส่งของเข้าเกมจากเว็บยังต้องเชื่อมและทดสอบ
 
-Core v0.6 เพิ่ม [มอนสเตอร์ตามความลึกและแถบเลือด](fantasycore/MONSTERS-th.md); v0.7 เพิ่ม [ดันฝึกเดี่ยว](fantasycore/DUNGEONS-th.md) จาก [คอนเซปต์4ภาพ](output/lobby-concept/dungeons/moonfall/README-th.md) แต่ยังไม่เปิดเล่นจริง; ปาร์ตี้/instanceหลายชุด/บอสโมเดลยังตามแผน
+Core v0.6 เพิ่ม [มอนสเตอร์ตามความลึกและแถบเลือด](fantasycore/MONSTERS-th.md); v0.7 เพิ่ม [ดันฝึกเดี่ยว](fantasycore/DUNGEONS-th.md) จาก [คอนเซปต์4ภาพ](output/lobby-concept/dungeons/moonfall/README-th.md) แต่ยังไม่เปิดเล่นจริง; v0.8 เพิ่ม [ปาร์ตี้/2ห้องส่วนตัว/reconnect60s](fantasycore/PARTY-DUNGEONS-th.md) แล้ว; บอสโมเดลยังตามแผน และทุกดันยังรอ Minecraft QA

@@ -12,7 +12,7 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.block.BlockState;
 
-/** Protection applies only to the fixed owned training world; no staff edit bypass during runs. */
+/** Protection applies to all three fixed owned dungeon worlds, including when admission is disabled. */
 public final class DungeonProtection implements Listener {
     private final DungeonService dungeon;
     public DungeonProtection(DungeonService dungeon) { this.dungeon=dungeon; }

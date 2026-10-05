@@ -33,8 +33,8 @@ public final class DungeonStore {
     public Optional<Run> begin(UUID player, ReturnPoint exit, String label, byte[] reward) throws SQLException {
         if (label == null || label.isBlank() || reward == null || reward.length == 0) { throw new IllegalArgumentException("reward"); }
         return database.transaction(c -> {
-            try (var ps = c.prepareStatement("SELECT 1 FROM dungeon_runs WHERE state IN ('PREPARING','ACTIVE') OR (player_uuid=? AND needs_return=1)")) {
-                ps.setString(1, player.toString());
+            try (var ps = c.prepareStatement("SELECT 1 FROM dungeon_runs WHERE state IN ('PREPARING','ACTIVE') OR (player_uuid=? AND needs_return=1) UNION ALL SELECT 1 FROM dungeon_group_runs WHERE instance_key='training' AND state IN ('PREPARING','ACTIVE') UNION ALL SELECT 1 FROM dungeon_group_members WHERE player_uuid=? AND needs_return=1")) {
+                ps.setString(1, player.toString()); ps.setString(2,player.toString());
                 try (var rs = ps.executeQuery()) { if (rs.next()) { return Optional.empty(); } }
             }
             String id = UUID.randomUUID().toString(); long now = clock.getAsLong();
@@ -80,11 +80,7 @@ public final class DungeonStore {
                     if (!rs.next()) { return Completion.INVALID; }
                     if (rs.getString("state").equals("COMPLETED")) { return Completion.ALREADY_COMPLETED; }
                     if (!rs.getString("state").equals("ACTIVE") || rs.getInt("stage") != 3 || rs.getInt("needs_return") != 1) { return Completion.INVALID; }
-                    boolean rewarded;
-                    try (var prior = c.prepareStatement("SELECT 1 FROM dungeon_rewards WHERE player_uuid=? AND dungeon_id=? AND period=?")) {
-                        prior.setString(1, player.toString()); prior.setString(2, ID); prior.setString(3, period);
-                        try (var found = prior.executeQuery()) { rewarded = !found.next(); }
-                    }
+                    boolean rewarded=!claimedIn(c,player,period);
                     long now = clock.getAsLong();
                     if (rewarded) {
                         long mailId = mail.enqueueIn(c, player, "dungeon.training", id, rs.getString("reward_label"), rs.getBytes("reward_data"));
@@ -113,6 +109,13 @@ public final class DungeonStore {
             }
             return null;
         });
+    }
+
+    static boolean claimedIn(Connection c,UUID player,String period) throws SQLException {
+        try(var ps=c.prepareStatement("SELECT 1 FROM dungeon_rewards WHERE player_uuid=? AND dungeon_id=? AND period=? UNION ALL SELECT 1 FROM dungeon_group_rewards WHERE player_uuid=? AND dungeon_id=? AND period=? LIMIT 1")) {
+            for(int start:new int[]{1,4}) { ps.setString(start,player.toString()); ps.setString(start+1,ID); ps.setString(start+2,period); }
+            try(var rs=ps.executeQuery()) { return rs.next(); }
+        }
     }
 
     public int recoverInterrupted() throws SQLException {

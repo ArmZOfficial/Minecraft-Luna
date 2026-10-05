@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessageKeysTest {
 
     private static final Pattern LITERAL = Pattern.compile(
-            "(?<!key\\()\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair|craft|dungeon)\\.[a-z0-9._-]+)\"");
+            "(?<!key\\()\"((?:common|core|service|menu|bank|economy|death|travel|spawn|rtp|home|land|admin|reward|mail|exchange|repair|craft|dungeon|party)\\.[a-z0-9._-]+)\"");
 
     /** string ที่หน้าตาเหมือน key แต่เป็น action ID / ชนิด operation / audit action */
     private static final Set<String> NOT_MESSAGES = Set.of(

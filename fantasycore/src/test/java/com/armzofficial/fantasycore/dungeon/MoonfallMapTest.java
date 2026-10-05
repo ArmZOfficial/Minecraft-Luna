@@ -31,6 +31,28 @@ class MoonfallMapTest {
         assertNotEquals("minecraft:air",block(x,feet-1,z),"floor "+x+","+z);
         for(int y=feet;y<=feet+2;y++) { assertEquals("minecraft:air",block(x,y,z),"headroom "+x+","+y+","+z); }
     }
+    @Test void everyMemberEntryAndCheckpointHasFloorAndHeadroom() {
+        for(int size=1;size<=4;size++) { for(int i=0;i<size;i++) {
+            double offset=(i-(size-1)/2.0)*2;
+            standing((int)Math.floor(22.5+offset),88,18);
+            standing((int)Math.floor(22.5+offset),78,46);
+            standing(106,38,(int)Math.floor(61.5+offset));
+            standing((int)Math.floor(116.5+offset),20,100);
+        } }
+    }
+    @Test void fingerprintIsDeterministicAndCombatScaleIsBounded() throws Exception {
+        var digest=java.security.MessageDigest.getInstance("SHA-256");
+        blocks.entrySet().stream().sorted(Comparator.comparingInt((Map.Entry<MoonfallMap.Pos,String> e) -> e.getKey().x()).thenComparingInt(e -> e.getKey().y()).thenComparingInt(e -> e.getKey().z()))
+                .forEach(e -> digest.update((e.getKey().x()+","+e.getKey().y()+","+e.getKey().z()+"="+e.getValue()+"\n").getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        assertEquals(java.util.HexFormat.of().formatHex(digest.digest()),MoonfallMap.fingerprint());
+        assertEquals(504,DungeonRules.scaledHealth(180,4),0.0001); assertEquals(1000,DungeonRules.scaledHealth(500,4));
+        assertEquals(8.16,DungeonRules.scaledAttack(6,4),0.0001); assertEquals(180,DungeonRules.scaledHealth(180,1));
+        assertThrows(IllegalArgumentException.class,() -> DungeonRules.scaledHealth(180,5));
+        assertThrows(IllegalArgumentException.class,() -> DungeonRules.scaledAttack(Double.NaN,2));
+        var yaml=new YamlConfiguration(); yaml.loadFromString(Files.readString(Path.of("src/main/resources/dungeons.yml")));
+        assertFalse(DungeonRules.load(yaml).partyEnabled()); yaml.set("party-enabled",null); assertFalse(DungeonRules.load(yaml).partyEnabled());
+        yaml.set("party-enabled","true"); assertThrows(IllegalArgumentException.class,() -> DungeonRules.load(yaml));
+    }
     @Test void fourStairRunsDescendOnePerRowAndFaceUpstream() {
         stairs(false,22,33,42,88,"north"); stairs(true,61,35,54,78,"west");
         stairs(true,61,83,102,58,"west"); stairs(false,116,75,92,38,"north");

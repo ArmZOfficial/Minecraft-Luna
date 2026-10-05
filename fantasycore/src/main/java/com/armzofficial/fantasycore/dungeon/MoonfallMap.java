@@ -23,6 +23,17 @@ public final class MoonfallMap {
     public static final List<Room> ENCOUNTERS = List.of(HALL, RELIQUARY, BOSS);
     private final Map<Pos,String> blocks = new LinkedHashMap<>();
     private MoonfallMap() {}
+    private static final String FINGERPRINT=calculateFingerprint();
+    public static String fingerprint() { return FINGERPRINT; }
+    private static String calculateFingerprint() {
+        try {
+            var digest=java.security.MessageDigest.getInstance("SHA-256");
+            plan().entrySet().stream().sorted(java.util.Comparator.comparingInt((Map.Entry<Pos,String> e) -> e.getKey().x())
+                    .thenComparingInt(e -> e.getKey().y()).thenComparingInt(e -> e.getKey().z())).forEach(e ->
+                    digest.update((e.getKey().x()+","+e.getKey().y()+","+e.getKey().z()+"="+e.getValue()+"\n").getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+            return java.util.HexFormat.of().formatHex(digest.digest());
+        } catch(java.security.NoSuchAlgorithmException e) { throw new IllegalStateException(e); }
+    }
 
     public static Map<Pos,String> plan() {
         MoonfallMap m = new MoonfallMap();

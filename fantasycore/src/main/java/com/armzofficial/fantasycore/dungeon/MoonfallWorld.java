@@ -20,13 +20,20 @@ public final class MoonfallWorld {
     private final Plugin plugin;
     private final NamespacedKey ownerKey;
     private final NamespacedKey readyKey;
+    private final NamespacedKey hashKey;
+    private final InstanceSlot slot;
     private World world;
     private BukkitTask building;
     private String problem;
 
     public MoonfallWorld(Plugin plugin) {
+        this(plugin,InstanceSlot.TRAINING);
+    }
+    public MoonfallWorld(Plugin plugin,InstanceSlot slot) {
         this.plugin=plugin;
+        this.slot=Objects.requireNonNull(slot);
         ownerKey=new NamespacedKey(plugin,"moonfall_owner"); readyKey=new NamespacedKey(plugin,"moonfall_map_version");
+        hashKey=new NamespacedKey(plugin,"moonfall_template_hash");
         try {
             Path folder=folder();
             if (Files.exists(folder) && markerValid(folder)) { load(); }
@@ -34,21 +41,28 @@ public final class MoonfallWorld {
     }
     public World world() { return world; }
     public boolean owns(World candidate) { return world!=null && candidate!=null && world.getUID().equals(candidate.getUID()); }
-    public boolean ready() { return problem==null && world!=null && building==null && world.getPersistentDataContainer().getOrDefault(readyKey,PersistentDataType.INTEGER,0)==MoonfallMap.VERSION; }
+    public boolean building() { return building!=null; }
+    public boolean ready() {
+        if(problem!=null || world==null || building!=null || world.getPersistentDataContainer().getOrDefault(readyKey,PersistentDataType.INTEGER,0)!=MoonfallMap.VERSION) { return false; }
+        String hash=world.getPersistentDataContainer().getOrDefault(hashKey,PersistentDataType.STRING,"");
+        return hash.equals(MoonfallMap.fingerprint()) || (!slot.party() && hash.isEmpty());
+    }
     public String status() { return problem!=null?problem:building!=null?"กำลังสร้างแมพ":ready()?"แมพฝึกพร้อม":world==null?"ยังไม่ได้สร้างโลกฝึก":"แมพสร้างไม่ครบ — /fa dungeon build"; }
 
     public void build(CommandSender sender, Consumer<String> report) {
         if (building!=null) { report.accept("กำลังสร้างอยู่แล้ว"); return; }
-        if (ready()) { report.accept("แมพพร้อมแล้ว ไม่เขียนทับงานตกแต่งเดิม"); return; }
+        if (world!=null && world.getPersistentDataContainer().getOrDefault(readyKey,PersistentDataType.INTEGER,0)>0) {
+            report.accept("แมพเคยสร้างเสร็จแล้ว ไม่เขียนทับงานตกแต่งเดิม (ตรวจ version/hash หากยังไม่ ready)"); return;
+        }
         try {
             Path folder=folder();
-            World loaded=Bukkit.getWorld(MoonfallMap.WORLD);
+            World loaded=Bukkit.getWorld(slot.world());
             if (loaded!=null && !owns(loaded)) { throw new IllegalStateException("ชื่อโลกถูกใช้อยู่ ไม่แก้ไขโลกที่ไม่มี ownership"); }
             if (Files.exists(folder)) {
                 if (!markerValid(folder)) { throw new IllegalStateException("พบโฟลเดอร์โลกเดิมที่ไม่มี ownership — หยุดโดยไม่เขียนทับ"); }
             } else {
                 Files.createDirectory(folder);
-                Files.writeString(folder.resolve(".fantasycore-moonfall-owner"),MARKER,StandardCharsets.UTF_8);
+                Files.writeString(folder.resolve(".fantasycore-moonfall-owner"),marker(),StandardCharsets.UTF_8);
             }
             if (world==null) { load(); }
             if (!world.getPlayers().isEmpty()) { throw new IllegalStateException("ต้องให้ผู้เล่นออกจากโลกก่อนสร้าง"); }
@@ -57,7 +71,7 @@ public final class MoonfallWorld {
             // Validate every palette entry before placing anything.
             plan.forEach(entry -> data.computeIfAbsent(entry.getValue(),Bukkit::createBlockData));
             int[] index={0};
-            report.accept("เริ่มสร้าง Moonfall "+plan.size()+" บล็อกในโลกใหม่ "+MoonfallMap.WORLD);
+            report.accept("เริ่มสร้าง Moonfall "+plan.size()+" บล็อกในโลกใหม่ "+slot.world());
             building=Bukkit.getScheduler().runTaskTimer(plugin,() -> {
                 try {
                     long deadline=System.nanoTime()+3_000_000;
@@ -69,11 +83,12 @@ public final class MoonfallWorld {
                         building.cancel(); building=null;
                         world.setSpawnLocation(22,88,18,0);
                         // Save blocks before advertising readiness; interruption stays safely incomplete.
-                        world.save(); world.getPersistentDataContainer().set(readyKey,PersistentDataType.INTEGER,MoonfallMap.VERSION); world.save();
+                        world.save(); world.getPersistentDataContainer().set(hashKey,PersistentDataType.STRING,MoonfallMap.fingerprint());
+                        world.getPersistentDataContainer().set(readyKey,PersistentDataType.INTEGER,MoonfallMap.VERSION); world.save();
                         problem=null; report.accept("สร้างแมพฝึกเสร็จ — /fa dungeon visit เพื่อตรวจทางเดินก่อนเปิด enabled");
                     }
                 } catch (RuntimeException e) {
-                    building.cancel(); building=null; problem=e.getMessage();
+                    if(building!=null) { building.cancel(); } building=null; problem=e.getMessage();
                     plugin.getLogger().warning("Moonfall build stopped: "+e); report.accept("สร้างไม่สำเร็จ: "+problem);
                 }
             },1,1);
@@ -82,16 +97,17 @@ public final class MoonfallWorld {
 
     private Path folder() {
         Path root=Bukkit.getWorldContainer().toPath().toAbsolutePath().normalize();
-        Path folder=root.resolve(MoonfallMap.WORLD).normalize();
+        Path folder=root.resolve(slot.world()).normalize();
         if (!folder.getParent().equals(root) || Files.isSymbolicLink(folder)) { throw new IllegalStateException("unsafe world path"); }
         return folder;
     }
-    private static boolean markerValid(Path folder) throws Exception {
+    private String marker() { return slot.party()?"FantasyCore Moonfall instance v1:"+slot.key()+"\n":MARKER; }
+    private boolean markerValid(Path folder) throws Exception {
         Path marker=folder.resolve(".fantasycore-moonfall-owner");
-        return !Files.isSymbolicLink(marker) && Files.isRegularFile(marker) && Files.readString(marker,StandardCharsets.UTF_8).equals(MARKER);
+        return !Files.isSymbolicLink(marker) && Files.isRegularFile(marker) && Files.readString(marker,StandardCharsets.UTF_8).equals(marker());
     }
     private void load() {
-        world=new WorldCreator(MoonfallMap.WORLD).generator(new VoidGenerator()).generateStructures(false).createWorld();
+        world=new WorldCreator(slot.world()).generator(new VoidGenerator()).generateStructures(false).createWorld();
         if (world==null) { throw new IllegalStateException("createWorld returned null"); }
         world.getPersistentDataContainer().set(ownerKey,PersistentDataType.INTEGER,1);
         world.setGameRule(GameRules.PVP,false); world.setDifficulty(Difficulty.NORMAL); world.setTime(18000); world.setStorm(false);

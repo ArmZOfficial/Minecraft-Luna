@@ -4,6 +4,8 @@
 
 # ---------- ผู้เล่นทั่วไป (default)
 # fantasy.player เปิดเป็น default ใน plugin.yml แล้ว (menu, bank ที่สถานี, home, rtp, spawn, land)
+lp group default permission set fantasy.dungeon true
+lp group default permission set fantasy.party true
 lp group default permission set protectionstones.create true
 lp group default permission set protectionstones.destroy true
 lp group default permission set protectionstones.unclaim true

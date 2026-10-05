@@ -1,4 +1,6 @@
-# Moonfall — ดันเจี้ยนฝึกเดี่ยว (FantasyCore v0.7)
+# Moonfall — ดันเจี้ยนฝึกเดี่ยว (ประวัติ FantasyCore v0.7)
+
+**รุ่นปัจจุบัน v0.8:** อ่าน [Party Dungeons](PARTY-DUNGEONS-th.md) ก่อนติดตั้ง ใช้ JAR0.8/schema7; เพิ่ม2ห้องปาร์ตี้และreconnect60s แม้solo บทนี้เก็บbehavior/schema/ขั้นติดตั้งv0.7ไว้เพื่ออ้างอิงย้อนหลัง ไม่มีการเปิดเซิร์ฟจริงแล้ว
 
 วันที่ 5 ต.ค. 2026 · สถานะ: source/JAR สำหรับ staging, **ยังไม่เคยรัน Minecraft หรือเปิดดันให้เล่นจริง**
 

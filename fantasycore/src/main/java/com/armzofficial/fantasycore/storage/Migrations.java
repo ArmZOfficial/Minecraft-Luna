@@ -235,6 +235,49 @@ public final class Migrations {
                         created_at INTEGER NOT NULL,
                         UNIQUE (player_uuid, dungeon_id, period)
                     )"""
+            },
+            // version 7 — expand-only: keep all v6 runs/receipts, add independent group instances
+            new String[]{
+                    """
+                    CREATE TABLE dungeon_group_runs (
+                        run_id TEXT PRIMARY KEY,
+                        dungeon_id TEXT NOT NULL,
+                        instance_key TEXT NOT NULL CHECK (instance_key IN ('training','party1','party2')),
+                        leader_uuid TEXT NOT NULL,
+                        party_uuid TEXT,
+                        member_count INTEGER NOT NULL CHECK (member_count BETWEEN 1 AND 4),
+                        template_hash TEXT NOT NULL CHECK (length(template_hash)=64),
+                        state TEXT NOT NULL CHECK (state IN ('PREPARING','ACTIVE','COMPLETED','ABORTED')),
+                        stage INTEGER NOT NULL DEFAULT 0 CHECK (stage BETWEEN 0 AND 3),
+                        reason TEXT,
+                        created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL
+                    )""",
+                    "CREATE UNIQUE INDEX dungeon_group_instance ON dungeon_group_runs(instance_key) WHERE state IN ('PREPARING','ACTIVE')",
+                    """
+                    CREATE TABLE dungeon_group_members (
+                        run_id TEXT NOT NULL REFERENCES dungeon_group_runs(run_id),
+                        player_uuid TEXT NOT NULL,
+                        needs_return INTEGER NOT NULL DEFAULT 1 CHECK (needs_return IN (0,1)),
+                        return_world TEXT NOT NULL,
+                        return_x REAL NOT NULL, return_y REAL NOT NULL, return_z REAL NOT NULL,
+                        return_yaw REAL NOT NULL, return_pitch REAL NOT NULL,
+                        reward_version INTEGER NOT NULL CHECK (reward_version>0),
+                        reward_label TEXT NOT NULL, reward_data BLOB NOT NULL,
+                        updated_at INTEGER NOT NULL,
+                        PRIMARY KEY(run_id,player_uuid)
+                    )""",
+                    "CREATE UNIQUE INDEX dungeon_group_return ON dungeon_group_members(player_uuid) WHERE needs_return=1",
+                    """
+                    CREATE TABLE dungeon_group_rewards (
+                        run_id TEXT NOT NULL REFERENCES dungeon_group_runs(run_id),
+                        player_uuid TEXT NOT NULL,
+                        dungeon_id TEXT NOT NULL, period TEXT NOT NULL,
+                        reward_version INTEGER NOT NULL,
+                        mail_id INTEGER NOT NULL UNIQUE REFERENCES mail(id),
+                        created_at INTEGER NOT NULL,
+                        PRIMARY KEY(run_id,player_uuid),
+                        UNIQUE(player_uuid,dungeon_id,period)
+                    )"""
             }
     );
 

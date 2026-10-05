@@ -39,6 +39,7 @@ public final class PlayerCommands implements TabExecutor {
             return true;
         }
         switch (command.getName().toLowerCase(Locale.ROOT)) {
+            case "party" -> PartyCommands.execute(services,player,args);
             case "dungeon" -> {
                 if (args.length==1 && args[0].equalsIgnoreCase("leave")) { services.dungeon().leave(player); }
                 else if (args.length==1 && args[0].equalsIgnoreCase("join")) { services.dungeon().join(player); }
@@ -170,7 +171,11 @@ public final class PlayerCommands implements TabExecutor {
                                       String[] args) {
         String name = command.getName().toLowerCase(Locale.ROOT);
         List<String> options = new ArrayList<>();
-        if (name.equals("dungeon") && args.length == 1) {
+        if (name.equals("party") && args.length == 1) {
+            options.addAll(List.of("invite","accept","list","leave","kick","disband"));
+        } else if (name.equals("party") && args.length == 2 && List.of("invite","kick").contains(args[0].toLowerCase(Locale.ROOT))) {
+            options.addAll(org.bukkit.Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
+        } else if (name.equals("dungeon") && args.length == 1) {
             options.addAll(List.of("join", "leave"));
         } else if (name.equals("bank") && args.length == 1) {
             options.addAll(List.of("deposit", "withdraw", "history"));

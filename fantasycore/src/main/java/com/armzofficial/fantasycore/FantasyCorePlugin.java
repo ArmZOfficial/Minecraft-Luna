@@ -12,6 +12,7 @@ import com.armzofficial.fantasycore.config.Settings;
 import com.armzofficial.fantasycore.combat.DepthMonsterService;
 import com.armzofficial.fantasycore.dungeon.DungeonService;
 import com.armzofficial.fantasycore.dungeon.DungeonStore;
+import com.armzofficial.fantasycore.dungeon.DungeonGroupStore;
 import com.armzofficial.fantasycore.dungeon.DungeonProtection;
 import com.armzofficial.fantasycore.economy.DeathListener;
 import com.armzofficial.fantasycore.economy.EconomyService;
@@ -103,11 +104,12 @@ public final class FantasyCorePlugin extends JavaPlugin {
         EconomyService economy = new EconomyService(database, economyStore);
         MailStore mailStore = new MailStore(database, System::currentTimeMillis);
         DungeonStore dungeonStore = new DungeonStore(database, mailStore, System::currentTimeMillis);
+        DungeonGroupStore dungeonGroups = new DungeonGroupStore(database, mailStore, dungeonStore, System::currentTimeMillis);
         ExchangeStore exchangeStore = new ExchangeStore(database, mailStore, System::currentTimeMillis);
         ExchangeStore craftStore = new ExchangeStore(database, mailStore, System::currentTimeMillis, economyStore, ExchangeStore.Kind.CRAFT);
         RepairStore repairStore = new RepairStore(database, economyStore, System::currentTimeMillis);
         try {
-            int abortedDungeons = dungeonStore.recoverInterrupted();
+            int abortedDungeons = dungeonGroups.recoverInterrupted();
             if (abortedDungeons > 0) { getLogger().warning("ยกเลิกรอบดันฝึกค้าง " + abortedDungeons + " รอบ — เก็บจุดกลับและ mail ที่ commit แล้วไว้"); }
             int interrupted = mailStore.quarantineInterrupted();
             ExchangeStore.Recovery recovery = exchangeStore.quarantineInterrupted();
@@ -165,7 +167,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
                 stations, settings.maxTransaction());
         repair.problems().forEach(p -> getLogger().warning("repair.yml: " + p));
         DepthMonsterService monsters = new DepthMonsterService(this);
-        DungeonService dungeon = new DungeonService(this,messages,settings,database,dungeonStore,tasks,teleports,landing);
+        DungeonService dungeon = new DungeonService(this,messages,settings,database,dungeonGroups,tasks,teleports,landing);
         dungeon.problems().forEach(getLogger()::warning);
         monsters.problems().forEach(getLogger()::warning);
         ActionRegistry actions = new ActionRegistry(() -> services);
@@ -190,7 +192,7 @@ public final class FantasyCorePlugin extends JavaPlugin {
 
         PlayerCommands playerCommands = new PlayerCommands(services);
         for (String name : new String[]{"menu", "bank", "balance", "sethome", "home", "delhome", "homes", "rtp", "spawn", "land",
-                "rewards", "mail", "exchange", "repair", "craft", "dungeon"}) {
+                "rewards", "mail", "exchange", "repair", "craft", "dungeon", "party"}) {
             bind(name, playerCommands);
         }
         bind("fantasycore", new CoreCommand(services));

@@ -1,4 +1,4 @@
-# FantasyCore — แกนระบบของ Luma (v0.7)
+# FantasyCore — แกนระบบของ Luma (v0.8)
 
 ปลั๊กอิน Paper ตาม [SERVER-SYSTEMS-PLAN §6](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 - v0.1: **ลำดับพัฒนาข้อ 1–3** และ **CASUAL-SURVIVAL §12 ข้อ 2 (บ้าน + RTP)**
@@ -10,6 +10,8 @@
 - v0.7: **Moonfall solo training** — โค้ดสร้างโครงโลกเฉพาะ, 3 encounter/ประตู/HP bar/ทุบพื้นมีวงเตือน, protect/กลับออก, frozen reward + mail + daily receipt; ดู [คู่มือดันฝึก](DUNGEONS-th.md) (ปิดรับผู้เล่นเริ่มต้นและยังรอเล่นจริง)
 Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่าน ViaVersion/ViaBackwards
 เพิ่ม [แผนผสม ItemsCore และ trial imports](ITEMSCORE-INTEGRATION-th.md); Java provider bridge ยังไม่เปิดจนมี JAR/APIจริงที่ผ่านทดสอบ
+
+รุ่นปัจจุบัน v0.8 เพิ่ม [ปาร์ตี้2–4คน/2ห้องส่วนตัว/reconnect60s](PARTY-DUNGEONS-th.md); roster/HP/attack/rewardตรึงต่อรอบ ใช้ dailyquotaร่วมกับ soloเดิม ทุกดันปิดรับเริ่มต้น
 
 ## มีอะไรในรุ่นนี้
 
@@ -29,7 +31,7 @@ Backend: Paper 26.2 · Java 25 · `api-version: 26.2` · client 1.16.5+ ผ่�
 | ซ่อม | `/repair` ที่สถานี `repair.main`, main hand 1 ชิ้น, preview 60 วิ, จองทองและซ่อมเฉพาะ DAMAGE; Core ตรวจเจ้าของ/serial/เวอร์ชันและ pending mail; ค้างหลังเริ่มซ่อมไป REVIEW แอดมินตัดสิน | §7 / [คู่มือ Repair](REPAIR-th.md) |
 | คราฟต์ | `/craft` ที่ `craft.main`, 3 สูตร gear จากวัตถุดิบธรรมดาและทอง, preview → confirm → serial ใหม่เข้า mail; แยก quota รายวันจาก exchange, คืนค่าจองเมื่อยกเลิกก่อนตัด และค้าง REVIEW ให้ทีมงานตรวจ | §7 / [คู่มือ Craft](CRAFT-th.md) |
 | มอนสเตอร์ | natural vanilla ใน luma_resource: 4 ชั้นตาม Y, HP/ตี/ยิงเพิ่ม, ระดับตรึงตอนเกิดและ Target HP BossBar | [คู่มือมอนสเตอร์](MONSTERS-th.md) |
-| ดันฝึก | `/dungeon`, ครั้งละ1คนในโลกใหม่, รูน→ศิลา→บอส, reward `/mail` วันละครั้ง; build/abort ต้อง confirm, ไม่มี party/model boss ในรุ่นนี้ | [คู่มือดันฝึก](DUNGEONS-th.md) |
+| ดันฝึก | `/dungeon`, เดี่ยว1ห้อง + ปาร์ตี้2–4คน2ห้อง, รูน→ศิลา→บอส, reward `/mail` วันละครั้งร่วมทุกslot; rosterตรึง/reconnect60s; build/abort confirm; ไม่มี custombossmodel | [Party Dungeons](PARTY-DUNGEONS-th.md) |
 | บ้าน | `/sethome [ชื่อ] [confirm]`, `/home [ชื่อ]`, `/delhome`, `/homes`; เฉพาะ `luma_housing` + ต้องเป็นเจ้าของ/สมาชิกแปลง PS, ตรวจซ้ำทุกครั้งก่อนวาร์ป, โควตา 1/3/5 | CASUAL §9 |
 | RTP | `/rtp [housing|resource]` วงแหวนกระจายตามพื้นที่, footprint 2×2 + ช่องหัว 3, ไม่ลงพื้นอันตราย/border/region, โหลด chunk async ≤2 งาน/โลก, 24 จุด/10 วิ, cooldown จาก receipt ในฐานข้อมูล | CASUAL §3 |
 | วาร์ป | อุ่นเครื่อง 3 วิ ยกเลิกเมื่อขยับ/โดนตี, ล็อกหลังต่อสู้ 15 วิ, บันทึกผลเมื่อ teleport สำเร็จจริงเท่านั้น; `/spawn` | §3, §9 |
@@ -46,7 +48,7 @@ Paper API ที่ใช้ compile ถูกตรึงเป็น `26.2.bui
 
 ```powershell
 cd fantasycore
-.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.7.0.jar
+.\gradlew.bat build        # compile + unit test → build\libs\FantasyCore-0.8.0.jar
 ```
 
 หรือใช้ `server\build-plugin.cmd` ซึ่ง build แล้วคัดลอกเข้าเซิร์ฟ staging ให้
@@ -80,12 +82,14 @@ Set-Location fantasycore
 | `fantasyadmin.repair.resolve` | OP | ตัดสินรายการซ่อมค้างพร้อม preview + เหตุผล + confirm |
 | `fantasy.craft.use` / `.remote` | use ผ่าน fantasy.player / remote ไม่มี | คราฟต์ที่ช่าง / ใช้จากนอกสถานี |
 | `fantasyadmin.craft.resolve` | OP | ตัดสินคราฟต์ค้างพร้อมเหตุผล preview และ confirm |
-| `fantasy.dungeon` / `fantasyadmin.dungeon.manage` | player / OP | เมนูฝึกเดี่ยว / สร้าง-ตรวจ-ยกเลิกดันพร้อม preview/confirm/audit |
+| `fantasy.dungeon` / `fantasyadmin.dungeon.manage` | player / OP | เมนูเดี่ยวหรือปาร์ตี้ / สร้าง-ตรวจ-ยกเลิกทุกรอบพร้อม preview/confirm/audit |
+
+สิทธิ์ `fantasy.party` ผ่าน fantasy.player สำหรับ /party; ไม่มีสิทธิ์เปลี่ยนrosterขณะรอบถูกล็อก
 
 ## ข้อมูลและการกู้คืน
 
-- ฐานข้อมูล `plugins/FantasyCore/fantasycore.db` (SQLite WAL, schema v6) — ตารางเดิมเงิน/บ้าน/items/mail/exchange/repair + `dungeon_runs`/`dungeon_rewards`
-- อัปจาก v0.1–v0.6 → v0.7: สำรองก่อน migrate schema v6 อัตโนมัติ สร้าง resource ที่ยังไม่มีรวม `dungeons.yml` โดยไม่เขียนทับ config ที่แก้แล้ว; ย้อน JAR เก่าต้องกู้ backup ชุดเดียวกัน
+- ฐานข้อมูล `plugins/FantasyCore/fantasycore.db` (SQLite WAL, schema v7) — ตารางเดิมเงิน/บ้าน/items/mail/exchange/repair/`dungeon_runs`/`dungeon_rewards` + `dungeon_group_runs`/`dungeon_group_members`/`dungeon_group_rewards`
+- อัปจาก v0.1–v0.7 → v0.8: สำรองก่อน migrate schema v7 อัตโนมัติ รักษา solo rowsเดิม สร้าง resource ที่ยังไม่มีรวม `dungeons.yml` โดยไม่เขียนทับ config ที่แก้แล้ว; ย้อน JAR เก่าต้องกู้ backup ชุดเดียวกัน
 - อัปจาก v0.5 → v0.6 ใช้ schema v5 เดิม; ไม่เขียนทับ config/อัปพลังของเก่าอัตโนมัติ เก็บแม่แบบ v1 จริงใน revisions ก่อนเพิ่ม current/output version ดู [ขั้นตอนอัปเกรด](ENCHANTS-th.md)
 - เซิร์ฟที่ยังไม่มีสอง template ใหม่ให้ merge อย่างระวังหรือปิดสูตรนั้น ดู [Craft](CRAFT-th.md)
 - SQLite นี้เป็นข้อมูล Core ฝั่งเกม ส่วน PostgreSQL เป็นข้อมูลเว็บ; ยังไม่มี bridge payment/ส่งคำสั่งจากเว็บในรุ่นนี้
@@ -143,4 +147,6 @@ NPC อนิเมชันจาก Blockbench เป็นอีกเส้�
 
 รอบ v0.7: unit tests **105 รายการผ่าน** (92 เดิม + 8 Dungeon store/migration + 5 map/rules); compile กับ Paper API ที่ล็อกไว้ผ่าน
 มี [โค้ดดันฝึกเดี่ยว](DUNGEONS-th.md) ต่อจาก [ภาพ/แปลนจันทรา](../output/lobby-concept/dungeons/moonfall/README-th.md); ยังไม่เริ่ม Minecraft จริง
-party/parallel instances/reconnect combat/custom boss model+animations ยังเป็นแผน; runtime spawn/AI/protect/teleport/Via/MSPT ต้องผ่าน checklist R ก่อนเปิด
+สถานะ v0.7 ข้างต้นเป็นประวัติ; รุ่นปัจจุบัน v0.8 มี party/2parallelinstances/reconnect60s แล้ว แต่ custombossmodel+animationsยังเป็นแผน
+รอบ v0.8: unit tests **124 รายการผ่าน** (เพิ่ม19), compileไม่มีwarning; YAML9/MiniMessage377 ผ่าน; schema7เป็นexpand-only อ่านlegacyและquotaร่วม
+ยังไม่ได้เริ่ม Minecraft; ต้องผ่าน [checklist R/S](../server/README-th.md) ก่อนเปิด enabled/party-enabled ดู [คู่มือ v0.8](PARTY-DUNGEONS-th.md)

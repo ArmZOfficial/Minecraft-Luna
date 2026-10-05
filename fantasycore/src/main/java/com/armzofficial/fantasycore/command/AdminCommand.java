@@ -1,6 +1,7 @@
 package com.armzofficial.fantasycore.command;
 
 import com.armzofficial.fantasycore.Services;
+import com.armzofficial.fantasycore.dungeon.InstanceSlot;
 import com.armzofficial.fantasycore.audit.AuditEntry;
 import com.armzofficial.fantasycore.audit.AuditStore;
 import com.armzofficial.fantasycore.config.Messages;
@@ -175,7 +176,8 @@ public final class AdminCommand implements TabExecutor {
             line(sender, "fix", "items.yml", problem);
         }
         line(sender, services.monsters().enabled() ? "ready" : "fix", "Depth monsters", services.monsters().status());
-        line(sender, services.dungeon().ready() ? "ready" : "off", "Moonfall solo training", services.dungeon().status());
+        line(sender, services.dungeon().ready() ? "ready" : "off", "Moonfall solo + party", services.dungeon().status());
+        services.dungeon().instanceStatus().forEach(detail -> services.messages().send(sender,"dungeon.admin-report",Messages.p("detail",detail)));
         services.dungeon().problems().forEach(problem -> line(sender,"fix","dungeons.yml",problem));
         services.monsters().problems().forEach(problem -> line(sender, "fix", "monsters.yml", problem));
         for (String key : services.messages().missingKeys()) {
@@ -191,25 +193,41 @@ public final class AdminCommand implements TabExecutor {
         });
     }
 
-    private void dungeon(CommandSender sender, String[] args) {
+    private void dungeon(CommandSender sender,String[] args) {
         Messages m=services.messages();
         String sub=args.length>=2?args[1].toLowerCase(Locale.ROOT):"status";
-        if(sub.equals("status")) { m.send(sender,"dungeon.admin-report",Messages.p("detail",services.dungeon().status())); return; }
+        if(sub.equals("status")) {
+            m.send(sender,"dungeon.admin-report",Messages.p("detail",services.dungeon().status()));
+            services.dungeon().instanceStatus().forEach(detail -> m.send(sender,"dungeon.admin-report",Messages.p("detail",detail))); return;
+        }
         if(!sender.hasPermission("fantasyadmin.dungeon.manage")) { m.send(sender,"common.no-permission"); return; }
-        if(sub.equals("visit") && sender instanceof Player player) { services.dungeon().visit(player); return; }
-        if((sub.equals("build") || sub.equals("abort")) && args.length>=3) {
-            String reason=String.join(" ",Arrays.copyOfRange(args,2,args.length)).trim();
+        if(sub.equals("visit") && sender instanceof Player player) {
+            var slot=InstanceSlot.parse(args.length>=3?args[2]:"training");
+            if(slot.isEmpty()) { m.send(sender,"dungeon.admin-usage"); return; }
+            services.dungeon().visit(player,slot.get()); return;
+        }
+        boolean build=sub.equals("build") || sub.equals("buildparty");
+        int reasonStart=sub.equals("buildparty")?3:2;
+        if((build || sub.equals("abort")) && args.length>reasonStart) {
+            InstanceSlot slot=InstanceSlot.TRAINING;
+            if(sub.equals("buildparty")) {
+                if(!List.of("1","2").contains(args[2])) { m.send(sender,"dungeon.admin-usage"); return; }
+                slot=args[2].equals("1")?InstanceSlot.PARTY1:InstanceSlot.PARTY2;
+            }
+            final InstanceSlot selected=slot;
+            String reason=String.join(" ",Arrays.copyOfRange(args,reasonStart,args.length)).trim();
             if(reason.length()<3 || reason.length()>200) { m.send(sender,"admin.reason-required"); return; }
             UUID actor=sender instanceof Player p?p.getUniqueId():null;
+            String target=build?selected.key():"ALL ACTIVE INSTANCES";
             String token=confirmations.create(actor,() -> {
                 if(!sender.hasPermission("fantasyadmin.dungeon.manage")) { m.send(sender,"common.no-permission"); return; }
-                AuditEntry entry=new AuditEntry(actor==null?null:actor.toString(),sender.getName(),"dungeon.admin."+sub,"moonfall_training",services.dungeon().status(),reason);
+                AuditEntry entry=new AuditEntry(actor==null?null:actor.toString(),sender.getName(),"dungeon.admin."+sub,target,services.dungeon().status(),reason);
                 services.tasks().then(services.database().async(() -> { services.audit().record(entry,OpMeta.newOpId()); return null; }),(ignored,error) -> {
                     if(error!=null) { m.send(sender,"dungeon.storage-error"); return; }
-                    if(sub.equals("build")) { services.dungeon().build(sender); } else { services.dungeon().abort(sender); }
+                    if(build) { services.dungeon().build(sender,selected); } else { services.dungeon().abort(sender); }
                 });
             });
-            m.send(sender,"dungeon.admin-preview",Messages.p("action",sub),Messages.p("reason",reason),Messages.p("token",token)); return;
+            m.send(sender,"dungeon.admin-preview",Messages.p("action",sub),Messages.p("target",target),Messages.p("reason",reason),Messages.p("token",token)); return;
         }
         m.send(sender,"dungeon.admin-usage");
     }
@@ -846,7 +864,7 @@ public final class AdminCommand implements TabExecutor {
                 case "mail" -> options.addAll(List.of("review", "release", "void", "give"));
                 case "exchange", "repair", "craft" -> options.addAll(List.of("review", "complete", "cancel"));
                 case "item" -> options.addAll(List.of("list", "give", "inspect"));
-                case "dungeon" -> options.addAll(List.of("status", "build", "visit", "abort"));
+                case "dungeon" -> options.addAll(List.of("status", "build", "buildparty", "visit", "abort"));
                 case "bank", "audit" -> Bukkit.getOnlinePlayers().forEach(p -> options.add(p.getName()));
                 default -> {
                 }
@@ -874,6 +892,10 @@ public final class AdminCommand implements TabExecutor {
             } else if (args[0].equalsIgnoreCase("item") && args[1].equalsIgnoreCase("give")) {
                 options.addAll(services.items().templates().keySet());
             }
+        }
+        if(args.length==3 && args[0].equalsIgnoreCase("dungeon")) {
+            if(args[1].equalsIgnoreCase("visit")) { options.addAll(List.of("training","party1","party2")); }
+            if(args[1].equalsIgnoreCase("buildparty")) { options.addAll(List.of("1","2")); }
         }
         String prefix = args.length == 0 ? "" : args[args.length - 1].toLowerCase(Locale.ROOT);
         return options.stream().filter(o -> o.toLowerCase(Locale.ROOT).startsWith(prefix)).toList();

@@ -99,11 +99,11 @@ class DungeonStoreTest {
                 st.execute("INSERT INTO homes VALUES ('"+player+"','home','บ้าน','world','luma_housing',1,80,2,90,0,'ps_test',1000,1000)");
             } return null;
         });
-        assertEquals(6,Migrations.apply(db)); assertEquals(6,Migrations.apply(db));
+        assertEquals(Migrations.latestVersion(),Migrations.apply(db)); assertEquals(Migrations.latestVersion(),Migrations.apply(db));
         assertEquals(oldMail,mail.pending(player,1).getFirst().id()); assertEquals(1,count("homes"));
         assertEquals(999,(int)db.read(c -> { try(var st=c.createStatement(); var rs=st.executeQuery("SELECT balance FROM accounts")) { rs.next(); return rs.getInt(1); } }));
         assertTrue(store.begin(player,exit,"new",new byte[]{1}).isPresent());
-        db.read(c -> { try(var st=c.createStatement()) { st.execute("UPDATE schema_version SET version=7"); } return null; });
+        db.read(c -> { try(var st=c.createStatement()) { st.execute("UPDATE schema_version SET version=8"); } return null; });
         assertThrows(SQLException.class,() -> Migrations.apply(db));
     }
     @Test void returnObligationAndFrozenPayloadSurviveDatabaseReopen() throws Exception {

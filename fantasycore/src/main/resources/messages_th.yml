@@ -4,7 +4,43 @@
 
 prefix: '<#DDA54A><bold>ลูม่า</bold></#DDA54A> <dark_gray>»</dark_gray> <#EDF4E9>'
 
+party:
+  not-leader: '<yellow>ให้หัวหน้าปาร์ตี้เป็นคนจัดทีมและเริ่มรอบ'
+  locked: '<yellow>ทีมกำลังลงดัน เปลี่ยนสมาชิกไม่ได้ · /dungeon leave จะยกเลิกทั้งรอบ'
+  updated: '<green>จัดทีมเรียบร้อย'
+  already-joined: '<yellow>ผู้เล่นอยู่ในทีมแล้ว หรือมีคำเชิญที่ยังไม่หมดอายุ'
+  full: '<yellow>ปาร์ตี้เต็มแล้ว สูงสุด 4 คน'
+  no-invite: '<yellow>ไม่มีคำเชิญที่ใช้ได้ หรือหมดเวลา 60 วินาทีแล้ว'
+  no-party: '<gray>ยังไม่มีปาร์ตี้ · /party invite ชื่อผู้เล่น'
+  invalid-target: '<yellow>ไม่พบผู้เล่นที่เชิญหรือจัดทีมได้'
+  invited: '<#B996EF><player> เชิญเข้าปาร์ตี้ <gray>พิมพ์ /party accept ภายใน 60 วินาที'
+  usage: '<gray>/party invite ชื่อ · accept · list · leave · kick ชื่อหรือUUID · disband'
+  menu:
+    title: '<#B996EF>ปาร์ตี้ · Moonfall'
+    info-name: '<#DDA54A>ทีมผจญภัย'
+    info-lore: |-
+      <gray>สมาชิก <count>/4 · หัวหน้า <leader>
+      <gray>สถานะ: <status>
+      <gray>เชิญเพื่อนด้วย /party invite ชื่อ
+      <gray>หัวหน้ากดเข้าดันเพื่อเริ่มพร้อมกัน
+    member-name: '<#47C8D3><player>'
+    accept-name: '<green>รับคำเชิญ'
+    accept-lore: '<gray>เข้าทีมของ <player> ก่อนคำเชิญหมดเวลา'
+    leave-name: '<yellow>ออกจากทีม'
+    leave-lore: |-
+      <gray>ออกได้เมื่อไม่มีรอบที่กำลังเล่น
+      <gray>หัวหน้าออกจะยุบทั้งปาร์ตี้
+    dungeon-name: '<#47C8D3>เปิดเมนูดันเจี้ยน'
+
 dungeon:
+  party-disabled: '<yellow>ดันปาร์ตี้ยังปิดอยู่ ทีมงานต้องทดสอบก่อน'
+  member-not-ready: '<yellow><player> ยังไม่พร้อม ต้องออนไลน์ อยู่ Survival บนพื้นปลอดภัย ไม่มีรอบหรือวาร์ปค้าง'
+  gather: '<#B996EF>รอสมาชิกครบห้อง <room> เพื่อเริ่มต่อสู้'
+  party-waiting: '<yellow>มีสมาชิกหลุดเกม พักมอนสเตอร์และการต่อสู้ รอกลับภายใน 60 วินาที'
+  party-resumed: '<green>สมาชิกกลับครบแล้ว ต่อสู้ต่อได้'
+  reconnected: '<green>กลับเข้ารอบเดิมแล้ว สมาชิกและรางวัลคงเดิม'
+  reconnect-expired: '<yellow>สมาชิกกลับไม่ทันเวลา ยกเลิกรอบและนำทุกคนกลับ'
+  paused: '<yellow>พักรอบ · รอสมาชิกอีก <seconds> วินาที'
   unavailable: '<yellow>ดันฝึกยังไม่เปิดหรือแมพยังไม่พร้อม — ทีมงานกำลังตรวจเส้นทาง'
   occupied: '<yellow>มีผู้เล่นกำลังฝึกหรือมีรายการกลับค้างอยู่ — ลองอีกครั้งเมื่อพร้อม'
   join-denied: '<yellow>เข้าได้ในโหมด Survival เมื่อยืนบนพื้น ไม่อยู่บนพาหนะและไม่มีการต่อสู้/วาร์ปค้าง'
@@ -12,7 +48,7 @@ dungeon:
   storage-error: '<red>ดันหยุดเพราะระบบบันทึกขัดข้อง รางวัลที่บันทึกสำเร็จแล้วยังคงอยู่ใน /mail — แจ้งทีมงาน'
   started: '<#B996EF>ยินดีต้อนรับสู่ซากวิหารจันทรา! <gray>เดินลงบันไดสู่ห้องรูน · ออกด้วย /dungeon leave'
   visiting: '<yellow>กำลังตรวจแมพฝึก ยังไม่มีมอนสเตอร์/รางวัล · ออกด้วย /dungeon leave'
-  left: '<yellow>ออกจากรอบฝึกและเริ่มกลับจุดเดิม รางวัลเฉพาะรอบที่ผ่านครบเท่านั้น'
+  left: '<yellow>สมาชิกออก ยกเลิกทั้งรอบและเริ่มกลับจุดเดิม รางวัลเฉพาะรอบที่ผ่านครบเท่านั้น'
   not-playing: '<gray>คุณยังไม่ได้อยู่ในดันฝึก'
   timeout: '<yellow>หมดเวลาฝึกรอบนี้ กำลังนำคุณกลับ'
   stopped: '<yellow>รอบฝึกหยุดลง กำลังนำคุณกลับ — ใช้ /dungeon leave ซ้ำได้ถ้าจุดกลับยังไม่พร้อม'
@@ -31,14 +67,14 @@ dungeon:
     <gray>รางวัลจากการฝึกในซากวิหารจันทรา
     <gray>วัตถุดิบเควส · ยังไม่มีสูตรใช้ในรุ่นนี้
   admin-report: '<#47C8D3>Moonfall <gray>· <detail>'
-  admin-preview: '<yellow>เตรียม <action> โลกฝึก luma_moonfall_training <gray>· <reason> · <gold>/fa confirm <token>'
-  admin-usage: '<yellow>/fa dungeon status | visit | build <เหตุผล> | abort <เหตุผล>'
+  admin-preview: '<yellow>เตรียม <action> เป้าหมาย <target> <gray>· <reason> · <gold>/fa confirm <token>'
+  admin-usage: '<yellow>/fa dungeon status | visit [training|party1|party2] | build <เหตุผล> | buildparty <1|2> <เหตุผล> | abort <เหตุผล> (ทุกรอบ)'
   menu:
-    title: '<#B996EF>ซากวิหารจันทรา · ฝึกเดี่ยว'
+    title: '<#B996EF>ซากวิหารจันทรา · เดี่ยว / ปาร์ตี้'
     info-name: '<#DDA54A>Moonfall · นักเดินทาง I'
     info-lore: |-
       <gray>ห้องรูน → ศิลาจันทร์ → ผู้พิทักษ์
-      <gray>หนึ่งผู้เล่นต่อรอบ · จำกัด <duration> นาที
+      <gray>เดี่ยวหรือทีม 2–4 คน · จำกัด <duration> นาที
       <gray>สถานะ: <status>
     join-name: '<#47C8D3>เข้าสู่ดันฝึก'
     join-lore: |-
@@ -47,10 +83,11 @@ dungeon:
       <gray>ความทนทานและของใช้ยังลดตามปกติ
       <gray>ผ่านครบรับเศษจันทรา ×2 ใน /mail
       <gray>รับรางวัลได้วันละครั้งเวลาไทย
-      <yellow>คลิกเพื่อเข้าเมื่อสถานะพร้อม
+      <gray>หลุดเกมพัก 60 วินาที · ตายหรือออกยกเลิกทั้งทีม
+      <yellow>หัวหน้าคลิกเพื่อเข้าทั้งทีม
     leave-name: '<yellow>กลับออกจากดัน'
     leave-lore: |-
-      <gray>ยกเลิกรอบปัจจุบันและกลับจุดก่อนเข้า
+      <gray>ยกเลิกทั้งรอบและนำสมาชิกกลับจุดก่อนเข้า
       <gray>หากจุดเดิมไม่ปลอดภัยจะกลับจุดเกิด
 
 common:
@@ -502,6 +539,7 @@ admin:
     <gray>/fa repair review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa craft review · complete|cancel <op> <เหตุผล> → /fa confirm
     <gray>/fa item list · give <ผู้เล่น> <template> · inspect
+    <gray>/fa dungeon status · visit [training|party1|party2] · build · buildparty 1|2 · abort (ทุกรอบ) → /fa confirm
     <gray>/fa audit [ผู้เล่น]
   doctor:
     header: '<#DDA54A>ตรวจระบบ FantasyCore <version>'

@@ -9,8 +9,12 @@ softdepend: [Vault, VaultUnlocked, WorldEdit, WorldGuard, ProtectionStones, Plac
 loadbefore: [ItemsCore]
 
 commands:
+  party:
+    description: จัดปาร์ตี้ Moonfall 2–4 คน
+    usage: /party [invite <player>|accept|list|leave|kick <player>|disband]
+    permission: fantasy.party
   dungeon:
-    description: ดันเจี้ยนฝึกเดี่ยว Moonfall
+    description: ดันเจี้ยน Moonfall เดี่ยวหรือปาร์ตี้
     usage: /dungeon [join|leave]
     aliases: [dun]
     permission: fantasy.dungeon
@@ -98,6 +102,10 @@ permissions:
       fantasy.repair.use: true
       fantasy.craft.use: true
       fantasy.dungeon: true
+      fantasy.party: true
+  fantasy.party:
+    description: จัดปาร์ตี้ดันเจี้ยน
+    default: true
   fantasyadmin.dungeon.manage:
     description: สร้าง/ตรวจโลกดันฝึกและยกเลิกรอบ (build/abort ต้องยืนยันและมีเหตุผล)
     default: op

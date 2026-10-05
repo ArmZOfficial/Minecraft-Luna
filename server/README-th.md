@@ -3,7 +3,7 @@
 เซิร์ฟนี้ใช้ทดสอบ **ลำดับพัฒนาข้อ 1–3** ใน [SERVER-SYSTEMS-PLAN §9](../output/lobby-concept/SERVER-SYSTEMS-PLAN-th.md)
 และ **CASUAL-SURVIVAL §12 ข้อ 1–2** (PS tier I/V + บ้าน + RTP) ก่อนเปลี่ยนสถานะ manifest จาก candidate เป็น locked
 FantasyCore v0.2 เพิ่มกล่องจดหมาย, รับของรายวัน และการผูก NPC ของ Citizens (หมวด B6, I, J ด้านล่าง)
-รุ่นปัจจุบัน v0.7/schema6 เพิ่ม [ดันฝึก Moonfall](../fantasycore/DUNGEONS-th.md) (checklist R); ไม่เปิดรับผู้เล่นอัตโนมัติ
+รุ่นปัจจุบัน v0.8/schema7 เพิ่ม [Moonfall ปาร์ตี้2–4คน/2ห้อง/reconnect](../fantasycore/PARTY-DUNGEONS-th.md) (checklist R/S); ไม่เปิดรับผู้เล่นอัตโนมัติ
 staging เปิด whitelist ไว้เสมอ และไม่ใช่เซิร์ฟเปิดให้ผู้เล่นทั่วไป
 
 คลังโมเดล/ไอคอนที่เพิ่ม: [26 แพ็กและแปลนวางในเมือง](content/library/README-th.md), [ชื่อชุดและบาลานซ์ enchant](content/library/BALANCE-th.md)
@@ -57,7 +57,7 @@ server/
 
 ### A. เปิดเซิร์ฟและเชื่อมต่อ
 - [ ] A1 เซิร์ฟเปิดถึง `Done` ไม่มี error สีแดงจาก FantasyCore, WorldGuard, ProtectionStones, VaultUnlocked
-- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v6)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
+- [ ] A2 log มี `ฐานข้อมูลพร้อม (schema v7)`, `ระบบที่ดิน: WorldGuard`, `ลงทะเบียน Vault economy provider`
 - [ ] A3 โลก `luma_housing` และ `luma_resource` ถูกสร้าง (`/fa doctor` แสดง border 10,000 และ 6,000)
 - [ ] A4 ★ client 26.2 และ 1.16.5 เข้าเซิร์ฟได้ทั้งคู่
 
@@ -259,3 +259,30 @@ server/
 
 เมื่อผ่านครบ: เปลี่ยน `status` ใน manifest เป็น locked, commit `plugins.lock.json` และบันทึกผลในเอกสารสถานะ
 แถวที่ไม่ผ่านให้จดข้อความ error/ภาพหน้าจอ แล้วแก้ก่อนต่อ provider adapter, custom recipe/coupon และ upgrade
+
+### S. Moonfall ปาร์ตี้และห้องส่วนตัว (v0.8 — ยังรอ Minecraft จริง)
+
+คู่มือปัจจุบัน: [Party Dungeons](../fantasycore/PARTY-DUNGEONS-th.md); source/tests ผ่านไม่ถือว่า checklist นี้ผ่าน
+ใช้ staging ที่สำรองจาก production, 2–4 account ต่อทีม และ client1.16.5/รุ่นกลาง/26.2
+ค่าเริ่มต้น enabled/party-enabled false; เช็ก SHA/JAR/config/schema7 ก่อนเปิดเพื่อ QA
+
+- [ ] S1 อัปสำเนา DBv0.7จริง→schema7 เงิน/ledger/items/homes/NPC/mail/daily/legacyreward/จุดกลับเดิมครบ; ก่อนอัป backup DB+world/playerdata/config/JAR; ทดลองกู้ backupชุดเดียวกลับv0.7
+- [ ] S2 configเดิมไม่มี party-enabled → partyปิด; messagesใหม่ mergeครบ doctorไม่มี missing; เปิดเฉพาะstaging+restartได้; productionยังfalse
+- [ ] S3 buildparty1/2 ต้องสิทธิ์ เหตุผล preview/confirm/audit; slotอื่นหรือ pathปฏิเสธ; buildพร้อมกันปฏิเสธ; โฟลเดอร์ไม่มีmarkerและโลกสร้างเสร็จไม่เขียนทับ
+- [ ] S4 เดินตรวจทุกslot พื้น/หัว/บันได/ประตู/border/void/มุมอับ; จุดเกิดครบ4คนและspawnม็อบถูก; นำงานตกแต่งที่reviewแล้วลงทั้ง3โลกและbackup ไม่ถือhashgeneratorเป็นchecksumโลกจริง
+- [ ] S5 invite/accept60s/team4เต็ม/คนอยู่ทีมแล้ว/สิทธิ์/หัวหน้า/kickofflineUUID/disbandทำงาน; เปิดmenuแล้วshift/drag/hotbar/doubleclickเอาiconออกไม่ได้
+- [ ] S6 leaderกดเข้า สมาชิกทั้งหมดonline/Survival/safefloor/noรถบิน/combat/วาร์ปค้าง; ใครไม่พร้อมหรือworld/DBไม่พร้อมไม่เริ่มครึ่งทีม; pendingreturnกันเริ่มใหม่
+- [ ] S7 สองปาร์ตี้พร้อมกันคนละโลก + solo; mob/bar/damage/target/ประตู/lootไม่ข้ามทีม; ทีมที่3ไม่มีที่ปฏิเสธ ไม่เข้าโลกทีมอื่น
+- [ ] S8 roster/reward/HP/attackตรึง ตรวจ HPบอส180/288/396/504 และattackจริงหลังเกราะ; ชั้น1/2/3หนักขึ้น ระยะเวลาgearv1/v2สมเหตุผล ไม่แก้balanceจากlore
+- [ ] S9 หลุดหนึ่งคนกลางwave/slam → AI/velocity/damageพัก วงหาย เพื่อนตีไม่ได้; reconnectก่อน60sกลับcheckpointปลอดภัย แสดงbar ครบแล้วresume/slamหน่วง4s
+- [ ] S10 สองคนหลุดคนละเวลา→deadlineแรกชนะ; quitซ้ำไม่เพิ่มเวลา; กลับที่60s/ช้า/สิทธิ์หาย/ตาย/TPถูกยกเลิก→abort; soloมีgrace; timeout18นาทียังนับช่วงพัก
+- [ ] S11 PREPARINGหลุด/TPtimeout/ขยับจากจุดก่อนเข้า→ยกเลิก คืนคนที่เข้าไปแล้ว; loadingcallbackเก่าไม่วาร์ปหลังabort; ไม่นับว่ากลับจนteleportสำเร็จ
+- [ ] S12 ตาย/leave/gamemode/disbandตอนล็อก/encounterหาย/คิลจากปลั๊กอินตอนพัก→abortตามกติกา; noPVP/place/break/bucket/explosion/drop/container/portalทุกslot รวมdisabled; ไม่ลบของที่พก
+- [ ] S13 ผ่านครบ reward2shardsต่อUUIDในmailวันละครั้งไทย; เปลี่ยนทีม/หัวหน้า/slot/soloไม่ได้เพิ่มquota; เพื่อนquotaหมดไม่บล็อกรางวัลคนอื่น; สิ้นวันใช้dateเมื่อcomplete
+- [ ] S14 จำลอง DBfailureช่วงจอง/activate/advance/finalmail/finishaudit→ไม่มีrewardบางคนหรือซ้ำ; crashก่อน/หลังcommit/ก่อนreturn→abort/recovery/mailตรงjournal; CLAIMINGยังREVIEW ไม่สุ่มคืนเอง
+- [ ] S15 offlineตอนจบ/login/restart→คืนจุดของคนนั้น/unsafehubfallback; คนเก่าloginในslotที่ทีมใหม่ใช้→กลับออกโดยไม่join/abortทีมใหม่; กลับfailedเก็บneeds_returnและleaveลองใหม่ได้
+- [ ] S16 cleanupม็อบ/projectile/bar/chunkticket/telegraphครบเฉพาะslot ปลดrosterหลังห้องว่าง; slot reuseไม่เอาcallback/runเก่ามาprogress; /fa dungeon abort previewระบุทุกรอบชัดเจน
+- [ ] S17 วัดTPS/MSPT/chunkload/RAM/entityระหว่าง3รอบและbuild ไม่เดาตัวเลขจากunit tests; ViaBossBar/particle/หัวข้อไทย/เกราะ/telegraph/landingทุกclientตรงกัน; packfailยังอ่านและหลบได้
+- [ ] S18 เจ้าของลงชื่อผลR/Sและgearplaytestก่อนproductionเปิด; custombossยังHuskfallback ไม่อ้างanimationพร้อม; ปิดparty/ทุกดัน+restartแล้วprotect/recoveryยังอยู่
+
+ผลรอบพัฒนา 5 ต.ค.2026: compileไม่มีwarning + unit tests124ผ่าน (0fail/error/skip); ยังไม่มีผล S ในเกม
