@@ -7,12 +7,14 @@
 
 ## สิ่งที่ทำแล้วกับสิ่งที่ต้องเชื่อมจริง
 
-ต้นแบบใน `website/dist/` มี home/news/map/shop/account/wiki/events/rankings/status/privacy/terms
+เว็บปัจจุบันใน `website/app/` ใช้ Next.js + React + Motion มี home/news/map/shop/account/wiki/events/rankings/status/privacy/terms
+Node API เชื่อม PostgreSQL จริงในเครื่องแล้ว มี health/news/catalog และ SQL schema พร้อมผลทดสอบ
+ดู [รายละเอียด implementation](NEXT-POSTGRES-IMPLEMENTATION-th.md) ส่วน `website/dist/` เป็นต้นแบบ HTML รุ่นก่อน
 มี responsive, dark/light, ลดการเคลื่อนไหว, ข่าวเปิดอ่านได้, ตัวกรองข่าว/คู่มือ, ค้นหาโซน 12 แห่ง, หมุดเลือกสถานที่, pan/zoom/copy พิกัด และ product details
 ค้นหาทั้งเว็บด้วยปุ่มค้นหาหรือ Ctrl+K แล้วเปิดสถานที่ คู่มือหรือสินค้าได้ ศูนย์บัญชีมีแท็บเชื่อมเกม/รายการซื้อ/กล่องจดหมาย/ตั้งค่า
 อันดับและกิจกรรมแสดงสถานะรอข้อมูลและแผนงาน ไม่สร้างคะแนน ผู้เล่น วันที่ หรือจำนวนออนไลน์ปลอม
 ภาพเมืองและmarkerเป็นconceptpreview **ยังไม่ใช่BlueMapสด** ราคา/ข่าวเป็นตัวอย่างที่ติดป้ายไว้
-ไม่มีpayment/auth/backend/bridgeในstaticprototype ปุ่มชำระเงินปิด ไม่สร้างQRปลอมและไม่แสดงdeliveryสำเร็จโดยไม่มีเกม
+ยังไม่มี payment provider/auth/game bridge ที่เปิดใช้งานจริง ปุ่มชำระเงินปิด และไม่แสดง delivery สำเร็จโดยไม่มีเกม
 
 Productionต้องมีserverendpoint/DB/secrets/paymentmerchantและFantasyCorebridgeตามแผนนี้ ยังไม่มีMinecraftserverruntimeในworkspaceที่ตรวจได้
 ไม่บังคับให้userส่งAPIkeyในแชต ให้ตั้งserversecretหรือproviderdashboardเมื่อทำdeploymentจริง

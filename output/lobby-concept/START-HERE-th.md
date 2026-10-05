@@ -20,6 +20,7 @@
 13. [แบรนด์ โลโก้และภาพเว็บ](BRAND-GUIDE-th.md) — เขียวหยก/ทอง TAB concept และหน้าหลักเว็บรุ่นใหม่
 14. [เปิดเว็บต้นแบบ](../../website/README-th.md) — วิธีรันและเมนูที่ใช้งานได้
 15. [แหล่งข้อมูล modern modeling](MODERN-MODELING-SOURCES-th.md) — เอกสารทางการและ compatibility gates
+16. [Next.js / React / Node / PostgreSQL](NEXT-POSTGRES-IMPLEMENTATION-th.md) — source เว็บปัจจุบัน animation ฐานข้อมูลและผลทดสอบ
 
 ## ข้อเลือกสำคัญ
 
@@ -39,6 +40,8 @@
 
 ยังไม่ได้แก้โลกจริง ติดตั้ง JAR หรือทดสอบบนเซิร์ฟเวอร์ Minecraft
 เว็บยังไม่เชื่อมแผนที่สด ผู้ให้บริการชำระเงิน หรือคิวส่งของเข้าเกม
+เว็บย้ายเป็น Next.js + React แล้ว Node API เชื่อม PostgreSQL จริงในเครื่อง สร้าง schema และผ่าน integration tests
+GitHub remote ใช้ ArmZOfficial/Minecraft-Luna โดยเผยแพร่ source งานชุดแรกแล้ว
 รายการปลั๊กอินเป็นข้อเสนอจากแหล่งทางการ ไม่ได้ยืนยันรายชื่อ plugin ของ SIXPIXEL
 
 ตัวเลขค่าธรรมเนียม/ดาเมจ/เวลาในคลิปเป็นตัวอย่างและคำกล่าวของผู้เล่า สูตรและตารางรางวัลต้นฉบับยังไม่มีครบ จึงยังอ้างว่าเหมือนทุกค่าไม่ได้

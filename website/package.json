@@ -1,0 +1,27 @@
+{
+  "name": "luma-minecraft-portal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 4179",
+    "build": "next build",
+    "start": "node --env-file-if-exists=.env.local server/start.mjs",
+    "db:migrate": "node --env-file-if-exists=.env.local server/migrate.mjs",
+    "test": "node --env-file-if-exists=.env.local --test server/api.test.mjs server/database.test.mjs",
+    "format": "prettier --write app components lib server next.config.mjs package.json"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "motion": "^14.0.0",
+    "next": "^16.3.8",
+    "pg": "^8.23.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9"
+  }
+}

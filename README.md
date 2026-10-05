@@ -13,6 +13,7 @@
 ## สถานะงาน
 
 มีเว็บต้นแบบที่ทดลองเมนู ค้นหาโซน คู่มือ ข่าว และศูนย์บัญชีได้ พร้อมภาพและเอกสารออกแบบ
+เว็บปัจจุบันใช้ Next.js + React + Motion และ Node API เชื่อม PostgreSQL จริงในเครื่อง
 มี NPC pilot 4 ตัวที่มี animation และ item pilot 2 ชิ้น export จาก Blockbench MCP
 ยังไม่มีโลก Minecraft ที่ติดตั้งระบบจริง, plugin JAR, แผนที่สด, payment backend หรือการส่งของจริง
 
@@ -22,12 +23,15 @@
 ## เปิดเว็บในเครื่อง
 
 ```powershell
-python -m http.server 4178 --bind 127.0.0.1 --directory website/dist
+cd website
+npm ci
+npm run build
+npm start
 ```
 
-เปิด `http://127.0.0.1:4178/` เว็บใช้ HTML/CSS/JavaScript โดยไม่ต้องติดตั้ง framework
+เปิด `http://127.0.0.1:4178/` การตั้ง PostgreSQL และ migration อยู่ใน [คู่มือเว็บ](website/README-th.md)
 
 ## GitHub
 
 Remote: https://github.com/ArmZOfficial/Minecraft-Luna.git
-การผูก remote และ commit ในเครื่องไม่เท่ากับการ push สำเร็จ ให้ดูสถานะส่งมอบในแชตหรือประวัติ GitHub
+remote เชื่อมแล้ว และส่งงานชุดแรกขึ้น main สำเร็จ การแก้ไขใหม่ให้ดู commit ล่าสุดใน GitHub
